@@ -8792,7 +8792,7 @@ var beepbox = (function (exports) {
 		cursor: pointer;
 	}
 `));
-    const colorTheme = getLocalStorage("colorTheme");
+    const colorTheme = getLocalStorage("TBBcolorTheme");
     ColorConfig.setTheme(colorTheme === null ? "dark classic" : colorTheme);
     let prevHash = null;
     let id = ((Math.random() * 0xffffffff) >>> 0).toString(16);
