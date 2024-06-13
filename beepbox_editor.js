@@ -1561,6 +1561,88 @@ var beepbox = (function (exports) {
 				--noise5-primary-note: #93f;
 			}
 		`,
+        "emerald": `
+			:root {
+				--page-margin: #040b04;
+				--editor-background: #040b04;
+				--hover-preview: white;
+				--playhead: white;
+				--primary-text: #ddf7cc;
+				--secondary-text: #579f4c;
+				--inverted-text: black;
+				--text-selection: rgba(119,68,255,0.99);
+				--box-selection-fill: rgba(178, 255, 201, 0.2);
+				--loop-accent: #44ffc2;
+				--link-accent: #dfff88;
+				--ui-widget-background: #064616;
+				--ui-widget-focus: #0c7526;
+				--pitch-background: #1a3118;
+				--tonic: #00600a;
+				--fifth-note: #568844;
+				--white-piano-key: #c9fdb6;
+				--black-piano-key: #32593a;
+				--pitch1-secondary-channel: #A14B00;
+				--pitch1-primary-channel: #FFB425;
+				--pitch1-secondary-note: #C79500;
+				--pitch1-primary-note: #FFDF92;
+				--pitch2-secondary-channel: #A10000;
+				--pitch2-primary-channel: #FF2525;
+				--pitch2-secondary-note: #C70000;
+				--pitch2-primary-note: #FF9292;
+				--pitch3-secondary-channel: #C7004B;
+				--pitch3-primary-channel: #FF526A;
+				--pitch3-secondary-note: #FF1C5C;
+				--pitch3-primary-note: #FFABDA;
+				--pitch4-secondary-channel: #7E00A1;
+				--pitch4-primary-channel: #D950FF;
+				--pitch4-secondary-note: #C700BB;
+				--pitch4-primary-note: #FFA0F0;
+				--pitch5-secondary-channel: #6820D0;
+				--pitch5-primary-channel: #BD90FF;
+				--pitch5-secondary-note: #9040E0;
+				--pitch5-primary-note: #E0C0FF;
+				--pitch6-secondary-channel: #778BB0;
+				--pitch6-primary-channel: #A0BCFF;
+				--pitch6-secondary-note: #889AD0;
+				--pitch6-primary-note: #D0DEFF;
+				--pitch7-secondary-channel: #0092A1;
+				--pitch7-primary-channel: #25B7FF;
+				--pitch7-secondary-note: #008FC7;
+				--pitch7-primary-note: #92E0FF;
+				--pitch8-secondary-channel: #00DF2D;
+				--pitch8-primary-channel: #98FFA8;
+				--pitch8-secondary-note: #4EFF6A;
+				--pitch8-primary-note: #B2FFD0;
+				--pitch9-secondary-channel: #23A100;
+				--pitch9-primary-channel: #6EFF50;
+				--pitch9-secondary-note: #06C700;
+				--pitch9-primary-note: #AAFF83;
+				--pitch10-secondary-channel: #D9FF1F;
+				--pitch10-primary-channel: #F1FF8B;
+				--pitch10-secondary-note: #C6B103;
+				--pitch10-primary-note: #FFF2AC;
+				--noise1-secondary-channel: #6F6F6F;
+				--noise1-primary-channel: #AAAAAA;
+				--noise1-secondary-note: #A7A7A7;
+				--noise1-primary-note: #E0E0E0;
+				--noise2-secondary-channel: #338699;
+				--noise2-primary-channel: #77CFDD;
+				--noise2-secondary-note: #669CCC;
+				--noise2-primary-note: #BBE9F0;
+				--noise3-secondary-channel: #568F4A;
+				--noise3-primary-channel: #84DD77;
+				--noise3-secondary-note: #84CF6F;
+				--noise3-primary-note: #C7FFBB;
+				--noise4-secondary-channel: #7A4F9A;
+				--noise4-primary-channel: #AF82D2;
+				--noise4-secondary-note: #9E71C1;
+				--noise4-primary-note: #D4C1EA;
+				--noise5-secondary-channel: #78373a;
+				--noise5-primary-channel: #BB777D;
+				--noise5-secondary-note: #AA666C;
+				--noise5-primary-note: #E2B2B4;
+			}
+		`,
     };
     ColorConfig.pageMargin = "var(--page-margin)";
     ColorConfig.editorBackground = "var(--editor-background)";
@@ -3171,7 +3253,7 @@ var beepbox = (function (exports) {
     class ThemePrompt {
         constructor(_doc) {
             this._doc = _doc;
-            this._themeSelect = select$8({ style: "width: 100%;" }, option$8({ value: "dark classic" }, "BeepBox Dark"), option$8({ value: "dark competition" }, "BeepBox Competitive"), option$8({ value: "light classic" }, "BeepBox Light"), option$8({ value: "marine" }, "Marine"), option$8({ value: "flame" }, "Flame"), option$8({ value: "amber" }, "Amber"), option$8({ value: "vermilion" }, "Vermilion"));
+            this._themeSelect = select$8({ style: "width: 100%;" }, option$8({ value: "dark classic" }, "BeepBox Dark"), option$8({ value: "dark competition" }, "BeepBox Competitive"), option$8({ value: "light classic" }, "BeepBox Light"), option$8({ value: "marine" }, "Marine"), option$8({ value: "flame" }, "Flame"), option$8({ value: "amber" }, "Amber"), option$8({ value: "vermilion" }, "Vermilion"), option$8({ value: "emerald" }, "Emerald"));
             this._cancelButton = button$c({ class: "cancelButton" });
             this._okayButton = button$c({ class: "okayButton", style: "width:45%;" }, "Okay");
             this.container = div$c({ class: "prompt noSelection", style: "width: 220px;" }, h2$b("Set Theme"), div$c({ style: "display: flex; flex-direction: row; align-items: center; height: 2em; justify-content: flex-end;" }, div$c({ class: "selectContainer", style: "width: 100%;" }, this._themeSelect)), div$c({ style: "display: flex; flex-direction: row-reverse; justify-content: space-between;" }, this._okayButton), this._cancelButton);
