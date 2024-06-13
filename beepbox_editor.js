@@ -1643,6 +1643,88 @@ var beepbox = (function (exports) {
 				--noise5-primary-note: #E2B2B4;
 			}
 		`,
+        "amethyst": `
+			:root {
+				--page-margin: #150613;
+				--editor-background: #150613;
+				--hover-preview: white;
+				--playhead: white;
+				--primary-text: #b8aaea;
+				--secondary-text: #412c8a;
+				--inverted-text: black;
+				--text-selection: rgba(119,68,255,0.99);
+				--box-selection-fill: rgba(255,255,255,0.2);
+				--loop-accent: #b145b5;
+				--link-accent: #f88;
+				--ui-widget-background: #331942;
+				--ui-widget-focus: #502668;
+				--pitch-background: #2a1f31;
+				--tonic: #3f1b53;
+				--fifth-note: #533762;
+				--white-piano-key: #eec0ff;
+				--black-piano-key: #4b2e53;
+				--pitch1-secondary-channel: #0099A1;
+				--pitch1-primary-channel: #25F3FF;
+				--pitch1-secondary-note: #00BDC7;
+				--pitch1-primary-note: #92F9FF;
+				--pitch2-secondary-channel: #A1A100;
+				--pitch2-primary-channel: #FFFF25;
+				--pitch2-secondary-note: #C7C700;
+				--pitch2-primary-note: #FFFF92;
+				--pitch3-secondary-channel: #C75000;
+				--pitch3-primary-channel: #FF9752;
+				--pitch3-secondary-note: #FF771C;
+				--pitch3-primary-note: #FFCDAB;
+				--pitch4-secondary-channel: #00A100;
+				--pitch4-primary-channel: #50FF50;
+				--pitch4-secondary-note: #00C700;
+				--pitch4-primary-note: #A0FFA0;
+				--pitch5-secondary-channel: #D020D0;
+				--pitch5-primary-channel: #FF90FF;
+				--pitch5-secondary-note: #E040E0;
+				--pitch5-primary-note: #FFC0FF;
+				--pitch6-secondary-channel: #7777B0;
+				--pitch6-primary-channel: #A0A0FF;
+				--pitch6-secondary-note: #8888D0;
+				--pitch6-primary-note: #D0D0FF;
+				--pitch7-secondary-channel: #8AA100;
+				--pitch7-primary-channel: #DEFF25;
+				--pitch7-secondary-note: #AAC700;
+				--pitch7-primary-note: #E6FF92;
+				--pitch8-secondary-channel: #DF0019;
+				--pitch8-primary-channel: #FF98A4;
+				--pitch8-secondary-note: #FF4E63;
+				--pitch8-primary-note: #FFB2BB;
+				--pitch9-secondary-channel: #00A170;
+				--pitch9-primary-channel: #50FFC9;
+				--pitch9-secondary-note: #00C78A;
+				--pitch9-primary-note: #83FFD9;
+				--pitch10-secondary-channel: #A11FFF;
+				--pitch10-primary-channel: #CE8BFF;
+				--pitch10-secondary-note: #B757FF;
+				--pitch10-primary-note: #DFACFF;
+				--noise1-secondary-channel: #6F6F6F;
+				--noise1-primary-channel: #AAAAAA;
+				--noise1-secondary-note: #A7A7A7;
+				--noise1-primary-note: #E0E0E0;
+				--noise2-secondary-channel: #996633;
+				--noise2-primary-channel: #DDAA77;
+				--noise2-secondary-note: #CC9966;
+				--noise2-primary-note: #F0D0BB;
+				--noise3-secondary-channel: #4A6D8F;
+				--noise3-primary-channel: #77AADD;
+				--noise3-secondary-note: #6F9FCF;
+				--noise3-primary-note: #BBD7FF;
+				--noise4-secondary-channel: #7A4F9A;
+				--noise4-primary-channel: #AF82D2;
+				--noise4-secondary-note: #9E71C1;
+				--noise4-primary-note: #D4C1EA;
+				--noise5-secondary-channel: #607837;
+				--noise5-primary-channel: #A2BB77;
+				--noise5-secondary-note: #91AA66;
+				--noise5-primary-note: #C5E2B2;
+			}
+		`,
     };
     ColorConfig.pageMargin = "var(--page-margin)";
     ColorConfig.editorBackground = "var(--editor-background)";
@@ -3253,7 +3335,7 @@ var beepbox = (function (exports) {
     class ThemePrompt {
         constructor(_doc) {
             this._doc = _doc;
-            this._themeSelect = select$8({ style: "width: 100%;" }, option$8({ value: "dark classic" }, "BeepBox Dark"), option$8({ value: "dark competition" }, "BeepBox Competitive"), option$8({ value: "light classic" }, "BeepBox Light"), option$8({ value: "marine" }, "Marine"), option$8({ value: "flame" }, "Flame"), option$8({ value: "amber" }, "Amber"), option$8({ value: "vermilion" }, "Vermilion"), option$8({ value: "emerald" }, "Emerald"));
+            this._themeSelect = select$8({ style: "width: 100%;" }, option$8({ value: "dark classic" }, "BeepBox Dark"), option$8({ value: "dark competition" }, "BeepBox Competitive"), option$8({ value: "light classic" }, "BeepBox Light"), option$8({ value: "marine" }, "Marine"), option$8({ value: "flame" }, "Flame"), option$8({ value: "amber" }, "Amber"), option$8({ value: "vermilion" }, "Vermilion"), option$8({ value: "emerald" }, "Emerald"), option$8({ value: "amethyst" }, "Amethyst"));
             this._cancelButton = button$c({ class: "cancelButton" });
             this._okayButton = button$c({ class: "okayButton", style: "width:45%;" }, "Okay");
             this.container = div$c({ class: "prompt noSelection", style: "width: 220px;" }, h2$b("Set Theme"), div$c({ style: "display: flex; flex-direction: row; align-items: center; height: 2em; justify-content: flex-end;" }, div$c({ class: "selectContainer", style: "width: 100%;" }, this._themeSelect)), div$c({ style: "display: flex; flex-direction: row-reverse; justify-content: space-between;" }, this._okayButton), this._cancelButton);
