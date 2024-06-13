@@ -1410,9 +1410,9 @@ var beepbox = (function (exports) {
 				--box-selection-fill: rgba(255,255,255,0.2);
 				--loop-accent: #ff7944;
 				--link-accent: #ffc588;
-				--ui-widget-background: #4f362a;
-				--ui-widget-focus: #684b3d;
-				--pitch-background: #4f362a;
+				--ui-widget-background: #4f2113;
+				--ui-widget-focus: #804634;
+				--pitch-background: #482b22;
 				--tonic: #8e4534;
 				--fifth-note: #a26835;
 				--white-piano-key: #eac2b3;
@@ -1477,6 +1477,88 @@ var beepbox = (function (exports) {
 				--noise5-primary-channel: #00c471;
 				--noise5-secondary-note: #00804a;
 				--noise5-primary-note: #00c471;
+			}
+		`,
+        "vermilion": `
+			:root {
+				--page-margin: #822219;
+				--editor-background: #822219;
+				--hover-preview: white;
+				--playhead: #FFF;
+				--primary-text: #FFCECA;
+				--secondary-text: #CA7169;
+				--inverted-text: black;
+				--text-selection: rgba(119,68,255,0.99);
+				--box-selection-fill: rgba(142, 138, 79, 0.28);
+				--loop-accent: #ffbf44;
+				--link-accent: #ffe788;
+				--ui-widget-background: #E34234;
+				--ui-widget-focus: #777;
+				--pitch-background: #93332B;
+				--tonic: #A2453E;
+				--fifth-note: #C8372D;
+				--white-piano-key: #FFA29A;
+				--black-piano-key: #7B231B;
+				--pitch1-secondary-channel: #660303;
+				--pitch1-primary-channel: #ff8080;
+				--pitch1-secondary-note: #d75353;
+				--pitch1-primary-note: #f7c0c0;
+				--pitch2-secondary-channel: #9f3400;
+				--pitch2-primary-channel: #ffb693;
+				--pitch2-secondary-note: #e87943;
+				--pitch2-primary-note: #ffb693;
+				--pitch3-secondary-channel: #953b04;
+				--pitch3-primary-channel: #ffd778;
+				--pitch3-secondary-note: #cc9b28;
+				--pitch3-primary-note: #ffd778;
+				--pitch4-secondary-channel: #2c4000;
+				--pitch4-primary-channel: #befd35;
+				--pitch4-secondary-note: #83b90c;
+				--pitch4-primary-note: #befd35;
+				--pitch5-secondary-channel: #00363c;
+				--pitch5-primary-channel: #15e8ff;
+				--pitch5-secondary-note: #209aa8;
+				--pitch5-primary-note: #15e8ff;
+				--pitch6-secondary-channel: #00234f;
+				--pitch6-primary-channel: #3b92ff;
+				--pitch6-secondary-note: #0b56b5;
+				--pitch6-primary-note: #99c6ff;
+				--pitch7-secondary-channel: #08012d;
+				--pitch7-primary-channel: #5335f7;
+				--pitch7-secondary-note: #351faa;
+				--pitch7-primary-note: #5335f7;
+				--pitch8-secondary-channel: #280033;
+				--pitch8-primary-channel: #c800ff;
+				--pitch8-secondary-note: #8500aa;
+				--pitch8-primary-note: #e588ff;
+				--pitch9-secondary-channel: #260020;
+				--pitch9-primary-channel: #df68cc;
+				--pitch9-secondary-note: #bb20a2;
+				--pitch9-primary-note: #ffa2f0;
+				--pitch10-secondary-channel: #370012;
+				--pitch10-primary-channel: #f06593;
+				--pitch10-secondary-note: #c1446d;
+				--pitch10-primary-note: #ffbad1;
+				--noise1-secondary-channel: #2d2d2d;
+				--noise1-primary-channel: #a8a8a8;
+				--noise1-secondary-note: #666;
+				--noise1-primary-note: #a8a8a8;
+				--noise2-secondary-channel: #511a00;
+				--noise2-primary-channel: #f77d44;
+				--noise2-secondary-note: #c66538;
+				--noise2-primary-note: #f77d44;
+				--noise3-secondary-channel: #003517;
+				--noise3-primary-channel: #66ffa9;
+				--noise3-secondary-note: #29c86e;
+				--noise3-primary-note: #66ffa9;
+				--noise4-secondary-channel: #001528;
+				--noise4-primary-channel: #4fa1ec;
+				--noise4-secondary-note: #2674bb;
+				--noise4-primary-note: #4fa1ec;
+				--noise5-secondary-channel: #204;
+				--noise5-primary-channel: #93f;
+				--noise5-secondary-note: #6000bf;
+				--noise5-primary-note: #93f;
 			}
 		`,
     };
@@ -3089,7 +3171,7 @@ var beepbox = (function (exports) {
     class ThemePrompt {
         constructor(_doc) {
             this._doc = _doc;
-            this._themeSelect = select$8({ style: "width: 100%;" }, option$8({ value: "dark classic" }, "BeepBox Dark"), option$8({ value: "dark competition" }, "BeepBox Competitive"), option$8({ value: "light classic" }, "BeepBox Light"), option$8({ value: "marine" }, "Marine"), option$8({ value: "flame" }, "Flame"), option$8({ value: "amber" }, "Amber"));
+            this._themeSelect = select$8({ style: "width: 100%;" }, option$8({ value: "dark classic" }, "BeepBox Dark"), option$8({ value: "dark competition" }, "BeepBox Competitive"), option$8({ value: "light classic" }, "BeepBox Light"), option$8({ value: "marine" }, "Marine"), option$8({ value: "flame" }, "Flame"), option$8({ value: "amber" }, "Amber"), option$8({ value: "vermilion" }, "Vermilion"));
             this._cancelButton = button$c({ class: "cancelButton" });
             this._okayButton = button$c({ class: "okayButton", style: "width:45%;" }, "Okay");
             this.container = div$c({ class: "prompt noSelection", style: "width: 220px;" }, h2$b("Set Theme"), div$c({ style: "display: flex; flex-direction: row; align-items: center; height: 2em; justify-content: flex-end;" }, div$c({ class: "selectContainer", style: "width: 100%;" }, this._themeSelect)), div$c({ style: "display: flex; flex-direction: row-reverse; justify-content: space-between;" }, this._okayButton), this._cancelButton);
