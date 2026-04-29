@@ -2,7 +2,7 @@ var beepbox = (function (exports) {
     'use strict';
 
     /*!
-    Copyright (c) 2012-2022 John Nesky and contributing authors
+    Copyright (c) John Nesky and contributing authors.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of
     this software and associated documentation files (the "Software"), to deal in
@@ -23,6 +23,13 @@ var beepbox = (function (exports) {
     SOFTWARE.
     */
     class Config {
+        static _generateSineWave() {
+            const wave = new Float32Array(Config.sineWaveLength + 1);
+            for (let i = 0; i < Config.sineWaveLength + 1; i++) {
+                wave[i] = Math.sin(i * Math.PI * 2.0 / Config.sineWaveLength);
+            }
+            return wave;
+        }
     }
     Config.scales = toNameMap([
         { name: "easy :)", realName: "pentatonic major", flags: [true, false, true, false, true, false, false, true, false, true, false, false] },
@@ -288,7 +295,7 @@ var beepbox = (function (exports) {
     Config.detuneMax = Config.detuneCenter * 2;
     Config.sineWaveLength = 1 << 8;
     Config.sineWaveMask = Config.sineWaveLength - 1;
-    Config.sineWave = generateSineWave();
+    Config.sineWave = Config._generateSineWave();
     Config.pickedStringDispersionCenterFreq = 6000.0;
     Config.pickedStringDispersionFreqScale = 0.3;
     Config.pickedStringDispersionFreqMult = 4.0;
@@ -419,13 +426,6 @@ var beepbox = (function (exports) {
         }
         return combinedAmplitude;
     }
-    function generateSineWave() {
-        const wave = new Float32Array(Config.sineWaveLength + 1);
-        for (let i = 0; i < Config.sineWaveLength + 1; i++) {
-            wave[i] = Math.sin(i * Math.PI * 2.0 / Config.sineWaveLength);
-        }
-        return wave;
-    }
     function getArpeggioPitchIndex(pitchCount, rhythm, arpeggio) {
         const arpeggioPattern = Config.rhythms[rhythm].arpeggioPatterns[pitchCount - 1];
         if (arpeggioPattern != null) {
@@ -516,7 +516,7 @@ var beepbox = (function (exports) {
             return null;
         }
     }
-    EditorConfig.version = "4.2";
+    EditorConfig.version = "4.2.1";
     EditorConfig.versionDisplayName = "BeepBox";
     EditorConfig.releaseNotesURL = "https://github.com/johnnesky/beepbox/releases/tag/v" + EditorConfig.version;
     EditorConfig.isOnMac = /^Mac/i.test(navigator.platform) || /Mac OS X/i.test(navigator.userAgent) || /^(iPhone|iPad|iPod)/i.test(navigator.platform) || /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
@@ -1253,69 +1253,69 @@ var beepbox = (function (exports) {
 				--fifth-note: #88447d;
 				--white-piano-key: #96a1bb;
 				--black-piano-key: #303144;
-				--pitch1-secondary-channel: #117734;
-				--pitch1-primary-channel: #5de88d;
-				--pitch1-secondary-note: #117734;
-				--pitch1-primary-note: #5de88d;
-				--pitch2-secondary-channel: #106b75;
-				--pitch2-primary-channel: #4dc7d5;
-				--pitch2-secondary-note: #106b75;
-				--pitch2-primary-note: #4dc7d5;
-				--pitch3-secondary-channel: #0f1f75;
-				--pitch3-primary-channel: #566dec;
-				--pitch3-secondary-note: #0f1f75;
-				--pitch3-primary-note: #566dec;
-				--pitch4-secondary-channel: #230948;
-				--pitch4-primary-channel: #a07dd2;
-				--pitch4-secondary-note: #230948;
-				--pitch4-primary-note: #a07dd2;
-				--pitch5-secondary-channel: #3e073d;
-				--pitch5-primary-channel: #d944d6;
-				--pitch5-secondary-note: #3e073d;
-				--pitch5-primary-note: #d944d6;
-				--pitch6-secondary-channel: #4f031c;
-				--pitch6-primary-channel: #d73c6f;
-				--pitch6-secondary-note: #4f031c;
-				--pitch6-primary-note: #d73c6f;
-				--pitch7-secondary-channel: #4d1313;
-				--pitch7-primary-channel: #d27373;
-				--pitch7-secondary-note: #4d1313;
-				--pitch7-primary-note: #d27373;
-				--pitch8-secondary-channel: #623a07;
-				--pitch8-primary-channel: #e8af67;
-				--pitch8-secondary-note: #623a07;
-				--pitch8-primary-note: #e8af67;
-				--pitch9-secondary-channel: #4d4805;
-				--pitch9-primary-channel: #eadd33;
-				--pitch9-secondary-note: #4d4805;
-				--pitch9-primary-note: #eadd33;
-				--pitch10-secondary-channel: #134f06;
-				--pitch10-primary-channel: #7fee66;
-				--pitch10-secondary-note: #134f06;
-				--pitch10-primary-note: #7fee66;
-				--noise1-secondary-channel: #3d4c5e;
-				--noise1-primary-channel: #7089a6;
-				--noise1-secondary-note: #3d4c5e;
-				--noise1-primary-note: #7089a6;
-				--noise2-secondary-channel: #2b5127;
-				--noise2-primary-channel: #4c8a44;
-				--noise2-secondary-note: #2b5127;
-				--noise2-primary-note: #4c8a44;
-				--noise3-secondary-channel: #2e4b4f;
-				--noise3-primary-channel: #71a5ac;
-				--noise3-secondary-note: #2e4b4f;
-				--noise3-primary-note: #71a5ac;
-				--noise4-secondary-channel: #1c1b40;
-				--noise4-primary-channel: #6765ae;
-				--noise4-secondary-note: #1c1b40;
-				--noise4-primary-note: #6765ae;
-				--noise5-secondary-channel: #3e1237;
-				--noise5-primary-channel: #bf6cb2;
-				--noise5-secondary-note: #3e1237;
-				--noise5-primary-note: #bf6cb2;
+				--pitch1-secondary-channel: #0099A1;
+				--pitch1-primary-channel:   #25F3FF;
+				--pitch1-secondary-note:    #00BDC7;
+				--pitch1-primary-note:      #92F9FF;
+				--pitch2-secondary-channel: #A1A100;
+				--pitch2-primary-channel:   #FFFF25;
+				--pitch2-secondary-note:    #C7C700;
+				--pitch2-primary-note:      #FFFF92;
+				--pitch3-secondary-channel: #C75000;
+				--pitch3-primary-channel:   #FF9752;
+				--pitch3-secondary-note:    #FF771C;
+				--pitch3-primary-note:      #FFCDAB;
+				--pitch4-secondary-channel: #00A100;
+				--pitch4-primary-channel:   #50FF50;
+				--pitch4-secondary-note:    #00C700;
+				--pitch4-primary-note:      #A0FFA0;
+				--pitch5-secondary-channel: #D020D0;
+				--pitch5-primary-channel:   #FF90FF;
+				--pitch5-secondary-note:    #E040E0;
+				--pitch5-primary-note:      #FFC0FF;
+				--pitch6-secondary-channel: #7777B0;
+				--pitch6-primary-channel:   #A0A0FF;
+				--pitch6-secondary-note:    #8888D0;
+				--pitch6-primary-note:      #D0D0FF;
+				--pitch7-secondary-channel: #8AA100;
+				--pitch7-primary-channel:   #DEFF25;
+				--pitch7-secondary-note:    #AAC700;
+				--pitch7-primary-note:      #E6FF92;
+				--pitch8-secondary-channel: #DF0019;
+				--pitch8-primary-channel:   #FF98A4;
+				--pitch8-secondary-note:    #FF4E63;
+				--pitch8-primary-note:      #FFB2BB;
+				--pitch9-secondary-channel: #00A170;
+				--pitch9-primary-channel:   #50FFC9;
+				--pitch9-secondary-note:    #00C78A;
+				--pitch9-primary-note:      #83FFD9;
+				--pitch10-secondary-channel:#A11FFF;
+				--pitch10-primary-channel:  #CE8BFF;
+				--pitch10-secondary-note:   #B757FF;
+				--pitch10-primary-note:     #DFACFF;
+				--noise1-secondary-channel: #6F6F6F;
+				--noise1-primary-channel:   #AAAAAA;
+				--noise1-secondary-note:    #A7A7A7;
+				--noise1-primary-note:      #E0E0E0;
+				--noise2-secondary-channel: #996633;
+				--noise2-primary-channel:   #DDAA77;
+				--noise2-secondary-note:    #CC9966;
+				--noise2-primary-note:      #F0D0BB;
+				--noise3-secondary-channel: #4A6D8F;
+				--noise3-primary-channel:   #77AADD;
+				--noise3-secondary-note:    #6F9FCF;
+				--noise3-primary-note:      #BBD7FF;
+				--noise4-secondary-channel: #7A4F9A;
+				--noise4-primary-channel:   #AF82D2;
+				--noise4-secondary-note:    #9E71C1;
+				--noise4-primary-note:      #D4C1EA;
+				--noise5-secondary-channel: #607837;
+				--noise5-primary-channel:   #A2BB77;
+				--noise5-secondary-note:    #91AA66;
+				--noise5-primary-note:      #C5E2B2;
 			}
 		`,
-        "flame": `
+        "ruby": `
 			:root {
 				--page-margin: #1a0306;
 				--editor-background: #1a0306;
@@ -1335,66 +1335,66 @@ var beepbox = (function (exports) {
 				--fifth-note: #771c4f;
 				--white-piano-key: #ffbebe;
 				--black-piano-key: #6a3535;
-				--pitch1-secondary-channel: #391702;
-				--pitch1-primary-channel: #c4794c;
-				--pitch1-secondary-note: #391702;
-				--pitch1-primary-note: #c4794c;
-				--pitch2-secondary-channel: #1f5307;
-				--pitch2-primary-channel: #81b768;
-				--pitch2-secondary-note: #1f5307;
-				--pitch2-primary-note: #81b768;
-				--pitch3-secondary-channel: #01261a;
-				--pitch3-primary-channel: #26bb8b;
-				--pitch3-secondary-note: #01261a;
-				--pitch3-primary-note: #26bb8b;
-				--pitch4-secondary-channel: #051239;
-				--pitch4-primary-channel: #7085c4;
-				--pitch4-secondary-note: #051239;
-				--pitch4-primary-note: #7085c4;
-				--pitch5-secondary-channel: #290442;
-				--pitch5-primary-channel: #894eb0;
-				--pitch5-secondary-note: #290442;
-				--pitch5-primary-note: #894eb0;
-				--pitch6-secondary-channel: #350534;
-				--pitch6-primary-channel: #a811a5;
-				--pitch6-secondary-note: #350534;
-				--pitch6-primary-note: #a811a5;
-				--pitch7-secondary-channel: #46031c;
-				--pitch7-primary-channel: #e84481;
-				--pitch7-secondary-note: #46031c;
-				--pitch7-primary-note: #e84481;
-				--pitch8-secondary-channel: #400;
-				--pitch8-primary-channel: #c45656;
-				--pitch8-secondary-note: #400;
-				--pitch8-primary-note: #c45656;
-				--pitch9-secondary-channel: #2d1f1f;
-				--pitch9-primary-channel: #a47777;
-				--pitch9-secondary-note: #2d1f1f;
-				--pitch9-primary-note: #a47777;
-				--pitch10-secondary-channel: #604017;
-				--pitch10-primary-channel: #e19533;
-				--pitch10-secondary-note: #604017;
-				--pitch10-primary-note: #e19533;
-				--noise1-secondary-channel: #535353;
-				--noise1-primary-channel: #959595;
-				--noise1-secondary-note: #535353;
-				--noise1-primary-note: #959595;
-				--noise2-secondary-channel: #223303;
-				--noise2-primary-channel: #62930a;
-				--noise2-secondary-note: #223303;
-				--noise2-primary-note: #62930a;
-				--noise3-secondary-channel: #01482d;
-				--noise3-primary-channel: #00b36f;
-				--noise3-secondary-note: #01482d;
-				--noise3-primary-note: #00b36f;
-				--noise4-secondary-channel: #001439;
-				--noise4-primary-channel: #0052ea;
-				--noise4-secondary-note: #001439;
-				--noise4-primary-note: #0052ea;
-				--noise5-secondary-channel: #420625;
-				--noise5-primary-channel: #bf1a6f;
-				--noise5-secondary-note: #420625;
-				--noise5-primary-note: #bf1a6f;
+				--pitch1-secondary-channel: #0099A1;
+				--pitch1-primary-channel:   #25F3FF;
+				--pitch1-secondary-note:    #00BDC7;
+				--pitch1-primary-note:      #92F9FF;
+				--pitch2-secondary-channel: #A1A100;
+				--pitch2-primary-channel:   #FFFF25;
+				--pitch2-secondary-note:    #C7C700;
+				--pitch2-primary-note:      #FFFF92;
+				--pitch3-secondary-channel: #C75000;
+				--pitch3-primary-channel:   #FF9752;
+				--pitch3-secondary-note:    #FF771C;
+				--pitch3-primary-note:      #FFCDAB;
+				--pitch4-secondary-channel: #00A100;
+				--pitch4-primary-channel:   #50FF50;
+				--pitch4-secondary-note:    #00C700;
+				--pitch4-primary-note:      #A0FFA0;
+				--pitch5-secondary-channel: #D020D0;
+				--pitch5-primary-channel:   #FF90FF;
+				--pitch5-secondary-note:    #E040E0;
+				--pitch5-primary-note:      #FFC0FF;
+				--pitch6-secondary-channel: #7777B0;
+				--pitch6-primary-channel:   #A0A0FF;
+				--pitch6-secondary-note:    #8888D0;
+				--pitch6-primary-note:      #D0D0FF;
+				--pitch7-secondary-channel: #8AA100;
+				--pitch7-primary-channel:   #DEFF25;
+				--pitch7-secondary-note:    #AAC700;
+				--pitch7-primary-note:      #E6FF92;
+				--pitch8-secondary-channel: #DF0019;
+				--pitch8-primary-channel:   #FF98A4;
+				--pitch8-secondary-note:    #FF4E63;
+				--pitch8-primary-note:      #FFB2BB;
+				--pitch9-secondary-channel: #00A170;
+				--pitch9-primary-channel:   #50FFC9;
+				--pitch9-secondary-note:    #00C78A;
+				--pitch9-primary-note:      #83FFD9;
+				--pitch10-secondary-channel:#A11FFF;
+				--pitch10-primary-channel:  #CE8BFF;
+				--pitch10-secondary-note:   #B757FF;
+				--pitch10-primary-note:     #DFACFF;
+				--noise1-secondary-channel: #6F6F6F;
+				--noise1-primary-channel:   #AAAAAA;
+				--noise1-secondary-note:    #A7A7A7;
+				--noise1-primary-note:      #E0E0E0;
+				--noise2-secondary-channel: #996633;
+				--noise2-primary-channel:   #DDAA77;
+				--noise2-secondary-note:    #CC9966;
+				--noise2-primary-note:      #F0D0BB;
+				--noise3-secondary-channel: #4A6D8F;
+				--noise3-primary-channel:   #77AADD;
+				--noise3-secondary-note:    #6F9FCF;
+				--noise3-primary-note:      #BBD7FF;
+				--noise4-secondary-channel: #7A4F9A;
+				--noise4-primary-channel:   #AF82D2;
+				--noise4-secondary-note:    #9E71C1;
+				--noise4-primary-note:      #D4C1EA;
+				--noise5-secondary-channel: #607837;
+				--noise5-primary-channel:   #A2BB77;
+				--noise5-secondary-note:    #91AA66;
+				--noise5-primary-note:      #C5E2B2;
 			}
 		`,
         "amber": `
@@ -1417,148 +1417,66 @@ var beepbox = (function (exports) {
 				--fifth-note: #a26835;
 				--white-piano-key: #eac2b3;
 				--black-piano-key: #4f3329;
-				--pitch1-secondary-channel: #0d1b2d;
-				--pitch1-primary-channel: #3d6293;
-				--pitch1-secondary-note: #20334d;
-				--pitch1-primary-note: #3d6293;
-				--pitch2-secondary-channel: #002821;
-				--pitch2-primary-channel: #2a9d89;
-				--pitch2-secondary-note: #107160;
-				--pitch2-primary-note: #2a9d89;
-				--pitch3-secondary-channel: #1f3906;
-				--pitch3-primary-channel: #7fc140;
-				--pitch3-secondary-note: #4a8413;
-				--pitch3-primary-note: #7fc140;
-				--pitch4-secondary-channel: #391a02;
-				--pitch4-primary-channel: #e38d4a;
-				--pitch4-secondary-note: #664730;
-				--pitch4-primary-note: #e38d4a;
-				--pitch5-secondary-channel: #2f0014;
-				--pitch5-primary-channel: #b01c5b;
-				--pitch5-secondary-note: #6f0e37;
-				--pitch5-primary-note: #b01c5b;
-				--pitch6-secondary-channel: #20002f;
-				--pitch6-primary-channel: #9635c4;
-				--pitch6-secondary-note: #6f1699;
-				--pitch6-primary-note: #9635c4;
-				--pitch7-secondary-channel: #100537;
-				--pitch7-primary-channel: #6243d0;
-				--pitch7-secondary-note: #3d2593;
-				--pitch7-primary-note: #6243d0;
-				--pitch8-secondary-channel: #03132d;
-				--pitch8-primary-channel: #305ca4;
-				--pitch8-secondary-note: #0c3c8a;
-				--pitch8-primary-note: #305ca4;
-				--pitch9-secondary-channel: #001317;
-				--pitch9-primary-channel: #30b3ce;
-				--pitch9-secondary-note: #036d84;
-				--pitch9-primary-note: #30b3ce;
-				--pitch10-secondary-channel: #2b1400;
-				--pitch10-primary-channel: #bb5700;
-				--pitch10-secondary-note: #7b3900;
-				--pitch10-primary-note: #bb5700;
-				--noise1-secondary-channel: #1e1e1e;
-				--noise1-primary-channel: #848484;
-				--noise1-secondary-note: #4a4a4a;
-				--noise1-primary-note: #848484;
-				--noise2-secondary-channel: #072800;
-				--noise2-primary-channel: #1eaa00;
-				--noise2-secondary-note: #147500;
-				--noise2-primary-note: #1eaa00;
-				--noise3-secondary-channel: #260000;
-				--noise3-primary-channel: #ca0000;
-				--noise3-secondary-note: #860000;
-				--noise3-primary-note: #ca0000;
-				--noise4-secondary-channel: #01002f;
-				--noise4-primary-channel: #4a48c6;
-				--noise4-secondary-note: #3c39b5;
-				--noise4-primary-note: #4a48c6;
-				--noise5-secondary-channel: #002616;
-				--noise5-primary-channel: #00c471;
-				--noise5-secondary-note: #00804a;
-				--noise5-primary-note: #00c471;
-			}
-		`,
-        "vermilion": `
-			:root {
-				--page-margin: #822219;
-				--editor-background: #822219;
-				--hover-preview: white;
-				--playhead: #FFF;
-				--primary-text: #FFCECA;
-				--secondary-text: #CA7169;
-				--inverted-text: black;
-				--text-selection: rgba(119,68,255,0.99);
-				--box-selection-fill: rgba(142, 138, 79, 0.28);
-				--loop-accent: #ffbf44;
-				--link-accent: #ffe788;
-				--ui-widget-background: #E34234;
-				--ui-widget-focus: #777;
-				--pitch-background: #93332B;
-				--tonic: #A2453E;
-				--fifth-note: #C8372D;
-				--white-piano-key: #FFA29A;
-				--black-piano-key: #7B231B;
-				--pitch1-secondary-channel: #660303;
-				--pitch1-primary-channel: #ff8080;
-				--pitch1-secondary-note: #d75353;
-				--pitch1-primary-note: #f7c0c0;
-				--pitch2-secondary-channel: #9f3400;
-				--pitch2-primary-channel: #ffb693;
-				--pitch2-secondary-note: #e87943;
-				--pitch2-primary-note: #ffb693;
-				--pitch3-secondary-channel: #953b04;
-				--pitch3-primary-channel: #ffd778;
-				--pitch3-secondary-note: #cc9b28;
-				--pitch3-primary-note: #ffd778;
-				--pitch4-secondary-channel: #2c4000;
-				--pitch4-primary-channel: #befd35;
-				--pitch4-secondary-note: #83b90c;
-				--pitch4-primary-note: #befd35;
-				--pitch5-secondary-channel: #00363c;
-				--pitch5-primary-channel: #15e8ff;
-				--pitch5-secondary-note: #209aa8;
-				--pitch5-primary-note: #15e8ff;
-				--pitch6-secondary-channel: #00234f;
-				--pitch6-primary-channel: #3b92ff;
-				--pitch6-secondary-note: #0b56b5;
-				--pitch6-primary-note: #99c6ff;
-				--pitch7-secondary-channel: #08012d;
-				--pitch7-primary-channel: #5335f7;
-				--pitch7-secondary-note: #351faa;
-				--pitch7-primary-note: #5335f7;
-				--pitch8-secondary-channel: #280033;
-				--pitch8-primary-channel: #c800ff;
-				--pitch8-secondary-note: #8500aa;
-				--pitch8-primary-note: #e588ff;
-				--pitch9-secondary-channel: #260020;
-				--pitch9-primary-channel: #df68cc;
-				--pitch9-secondary-note: #bb20a2;
-				--pitch9-primary-note: #ffa2f0;
-				--pitch10-secondary-channel: #370012;
-				--pitch10-primary-channel: #f06593;
-				--pitch10-secondary-note: #c1446d;
-				--pitch10-primary-note: #ffbad1;
-				--noise1-secondary-channel: #2d2d2d;
-				--noise1-primary-channel: #a8a8a8;
-				--noise1-secondary-note: #666;
-				--noise1-primary-note: #a8a8a8;
-				--noise2-secondary-channel: #511a00;
-				--noise2-primary-channel: #f77d44;
-				--noise2-secondary-note: #c66538;
-				--noise2-primary-note: #f77d44;
-				--noise3-secondary-channel: #003517;
-				--noise3-primary-channel: #66ffa9;
-				--noise3-secondary-note: #29c86e;
-				--noise3-primary-note: #66ffa9;
-				--noise4-secondary-channel: #001528;
-				--noise4-primary-channel: #4fa1ec;
-				--noise4-secondary-note: #2674bb;
-				--noise4-primary-note: #4fa1ec;
-				--noise5-secondary-channel: #204;
-				--noise5-primary-channel: #93f;
-				--noise5-secondary-note: #6000bf;
-				--noise5-primary-note: #93f;
+				--pitch1-secondary-channel: #0099A1;
+				--pitch1-primary-channel:   #25F3FF;
+				--pitch1-secondary-note:    #00BDC7;
+				--pitch1-primary-note:      #92F9FF;
+				--pitch2-secondary-channel: #A1A100;
+				--pitch2-primary-channel:   #FFFF25;
+				--pitch2-secondary-note:    #C7C700;
+				--pitch2-primary-note:      #FFFF92;
+				--pitch3-secondary-channel: #C75000;
+				--pitch3-primary-channel:   #FF9752;
+				--pitch3-secondary-note:    #FF771C;
+				--pitch3-primary-note:      #FFCDAB;
+				--pitch4-secondary-channel: #00A100;
+				--pitch4-primary-channel:   #50FF50;
+				--pitch4-secondary-note:    #00C700;
+				--pitch4-primary-note:      #A0FFA0;
+				--pitch5-secondary-channel: #D020D0;
+				--pitch5-primary-channel:   #FF90FF;
+				--pitch5-secondary-note:    #E040E0;
+				--pitch5-primary-note:      #FFC0FF;
+				--pitch6-secondary-channel: #7777B0;
+				--pitch6-primary-channel:   #A0A0FF;
+				--pitch6-secondary-note:    #8888D0;
+				--pitch6-primary-note:      #D0D0FF;
+				--pitch7-secondary-channel: #8AA100;
+				--pitch7-primary-channel:   #DEFF25;
+				--pitch7-secondary-note:    #AAC700;
+				--pitch7-primary-note:      #E6FF92;
+				--pitch8-secondary-channel: #DF0019;
+				--pitch8-primary-channel:   #FF98A4;
+				--pitch8-secondary-note:    #FF4E63;
+				--pitch8-primary-note:      #FFB2BB;
+				--pitch9-secondary-channel: #00A170;
+				--pitch9-primary-channel:   #50FFC9;
+				--pitch9-secondary-note:    #00C78A;
+				--pitch9-primary-note:      #83FFD9;
+				--pitch10-secondary-channel:#A11FFF;
+				--pitch10-primary-channel:  #CE8BFF;
+				--pitch10-secondary-note:   #B757FF;
+				--pitch10-primary-note:     #DFACFF;
+				--noise1-secondary-channel: #6F6F6F;
+				--noise1-primary-channel:   #AAAAAA;
+				--noise1-secondary-note:    #A7A7A7;
+				--noise1-primary-note:      #E0E0E0;
+				--noise2-secondary-channel: #996633;
+				--noise2-primary-channel:   #DDAA77;
+				--noise2-secondary-note:    #CC9966;
+				--noise2-primary-note:      #F0D0BB;
+				--noise3-secondary-channel: #4A6D8F;
+				--noise3-primary-channel:   #77AADD;
+				--noise3-secondary-note:    #6F9FCF;
+				--noise3-primary-note:      #BBD7FF;
+				--noise4-secondary-channel: #7A4F9A;
+				--noise4-primary-channel:   #AF82D2;
+				--noise4-secondary-note:    #9E71C1;
+				--noise4-primary-note:      #D4C1EA;
+				--noise5-secondary-channel: #607837;
+				--noise5-primary-channel:   #A2BB77;
+				--noise5-secondary-note:    #91AA66;
+				--noise5-primary-note:      #C5E2B2;
 			}
 		`,
         "emerald": `
@@ -1581,66 +1499,66 @@ var beepbox = (function (exports) {
 				--fifth-note: #568844;
 				--white-piano-key: #c9fdb6;
 				--black-piano-key: #32593a;
-				--pitch1-secondary-channel: #A14B00;
-				--pitch1-primary-channel: #FFB425;
-				--pitch1-secondary-note: #C79500;
-				--pitch1-primary-note: #FFDF92;
-				--pitch2-secondary-channel: #A10000;
-				--pitch2-primary-channel: #FF2525;
-				--pitch2-secondary-note: #C70000;
-				--pitch2-primary-note: #FF9292;
-				--pitch3-secondary-channel: #C7004B;
-				--pitch3-primary-channel: #FF526A;
-				--pitch3-secondary-note: #FF1C5C;
-				--pitch3-primary-note: #FFABDA;
-				--pitch4-secondary-channel: #7E00A1;
-				--pitch4-primary-channel: #D950FF;
-				--pitch4-secondary-note: #C700BB;
-				--pitch4-primary-note: #FFA0F0;
-				--pitch5-secondary-channel: #6820D0;
-				--pitch5-primary-channel: #BD90FF;
-				--pitch5-secondary-note: #9040E0;
-				--pitch5-primary-note: #E0C0FF;
-				--pitch6-secondary-channel: #778BB0;
-				--pitch6-primary-channel: #A0BCFF;
-				--pitch6-secondary-note: #889AD0;
-				--pitch6-primary-note: #D0DEFF;
-				--pitch7-secondary-channel: #0092A1;
-				--pitch7-primary-channel: #25B7FF;
-				--pitch7-secondary-note: #008FC7;
-				--pitch7-primary-note: #92E0FF;
-				--pitch8-secondary-channel: #00DF2D;
-				--pitch8-primary-channel: #98FFA8;
-				--pitch8-secondary-note: #4EFF6A;
-				--pitch8-primary-note: #B2FFD0;
-				--pitch9-secondary-channel: #23A100;
-				--pitch9-primary-channel: #6EFF50;
-				--pitch9-secondary-note: #06C700;
-				--pitch9-primary-note: #AAFF83;
-				--pitch10-secondary-channel: #D9FF1F;
-				--pitch10-primary-channel: #F1FF8B;
-				--pitch10-secondary-note: #C6B103;
-				--pitch10-primary-note: #FFF2AC;
+				--pitch1-secondary-channel: #0099A1;
+				--pitch1-primary-channel:   #25F3FF;
+				--pitch1-secondary-note:    #00BDC7;
+				--pitch1-primary-note:      #92F9FF;
+				--pitch2-secondary-channel: #A1A100;
+				--pitch2-primary-channel:   #FFFF25;
+				--pitch2-secondary-note:    #C7C700;
+				--pitch2-primary-note:      #FFFF92;
+				--pitch3-secondary-channel: #C75000;
+				--pitch3-primary-channel:   #FF9752;
+				--pitch3-secondary-note:    #FF771C;
+				--pitch3-primary-note:      #FFCDAB;
+				--pitch4-secondary-channel: #00A100;
+				--pitch4-primary-channel:   #50FF50;
+				--pitch4-secondary-note:    #00C700;
+				--pitch4-primary-note:      #A0FFA0;
+				--pitch5-secondary-channel: #D020D0;
+				--pitch5-primary-channel:   #FF90FF;
+				--pitch5-secondary-note:    #E040E0;
+				--pitch5-primary-note:      #FFC0FF;
+				--pitch6-secondary-channel: #7777B0;
+				--pitch6-primary-channel:   #A0A0FF;
+				--pitch6-secondary-note:    #8888D0;
+				--pitch6-primary-note:      #D0D0FF;
+				--pitch7-secondary-channel: #8AA100;
+				--pitch7-primary-channel:   #DEFF25;
+				--pitch7-secondary-note:    #AAC700;
+				--pitch7-primary-note:      #E6FF92;
+				--pitch8-secondary-channel: #DF0019;
+				--pitch8-primary-channel:   #FF98A4;
+				--pitch8-secondary-note:    #FF4E63;
+				--pitch8-primary-note:      #FFB2BB;
+				--pitch9-secondary-channel: #00A170;
+				--pitch9-primary-channel:   #50FFC9;
+				--pitch9-secondary-note:    #00C78A;
+				--pitch9-primary-note:      #83FFD9;
+				--pitch10-secondary-channel:#A11FFF;
+				--pitch10-primary-channel:  #CE8BFF;
+				--pitch10-secondary-note:   #B757FF;
+				--pitch10-primary-note:     #DFACFF;
 				--noise1-secondary-channel: #6F6F6F;
-				--noise1-primary-channel: #AAAAAA;
-				--noise1-secondary-note: #A7A7A7;
-				--noise1-primary-note: #E0E0E0;
-				--noise2-secondary-channel: #338699;
-				--noise2-primary-channel: #77CFDD;
-				--noise2-secondary-note: #669CCC;
-				--noise2-primary-note: #BBE9F0;
-				--noise3-secondary-channel: #568F4A;
-				--noise3-primary-channel: #84DD77;
-				--noise3-secondary-note: #84CF6F;
-				--noise3-primary-note: #C7FFBB;
+				--noise1-primary-channel:   #AAAAAA;
+				--noise1-secondary-note:    #A7A7A7;
+				--noise1-primary-note:      #E0E0E0;
+				--noise2-secondary-channel: #996633;
+				--noise2-primary-channel:   #DDAA77;
+				--noise2-secondary-note:    #CC9966;
+				--noise2-primary-note:      #F0D0BB;
+				--noise3-secondary-channel: #4A6D8F;
+				--noise3-primary-channel:   #77AADD;
+				--noise3-secondary-note:    #6F9FCF;
+				--noise3-primary-note:      #BBD7FF;
 				--noise4-secondary-channel: #7A4F9A;
-				--noise4-primary-channel: #AF82D2;
-				--noise4-secondary-note: #9E71C1;
-				--noise4-primary-note: #D4C1EA;
-				--noise5-secondary-channel: #78373a;
-				--noise5-primary-channel: #BB777D;
-				--noise5-secondary-note: #AA666C;
-				--noise5-primary-note: #E2B2B4;
+				--noise4-primary-channel:   #AF82D2;
+				--noise4-secondary-note:    #9E71C1;
+				--noise4-primary-note:      #D4C1EA;
+				--noise5-secondary-channel: #607837;
+				--noise5-primary-channel:   #A2BB77;
+				--noise5-secondary-note:    #91AA66;
+				--noise5-primary-note:      #C5E2B2;
 			}
 		`,
         "amethyst": `
@@ -1664,147 +1582,65 @@ var beepbox = (function (exports) {
 				--white-piano-key: #eec0ff;
 				--black-piano-key: #4b2e53;
 				--pitch1-secondary-channel: #0099A1;
-				--pitch1-primary-channel: #25F3FF;
-				--pitch1-secondary-note: #00BDC7;
-				--pitch1-primary-note: #92F9FF;
+				--pitch1-primary-channel:   #25F3FF;
+				--pitch1-secondary-note:    #00BDC7;
+				--pitch1-primary-note:      #92F9FF;
 				--pitch2-secondary-channel: #A1A100;
-				--pitch2-primary-channel: #FFFF25;
-				--pitch2-secondary-note: #C7C700;
-				--pitch2-primary-note: #FFFF92;
+				--pitch2-primary-channel:   #FFFF25;
+				--pitch2-secondary-note:    #C7C700;
+				--pitch2-primary-note:      #FFFF92;
 				--pitch3-secondary-channel: #C75000;
-				--pitch3-primary-channel: #FF9752;
-				--pitch3-secondary-note: #FF771C;
-				--pitch3-primary-note: #FFCDAB;
+				--pitch3-primary-channel:   #FF9752;
+				--pitch3-secondary-note:    #FF771C;
+				--pitch3-primary-note:      #FFCDAB;
 				--pitch4-secondary-channel: #00A100;
-				--pitch4-primary-channel: #50FF50;
-				--pitch4-secondary-note: #00C700;
-				--pitch4-primary-note: #A0FFA0;
+				--pitch4-primary-channel:   #50FF50;
+				--pitch4-secondary-note:    #00C700;
+				--pitch4-primary-note:      #A0FFA0;
 				--pitch5-secondary-channel: #D020D0;
-				--pitch5-primary-channel: #FF90FF;
-				--pitch5-secondary-note: #E040E0;
-				--pitch5-primary-note: #FFC0FF;
+				--pitch5-primary-channel:   #FF90FF;
+				--pitch5-secondary-note:    #E040E0;
+				--pitch5-primary-note:      #FFC0FF;
 				--pitch6-secondary-channel: #7777B0;
-				--pitch6-primary-channel: #A0A0FF;
-				--pitch6-secondary-note: #8888D0;
-				--pitch6-primary-note: #D0D0FF;
+				--pitch6-primary-channel:   #A0A0FF;
+				--pitch6-secondary-note:    #8888D0;
+				--pitch6-primary-note:      #D0D0FF;
 				--pitch7-secondary-channel: #8AA100;
-				--pitch7-primary-channel: #DEFF25;
-				--pitch7-secondary-note: #AAC700;
-				--pitch7-primary-note: #E6FF92;
+				--pitch7-primary-channel:   #DEFF25;
+				--pitch7-secondary-note:    #AAC700;
+				--pitch7-primary-note:      #E6FF92;
 				--pitch8-secondary-channel: #DF0019;
-				--pitch8-primary-channel: #FF98A4;
-				--pitch8-secondary-note: #FF4E63;
-				--pitch8-primary-note: #FFB2BB;
+				--pitch8-primary-channel:   #FF98A4;
+				--pitch8-secondary-note:    #FF4E63;
+				--pitch8-primary-note:      #FFB2BB;
 				--pitch9-secondary-channel: #00A170;
-				--pitch9-primary-channel: #50FFC9;
-				--pitch9-secondary-note: #00C78A;
-				--pitch9-primary-note: #83FFD9;
-				--pitch10-secondary-channel: #A11FFF;
-				--pitch10-primary-channel: #CE8BFF;
-				--pitch10-secondary-note: #B757FF;
-				--pitch10-primary-note: #DFACFF;
+				--pitch9-primary-channel:   #50FFC9;
+				--pitch9-secondary-note:    #00C78A;
+				--pitch9-primary-note:      #83FFD9;
+				--pitch10-secondary-channel:#A11FFF;
+				--pitch10-primary-channel:  #CE8BFF;
+				--pitch10-secondary-note:   #B757FF;
+				--pitch10-primary-note:     #DFACFF;
 				--noise1-secondary-channel: #6F6F6F;
-				--noise1-primary-channel: #AAAAAA;
-				--noise1-secondary-note: #A7A7A7;
-				--noise1-primary-note: #E0E0E0;
+				--noise1-primary-channel:   #AAAAAA;
+				--noise1-secondary-note:    #A7A7A7;
+				--noise1-primary-note:      #E0E0E0;
 				--noise2-secondary-channel: #996633;
-				--noise2-primary-channel: #DDAA77;
-				--noise2-secondary-note: #CC9966;
-				--noise2-primary-note: #F0D0BB;
+				--noise2-primary-channel:   #DDAA77;
+				--noise2-secondary-note:    #CC9966;
+				--noise2-primary-note:      #F0D0BB;
 				--noise3-secondary-channel: #4A6D8F;
-				--noise3-primary-channel: #77AADD;
-				--noise3-secondary-note: #6F9FCF;
-				--noise3-primary-note: #BBD7FF;
+				--noise3-primary-channel:   #77AADD;
+				--noise3-secondary-note:    #6F9FCF;
+				--noise3-primary-note:      #BBD7FF;
 				--noise4-secondary-channel: #7A4F9A;
-				--noise4-primary-channel: #AF82D2;
-				--noise4-secondary-note: #9E71C1;
-				--noise4-primary-note: #D4C1EA;
+				--noise4-primary-channel:   #AF82D2;
+				--noise4-secondary-note:    #9E71C1;
+				--noise4-primary-note:      #D4C1EA;
 				--noise5-secondary-channel: #607837;
-				--noise5-primary-channel: #A2BB77;
-				--noise5-secondary-note: #91AA66;
-				--noise5-primary-note: #C5E2B2;
-			}
-		`,
-        "polar": `
-			:root {
-				--page-margin: #15243e;
-				--editor-background: #15243e;
-				--hover-preview: white;
-				--playhead: white;
-				--primary-text: #aebfe6;
-				--secondary-text: #465799;
-				--inverted-text: #000611;
-				--text-selection: rgba(68, 80, 255, 0.99);
-				--box-selection-fill: rgba(174, 190, 255, 0.2);
-				--loop-accent: #4473ff;
-				--link-accent: #88c2ff;
-				--ui-widget-background: #293e62;
-				--ui-widget-focus: #51617d;
-				--pitch-background: #283e62;
-				--tonic: #2f3095;
-				--fifth-note: #468;
-				--white-piano-key: #b1c7d5;
-				--black-piano-key: #1c3646;
-				--pitch1-secondary-channel: #0099A1;
-				--pitch1-primary-channel: #25F3FF;
-				--pitch1-secondary-note: #00BDC7;
-				--pitch1-primary-note: #92F9FF;
-				--pitch2-secondary-channel: #0028A1;
-				--pitch2-primary-channel: #4471FB;
-				--pitch2-secondary-note: #0028A1;
-				--pitch2-primary-note: #8DA6F4;
-				--pitch3-secondary-channel: #00C786;
-				--pitch3-primary-channel: #45FFC2;
-				--pitch3-secondary-note: #007B53;
-				--pitch3-primary-note: #45FFC2;
-				--pitch4-secondary-channel: #00A100;
-				--pitch4-primary-channel: #50FF50;
-				--pitch4-secondary-note: #00C700;
-				--pitch4-primary-note: #A0FFA0;
-				--pitch5-secondary-channel: #8920D0;
-				--pitch5-primary-channel: #E790FF;
-				--pitch5-secondary-note: #9543CC;
-				--pitch5-primary-note: #E790FF;
-				--pitch6-secondary-channel: #7777B0;
-				--pitch6-primary-channel: #A0A0FF;
-				--pitch6-secondary-note: #8888D0;
-				--pitch6-primary-note: #D0D0FF;
-				--pitch7-secondary-channel: #A13C00;
-				--pitch7-primary-channel: #FF8125;
-				--pitch7-secondary-note: #C78300;
-				--pitch7-primary-note: #FFC592;
-				--pitch8-secondary-channel: #AC1E2E;
-				--pitch8-primary-channel: #FF98A4;
-				--pitch8-secondary-note: #FF4E63;
-				--pitch8-primary-note: #FFB2BB;
-				--pitch9-secondary-channel: #00A170;
-				--pitch9-primary-channel: #50FFC9;
-				--pitch9-secondary-note: #00C78A;
-				--pitch9-primary-note: #83FFD9;
-				--pitch10-secondary-channel: #A11FFF;
-				--pitch10-primary-channel: #CE8BFF;
-				--pitch10-secondary-note: #B757FF;
-				--pitch10-primary-note: #DFACFF;
-				--noise1-secondary-channel: #6F6F6F;
-				--noise1-primary-channel: #AAAAAA;
-				--noise1-secondary-note: #A7A7A7;
-				--noise1-primary-note: #E0E0E0;
-				--noise2-secondary-channel: #996633;
-				--noise2-primary-channel: #DDAA77;
-				--noise2-secondary-note: #CC9966;
-				--noise2-primary-note: #F0D0BB;
-				--noise3-secondary-channel: #4A6D8F;
-				--noise3-primary-channel: #77AADD;
-				--noise3-secondary-note: #6F9FCF;
-				--noise3-primary-note: #BBD7FF;
-				--noise4-secondary-channel: #7A4F9A;
-				--noise4-primary-channel: #AF82D2;
-				--noise4-secondary-note: #9E71C1;
-				--noise4-primary-note: #D4C1EA;
-				--noise5-secondary-channel: #607837;
-				--noise5-primary-channel: #A2BB77;
-				--noise5-secondary-note: #91AA66;
-				--noise5-primary-note: #C5E2B2;
+				--noise5-primary-channel:   #A2BB77;
+				--noise5-secondary-note:    #91AA66;
+				--noise5-primary-note:      #C5E2B2;
 			}
 		`,
     };
@@ -1924,11 +1760,25 @@ var beepbox = (function (exports) {
     ]);
     ColorConfig._styleElement = document.head.appendChild(HTML.style({ type: "text/css" }));
 
-    const scrollBarTest = document.body.appendChild(HTML.div({ style: "width:30px; height:30px; overflow: auto;" }, HTML.div({ style: "width:100%;height:40px" })));
-    if (scrollBarTest.firstChild.clientWidth < 30) {
-        document.documentElement.classList.add("obtrusive-scrollbars");
+    function scrollBarTestFunc() {
+        const scrollBarTest = document.body.appendChild(HTML.div({ style: "width:30px; height:30px; overflow: auto;" }, HTML.div({ style: "width:100%; height:40px" })));
+        if (scrollBarTest.firstChild.clientWidth < 30) {
+            document.documentElement.classList.add("has-classic-scrollbars");
+        }
+        document.body.removeChild(scrollBarTest);
     }
-    document.body.removeChild(scrollBarTest);
+    if (document.body) {
+        scrollBarTestFunc();
+    }
+    else {
+        const observer = new MutationObserver(function () {
+            if (document.body) {
+                scrollBarTestFunc();
+                observer.disconnect();
+            }
+        });
+        observer.observe(document.documentElement, { childList: true });
+    }
     document.head.appendChild(HTML.style({ type: "text/css" }, `
 
 /* Note: "#" symbols need to be encoded as "%23" in SVG data urls, otherwise they are interpreted as fragment identifiers! */
@@ -2034,20 +1884,33 @@ var beepbox = (function (exports) {
 }
 
 
-.obtrusive-scrollbars, .obtrusive-scrollbars * {
+.has-classic-scrollbars, .has-classic-scrollbars *, .prefers-classic-scrollbars {
 	scrollbar-width: thin;
 	scrollbar-color: ${ColorConfig.uiWidgetBackground} ${ColorConfig.editorBackground};
 }
-.obtrusive-scrollbars::-webkit-scrollbar, .obtrusive-scrollbars *::-webkit-scrollbar {
-	width: 12px;
+.prefers-big-scrollbars {
+	scrollbar-width: auto;
+	scrollbar-color: ${ColorConfig.uiWidgetBackground} ${ColorConfig.editorBackground};
 }
-.obtrusive-scrollbars::-webkit-scrollbar-track, .obtrusive-scrollbars *::-webkit-scrollbar-track {
+.has-classic-scrollbars::-webkit-scrollbar, .has-classic-scrollbars *::-webkit-scrollbar, .prefers-classic-scrollbars::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+.prefers-big-scrollbars::-webkit-scrollbar {
+	width: 20px;
+	height: 20px;
+}
+.has-classic-scrollbars::-webkit-scrollbar-track, .has-classic-scrollbars *::-webkit-scrollbar-track, .prefers-classic-scrollbars::-webkit-scrollbar-track, .prefers-big-scrollbars::-webkit-scrollbar-track {
 	background: ${ColorConfig.editorBackground};
 }
-.obtrusive-scrollbars::-webkit-scrollbar-thumb, .obtrusive-scrollbars *::-webkit-scrollbar-thumb {
+.has-classic-scrollbars::-webkit-scrollbar-thumb, .has-classic-scrollbars *::-webkit-scrollbar-thumb, .prefers-classic-scrollbars::-webkit-scrollbar-thumb, .prefers-big-scrollbars::-webkit-scrollbar-thumb {
 	background-color: ${ColorConfig.uiWidgetBackground};
 	border: 3px solid ${ColorConfig.editorBackground};
 }
+.has-classic-scrollbars::-webkit-scrollbar-corner, .has-classic-scrollbars *::-webkit-scrollbar-corner, .prefers-classic-scrollbars::-webkit-scrollbar-corner, .prefers-big-scrollbars::-webkit-scrollbar-corner {
+	background-color: ${ColorConfig.editorBackground};
+}
+
 
 
 .beepboxEditor {
@@ -2139,6 +2002,17 @@ var beepbox = (function (exports) {
 	mask-image: var(--volume-symbol);
 	mask-repeat: no-repeat;
 	mask-position: center;
+}
+
+.beepboxEditor .playback-volume-controls {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.beepboxEditor .playback-volume-controls > :last-child {
+	width: 5em;
+	flex-grow: 1;
 }
 
 .beepboxEditor .drum-button {
@@ -3169,10 +3043,7 @@ var beepbox = (function (exports) {
 		margin: 2px 0;
 	}
 	.beepboxEditor .playback-volume-controls {
-		display: flex;
-		flex-direction: row;
 		margin: 2px 0;
-		align-items: center;
 	}
 	.beepboxEditor .settings-area {
 		width: var(--settings-area-width);
@@ -3220,9 +3091,6 @@ var beepbox = (function (exports) {
 		flex-grow: 1;
 	}
 	.beepboxEditor .playback-volume-controls {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
 		flex-grow: 1;
 	}
 }
@@ -3293,24 +3161,6 @@ var beepbox = (function (exports) {
 				}
 				.beepboxEditor .trackContainer {
 					overflow: visible;
-				}
-				.beepboxEditor .trackAndMuteContainer {
-					scrollbar-width: auto;
-					scrollbar-color: ${ColorConfig.uiWidgetBackground} ${ColorConfig.editorBackground};
-				}
-				.beepboxEditor .trackAndMuteContainer::-webkit-scrollbar {
-					width: 20px;
-					height: 20px;
-				}
-				.beepboxEditor .trackAndMuteContainer::-webkit-scrollbar-track {
-					background: ${ColorConfig.editorBackground};
-				}
-				.beepboxEditor .trackAndMuteContainer::-webkit-scrollbar-thumb {
-					background-color: ${ColorConfig.uiWidgetBackground};
-					border: 3px solid ${ColorConfig.editorBackground};
-				}
-				.beepboxEditor .trackAndMuteContainer::-webkit-scrollbar-corner {
-					background-color: ${ColorConfig.editorBackground};
 				}
 			}
 		`,
@@ -3390,74 +3240,71 @@ var beepbox = (function (exports) {
 				.beepboxEditor .trackContainer {
 					overflow: visible;
 				}
-				.beepboxEditor .trackAndMuteContainer {
-					scrollbar-width: auto;
-					scrollbar-color: ${ColorConfig.uiWidgetBackground} ${ColorConfig.editorBackground};
-				}
-				.beepboxEditor .trackAndMuteContainer::-webkit-scrollbar {
-					width: 20px;
-					height: 20px;
-				}
-				.beepboxEditor .trackAndMuteContainer::-webkit-scrollbar-track {
-					background: ${ColorConfig.editorBackground};
-				}
-				.beepboxEditor .trackAndMuteContainer::-webkit-scrollbar-thumb {
-					background-color: ${ColorConfig.uiWidgetBackground};
-					border: 3px solid ${ColorConfig.editorBackground};
-				}
-				.beepboxEditor .trackAndMuteContainer::-webkit-scrollbar-corner {
-					background-color: ${ColorConfig.editorBackground};
-				}
 			}
 		`,
     };
     Layout._styleElement = document.head.appendChild(HTML.style({ type: "text/css" }));
 
-    const { button: button$c, div: div$c, h2: h2$b, select: select$8, option: option$8 } = HTML;
+    const { button: button$c, div: div$c, form: form$1, label: label$3, input: input$9 } = HTML;
     class ThemePrompt {
         constructor(_doc) {
             this._doc = _doc;
-            this._themeSelect = select$8({ style: "width: 100%;" }, option$8({ value: "dark classic" }, "BeepBox Dark"), option$8({ value: "dark competition" }, "BeepBox Competitive"), option$8({ value: "light classic" }, "BeepBox Light"), option$8({ value: "marine" }, "Marine"), option$8({ value: "flame" }, "Flame"), option$8({ value: "amber" }, "Amber"), option$8({ value: "vermilion" }, "Vermilion"), option$8({ value: "emerald" }, "Emerald"), option$8({ value: "amethyst" }, "Amethyst"), option$8({ value: "polar" }, "Polar"));
-            this._cancelButton = button$c({ class: "cancelButton" });
-            this._okayButton = button$c({ class: "okayButton", style: "width:45%;" }, "Okay");
-            this.container = div$c({ class: "prompt noSelection", style: "width: 220px;" }, h2$b("Set Theme"), div$c({ style: "display: flex; flex-direction: row; align-items: center; height: 2em; justify-content: flex-end;" }, div$c({ class: "selectContainer", style: "width: 100%;" }, this._themeSelect)), div$c({ style: "display: flex; flex-direction: row-reverse; justify-content: space-between;" }, this._okayButton), this._cancelButton);
-            this.lastTheme = window.localStorage.getItem("TBBcolorTheme");
+            this.hasChanged = false;
+            this._closeButton = button$c({ style: "flex: 1; width: 0;" }, "Close");
+            this._previewButton = button$c({ style: "flex: 1; width: 0;" }, "Preview");
+            this._previewText = div$c({ style: "opacity: 0; position:absolute; left: 8px; top: 24px; font-size: 32px; font-weight:bold;" }, "Previewing...");
+            this.previewExit = div$c({ style: "width: 100vw; height: 100vh; position: fixed; left: 0; top: -2vh; display: flex; pointer-events: none;" }, this._previewText);
+            this._form = form$1({ style: "display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; max-height:265px; overflow-y: scroll; overflow-x: hidden;" }, label$3({ title: "BeepBox Dark", class: "theme-option" }, input$9({ type: "radio", name: "theme", value: "dark classic", style: "display:none;" }), div$c({ style: "display: flex; flex-direction: column; gap: 3px; align-items: center;" }, div$c({ style: "background: black; width: 64px; height: 64px; border-radius: 35px; border: solid; border-color:currentColor; display: flex; align-items: center; justify-content: center;" }, div$c({ style: "width: 58px; height: 58px; background: #606060; border-radius: 35px;" })), div$c({ style: "text-wrap:wrap; max-width: 64px; color:currentColor;" }, "BeepBox Dark"))), label$3({ title: "BeepBox Light", class: "theme-option" }, input$9({ type: "radio", name: "theme", value: "light classic", style: "display:none;" }), div$c({ style: "display: flex; flex-direction: column; gap: 3px; align-items: center;" }, div$c({ style: "background: black; width: 64px; height: 64px; border-radius: 35px; border: solid; border-color:currentColor; display: flex; align-items: center; justify-content: center;" }, div$c({ style: "width: 58px; height: 58px; background: #f0d6b6; border-radius: 35px;" })), div$c({ style: "text-wrap:wrap; max-width: 64px; color:currentColor;" }, "BeepBox Light"))), label$3({ title: "BeepBox Competitive", class: "theme-option" }, input$9({ type: "radio", name: "theme", value: "dark competition", style: "display:none;" }), div$c({ style: "display: flex; flex-direction: column; gap: 3px; align-items: center;" }, div$c({ style: "background: black; width: 64px; height: 64px; border-radius: 35px; border: solid; border-color:currentColor; display: flex; align-items: center; justify-content: center;" }, div$c({ style: "width: 58px; height: 58px; background: #884a44; border-radius: 35px;" })), div$c({ style: "text-wrap:wrap; max-width: 64px; color:currentColor;" }, "BeepBox Competitive"))), label$3({ title: "Marine", class: "theme-option" }, input$9({ type: "radio", name: "theme", value: "marine", style: "display:none;" }), div$c({ style: "display: flex; flex-direction: column; gap: 3px; align-items: center;" }, div$c({ style: "background: black; width: 64px; height: 64px; border-radius: 35px; border: solid; border-color:currentColor; display: flex; align-items: center; justify-content: center;" }, div$c({ style: "width: 58px; height: 58px; background: #444baf; border-radius: 35px;" })), div$c({ style: "text-wrap:wrap; max-width: 64px; color:currentColor;" }, "Marine"))), label$3({ title: "Ruby", class: "theme-option" }, input$9({ type: "radio", name: "theme", value: "ruby", style: "display:none;" }), div$c({ style: "display: flex; flex-direction: column; gap: 3px; align-items: center;" }, div$c({ style: "background: black; width: 64px; height: 64px; border-radius: 35px; border: solid; border-color:currentColor; display: flex; align-items: center; justify-content: center;" }, div$c({ style: "width: 58px; height: 58px; background: #b42a2a; border-radius: 35px;" })), div$c({ style: "text-wrap:wrap; max-width: 64px; color:currentColor;" }, "Ruby"))), label$3({ title: "Amber", class: "theme-option" }, input$9({ type: "radio", name: "theme", value: "amber", style: "display:none;" }), div$c({ style: "display: flex; flex-direction: column; gap: 3px; align-items: center;" }, div$c({ style: "background: black; width: 64px; height: 64px; border-radius: 35px; border: solid; border-color:currentColor; display: flex; align-items: center; justify-content: center;" }, div$c({ style: "width: 58px; height: 58px; background: #b36c2f; border-radius: 35px;" })), div$c({ style: "text-wrap:wrap; max-width: 64px; color:currentColor;" }, "Amber"))), label$3({ title: "Emerald", class: "theme-option" }, input$9({ type: "radio", name: "theme", value: "emerald", style: "display:none;" }), div$c({ style: "display: flex; flex-direction: column; gap: 3px; align-items: center;" }, div$c({ style: "background: black; width: 64px; height: 64px; border-radius: 35px; border: solid; border-color:currentColor; display: flex; align-items: center; justify-content: center;" }, div$c({ style: "width: 58px; height: 58px; background: #0b8317; border-radius: 35px;" })), div$c({ style: "text-wrap:wrap; max-width: 64px; color:currentColor;" }, "Emerald"))), label$3({ title: "Amethyst", class: "theme-option" }, input$9({ type: "radio", name: "theme", value: "amethyst", style: "display:none;" }), div$c({ style: "display: flex; flex-direction: column; gap: 3px; align-items: center;" }, div$c({ style: "background: black; width: 64px; height: 64px; border-radius: 35px; border: solid; border-color:currentColor; display: flex; align-items: center; justify-content: center;" }, div$c({ style: "width: 58px; height: 58px; background: #a967bf; border-radius: 35px;" })), div$c({ style: "text-wrap:wrap; max-width: 64px; color:currentColor;" }, "Amethyst"))));
+            this.themeContainer = div$c({ class: "prompt", style: "width: 330px; max-height: 600px;" }, div$c({ style: "font-size: 2em" }, div$c("Themes")), this._form, div$c({ style: "display:flex; flex-direction:row; width:100%; gap: 16px;" }, this._previewButton, this._closeButton));
+            this.container = div$c({}, this.themeContainer, this.previewExit);
             this._close = () => {
-                if (this.lastTheme != null) {
-                    ColorConfig.setTheme(this.lastTheme);
+                if (this.hasChanged == false) {
+                    if (window.localStorage.getItem("colorTheme")) {
+                        ColorConfig.setTheme(String(window.localStorage.getItem("colorTheme")));
+                    }
+                    else {
+                        ColorConfig.setTheme("default");
+                    }
+                    this._doc.prompt = null;
+                    this._doc.undo();
                 }
                 else {
-                    ColorConfig.setTheme("dark classic");
-                }
-                this._doc.undo();
-            };
-            this.cleanUp = () => {
-                this._okayButton.removeEventListener("click", this._saveChanges);
-                this._cancelButton.removeEventListener("click", this._close);
-                this.container.removeEventListener("keydown", this._whenKeyPressed);
-            };
-            this._whenKeyPressed = (event) => {
-                if (event.target.tagName != "BUTTON" && event.keyCode == 13) {
-                    this._saveChanges();
+                    window.localStorage.setItem("colorTheme", this._form.elements["theme"].value);
+                    this._doc.prompt = null;
+                    this._doc.undo();
                 }
             };
-            this._saveChanges = () => {
-                window.localStorage.setItem("TBBcolorTheme", this._themeSelect.value);
-                this._doc.prompt = null;
-                this._doc.prefs.colorTheme = this._themeSelect.value;
-                this._doc.undo();
+            this._themeChange = () => {
+                ColorConfig.setTheme(this._form.elements["theme"].value);
+                if (this._form.elements["theme"].value != window.localStorage.getItem("colorTheme")) {
+                    this.hasChanged = true;
+                    this._closeButton.innerHTML = "Save";
+                }
+                else {
+                    this.hasChanged = false;
+                    this._closeButton.innerHTML = "Cancel";
+                }
             };
             this._previewTheme = () => {
-                ColorConfig.setTheme(this._themeSelect.value);
-                this._doc.notifier.changed();
+                this.themeContainer.style.opacity = "0";
+                this.previewExit.style.pointerEvents = "";
+                this._previewText.style.opacity = "1";
             };
-            if (this.lastTheme != null) {
-                this._themeSelect.value = this.lastTheme;
+            this._exitPreview = () => {
+                this.themeContainer.style.opacity = "1";
+                this.previewExit.style.pointerEvents = "none";
+                this._previewText.style.opacity = "0";
+            };
+            this.cleanUp = () => {
+                this._closeButton.removeEventListener("click", this._close);
+            };
+            this._closeButton.addEventListener("click", this._close);
+            this._previewButton.addEventListener("click", this._previewTheme);
+            this.previewExit.addEventListener("click", this._exitPreview);
+            this._form.addEventListener("change", this._themeChange);
+            if (window.localStorage.getItem("colorTheme") != null) {
+                this._form.elements["theme"].value = window.localStorage.getItem("colorTheme");
             }
-            this._okayButton.addEventListener("click", this._saveChanges);
-            this._cancelButton.addEventListener("click", this._close);
-            this.container.addEventListener("keydown", this._whenKeyPressed);
-            this._themeSelect.addEventListener("change", this._previewTheme);
         }
     }
 
@@ -3476,19 +3323,178 @@ var beepbox = (function (exports) {
     }
     function reverseIndexBits(array, fullArrayLength) {
         const bitCount = countBits(fullArrayLength);
-        if (bitCount > 16)
-            throw new Error("FFT array length must not be greater than 2^16.");
-        const finalShift = 16 - bitCount;
+        const finalShift = 32 - bitCount;
         for (let i = 0; i < fullArrayLength; i++) {
             let j;
-            j = ((i & 0xaaaa) >> 1) | ((i & 0x5555) << 1);
-            j = ((j & 0xcccc) >> 2) | ((j & 0x3333) << 2);
-            j = ((j & 0xf0f0) >> 4) | ((j & 0x0f0f) << 4);
-            j = ((j >> 8) | ((j & 0xff) << 8)) >> finalShift;
+            j = ((i >> 1) & 0x55555555) | ((i & 0x55555555) << 1);
+            j = ((j >> 2) & 0x33333333) | ((j & 0x33333333) << 2);
+            j = ((j >> 4) & 0x0F0F0F0F) | ((j & 0x0F0F0F0F) << 4);
+            j = ((j >> 8) & 0x00FF00FF) | ((j & 0x00FF00FF) << 8);
+            j = ((j >> 16) & 0x0000FFFF) | ((j & 0x0000FFFF) << 16);
+            j = j >>> finalShift;
             if (j > i) {
                 let temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
+            }
+        }
+    }
+    function fastFourierTransform(realArray, imagArray) {
+        const fullArrayLength = realArray.length;
+        if (!isPowerOf2(fullArrayLength))
+            throw new Error("FFT array length must be a power of 2.");
+        if (fullArrayLength < 4)
+            throw new Error("FFT array length must be at least 4.");
+        if (fullArrayLength != imagArray.length)
+            throw new Error("FFT arrays must be the same length.");
+        reverseIndexBits(realArray, fullArrayLength);
+        reverseIndexBits(imagArray, fullArrayLength);
+        for (let startIndex = 0; startIndex < fullArrayLength; startIndex += 4) {
+            const startIndex1 = startIndex + 1;
+            const startIndex2 = startIndex + 2;
+            const startIndex3 = startIndex + 3;
+            const real0 = realArray[startIndex];
+            const real1 = realArray[startIndex1];
+            const real2 = realArray[startIndex2];
+            const real3 = realArray[startIndex3];
+            const imag0 = imagArray[startIndex];
+            const imag1 = imagArray[startIndex1];
+            const imag2 = imagArray[startIndex2];
+            const imag3 = imagArray[startIndex3];
+            const realTemp0 = real0 + real1;
+            const realTemp1 = real0 - real1;
+            const realTemp2 = real2 + real3;
+            const realTemp3 = real2 - real3;
+            const imagTemp0 = imag0 + imag1;
+            const imagTemp1 = imag0 - imag1;
+            const imagTemp2 = imag2 + imag3;
+            const imagTemp3 = imag2 - imag3;
+            realArray[startIndex] = realTemp0 + realTemp2;
+            realArray[startIndex1] = realTemp1 + imagTemp3;
+            realArray[startIndex2] = realTemp0 - realTemp2;
+            realArray[startIndex3] = realTemp1 - imagTemp3;
+            imagArray[startIndex] = imagTemp0 + imagTemp2;
+            imagArray[startIndex1] = imagTemp1 - realTemp3;
+            imagArray[startIndex2] = imagTemp0 - imagTemp2;
+            imagArray[startIndex3] = imagTemp1 + realTemp3;
+        }
+        for (let stride = 8; stride <= fullArrayLength; stride += stride) {
+            const halfLength = stride >>> 1;
+            const radiansIncrement = Math.PI * 2.0 / stride;
+            const cosIncrement = Math.cos(radiansIncrement);
+            const sinIncrement = Math.sin(radiansIncrement);
+            const oscillatorMultiplier = 2.0 * cosIncrement;
+            for (let startIndex = 0; startIndex < fullArrayLength; startIndex += stride) {
+                let c = 1.0;
+                let s = 0.0;
+                let cPrev = cosIncrement;
+                let sPrev = sinIncrement;
+                const secondHalf = startIndex + halfLength;
+                for (let i = startIndex; i < secondHalf; i++) {
+                    const j = i + halfLength;
+                    const real0 = realArray[i];
+                    const imag0 = imagArray[i];
+                    const real1 = realArray[j] * c - imagArray[j] * s;
+                    const imag1 = realArray[j] * s + imagArray[j] * c;
+                    realArray[i] = real0 + real1;
+                    imagArray[i] = imag0 + imag1;
+                    realArray[j] = real0 - real1;
+                    imagArray[j] = imag0 - imag1;
+                    const cTemp = oscillatorMultiplier * c - cPrev;
+                    const sTemp = oscillatorMultiplier * s - sPrev;
+                    cPrev = c;
+                    sPrev = s;
+                    c = cTemp;
+                    s = sTemp;
+                }
+            }
+        }
+    }
+    function forwardRealFourierTransform(array) {
+        const fullArrayLength = array.length;
+        const totalPasses = countBits(fullArrayLength);
+        if (fullArrayLength < 4)
+            throw new Error("FFT array length must be at least 4.");
+        reverseIndexBits(array, fullArrayLength);
+        for (let index = 0; index < fullArrayLength; index += 4) {
+            const index1 = index + 1;
+            const index2 = index + 2;
+            const index3 = index + 3;
+            const real0 = array[index];
+            const real1 = array[index1];
+            const real2 = array[index2];
+            const real3 = array[index3];
+            const tempA = real0 + real1;
+            const tempB = real2 + real3;
+            array[index] = tempA + tempB;
+            array[index1] = real0 - real1;
+            array[index2] = tempA - tempB;
+            array[index3] = real2 - real3;
+        }
+        const sqrt2over2 = Math.sqrt(2.0) / 2.0;
+        for (let index = 0; index < fullArrayLength; index += 8) {
+            const index1 = index + 1;
+            const index3 = index + 3;
+            const index4 = index + 4;
+            const index5 = index + 5;
+            const index7 = index + 7;
+            const real0 = array[index];
+            const real1 = array[index1];
+            const imag3 = array[index3];
+            const real4 = array[index4];
+            const real5 = array[index5];
+            const imag7 = array[index7];
+            const tempA = (real5 - imag7) * sqrt2over2;
+            const tempB = (real5 + imag7) * sqrt2over2;
+            array[index] = real0 + real4;
+            array[index1] = real1 + tempA;
+            array[index3] = real1 - tempA;
+            array[index4] = real0 - real4;
+            array[index5] = tempB - imag3;
+            array[index7] = tempB + imag3;
+        }
+        for (let pass = 3; pass < totalPasses; pass++) {
+            const subStride = 1 << pass;
+            const midSubStride = subStride >> 1;
+            const stride = subStride << 1;
+            const radiansIncrement = Math.PI * 2.0 / stride;
+            const cosIncrement = Math.cos(radiansIncrement);
+            const sinIncrement = Math.sin(radiansIncrement);
+            const oscillatorMultiplier = 2.0 * cosIncrement;
+            for (let startIndex = 0; startIndex < fullArrayLength; startIndex += stride) {
+                const startIndexA = startIndex;
+                const startIndexB = startIndexA + subStride;
+                const stopIndex = startIndexB + subStride;
+                const realStartA = array[startIndexA];
+                const realStartB = array[startIndexB];
+                array[startIndexA] = realStartA + realStartB;
+                array[startIndexB] = realStartA - realStartB;
+                let c = cosIncrement;
+                let s = -sinIncrement;
+                let cPrev = 1.0;
+                let sPrev = 0.0;
+                for (let index = 1; index < midSubStride; index++) {
+                    const indexA0 = startIndexA + index;
+                    const indexA1 = startIndexB - index;
+                    const indexB0 = startIndexB + index;
+                    const indexB1 = stopIndex - index;
+                    const real0 = array[indexA0];
+                    const imag0 = array[indexA1];
+                    const real1 = array[indexB0];
+                    const imag1 = array[indexB1];
+                    const tempA = real1 * c + imag1 * s;
+                    const tempB = real1 * s - imag1 * c;
+                    array[indexA0] = real0 + tempA;
+                    array[indexA1] = real0 - tempA;
+                    array[indexB0] = -imag0 - tempB;
+                    array[indexB1] = imag0 - tempB;
+                    const cTemp = oscillatorMultiplier * c - cPrev;
+                    const sTemp = oscillatorMultiplier * s - sPrev;
+                    cPrev = c;
+                    sPrev = s;
+                    c = cTemp;
+                    s = sTemp;
+                }
             }
         }
     }
@@ -10724,8 +10730,8 @@ var beepbox = (function (exports) {
             const beatsPerMinute = this.song.getBeatsPerMinute();
             const beatsPerSecond = beatsPerMinute / 60.0;
             const partsPerSecond = Config.partsPerBeat * beatsPerSecond;
-            const tickPerSecond = Config.ticksPerPart * partsPerSecond;
-            return this.samplesPerSecond / tickPerSecond;
+            const ticksPerSecond = Config.ticksPerPart * partsPerSecond;
+            return this.samplesPerSecond / ticksPerSecond;
         }
         static fittingPowerOfTwo(x) {
             return 1 << (32 - Math.clz32(Math.ceil(x) - 1));
@@ -10860,229 +10866,1569 @@ var beepbox = (function (exports) {
 			const operator#Scaled   = operator#OutputMult * operator#Output;
 	`).split("\n");
 
-    const { button: button$b, div: div$b, p: p$4, h2: h2$a } = HTML;
-    class TipPrompt {
-        constructor(_doc, type) {
-            this._doc = _doc;
-            this._closeButton = button$b({ class: "cancelButton" });
-            this._close = () => {
-                this._doc.undo();
-            };
-            this.cleanUp = () => {
-                this._closeButton.removeEventListener("click", this._close);
-            };
-            let message;
-            switch (type) {
-                case "scale":
-                    {
-                        message = div$b(h2$a("Scale"), p$4("This setting limits the available pitches for adding notes. You may think that there's no point in limiting your choices, but the set of pitches you use has a strong influence on the mood and feel of your song, and these scales serve as guides to help you choose appropriate pitches. Don't worry, you can change the scale at any time, so you're not locked into it. Try making little melodies using all the available pitches of a scale to get a sense for how it sounds."), p$4("Most of the scales have a major version, marked with a smiley face, and a minor version, marked with a sad face. Assuming your song uses all pitches in the scale and especially \"tonic\" pitches (the brown rows in the pattern editor) then major scales tend to sound more playful or optimistic, whereas minor scales sound more serious or sad."));
-                    }
-                    break;
-                case "key":
-                    {
-                        message = div$b(h2$a("Song Key"), p$4("This setting can shift the frequency of every note in your entire song up or down, keeping the \"tonic\" pitches (the brown rows in the pattern editor) aligned with the selected \"key\" pitch."), p$4("If you've already placed some notes but they don't emphasize \"tonic\" pitches then the selected key isn't very meaningful. You can select the \"Detect Key\" option in the key menu to automatically align the most emphasized notes with \"tonic\" pitches."));
-                    }
-                    break;
-                case "tempo":
-                    {
-                        message = div$b(h2$a("Song Tempo"), p$4("This setting controls the speed of your song, measured in beats-per-minute. A \"beat\" is the duration of the little gray rectangles in the pattern editor. (In conventional music notation, a \"quarter note\" is usually equivalent to \"beat\".)"));
-                    }
-                    break;
-                case "reverb":
-                    {
-                        message = div$b(h2$a("Reverb"), p$4("Reverb is like a continuous echo effect. A little bit helps instruments sound more natural. Adding a lot of reverb can add sense of depth or mystery, but too much reverb can kinda \"smear\" sounds so that it's harder to distinguish notes or instruments, especially for lower \"bass\" notes."));
-                    }
-                    break;
-                case "rhythm":
-                    {
-                        message = div$b(h2$a("Rhythm"), p$4("This setting determines how beats are divided. The pattern editor helps you align notes to fractions of a beat based on this setting."), p$4("If you've already placed some notes but they don't align with the selected rhythm, you can select the \"Snap Notes To Rhythm\" option in the rhythm menu to force the notes in the currently selected pattern(s) to align with the selected rhythm."));
-                    }
-                    break;
-                case "instrumentIndex":
-                    {
-                        message = div$b(h2$a("Instrument Number"), p$4("In the \"Channel Settings\" option from BeepBox's \"Edit\" menu, there are a few ways to enable multiple instruments per channel."), p$4("First, you could enable multiple simultaneous instruments per channel. All of the channel's instruments will play all of the notes in the channel at the same time, and you can click an instrument number to view and edit its settings."), p$4("Second, you could enable different instruments per pattern. Only one of the instruments will play at any given time, but you can click the instrument number to change which instrument is used for the currently selected pattern(s)."), p$4("Finally, you can enable them both, in which case you can click an instrument number once to view it, and again to toggle whether the instrument is used for the currently selected pattern(s)."), p$4("Either way, you can click the + button to add more instruments to a channel, and you can press shift and a number key on your keyboard to select an instrument as if you had clicked the corresponding button here."));
-                    }
-                    break;
-                case "instrumentVolume":
-                    {
-                        message = div$b(h2$a("Instrument Volume"), p$4("This setting controls the volume of the selected instrument without affecting the volume of the other instruments. This allows you to balance the loudness of each instrument relative to each other."));
-                    }
-                    break;
-                case "pan":
-                    {
-                        message = div$b(h2$a("Instrument Panning"), p$4("If you're listening through headphones or some other stereo sound system, this controls the position of the instrument and where the sound is coming from, ranging from left to right."), p$4("As a suggestion, composers often put lead melodies, drums, and basses in the center, and spread other instruments toward either side. If too many instruments seem like they're coming from the same place, it can feel crowded and harder to distinguish individual sounds, especially if they cover a similar pitch range."));
-                    }
-                    break;
-                case "instrumentType":
-                    {
-                        message = div$b(h2$a("Instrument Type"), p$4("BeepBox comes with many instrument presets, try them out! You can also create your own custom instruments!"), p$4("There are also options for copying and pasting instrument settings and for generating random instruments at the top of the instrument type menu."));
-                    }
-                    break;
-                case "eqFilter":
-                    {
-                        message = div$b(h2$a("EQ Filter"), p$4("Filters are a way of emphasizing or diminishing different parts of a sound. Musical notes have a fundamental (base) frequency, but the sound of a musical note also has parts at higher frequencies and filters can adjust the volume of each of these parts based on their frequency."), p$4("Click in the filter editor to insert, delete, or drag a filter control point. The horizontal position of the point determines which frequencies it affects, and the vertical position determines how the volume is affected at that frequency."), p$4("Insert a new point on the left side of the filter editor to add a \"high-pass\" filter point, which additionally reduces the volume of lower frequencies, or insert a new point on the right side to add a \"low-pass\" filter point which reduces the volume of higher frequencies."), p$4("You can also enable a \"Note Filter\" as an effect. EQ and note filters are mostly the same, but have different purposes. EQ filters are for overall adjustments, whereas note filters are for dynamic control and can be moved with envelopes. Note filters also change how the distortion effect sounds."));
-                    }
-                    break;
-                case "noteFilter":
-                    {
-                        message = div$b(h2$a("Note Filter"), p$4("Note filters are mostly the same as EQ filters, but have a different purpose. EQ filters are for overall adjustments, whereas note filters are for dynamic control and can be moved with envelopes. Note filters also change how the distortion effect sounds."), p$4("Filters are a way of emphasizing or diminishing different parts of a sound. Musical notes have a fundamental (base) frequency, but the sound of a musical note also has parts at higher frequencies and filters can adjust the volume of each of these parts based on their frequency."), p$4("Click in the filter editor to insert, delete, or drag a filter control point. The horizontal position of the point determines which frequencies it affects, and the vertical position determines how the volume is affected at that frequency."), p$4("Insert a new point on the left side of the filter editor to add a \"high-pass\" filter point, which additionally reduces the volume of lower frequencies, or insert a new point on the right side to add a \"low-pass\" filter point which reduces the volume of higher frequencies."));
-                    }
-                    break;
-                case "fadeInOut":
-                    {
-                        message = div$b(h2$a("Fade In/Out"), p$4("This setting controls how long it takes for notes to reach full volume at the beginning or decay to silence at the end."), p$4("An instant fade-in sounds like instruments that are played by hitting or plucking, whereas slower fade-ins sound like instruments that are played by blowing air."), p$4("You can also make the fade-out start before the note ends to leave a gap before the next note starts, or after the note ends to allow the sound of the end of the note to overlap with the start of the next note."));
-                    }
-                    break;
-                case "transition":
-                    {
-                        message = div$b(h2$a("Transition"), p$4("Usually, when one note ends at the same time another begins, the old note will fade out and the new note will fade in based on the fade in/out settings, but this setting can override that, connecting the end of one note to the beginning of the next."), p$4("The \"interrupt\" transition makes the wave suddenly change from the old note's frequency to the new note's frequency without any fading, but still restarts envelopes at the beginning of the new note. The \"continue\" transition is similar but it doesn't even restart envelopes, and can be used to make each of the notes in a chord start or stop at different times!"), p$4("The \"slide\" transition makes the pitch shift quickly but not instantaneously from the old note's frequency to the new note's frequency, and softly restarts envelopes. The \"slide in pattern\" transition is the same except it doesn't connect the last note in a pattern to the first note in the next pattern."));
-                    }
-                    break;
-                case "chipWave":
-                    {
-                        message = div$b(h2$a("Chip Wave"), p$4("BeepBox comes with some sound waves based on classic electronic sound chips, as well as several unique waves. This is the basic source of the sound of the instrument, which is modified by the other instrument settings."));
-                    }
-                    break;
-                case "chipNoise":
-                    {
-                        message = div$b(h2$a("Noise"), p$4("BeepBox comes with several basic noise sounds. These do not have any distinct musical pitch, and can be used like drums to create beats and emphasize your song's rhythm."));
-                    }
-                    break;
-                case "supersawDynamism":
-                    {
-                        message = div$b(h2$a("Supersaw Dynamism"), p$4("A supersaw is a combination of many sawtooth waves, and this setting controls the contribution of extra sawtooth waves."), p$4("At the low end of the slider, only the first wave is contributing to the sound, which sounds like an ordinary static sawtooth wave. At the maximum setting, all of the waves are contributing equally and the resulting tone can randomly shift depending on how the waves line up with each other, similar to the \"unison\" and \"chorus\" settings."));
-                    }
-                    break;
-                case "supersawSpread":
-                    {
-                        message = div$b(h2$a("Supersaw Spread"), p$4("A supersaw is a combination of many sawtooth waves, and this setting controls the distance between their frequencies. The dynamism setting must be used for the extra waves to have any effect."), p$4("At the low end of the spread slider, all of the voices have the same frequency but random phase, resulting in a different sound every time a note starts. In the middle, the waves all have slightly different frequencies that shift in and out of phase over time similar to the \"unison\" and \"chorus\" settings, creating a classic supersaw sound. At the extreme end, the frequencies are so far apart they sound dissonant."));
-                    }
-                    break;
-                case "supersawShape":
-                    {
-                        message = div$b(h2$a("Supersaw Shape"), p$4("This supersaw instrument includes an option to change the shape of the waves from sawtooth waves to pulse waves. Use this setting to morph between the two shapes."), p$4("When a pulse wave shape is used, you can also control the pulse width with a separate setting."));
-                    }
-                    break;
-                case "pulseWidth":
-                    {
-                        message = div$b(h2$a("Pulse Wave Width"), p$4("This setting controls the shape and sound of a pulse wave. At the minimum width, it sounds light and buzzy. At the maximum width, it is shaped like a classic square wave."));
-                    }
-                    break;
-                case "unison":
-                    {
-                        message = div$b(h2$a("Unison"), p$4("This instrument can play two identical waves at different frequencies. When two waves play at slightly different frequencies, they move in and out of phase with each other over time as different parts of the waves line up. This creates a dynamic, shifting sound. Pianos are a common example of this kind of sound, because each piano key strikes multiple strings that are tuned to slightly different frequencies."), p$4("The distance between two frequencies is called an \"interval\", and this setting controls how large it is. If the interval is too wide, then the waves may sound out-of-tune and \"dissonant\". However, if the interval is even larger, then the two frequencies can even be distinct pitches."));
-                    }
-                    break;
-                case "chords":
-                    {
-                        message = div$b(h2$a("Chords"), p$4("When multiple different notes occur at the same time, this is called a chord. Chords can be created in BeepBox's pattern editor by adding notes above or below another note."), p$4("This setting determines how chords are played. The standard option is \"simultaneous\" which starts playing all of the pitches in a chord at the same instant. The \"strum\" option is similar, but plays the notes starting at slightly different times. The \"arpeggio\" option is used in \"chiptune\" style music and plays a single tone that rapidly alternates between all of the pitches in the chord."), p$4("Some BeepBox instruments have an option called \"custom interval\" which uses the chord notes to control the interval between the waves of a single tone. This can create strange sound effects when combined with FM modulators."));
-                    }
-                    break;
-                case "vibrato":
-                    {
-                        message = div$b(h2$a("Vibrato"), p$4("This setting causes the frequency of a note to wobble slightly. Singers and violinists often use vibrato."));
-                    }
-                    break;
-                case "algorithm":
-                    {
-                        message = div$b(h2$a("FM Algorithm"), p$4('FM Synthesis is a mysterious but powerful technique for crafting sounds, popularized by Yamaha keyboards and the Sega Genesis/Mega Drive. It may seem confusing, but try playing around with the options until you get a feel for it, or check out some of the preset examples!'), p$4('This FM synthesizer uses up to four waves, numbered 1, 2, 3, and 4. Each wave may have its own frequency and volume.'), p$4('There are two kinds of waves: "carrier" waves play a tone out loud, but "modulator" waves distort other waves instead. Wave 1 is always a carrier and plays a tone, but other waves may distort it. The "Algorithm" setting determines which waves are modulators, and which other waves those modulators distort. For example, "1←2" means that wave 2 modulates wave 1, and wave 1 plays out loud.'));
-                    }
-                    break;
-                case "feedbackType":
-                    {
-                        message = div$b(h2$a("Feedback Type"), p$4('Modulators distort in one direction (like 1←2), but you can also use the feedback setting to make any wave distort in the opposite direction (1→2), or even itself (1⟲).'));
-                    }
-                    break;
-                case "feedbackVolume":
-                    {
-                        message = div$b(h2$a("Feedback Distortion"), p$4("This setting controls the amount of feedback distortion based on the feedback type setting."));
-                    }
-                    break;
-                case "operatorFrequency":
-                    {
-                        message = div$b(h2$a("Operator Frequency"), p$4('This setting controls the frequency of an individual FM wave, relative to the fundamental frequency of the note. The multiplier 1× is the same as the fundamental frequency, whereas 2x would be an octave (12 semitones) above it. The frequencies with a "~" are slightly detuned and shift in and out of phase over time compared to the other frequencies.'), p$4('Try different combinations of a "carrier" wave and a "modulator" wave with different frequencies to get a feel for how they sound together.'));
-                    }
-                    break;
-                case "operatorVolume":
-                    {
-                        message = div$b(h2$a("Operator Volume"), p$4("This setting controls the volume of \"carrier\" waves, or the amount of distortion that \"modulator\" waves apply to other waves."));
-                    }
-                    break;
-                case "spectrum":
-                    {
-                        message = div$b(h2$a("Spectrum"), p$4("This setting allows you to draw your own noise spectrum! This is good for making drum sounds."), p$4("If you only use certain frequencies and a soft fade in/out, it's also possible to make howling wind sounds or even musical wind instruments."), p$4("The left side of the spectrum editor controls the noise energy at lower frequencies, and the right side controls higher frequencies."));
-                    }
-                    break;
-                case "harmonics":
-                    {
-                        message = div$b(h2$a("Harmonics"), p$4("This setting allows you to design your own sound wave! Most musical waves are actually a combination of sine waves at certain frequencies, and this lets you control the volume of each sine wave individually."), p$4("The left side of the harmonics editor controls the sine wave volumes at lower frequencies, and the right side controls higher frequencies."));
-                    }
-                    break;
-                case "effects":
-                    {
-                        message = div$b(h2$a("Effects"), p$4("BeepBox has many different kinds of special effects you can add to instruments. You can turn on multiple effects at once, and they can be configured individually. Try them all out!"));
-                    }
-                    break;
-                case "drumsetEnvelope":
-                    {
-                        message = div$b(h2$a("Drumset Envelope"), p$4("This drumset comes with a low-pass filter, and this setting can dynamically change the low-pass filter frequency over time. Each row in the pattern editor can have a different envelope shape."));
-                    }
-                    break;
-                case "drumsetSpectrum":
-                    {
-                        message = div$b(h2$a("Drumset Spectrum"), p$4("This setting allows you to draw your own noise spectrum! This is good for making drumsets. Each row in the pattern editor gets its own spectrum."), p$4("The left side of the spectrum editor controls the noise energy at lower frequencies, and the right side controls higher frequencies."));
-                    }
-                    break;
-                case "chorus":
-                    {
-                        message = div$b(h2$a("Chorus"), p$4("The chorus effect combines multiple copies of the instrument's sound and adds a bit of vibrato to simulate an ensemble of instruments or voices. Drag the slider to control how much chorus is added."));
-                    }
-                    break;
-                case "echoSustain":
-                    {
-                        message = div$b(h2$a("Echo Volume"), p$4("The echo effect repeats the instrument's sound after a delay. Each echo is a little bit quieter than the last, and this setting controls how much quieter."));
-                    }
-                    break;
-                case "echoDelay":
-                    {
-                        message = div$b(h2$a("Echo Delay"), p$4("The echo effect repeats the instrument's sound after a delay, and this setting controls how long the delay is."));
-                    }
-                    break;
-                case "pitchShift":
-                    {
-                        message = div$b(h2$a("Pitch Shift"), p$4("This setting makes instruments play higher or lower pitches than the ones displayed in the pattern editor. Be careful that you don't confuse yourself!"), p$4("You can combine this with envelopes to bend pitch over time, or play multiple simultaneous instruments with different pitch shifts for interesting layered sounds."), p$4("The intervals created by this setting are in \"just intonation\" which means they stay in phase with the original pitch instead of shifting in and out of phase over time. If you want the shifting, add the detune effect!"));
-                    }
-                    break;
-                case "detune":
-                    {
-                        message = div$b(h2$a("Detune"), p$4("This setting slightly adjusts the frequency of notes played by the instrument. You can use a little bit to add a pleasing shifting sound similar to the \"unison\" feature when combined with other instruments. If you use too much, then the instrument may sound unpleasantly out-of-tune."));
-                    }
-                    break;
-                case "distortion":
-                    {
-                        message = div$b(h2$a("Distortion"), p$4("This is the famous electric guitar effect! However, there are some things to be aware of."), p$4("First, most chords don't sound right when combined with heavy distortion. The only chords commonly used with distorted electric guitars are \"power chords\" which consist of a root note, a \"fifth\" note above that, and/or any octaves of those two notes."), p$4("Second, the distortion sound depends a lot on filtering. In particular, I recommend enabling the note filter effect, and adding both high-pass and low-pass points to the note filter. (Note filters are applied first, then distortion which transforms the sound based on that filtering, then the EQ filter is applied last.)"), p$4("Finally, I recommend adjusting the fade-out setting to allow the end of each note to overlap a little bit with the beginning of the next, but not too much!"));
-                    }
-                    break;
-                case "bitcrusherQuantization":
-                    {
-                        message = div$b(h2$a("Bitcrusher Quantization"), p$4("This effect makes stuff sounds harsher, artificial, and \"low quality\", which is great if that's what you're going for!"));
-                    }
-                    break;
-                case "bitcrusherFreq":
-                    {
-                        message = div$b(h2$a("Frequency Quantization"), p$4("The bitcrusher effect comes with an additional frequency quantization effect! This is a fun one to play with, especially when combined with the note filter effect."), p$4("Every other notch on this slider is aligned with the currently selected key of the song, and the in-between notches are aligned with the tritones of the key."));
-                    }
-                    break;
-                case "envelopes":
-                    {
-                        message = div$b(h2$a("Envelopes"), p$4("Envelopes are a way to dynamically adjust various other settings over time, usually based on how long the note lasts. Press the + button to add an envelope, then use the menus below to select which setting to control and the curve of the envelope. Try different combinations to see how they sound!"), p$4("Most envelope curves restart from the beginning every time a new note plays. The \"note size\" option is based on the note width as drawn in the pattern editor."), p$4("Envelope curves move in the range from 0 to 1 (or vice versa), where 0 means as quiet as possible and 1 is the same as the corresponding position selected in the instrument settings above. If multiple envelopes are targetting the same setting, they are multiplied before applying to the setting."));
-                    }
-                    break;
-                default: throw new Error("Unhandled TipPrompt type: " + type);
+    function verifyBooleanOption(options, name, defaultValue) {
+        const value = options[name];
+        if (typeof value != "boolean" && value !== undefined) {
+            throw new Error(`EasyPointers: The ${name} option, if provided, should be a boolean value.`);
+        }
+        return !!(value !== null && value !== void 0 ? value : defaultValue);
+    }
+    function elementIsInLayout(element) {
+        return element.getClientRects().length > 0;
+    }
+    class EasyPointers {
+        get target() { return this._target; }
+        get byId() { return this._byId; }
+        constructor(target, options = {}) {
+            var _a, _b, _c;
+            this._byId = new Map();
+            this._altKey = false;
+            this._ctrlKey = false;
+            this._metaKey = false;
+            this._shiftKey = false;
+            if (!(target instanceof HTMLElement) && !(target instanceof SVGElement)) {
+                throw new Error("EasyPointers: The target should be an HTMLElement or SVGElement.");
             }
-            this.container = div$b({ class: "prompt", style: "width: 300px;" }, message, this._closeButton);
-            setTimeout(() => this._closeButton.focus());
-            this._closeButton.addEventListener("click", this._close);
+            if (EasyPointers._managedTargets.has(target)) {
+                throw new Error("EasyPointers: Cannot register EasyPointers twice for the same target element simultaneously. Try calling dispose() on the first one before creating another.");
+            }
+            EasyPointers._managedTargets.add(target);
+            this._target = target;
+            if (options.listenForTheseButtons !== undefined &&
+                typeof options.listenForTheseButtons[Symbol.iterator] != "function") {
+                throw new Error("EasyPointers: The listenForTheseButtons option, if provided, should be an iterable object, such as an array, that contains pointer button names.");
+            }
+            const listenForTheseButtons = new Set((_a = options.listenForTheseButtons) !== null && _a !== void 0 ? _a : ["primary"]);
+            for (const button of listenForTheseButtons) {
+                if (!_buttonSet.has(button)) {
+                    throw new Error("EasyPointers: Unrecognized pointer button name provided: " + button + ". Valid values are: " + [..._buttonSet].map(s => `"${s}"`).join(", "));
+                }
+            }
+            const listenForTheseButtonIndices = new Set([...listenForTheseButtons].map(button => _indexFromButton.get(button)));
+            const listenForTheseButtonsBitmask = [...listenForTheseButtons].map(button => _bitmaskFromButton.get(button)).reduce((acc, bit) => acc | bit, 0);
+            const listenForMultipleButtonsDown = verifyBooleanOption(options, "listenForMultipleButtonsDown", false);
+            const listenForMultiplePointers = verifyBooleanOption(options, "listenForMultiplePointers", false);
+            const listenForPossiblyAccidentalPointers = verifyBooleanOption(options, "listenForPossiblyAccidentalPointers", true);
+            const moveMinDistance = (_b = options.moveMinDistance) !== null && _b !== void 0 ? _b : 15;
+            if (typeof moveMinDistance != "number" || moveMinDistance < 0 || !Number.isFinite(moveMinDistance))
+                throw new Error(`EasyPointers: The moveMinDistance option, if provided, should be a nonnegative number value.`);
+            const holdStillMinMillis = (_c = options.holdStillMinMillis) !== null && _c !== void 0 ? _c : Infinity;
+            if (typeof holdStillMinMillis != "number" || holdStillMinMillis <= 0 || Number.isNaN(holdStillMinMillis))
+                throw new Error(`EasyPointers: The holdStillMinMillis option, if provided, should be a positive number value.`);
+            this.deferInitialEvents = verifyBooleanOption(options, "deferInitialEvents", false);
+            this.preventTouchGestureScrolling = verifyBooleanOption(options, "preventTouchGestureScrolling", false);
+            this.preventTextSelection = verifyBooleanOption(options, "preventTextSelection", listenForTheseButtons.has("primary"));
+            this.preventContextMenu = verifyBooleanOption(options, "preventContextMenu", listenForTheseButtons.has("secondary"));
+            this.preventMiddleButtonScrolling = verifyBooleanOption(options, "preventMiddleButtonScrolling", listenForTheseButtons.has("middle"));
+            const stopEventsAfterTargetIsRemovedFromLayout = verifyBooleanOption(options, "stopEventsAfterTargetIsRemovedFromLayout", true);
+            const prioritizeTargetOverNeighborsOnTouchScreen = verifyBooleanOption(options, "prioritizeTargetOverNeighborsOnTouchScreen", true);
+            this._latest = new _InternalPointer(this, 0, EasyPointers.usingPrimarilyTouchDevice ? "touch" : "mouse");
+            this._latest._isInTarget = false;
+            this._latest._isPresent = false;
+            this._first = this._latest;
+            const stop = (event) => event.stopImmediatePropagation();
+            const syncEventAndPointer = (event, pointer) => {
+                if (!("pointers" in event))
+                    event.pointers = this;
+                if (!("pointer" in event))
+                    event.pointer = pointer;
+                this._latest = pointer;
+                pointer._lastEvent = event;
+                this._altKey = event.altKey;
+                this._ctrlKey = event.ctrlKey;
+                this._metaKey = event.metaKey;
+                this._shiftKey = event.shiftKey;
+                pointer._hasJustEntered = (event.type == "pointerenter");
+                pointer._hasJustLeft = (event.type == "pointerleave");
+                pointer._hasJustMoved = (event.type == "pointermove");
+                pointer._hasJustBecomeDown = (event.type == "pointerdown");
+                pointer._hasJustBecomeUp = (event.type == "pointerup");
+                pointer._hasJustBeenCanceled = (event.type == "pointercancel");
+            };
+            const resetPresses = (pointer) => {
+                pointer._gesture = null;
+                pointer._pressedButtons = 0;
+                pointer._pressingButtons = 0;
+                pointer._startedWithButton = -1;
+                pointer._justPressedButton = -1;
+                pointer._justReleasedButton = -1;
+                pointer._startedWithAltKey = false;
+                pointer._startedWithCtrlKey = false;
+                pointer._startedWithMetaKey = false;
+                pointer._startedWithShiftKey = false;
+            };
+            const internalEnter = (event) => {
+                if (event.target != event.currentTarget)
+                    return;
+                if (stopEventsAfterTargetIsRemovedFromLayout && !elementIsInLayout(this._target)) {
+                    if (this._byId.has(event.pointerId)) {
+                        this._dispatchPointerLeaveEvent(event.pointerId);
+                    }
+                    return stop(event);
+                }
+                if (!listenForMultiplePointers) {
+                    for (const pointer of this._byId.values()) {
+                        if (pointer.id != event.pointerId &&
+                            pointer.type != event.pointerType &&
+                            !pointer._isDown) {
+                            this._dispatchPointerLeaveEvent(pointer.id);
+                        }
+                    }
+                }
+                if (!listenForMultiplePointers && this._byId.size > 0)
+                    return stop(event);
+                if (!listenForPossiblyAccidentalPointers && this._byId.size == 0 && !event.isPrimary) {
+                    return stop(event);
+                }
+                let pointer = this._byId.get(event.pointerId);
+                if (pointer && pointer._isPresent)
+                    return stop(event);
+                pointer = new _InternalPointer(this, event.pointerId, event.pointerType);
+                this._byId.set(event.pointerId, pointer);
+                if (this._byId.size == 1)
+                    this._first = pointer;
+                syncEventAndPointer(event, pointer);
+                resetPresses(pointer);
+                pointer._verifyValidity();
+            };
+            const internalLeave = (event) => {
+                if (event.target != event.currentTarget)
+                    return;
+                let pointer = this._byId.get(event.pointerId);
+                if (!pointer || !pointer._isPresent)
+                    return stop(event);
+                if (pointer._isDown) {
+                    this.dispatchPointerCancelEvent(event.pointerId);
+                    pointer = this._byId.get(event.pointerId);
+                    if (!pointer || !pointer._isPresent)
+                        return stop(event);
+                }
+                syncEventAndPointer(event, pointer);
+                resetPresses(pointer);
+                pointer._isInTarget = false;
+                pointer._isPresent = false;
+                pointer._verifyValidity();
+                this._byId.delete(event.pointerId);
+            };
+            const internalMove = (event) => {
+                var _a;
+                if (this.preventMiddleButtonScrolling &&
+                    event.button == 1 &&
+                    (event.buttons & 4) != 0) {
+                    event.preventDefault();
+                }
+                if (stopEventsAfterTargetIsRemovedFromLayout && !elementIsInLayout(this._target)) {
+                    if (this._byId.has(event.pointerId)) {
+                        this._dispatchPointerLeaveEvent(event.pointerId);
+                    }
+                    return stop(event);
+                }
+                if (!this.preventContextMenu &&
+                    event.button == 2 &&
+                    (event.buttons & 2) == 0) {
+                    return stop(event);
+                }
+                let pointer = this._byId.get(event.pointerId);
+                const pointerIsDown = () => { var _a, _b, _c; return ((_a = pointer === null || pointer === void 0 ? void 0 : pointer._isDown) !== null && _a !== void 0 ? _a : false) || ((_c = (_b = pointer === null || pointer === void 0 ? void 0 : pointer._gesture) === null || _b === void 0 ? void 0 : _b.deferringEvents) !== null && _c !== void 0 ? _c : false); };
+                const pointerPressingButtons = () => {
+                    var _a, _b, _c, _d, _e;
+                    return ((_b = (_a = pointer === null || pointer === void 0 ? void 0 : pointer._gesture) === null || _a === void 0 ? void 0 : _a.deferringEvents) !== null && _b !== void 0 ? _b : false)
+                        ? ((_d = (_c = pointer === null || pointer === void 0 ? void 0 : pointer._gesture) === null || _c === void 0 ? void 0 : _c.pressingButtons) !== null && _d !== void 0 ? _d : 0)
+                        : ((_e = pointer === null || pointer === void 0 ? void 0 : pointer._pressingButtons) !== null && _e !== void 0 ? _e : 0);
+                };
+                let changedButtonIndex = listenForTheseButtonIndices.has(event.button)
+                    ? event.button
+                    : -1;
+                if (!listenForMultipleButtonsDown &&
+                    pointer &&
+                    pointerIsDown() &&
+                    changedButtonIndex != pointer._startedWithButton) {
+                    changedButtonIndex = -1;
+                }
+                let pressingButtons = pointerPressingButtons();
+                let addedButton = -1;
+                let removedButton = -1;
+                if (changedButtonIndex != -1) {
+                    const changedButtonBitmask = _bitmaskFromButton.get(_buttonFromIndex.get(changedButtonIndex));
+                    if (changedButtonBitmask == undefined)
+                        throw new Error("EasyPointers: Missing bitmask for button index: " + changedButtonIndex);
+                    const pressingChangedButton = (event.buttons & changedButtonBitmask) != 0;
+                    if (pressingChangedButton) {
+                        if ((pressingButtons & changedButtonBitmask) != 0) {
+                            this.dispatchPointerCancelEvent(event.pointerId);
+                            pointer = this._byId.get(event.pointerId);
+                            pressingButtons = pointerPressingButtons();
+                        }
+                        addedButton = changedButtonIndex;
+                        pressingButtons = (pressingButtons | changedButtonBitmask);
+                    }
+                    if (!pressingChangedButton && (pressingButtons & changedButtonBitmask) != 0) {
+                        removedButton = changedButtonIndex;
+                        pressingButtons = (pressingButtons & (~changedButtonBitmask));
+                    }
+                }
+                const pressingAnyMissingButtons = (pressingButtons & (~event.buttons)) != 0;
+                if (pressingAnyMissingButtons) {
+                    this.dispatchPointerCancelEvent(event.pointerId);
+                    pointer = this._byId.get(event.pointerId);
+                    pressingButtons = pointerPressingButtons();
+                    addedButton = -1;
+                    removedButton = -1;
+                }
+                if (addedButton != -1 && !pointerIsDown()) {
+                    if (this._dispatchPointerDownEvent(event, addedButton).defaultPrevented) {
+                        event.preventDefault();
+                    }
+                    return stop(event);
+                }
+                if (removedButton != -1 && pointerIsDown() && pressingButtons == 0) {
+                    if (this._dispatchPointerUpEvent(event, removedButton).defaultPrevented) {
+                        event.preventDefault();
+                    }
+                    return stop(event);
+                }
+                if (!pointer || !pointer._isPresent) {
+                    if (addedButton != -1 ||
+                        removedButton != -1 ||
+                        pressingButtons != 0) {
+                        throw new Error("EasyPointers: Cannot add or remove buttons on a missing pointer.");
+                    }
+                    this._dispatchPointerEnterEvent(event);
+                    pointer = this._byId.get(event.pointerId);
+                    if (!pointer || !pointer._isPresent)
+                        return stop(event);
+                }
+                const gesture = pointer._gesture;
+                if (pointerIsDown() && gesture && !gesture.hasMovedFromStart) {
+                    const zoom = window.outerWidth / ((_a = visualViewport === null || visualViewport === void 0 ? void 0 : visualViewport.width) !== null && _a !== void 0 ? _a : window.innerWidth);
+                    const dx = (event.clientX - gesture.startClientX) * zoom;
+                    const dy = (event.clientY - gesture.startClientY) * zoom;
+                    const distanceMoved = Math.sqrt(dx * dx + dy * dy);
+                    if (distanceMoved > moveMinDistance) {
+                        gesture.hasMovedFromStart = true;
+                        if (gesture.deferringEvents) {
+                            setTimeout(() => {
+                                if (pointer &&
+                                    gesture == pointer._gesture &&
+                                    pointer._isPresent &&
+                                    pointer == this._byId.get(event.pointerId) &&
+                                    gesture.deferringEvents) {
+                                    gesture.stopDeferring();
+                                }
+                            }, 10);
+                        }
+                    }
+                }
+                if (gesture && gesture.deferringEvents) {
+                    gesture.deferredEvents.push(event);
+                    gesture.pressingButtons = pressingButtons;
+                    return stop(event);
+                }
+                syncEventAndPointer(event, pointer);
+                if (!pointer._isDown)
+                    resetPresses(pointer);
+                pointer._isInTarget = target.contains(document.elementFromPoint(event.clientX, event.clientY));
+                if (addedButton)
+                    pointer._pressedButtons = pressingButtons;
+                pointer._pressingButtons = pressingButtons;
+                pointer._justPressedButton = addedButton;
+                pointer._justReleasedButton = removedButton;
+                pointer._verifyValidity();
+            };
+            const internalDown = (event) => {
+                var _a;
+                if (this.preventMiddleButtonScrolling && event.button == 1)
+                    event.preventDefault();
+                if (stopEventsAfterTargetIsRemovedFromLayout && !elementIsInLayout(this._target)) {
+                    if (this._byId.has(event.pointerId)) {
+                        this._dispatchPointerLeaveEvent(event.pointerId);
+                    }
+                    return stop(event);
+                }
+                if (!listenForTheseButtonIndices.has(event.button))
+                    return stop(event);
+                let pointer = this._byId.get(event.pointerId);
+                if (pointer && pointer._isDown) {
+                    this.dispatchPointerCancelEvent(event.pointerId);
+                    pointer = this._byId.get(event.pointerId);
+                }
+                if (!pointer || !pointer._isPresent) {
+                    if (!listenForMultiplePointers) {
+                        for (const pointer of this._byId.values()) {
+                            if (pointer.type != event.pointerType) {
+                                this._dispatchPointerLeaveEvent(pointer.id);
+                            }
+                        }
+                    }
+                    this._dispatchPointerEnterEvent(event);
+                    pointer = this._byId.get(event.pointerId);
+                    if (!pointer || !pointer._isPresent)
+                        return stop(event);
+                }
+                let gesture = pointer._gesture;
+                if (!((_a = gesture === null || gesture === void 0 ? void 0 : gesture.dispatchingDeferredEvents) !== null && _a !== void 0 ? _a : false)) {
+                    this._target.setPointerCapture(event.pointerId);
+                    gesture = new _Gesture();
+                    pointer._gesture = gesture;
+                    gesture.startClientX = event.clientX;
+                    gesture.startClientY = event.clientY;
+                    if (Number.isFinite(holdStillMinMillis) && holdStillMinMillis > 0) {
+                        setTimeout(() => {
+                            if (pointer &&
+                                gesture &&
+                                gesture == pointer._gesture &&
+                                pointer._isPresent &&
+                                pointer == this._byId.get(event.pointerId) &&
+                                !gesture.wasHeldStill &&
+                                !gesture.hasMovedFromStart) {
+                                gesture.wasHeldStill = true;
+                                if (gesture.deferringEvents) {
+                                    gesture.stopDeferring();
+                                }
+                            }
+                        }, holdStillMinMillis);
+                    }
+                    gesture.deferringEvents = this.deferInitialEvents || (event.pointerType == "touch" && !this.preventTouchGestureScrolling);
+                    if (gesture.deferringEvents) {
+                        gesture.deferredEvents.push(event);
+                        gesture.pressingButtons = event.buttons & listenForTheseButtonsBitmask;
+                        return stop(event);
+                    }
+                }
+                syncEventAndPointer(event, pointer);
+                pointer._isDown = true;
+                pointer._isInTarget = true;
+                pointer._pressedButtons = event.buttons & listenForTheseButtonsBitmask;
+                pointer._pressingButtons = event.buttons & listenForTheseButtonsBitmask;
+                pointer._startedWithButton = event.button;
+                pointer._justPressedButton = event.button;
+                pointer._justReleasedButton = -1;
+                pointer._startedWithAltKey = event.altKey;
+                pointer._startedWithCtrlKey = event.ctrlKey;
+                pointer._startedWithMetaKey = event.metaKey;
+                pointer._startedWithShiftKey = event.shiftKey;
+                pointer._verifyValidity();
+                if (!pointer._isDown && !pointer._isInTarget && pointer._isPresent)
+                    throw new Error("EasyPointers: A pointer that isn't down or in the target shouldn't be present.");
+            };
+            const internalUp = (event) => {
+                var _a, _b;
+                if (stopEventsAfterTargetIsRemovedFromLayout && !elementIsInLayout(this._target)) {
+                    if (this._byId.has(event.pointerId)) {
+                        this._dispatchPointerLeaveEvent(event.pointerId);
+                    }
+                    return stop(event);
+                }
+                if (!this.preventContextMenu && event.button == 2) {
+                    this.dispatchPointerCancelEvent(event.pointerId);
+                    return stop(event);
+                }
+                let pointer = this._byId.get(event.pointerId);
+                if ((_b = (_a = pointer === null || pointer === void 0 ? void 0 : pointer._gesture) === null || _a === void 0 ? void 0 : _a.deferringEvents) !== null && _b !== void 0 ? _b : false) {
+                    pointer._gesture.stopDeferring();
+                    pointer = this._byId.get(event.pointerId);
+                }
+                if (!pointer || !pointer._isDown)
+                    return stop(event);
+                this._target.releasePointerCapture(event.pointerId);
+                syncEventAndPointer(event, pointer);
+                pointer._pressingButtons = 0;
+                pointer._justPressedButton = -1;
+                pointer._justReleasedButton = event.button;
+                pointer._isDown = false;
+                pointer._isInTarget = target.contains(document.elementFromPoint(event.clientX, event.clientY));
+                pointer._verifyValidity();
+            };
+            const internalCancel = (event) => {
+                let pointer = this._byId.get(event.pointerId);
+                if (pointer)
+                    pointer._gesture = null;
+                if (!pointer || !pointer._isDown)
+                    return stop(event);
+                this._target.releasePointerCapture(event.pointerId);
+                syncEventAndPointer(event, pointer);
+                pointer._pressingButtons = 0;
+                pointer._justPressedButton = -1;
+                pointer._justReleasedButton = -1;
+                pointer._isDown = false;
+                pointer._isInTarget = target.contains(document.elementFromPoint(event.clientX, event.clientY));
+                pointer._verifyValidity();
+            };
+            const touchPreventScrolling = (event) => {
+                if (this.preventTouchGestureScrolling) {
+                    event.preventDefault();
+                }
+                else {
+                    for (const pointer of this._byId.values()) {
+                        const gesture = pointer._gesture;
+                        if (gesture && !gesture.deferringEvents) {
+                            event.preventDefault();
+                            break;
+                        }
+                    }
+                }
+            };
+            const emptyMousedownForTouchScreen = function (event) { };
+            const selectDragListener = (event) => {
+                if (this.preventTextSelection)
+                    event.preventDefault();
+            };
+            const contextmenu = (event) => {
+                if (this.preventContextMenu) {
+                    event.preventDefault();
+                }
+                else {
+                    const pointer = this._byId.get(event.pointerId);
+                    if (pointer && pointer._isDown) {
+                        if (pointer._gesture && Number.isFinite(holdStillMinMillis)) {
+                            event.preventDefault();
+                        }
+                        else {
+                            this.dispatchPointerCancelEvent(event.pointerId);
+                        }
+                    }
+                }
+            };
+            if (prioritizeTargetOverNeighborsOnTouchScreen) {
+                target.addEventListener("mousedown", emptyMousedownForTouchScreen);
+            }
+            target.addEventListener("touchstart", touchPreventScrolling, { capture: true, passive: false });
+            target.addEventListener("touchmove", touchPreventScrolling, { capture: true, passive: false });
+            target.addEventListener("selectstart", selectDragListener, { capture: true });
+            target.addEventListener("selectionchange", selectDragListener, { capture: true });
+            target.addEventListener("dragstart", selectDragListener, { capture: true });
+            target.addEventListener("contextmenu", contextmenu, { capture: true });
+            target.addEventListener("pointerenter", internalEnter, { capture: true });
+            target.addEventListener("pointerleave", internalLeave, { capture: true });
+            target.addEventListener("pointermove", internalMove, { capture: true });
+            target.addEventListener("pointerdown", internalDown, { capture: true });
+            target.addEventListener("pointerup", internalUp, { capture: true });
+            target.addEventListener("pointercancel", internalCancel, { capture: true });
+            this.dispose = () => {
+                for (const pointer of this._byId.values()) {
+                    this._dispatchPointerLeaveEvent(pointer.id);
+                }
+                target.removeEventListener("mousedown", emptyMousedownForTouchScreen);
+                target.removeEventListener("touchstart", touchPreventScrolling, { capture: true });
+                target.removeEventListener("touchmove", touchPreventScrolling, { capture: true });
+                target.removeEventListener("selectstart", selectDragListener, { capture: true });
+                target.removeEventListener("selectionchange", selectDragListener, { capture: true });
+                target.removeEventListener("dragstart", selectDragListener, { capture: true });
+                target.removeEventListener("contextmenu", contextmenu, { capture: true });
+                target.removeEventListener("pointerenter", internalEnter, { capture: true });
+                target.removeEventListener("pointerleave", internalLeave, { capture: true });
+                target.removeEventListener("pointermove", internalMove, { capture: true });
+                target.removeEventListener("pointerdown", internalDown, { capture: true });
+                target.removeEventListener("pointerup", internalUp, { capture: true });
+                target.removeEventListener("pointercancel", internalCancel, { capture: true });
+                EasyPointers._managedTargets.delete(target);
+            };
+        }
+        _dispatchSyntheticEvent(type, modelEvent, overrides) {
+            const proxy = new Proxy(modelEvent, {
+                get(_, key) { return Object.prototype.hasOwnProperty.call(overrides, key) ? overrides[key] : modelEvent[key]; },
+            });
+            let newEvent = new PointerEvent(type, proxy);
+            if (newEvent.bubbles && this._target.contains(modelEvent.target)) {
+                modelEvent.target.dispatchEvent(newEvent);
+            }
+            else {
+                this._target.dispatchEvent(newEvent);
+            }
+            return newEvent;
+        }
+        ;
+        _dispatchPointerEnterEvent(modelEvent) {
+            return this._dispatchSyntheticEvent("pointerenter", modelEvent, {
+                bubbles: false,
+                button: -1,
+                buttons: 0,
+            });
+        }
+        _dispatchPointerLeaveEvent(pointerId) {
+            const pointer = this._byId.get(pointerId);
+            if (!pointer)
+                return null;
+            return this._dispatchSyntheticEvent("pointerleave", pointer._lastEvent, {
+                bubbles: false,
+                button: -1,
+                buttons: 0,
+                relatedTarget: null,
+            });
+        }
+        _dispatchPointerDownEvent(modelEvent, button) {
+            return this._dispatchSyntheticEvent("pointerdown", modelEvent, {
+                bubbles: true,
+                button: button,
+                buttons: _bitmaskFromButton.get(_buttonFromIndex.get(button)),
+                relatedTarget: null,
+            });
+        }
+        _dispatchPointerUpEvent(modelEvent, button) {
+            return this._dispatchSyntheticEvent("pointerup", modelEvent, {
+                bubbles: true,
+                button: button,
+                buttons: 0,
+                relatedTarget: null,
+            });
+        }
+        dispatchPointerCancelEvent(pointerId) {
+            const pointer = this._byId.get(pointerId);
+            if (!pointer)
+                return null;
+            return this._dispatchSyntheticEvent("pointercancel", pointer._lastEvent, {
+                bubbles: true,
+                button: -1,
+                buttons: 0,
+                relatedTarget: null,
+            });
+        }
+        get latest() { return this._latest; }
+        get first() { return this._first; }
+        [Symbol.iterator]() { return this._byId.values(); }
+        get count() { return this._byId.size; }
+        get downCount() {
+            let result = 0;
+            for (const pointer of this._byId.values()) {
+                if (pointer._isDown)
+                    result++;
+            }
+            return result;
+        }
+        get anyDown() {
+            for (const pointer of this._byId.values()) {
+                if (pointer.isDown)
+                    return true;
+            }
+            return false;
+        }
+        get anyPresent() {
+            return this._byId.size > 0;
+        }
+        get anyHovering() {
+            for (const pointer of this._byId.values()) {
+                if (pointer.isHovering)
+                    return true;
+            }
+            return false;
+        }
+        get firstHasJustEntered() {
+            return this._byId.size == 1 && this._latest.hasJustEntered;
+        }
+        get firstHasJustBecomeDown() {
+            return this.downCount == 1 && this._latest.hasJustBecomeDown;
+        }
+        get lastHasJustLeft() {
+            return this._byId.size == 0 && this._latest.hasJustLeft;
+        }
+        get lastHasJustBecomeUp() {
+            return this.downCount == 0 && this._latest.hasJustBecomeUp;
+        }
+        get isUsingMouse() {
+            for (const pointer of this._byId.values()) {
+                if (pointer.isMouse)
+                    return true;
+            }
+            if (this._latest.isMouse)
+                return true;
+            return false;
+        }
+        get isUsingTouch() {
+            for (const pointer of this._byId.values()) {
+                if (pointer.isTouch)
+                    return true;
+            }
+            if (this._latest.isTouch)
+                return true;
+            return false;
+        }
+        get altKeyIsDown() { return this._altKey; }
+        get ctrlKeyIsDown() { return this._ctrlKey; }
+        get metaKeyIsDown() { return this._metaKey; }
+        get shiftKeyIsDown() { return this._shiftKey; }
+        get ctrlOrMetaKeyIsDown() { return this._ctrlKey || this._metaKey; }
+    }
+    EasyPointers._managedTargets = new WeakSet();
+    EasyPointers.usingPrimarilyTouchDevice = matchMedia("(pointer:coarse)").matches;
+    const _buttonSet = new Set([
+        "primary",
+        "secondary",
+        "middle",
+        "back",
+        "forward",
+        "eraser",
+    ]);
+    const _indexFromButton = new Map([
+        ["none", -1],
+        ["primary", 0],
+        ["secondary", 2],
+        ["middle", 1],
+        ["back", 3],
+        ["forward", 4],
+        ["eraser", 5],
+    ]);
+    const _buttonFromIndex = new Map(Array.from(_indexFromButton, entry => entry.reverse()));
+    const _bitmaskFromButton = new Map([
+        ["none", 0],
+        ["primary", 1],
+        ["secondary", 2],
+        ["middle", 4],
+        ["back", 8],
+        ["forward", 16],
+        ["eraser", 32],
+    ]);
+    const _buttonFromBitmask = new Map(Array.from(_bitmaskFromButton, entry => entry.reverse()));
+    function _buttonSetFromBitmask(buttons) {
+        const result = new Set();
+        for (const bitmask of _buttonFromBitmask.keys()) {
+            if (buttons & bitmask) {
+                result.add(_buttonFromBitmask.get(bitmask));
+            }
+        }
+        return result;
+    }
+    class _Gesture {
+        constructor() {
+            this.startClientX = 0;
+            this.startClientY = 0;
+            this.deferredEvents = [];
+            this.deferringEvents = true;
+            this.dispatchingDeferredEvents = false;
+            this.pressingButtons = 0;
+            this.hasMovedFromStart = false;
+            this.wasHeldStill = false;
+        }
+        stopDeferring() {
+            this.deferringEvents = false;
+            this.dispatchingDeferredEvents = true;
+            for (const event of this.deferredEvents) {
+                event.target.dispatchEvent(new PointerEvent(event.type, event));
+            }
+            this.dispatchingDeferredEvents = false;
+            this.deferredEvents.length = 0;
+        }
+    }
+    class _InternalPointer {
+        constructor(_pointers, id, type) {
+            this._pointers = _pointers;
+            this.id = id;
+            this.type = type;
+            this._lastEvent = null;
+            this._gesture = null;
+            this._isPresent = true;
+            this._isInTarget = true;
+            this._isDown = false;
+            this._hasJustEntered = false;
+            this._hasJustLeft = false;
+            this._hasJustMoved = false;
+            this._hasJustBecomeDown = false;
+            this._hasJustBecomeUp = false;
+            this._hasJustBeenCanceled = false;
+            this._pressedButtons = 0;
+            this._pressingButtons = 0;
+            this._startedWithButton = -1;
+            this._justPressedButton = -1;
+            this._justReleasedButton = -1;
+            this._startedWithAltKey = false;
+            this._startedWithCtrlKey = false;
+            this._startedWithMetaKey = false;
+            this._startedWithShiftKey = false;
+        }
+        get isPresent() { return this._isPresent; }
+        get isInTarget() { return this._isInTarget && this._isPresent; }
+        get isDown() { return this._isDown; }
+        get isMouse() { return (this.type == "mouse"); }
+        get isTouch() { return (this.type == "touch"); }
+        get isHovering() {
+            return (this._isInTarget && !this._isDown && this.type != "touch");
+        }
+        get hasJustEntered() { return this._hasJustEntered; }
+        get hasJustLeft() { return this._hasJustLeft; }
+        get hasJustMoved() { return this._hasJustMoved; }
+        get hasJustBecomeDown() { return this._hasJustBecomeDown; }
+        get hasJustBecomeUp() { return this._hasJustBecomeUp; }
+        get hasJustBeenCanceled() { return this._hasJustBeenCanceled; }
+        get hasMovedFromStart() { var _a, _b; return (_b = (_a = this._gesture) === null || _a === void 0 ? void 0 : _a.hasMovedFromStart) !== null && _b !== void 0 ? _b : false; }
+        get wasHeldStill() { var _a, _b; return (_b = (_a = this._gesture) === null || _a === void 0 ? void 0 : _a.wasHeldStill) !== null && _b !== void 0 ? _b : false; }
+        get pressedButtons() { return _buttonSetFromBitmask(this._pressedButtons); }
+        get hadPressedPrimaryButton() { return (this._pressedButtons & 1) != 0; }
+        get hadPressedSecondaryButton() { return (this._pressedButtons & 2) != 0; }
+        get hadPressedMiddleButton() { return (this._pressedButtons & 4) != 0; }
+        get hadPressedOnlyPrimaryButton() { return (this._pressedButtons == 1); }
+        get hadPressedOnlySecondaryButton() { return (this._pressedButtons == 2); }
+        get hadPressedOnlyMiddleButton() { return (this._pressedButtons == 4); }
+        hadPressedAny(...buttons) {
+            for (const button of buttons) {
+                if (this._pressedButtons & _bitmaskFromButton.get(button))
+                    return true;
+            }
+            return false;
+        }
+        hadPressedAll(...buttons) {
+            for (const button of buttons) {
+                if (!(this._pressedButtons & _bitmaskFromButton.get(button)))
+                    return false;
+            }
+            return true;
+        }
+        hadPressedExactly(...buttons) {
+            let mask = 0;
+            for (const button of buttons)
+                mask |= _bitmaskFromButton.get(button);
+            return (this._pressedButtons == mask);
+        }
+        get pressingButtons() { return _buttonSetFromBitmask(this._pressingButtons); }
+        get isPressingPrimaryButton() { return (this._pressingButtons & 1) != 0; }
+        get isPressingSecondaryButton() { return (this._pressingButtons & 2) != 0; }
+        get isPressingMiddleButton() { return (this._pressingButtons & 4) != 0; }
+        get isPressingOnlyPrimaryButton() { return (this._pressingButtons == 1); }
+        get isPressingOnlySecondaryButton() { return (this._pressingButtons == 2); }
+        get isPressingOnlyMiddleButton() { return (this._pressingButtons == 4); }
+        isPressingAny(...buttons) {
+            for (const button of buttons) {
+                if (this._pressingButtons & _bitmaskFromButton.get(button))
+                    return true;
+            }
+            return false;
+        }
+        isPressingAll(...buttons) {
+            for (const button of buttons) {
+                if (!(this._pressingButtons & _bitmaskFromButton.get(button)))
+                    return false;
+            }
+            return true;
+        }
+        isPressingExactly(...buttons) {
+            let mask = 0;
+            for (const button of buttons)
+                mask |= _bitmaskFromButton.get(button);
+            return (this._pressingButtons == mask);
+        }
+        get startedWithButton() { return _buttonFromIndex.get(this._startedWithButton); }
+        get startedWithPrimaryButton() { return this._startedWithButton == 0; }
+        get startedWithSecondaryButton() { return this._startedWithButton == 2; }
+        get startedWithMiddleButton() { return this._startedWithButton == 1; }
+        get justPressedButton() { return _buttonFromIndex.get(this._justPressedButton); }
+        get hasJustPressedPrimaryButton() { return this._justPressedButton == 0; }
+        get hasJustPressedSecondaryButton() { return this._justPressedButton == 2; }
+        get hasJustPressedMiddleButton() { return this._justPressedButton == 1; }
+        get justReleasedButton() { return _buttonFromIndex.get(this._justReleasedButton); }
+        get hasJustReleasedPrimaryButton() { return this._justReleasedButton == 0; }
+        get hasJustReleasedSecondaryButton() { return this._justReleasedButton == 2; }
+        get hasJustReleasedMiddleButton() { return this._justReleasedButton == 1; }
+        get pageX() { return this._lastEvent.clientX + window.scrollX; }
+        get pageY() { return this._lastEvent.clientY + window.scrollY; }
+        get pointInPage() { return new Point2d(this._lastEvent.clientX + window.scrollX, this._lastEvent.clientY + window.scrollY); }
+        get viewportX() { return this._lastEvent.clientX; }
+        get viewportY() { return this._lastEvent.clientY; }
+        get pointInViewport() { return new Point2d(this._lastEvent.clientX, this._lastEvent.clientY); }
+        getPointIn(element, box) {
+            var _a, _b;
+            if (!elementIsInLayout(element))
+                return new Point2d(NaN, NaN);
+            return projectPointToPlane(((_a = this._lastEvent) === null || _a === void 0 ? void 0 : _a.clientX) || 0, ((_b = this._lastEvent) === null || _b === void 0 ? void 0 : _b.clientY) || 0, getElementMatrix(element, box, "viewport"));
+        }
+        getPointInNormalized(element, box) {
+            var _a, _b;
+            if (!elementIsInLayout(element))
+                return new Point2d(NaN, NaN);
+            const point = projectPointToPlane(((_a = this._lastEvent) === null || _a === void 0 ? void 0 : _a.clientX) || 0, ((_b = this._lastEvent) === null || _b === void 0 ? void 0 : _b.clientY) || 0, getElementMatrix(element, box, "viewport"));
+            const dimensions = getElementDimensions(element, box);
+            point.x = (point.x / dimensions.width) || 0;
+            point.y = (point.y / dimensions.height) || 0;
+            return point;
+        }
+        get startedWithAltKey() { return this._startedWithAltKey; }
+        get startedWithCtrlKey() { return this._startedWithCtrlKey; }
+        get startedWithMetaKey() { return this._startedWithMetaKey; }
+        get startedWithShiftKey() { return this._startedWithShiftKey; }
+        cancel() {
+            this._pointers.dispatchPointerCancelEvent(this.id);
+        }
+        _verifyValidity() {
+            if (this._lastEvent == null)
+                throw new Error("EasyPointers: A pointer is missing _lastEvent.");
+            if ((this._isDown || this._isInTarget) && !this._isPresent)
+                throw new Error("EasyPointers: A pointer that is down or in the target shouldn't have left.");
+            if (this._isDown != (this._pressingButtons != 0))
+                throw new Error("EasyPointers: Whether pointer is down should correspond to whether it is pressing at least one button.");
+            if ((this._pressingButtons & this._pressedButtons) != this._pressingButtons)
+                throw new Error("EasyPointers: A pointer is pressing buttons that were not recorded has having been pressed.");
+            if ((this._startedWithButton != -1) != (this._pressedButtons != 0))
+                throw new Error("EasyPointers: Whether pointer is has a started button should correspond to whether it has pressed any buttons.");
+        }
+    }
+    const _cornerMarker = document.createElement("div");
+    _cornerMarker.id = "easy-pointers-corner-marker";
+    _cornerMarker.setAttribute("style", "border: none !important; margin: 0 !important; padding: 0 !important; width: 0 !important; min-width: 0 !important; height: 0 !important; min-height: 0 !important; position: absolute !important; display: block !important; float: none !important; clear: none !important; zoom: none !important; translate: none !important; rotate: none !important; scale: none !important; offset: none !important; transform: none !important;");
+    function _derive2dMatrixOfTransformedElementByAppendingChild(element) {
+        let clientWidth = element.clientWidth;
+        let clientHeight = element.clientHeight;
+        element.appendChild(_cornerMarker);
+        _cornerMarker.style.top = "0";
+        _cornerMarker.style.left = "0";
+        _cornerMarker.style.bottom = "auto";
+        _cornerMarker.style.right = "auto";
+        const p0 = _cornerMarker.getBoundingClientRect();
+        const x0 = p0.x;
+        const y0 = p0.y;
+        _cornerMarker.style.left = "auto";
+        _cornerMarker.style.right = "0";
+        const p1 = _cornerMarker.getBoundingClientRect();
+        const x1 = p1.x;
+        const y1 = p1.y;
+        _cornerMarker.style.top = "auto";
+        _cornerMarker.style.bottom = "0";
+        if (element == document.documentElement || element == document.body) {
+            clientWidth = _cornerMarker.offsetLeft;
+            clientHeight = _cornerMarker.offsetTop;
+        }
+        const p2 = _cornerMarker.getBoundingClientRect();
+        const x2 = p2.x;
+        const y2 = p2.y;
+        _cornerMarker.style.right = "auto";
+        _cornerMarker.style.left = "0";
+        const p3 = _cornerMarker.getBoundingClientRect();
+        const x3 = p3.x;
+        const y3 = p3.y;
+        _cornerMarker.remove();
+        const dx1 = x1 - x2;
+        const dy1 = y1 - y2;
+        const dx2 = x3 - x2;
+        const dy2 = y3 - y2;
+        const sx = x0 - x1 + x2 - x3;
+        const sy = y0 - y1 + y2 - y3;
+        let matrix;
+        if (sx == 0 && sy == 0) {
+            const a = x1 - x0;
+            const b = x3 - x0;
+            const c = x0;
+            const d = y1 - y0;
+            const e = y3 - y0;
+            const f = y0;
+            matrix = new DOMMatrix([
+                a, d, 0, 0,
+                b, e, 0, 0,
+                0, 0, 1, 0,
+                c, f, 0, 1,
+            ]);
+        }
+        else {
+            const denom = dx1 * dy2 - dy1 * dx2;
+            const g = (sx * dy2 - sy * dx2) / denom;
+            const h = (dx1 * sy - dy1 * sx) / denom;
+            const a = x1 - x0 + g * x1;
+            const b = x3 - x0 + h * x3;
+            const c = x0;
+            const d = y1 - y0 + g * y1;
+            const e = y3 - y0 + h * y3;
+            const f = y0;
+            matrix = new DOMMatrix([
+                a, d, 0, g,
+                b, e, 0, h,
+                0, 0, 1, 0,
+                c, f, 0, 1,
+            ]);
+        }
+        matrix.scaleSelf(1 / clientWidth, 1 / clientHeight);
+        matrix.translateSelf(-element.clientLeft, -element.clientTop);
+        if (element != document.documentElement) {
+            matrix.translateSelf(element.scrollLeft, element.scrollTop);
+        }
+        return matrix;
+    }
+    function projectPointToPlane(px, py, matrix) {
+        let x = (matrix.m21 * (matrix.m42 - matrix.m44 * py) +
+            matrix.m22 * (matrix.m44 * px - matrix.m41) +
+            matrix.m24 * (matrix.m41 * py - matrix.m42 * px)) / (matrix.m11 * (matrix.m22 - matrix.m24 * py) +
+            matrix.m12 * (matrix.m24 * px - matrix.m21) +
+            matrix.m14 * (matrix.m21 * py - matrix.m22 * px));
+        let y = (py * (matrix.m14 * x + matrix.m44) - matrix.m12 * x - matrix.m42) / (matrix.m22 - matrix.m24 * py);
+        if (isNaN(y)) {
+            y = (px * (matrix.m14 * x + matrix.m44) - matrix.m11 * x - matrix.m41) / (matrix.m21 - matrix.m24 * px);
+        }
+        if (!(x * matrix.m14 + y * matrix.m24 + matrix.m44 >= 0)) {
+            return new Point2d(NaN, NaN);
+        }
+        return new Point2d(x, y);
+    }
+    const _containStylesForOffsetParent = new Set(["paint", "content", "strict", "layout"]);
+    const _willChangeStylesForOffsetParent = new Set(["transform", "rotate", "scale", "translate", "perspective", "transform-style", "offset-path", "contain", "filter", "backdrop-filter"]);
+    function _couldBeOffsetParent(childPosition, ancestor, ancestorStyle) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
+        if (ancestor instanceof SVGElement)
+            return true;
+        const display = ancestorStyle.display;
+        if (display == "contents")
+            return false;
+        if (childPosition != "fixed") {
+            if (ancestorStyle.position != "static")
+                return true;
+            if (childPosition != "absolute") {
+                if (ancestor == document.documentElement) {
+                    return true;
+                }
+                if (ancestor == document.body) {
+                    if (display != "inline") {
+                        if (((_a = ancestorStyle.zoom) !== null && _a !== void 0 ? _a : "1") != "1" ||
+                            ((_b = ancestorStyle.translate) !== null && _b !== void 0 ? _b : "none") != "none" ||
+                            ((_c = ancestorStyle.rotate) !== null && _c !== void 0 ? _c : "none") != "none" ||
+                            ((_d = ancestorStyle.scale) !== null && _d !== void 0 ? _d : "none") != "none" ||
+                            ancestorStyle.transform != "none" ||
+                            ((_e = ancestorStyle.offsetPath) !== null && _e !== void 0 ? _e : "none") != "none") {
+                            throw new Error("EasyPointers: Sorry, EasyPointers does not support body elements with css transforms unless the body element is also a positioned element, e.g. position: relative.");
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        if (display != "inline") {
+            if (ancestor != document.documentElement && ((_f = ancestorStyle.zoom) !== null && _f !== void 0 ? _f : "1") != "1") {
+                throw new Error("EasyPointers: Sorry, EasyPointers does not support elements with css zoom unless the element is also a positioned element, e.g. position: relative.");
+            }
+            if (ancestorStyle.perspective != "none" ||
+                ((_g = ancestorStyle.translate) !== null && _g !== void 0 ? _g : "none") != "none" ||
+                ((_h = ancestorStyle.rotate) !== null && _h !== void 0 ? _h : "none") != "none" ||
+                ((_j = ancestorStyle.scale) !== null && _j !== void 0 ? _j : "none") != "none" ||
+                ancestorStyle.transform != "none" ||
+                ancestorStyle.transformStyle != "flat" ||
+                ((_k = ancestorStyle.offsetPath) !== null && _k !== void 0 ? _k : "none") != "none") {
+                return true;
+            }
+        }
+        return (ancestorStyle.filter != "none" ||
+            ((_l = ancestorStyle.backdropFilter) !== null && _l !== void 0 ? _l : "none") != "none" ||
+            ((_m = ancestorStyle.contentVisibility) !== null && _m !== void 0 ? _m : "visible") != "visible" ||
+            ((_o = ancestorStyle.containerType) !== null && _o !== void 0 ? _o : "normal") != "normal" ||
+            ((_p = ancestorStyle.contain) !== null && _p !== void 0 ? _p : "none").split(" ").some(s => _containStylesForOffsetParent.has(s)) ||
+            ancestorStyle.willChange.split(", ").some(s => _willChangeStylesForOffsetParent.has(s)));
+    }
+    function _getOffsetParent(childPosition, element) {
+        let ancestor = element;
+        while (true) {
+            if (ancestor.assignedSlot) {
+                ancestor = ancestor.assignedSlot;
+            }
+            else if (ancestor.parentNode instanceof ShadowRoot) {
+                ancestor = ancestor.parentNode.host;
+            }
+            else {
+                ancestor = ancestor.parentElement;
+            }
+            if (ancestor == null)
+                break;
+            const ancestorStyle = getComputedStyle(ancestor);
+            if (_couldBeOffsetParent(childPosition, ancestor, ancestorStyle)) {
+                return ancestor;
+            }
+        }
+        return null;
+    }
+    function _parseObjectPositionComponent(positionComponent, unusedSize) {
+        var _a;
+        if (positionComponent.charCodeAt(0) == 99) {
+            const endOffset = (_a = positionComponent.match(/calc\(100% - (.+)px\)/)) === null || _a === void 0 ? void 0 : _a[1];
+            return (endOffset == null) ? 0 : unusedSize - parseFloat(endOffset);
+        }
+        else if (positionComponent.charCodeAt(positionComponent.length - 1) == 37) {
+            return unusedSize * parseFloat(positionComponent) / 100;
+        }
+        else {
+            return parseFloat(positionComponent);
+        }
+    }
+    function _imageElementContainsSvg(element) {
+        var _a, _b;
+        if (element.src.startsWith("data:")) {
+            return element.src.startsWith("data:image/svg+xml,");
+        }
+        else {
+            const fileExtension = (element instanceof HTMLImageElement) ? (_b = (_a = element.src.match(/\.([^\.?#/]+)(\?.*)?(\#.*)?$/)) === null || _a === void 0 ? void 0 : _a[1]) === null || _b === void 0 ? void 0 : _b.toLowerCase() : undefined;
+            return (fileExtension == "svg" || fileExtension == "svg");
+        }
+    }
+    function getElementMatrix(element, elementBox, displayBox) {
+        var _a, _b;
+        const styles = getComputedStyle(element);
+        const matrix = _getBorderBoxMatrix(element, styles);
+        if (elementBox == undefined) {
+            elementBox = (element instanceof SVGElement) ? "svgTransform" : "paddingBox";
+        }
+        if (element instanceof SVGElement && elementBox != "svgTransform") {
+            throw new Error("EasyPointers: The element box must be svgTransform for SVG elements.");
+        }
+        if (element instanceof HTMLElement) {
+            switch (elementBox) {
+                case "borderBox":
+                    break;
+                case "insideBorder":
+                    {
+                        matrix.translateSelf(parseFloat(styles.borderLeft), parseFloat(styles.borderTop));
+                    }
+                    break;
+                case "paddingBox":
+                    {
+                        if (styles.display == "inline") {
+                            matrix.translateSelf(parseFloat(styles.borderLeft), parseFloat(styles.borderTop));
+                        }
+                        else {
+                            matrix.translateSelf(element.clientLeft - element.scrollLeft, element.clientTop - element.scrollTop);
+                        }
+                    }
+                    break;
+                case "contentBox":
+                    {
+                        if (styles.display == "inline") {
+                            matrix.translateSelf(parseFloat(styles.borderLeft) + parseFloat(styles.paddingLeft), parseFloat(styles.borderTop) + parseFloat(styles.paddingTop));
+                        }
+                        else {
+                            matrix.translateSelf(parseFloat(styles.paddingLeft) + element.clientLeft - element.scrollLeft, parseFloat(styles.paddingTop) + element.clientTop - element.scrollTop);
+                        }
+                    }
+                    break;
+                case "imagePixels":
+                    {
+                        let isSvg = false;
+                        let intrinsicWidth, intrinsicHeight, availableWidth, availableHeight;
+                        if (element instanceof HTMLImageElement) {
+                            isSvg = _imageElementContainsSvg(element);
+                            intrinsicWidth = element.naturalWidth;
+                            intrinsicHeight = element.naturalHeight;
+                            availableWidth = element.width;
+                            availableHeight = element.height;
+                        }
+                        else if (element instanceof HTMLCanvasElement) {
+                            intrinsicWidth = element.width;
+                            intrinsicHeight = element.height;
+                            availableWidth = element.clientWidth - parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight);
+                            availableHeight = element.clientHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom);
+                        }
+                        else {
+                            throw new Error("EasyPointers: Unsupported element type for image box: " + element.tagName);
+                        }
+                        let renderedWidth, renderedHeight;
+                        switch (styles.objectFit) {
+                            case "fill":
+                                {
+                                    if (isSvg) {
+                                        const scale = Math.min(availableWidth / intrinsicWidth, availableHeight / intrinsicHeight);
+                                        renderedWidth = intrinsicWidth * scale;
+                                        renderedHeight = intrinsicHeight * scale;
+                                    }
+                                    else {
+                                        renderedWidth = availableWidth;
+                                        renderedHeight = availableHeight;
+                                    }
+                                }
+                                break;
+                            case "contain":
+                                {
+                                    const scale = Math.min(availableWidth / intrinsicWidth, availableHeight / intrinsicHeight);
+                                    renderedWidth = intrinsicWidth * scale;
+                                    renderedHeight = intrinsicHeight * scale;
+                                }
+                                break;
+                            case "cover":
+                                {
+                                    const scale = Math.max(availableWidth / intrinsicWidth, availableHeight / intrinsicHeight);
+                                    renderedWidth = intrinsicWidth * scale;
+                                    renderedHeight = intrinsicHeight * scale;
+                                }
+                                break;
+                            case "none":
+                                {
+                                    renderedWidth = intrinsicWidth;
+                                    renderedHeight = intrinsicHeight;
+                                }
+                                break;
+                            case "scale-down":
+                                {
+                                    const scale = Math.min(1, Math.min(availableWidth / intrinsicWidth, availableHeight / intrinsicHeight));
+                                    renderedWidth = intrinsicWidth * scale;
+                                    renderedHeight = intrinsicHeight * scale;
+                                }
+                                break;
+                            default: throw new Error("EasyPointers: Unrecognized object-fit style value:" + styles.objectFit);
+                        }
+                        const stylePosMatch = styles.objectPosition.match(/(calc\([^\)]*\)|[^\(]+%|[^\(]*px)\s+(calc\([^\)]*\)|[^\(]+%|[^\(]*px)/);
+                        const posLeft = _parseObjectPositionComponent((_a = stylePosMatch === null || stylePosMatch === void 0 ? void 0 : stylePosMatch[1]) !== null && _a !== void 0 ? _a : "50%", availableWidth - renderedWidth);
+                        const posTop = _parseObjectPositionComponent((_b = stylePosMatch === null || stylePosMatch === void 0 ? void 0 : stylePosMatch[2]) !== null && _b !== void 0 ? _b : "50%", availableHeight - renderedHeight);
+                        const contentLeft = parseFloat(styles.paddingLeft) + element.clientLeft;
+                        const contentTop = parseFloat(styles.paddingTop) + element.clientTop;
+                        const imageLeft = contentLeft + posLeft;
+                        const imageTop = contentTop + posTop;
+                        matrix.translateSelf(imageLeft, imageTop);
+                        matrix.scaleSelf(renderedWidth / intrinsicWidth, renderedHeight / intrinsicHeight);
+                    }
+                    break;
+                case "svgTransform": {
+                    throw new Error("EasyPointers: svgTransform unsupported for HTML elements.");
+                }
+                default: throw new Error("EasyPointers: Unrecognized element box: " + elementBox);
+            }
+        }
+        switch (displayBox !== null && displayBox !== void 0 ? displayBox : "viewport") {
+            case "viewport":
+                break;
+            case "page":
+                {
+                    matrix.preMultiplySelf(new DOMMatrix().translateSelf(window.scrollX, window.scrollY));
+                }
+                break;
+            default: throw new Error("EasyPointers: Unrecognized display box: " + displayBox);
+        }
+        return matrix;
+    }
+    function getElementDimensions(element, elementBox = "paddingBox") {
+        const styles = getComputedStyle(element);
+        switch (elementBox) {
+            case "borderBox":
+                {
+                    return { width: element.offsetWidth, height: element.offsetHeight };
+                }
+            case "insideBorder":
+                {
+                    return {
+                        width: element.offsetWidth - parseFloat(styles.borderLeft) - parseFloat(styles.borderRight),
+                        height: element.offsetHeight - parseFloat(styles.borderTop) - parseFloat(styles.borderBottom),
+                    };
+                }
+            case "paddingBox":
+                {
+                    if (styles.display == "inline") {
+                        return {
+                            width: element.offsetWidth - parseFloat(styles.borderLeft) - parseFloat(styles.borderRight),
+                            height: element.offsetHeight - parseFloat(styles.borderTop) - parseFloat(styles.borderBottom),
+                        };
+                    }
+                    else {
+                        return { width: element.scrollWidth, height: element.scrollHeight };
+                    }
+                }
+            case "contentBox":
+                {
+                    if (styles.display == "inline") {
+                        return {
+                            width: element.offsetWidth - parseFloat(styles.borderLeft) - parseFloat(styles.borderRight) - parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight),
+                            height: element.offsetHeight - parseFloat(styles.borderTop) - parseFloat(styles.borderBottom) - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom),
+                        };
+                    }
+                    else {
+                        return {
+                            width: element.scrollWidth - parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight),
+                            height: element.scrollHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom),
+                        };
+                    }
+                }
+            case "imagePixels":
+                {
+                    if (element instanceof HTMLImageElement) {
+                        return { width: element.naturalWidth, height: element.naturalHeight };
+                    }
+                    else if (element instanceof HTMLCanvasElement) {
+                        return { width: element.width, height: element.height };
+                    }
+                    else {
+                        throw new Error("EasyPointers: Unsupported element type for image box: " + element.tagName);
+                    }
+                }
+            case "svgTransform": {
+                throw new Error("EasyPointers: svgTransform unsupported for HTML elements.");
+            }
+            default: throw new Error("EasyPointers: Unrecognized element box: " + elementBox);
+        }
+    }
+    const _elementsThatDoNotRenderChildren = new Set(["audio", "br", "canvas", "embed", "iframe", "img", "input", "object", "optgroup", "option", "progress", "select", "textarea", "video", "wbr"]);
+    function _getBorderBoxMatrix(element, styles) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+        if (element instanceof SVGElement) {
+            const svgMatrix = (_b = (_a = element).getScreenCTM) === null || _b === void 0 ? void 0 : _b.call(_a);
+            if (!svgMatrix)
+                throw new Error("EasyPointers: Could not get transform matrix of SVG Element.");
+            const domMatrix = (svgMatrix instanceof DOMMatrix) ? svgMatrix : new DOMMatrix([svgMatrix.a, svgMatrix.b, svgMatrix.c, svgMatrix.d, svgMatrix.e, svgMatrix.f]);
+            if (element instanceof SVGForeignObjectElement) {
+                const bbox = element.getBBox();
+                domMatrix.translateSelf(bbox.x, bbox.y);
+            }
+            return domMatrix;
+        }
+        const position = styles.position;
+        const offsetParent = _getOffsetParent(position, element);
+        const parentStyle = offsetParent ? getComputedStyle(offsetParent) : null;
+        let perspective = null;
+        let perspectiveOriginX = null;
+        let perspectiveOriginY = null;
+        const parentPerspective = (_c = parentStyle === null || parentStyle === void 0 ? void 0 : parentStyle.perspective) !== null && _c !== void 0 ? _c : "none";
+        if (parentPerspective != "none") {
+            perspective = parseFloat(parentPerspective);
+            const perspectiveOrigin = ((_d = parentStyle === null || parentStyle === void 0 ? void 0 : parentStyle.perspectiveOrigin) !== null && _d !== void 0 ? _d : "0px 0px").split(" ");
+            perspectiveOriginX = parseFloat(perspectiveOrigin[0]);
+            perspectiveOriginY = parseFloat(perspectiveOrigin[1]);
+        }
+        const zoom = (element == document.documentElement)
+            ? "1"
+            : (_e = styles.zoom) !== null && _e !== void 0 ? _e : "1";
+        const translate = (_f = styles.translate) !== null && _f !== void 0 ? _f : "none";
+        const rotate = (_g = styles.rotate) !== null && _g !== void 0 ? _g : "none";
+        const scale = (_h = styles.scale) !== null && _h !== void 0 ? _h : "none";
+        const transform = styles.transform;
+        const hasOffsetPath = ((_j = styles.offsetPath) !== null && _j !== void 0 ? _j : "none") != "none";
+        const displayIsInline = (styles.display == "inline");
+        const usesTransforms = !displayIsInline && (zoom != "1" ||
+            translate != "none" ||
+            rotate != "none" ||
+            scale != "none" ||
+            transform != "none" ||
+            perspective != null ||
+            hasOffsetPath);
+        let preserve3d = false;
+        if (styles.transformStyle == "preserve-3d") {
+            const supportsPreserve3d = ["visible", "clip"].includes(styles.overflow) &&
+                styles.opacity == "1" &&
+                styles.filter == "none" &&
+                ((_k = styles.backdropFilter) !== null && _k !== void 0 ? _k : "none") == "none" &&
+                ((_l = styles.clip) !== null && _l !== void 0 ? _l : "auto") == "auto" &&
+                ((_m = styles.clipPath) !== null && _m !== void 0 ? _m : "none") == "none" &&
+                styles.isolation != "isolate" &&
+                styles.mixBlendMode == "normal" &&
+                ((_o = styles.contentVisibility) !== null && _o !== void 0 ? _o : "visible") == "visible";
+            if (supportsPreserve3d) {
+                preserve3d = true;
+            }
+        }
+        const hasReportedOffsets = (element != document.body && element != document.documentElement && element instanceof HTMLElement);
+        let mustDeriveTransformFromChildren = (!hasReportedOffsets && usesTransforms) || hasOffsetPath;
+        if (element == document.body && !usesTransforms) {
+            const htmlStyles = getComputedStyle(document.documentElement);
+            if (htmlStyles.perspective != "none" ||
+                ((_p = htmlStyles.translate) !== null && _p !== void 0 ? _p : "none") != "none" ||
+                ((_q = htmlStyles.rotate) !== null && _q !== void 0 ? _q : "none") != "none" ||
+                ((_r = htmlStyles.scale) !== null && _r !== void 0 ? _r : "none") != "none" ||
+                htmlStyles.transform != "none" ||
+                ((_s = htmlStyles.offsetPath) !== null && _s !== void 0 ? _s : "none") != "none") {
+                if (position == "static") {
+                    throw new Error("EasyPointers: Can't determine how the root html element's transform affects the body element if the body isn't a positioned element.");
+                }
+                else {
+                    mustDeriveTransformFromChildren = true;
+                }
+            }
+        }
+        if (mustDeriveTransformFromChildren) {
+            const canDeriveTransformFromChildren = (usesTransforms || position != "static") && !_elementsThatDoNotRenderChildren.has(element.tagName.toLowerCase()) && !preserve3d;
+            if (!canDeriveTransformFromChildren) {
+                throw new Error("EasyPointers: Can't compute the transform of a the element: " + element.tagName + "#" + element.id + "." + element.className);
+            }
+            return _derive2dMatrixOfTransformedElementByAppendingChild(element);
+        }
+        let offsetLeft = 0;
+        let offsetTop = 0;
+        if (hasReportedOffsets) {
+            offsetLeft = element.offsetLeft;
+            offsetTop = element.offsetTop;
+            const domScopes = new Set();
+            for (let scope = element.getRootNode(); scope; scope = (_t = scope.host) === null || _t === void 0 ? void 0 : _t.getRootNode()) {
+                domScopes.add(scope);
+            }
+            let offsetAncestor = offsetParent;
+            while (offsetAncestor && !domScopes.has(offsetAncestor.getRootNode())) {
+                if (offsetAncestor instanceof SVGElement)
+                    throw new Error("EasyPointers: Can't determine matrix of an HTMLElement that is in the slot of a shadow dom that contains SVGElements.");
+                offsetLeft -= offsetAncestor.offsetLeft;
+                offsetTop -= offsetAncestor.offsetTop;
+                const ancestorPosition = (_u = getComputedStyle(offsetAncestor).position) !== null && _u !== void 0 ? _u : "static";
+                offsetAncestor = _getOffsetParent(ancestorPosition, offsetAncestor);
+            }
+        }
+        let parentPaddingX = 0;
+        let parentPaddingY = 0;
+        let matrix;
+        if (!hasReportedOffsets) {
+            const bounds = element.getBoundingClientRect();
+            offsetLeft = bounds.left;
+            offsetTop = bounds.top;
+            matrix = new DOMMatrix();
+        }
+        else if (offsetParent != null) {
+            matrix = _getBorderBoxMatrix(offsetParent, parentStyle);
+            parentPaddingX += offsetParent.clientLeft;
+            parentPaddingY += offsetParent.clientTop;
+            if (offsetParent != document.documentElement) {
+                parentPaddingX -= offsetParent.scrollLeft;
+                parentPaddingY -= offsetParent.scrollTop;
+            }
+            let parent = element.parentElement;
+            while (parent != null && parent != document.documentElement && parent != offsetParent) {
+                offsetLeft -= parent.scrollLeft;
+                offsetTop -= parent.scrollTop;
+                parent = parent.parentElement;
+            }
+        }
+        else {
+            matrix = new DOMMatrix();
+            if (position != "fixed") {
+                parentPaddingX -= window.scrollX;
+                parentPaddingY -= window.scrollY;
+            }
+        }
+        if (!usesTransforms) {
+            matrix.translateSelf(parentPaddingX + offsetLeft, parentPaddingY + offsetTop);
+        }
+        else {
+            let combinedTransform = "";
+            if (perspective != null) {
+                combinedTransform += `translate(${perspectiveOriginX}px, ${perspectiveOriginY}px) `;
+                combinedTransform += `perspective(${perspective}px) `;
+                combinedTransform += `translate(${-perspectiveOriginX}px, ${-perspectiveOriginY}px) `;
+            }
+            if (parentPaddingX != 0 || parentPaddingY != 0) {
+                combinedTransform += `translate(${parentPaddingX}px, ${parentPaddingY}px) `;
+            }
+            if (zoom != "1") {
+                combinedTransform += `scale(${zoom}) `;
+            }
+            if (offsetLeft != 0 || offsetTop != 0) {
+                combinedTransform += `translate(${offsetLeft}px, ${offsetTop}px) `;
+            }
+            const transformOrigin = styles.transformOrigin.split(" ");
+            const negatedOrigin = transformOrigin.map(c => c.charCodeAt(0) == 45 ? c.slice(1) : "-" + c);
+            let originTranslate = `translate(${transformOrigin.slice(0, 2).join(", ")}) `;
+            let reverseTranslate = `translate(${negatedOrigin.slice(0, 2).join(", ")}) `;
+            if (transformOrigin.length == 3)
+                originTranslate += ` translateZ(${transformOrigin[2]})`;
+            if (negatedOrigin.length == 3)
+                reverseTranslate += ` translateZ(${negatedOrigin[2]})`;
+            combinedTransform += originTranslate;
+            if (translate != "none") {
+                const components = translate.split(" ");
+                if (components[0].charCodeAt(components[0].length - 1) == 37) {
+                    components[0] = parseFloat(components[0]) / 100 * element.offsetWidth + "px";
+                }
+                if (components.length >= 2 && components[1].charCodeAt(components[1].length - 1) == 37) {
+                    components[1] = parseFloat(components[1]) / 100 * element.offsetHeight + "px";
+                }
+                if (components.length < 3) {
+                    combinedTransform += `translate(${components.join(", ")}) `;
+                }
+                else if (components.length == 3) {
+                    combinedTransform += `translate3d(${components.join(", ")}) `;
+                }
+            }
+            if (rotate != "none") {
+                const components = rotate.split(" ");
+                if (components.length == 1) {
+                    combinedTransform += `rotate(${components[0]}) `;
+                }
+                else if (components.length == 2) {
+                    combinedTransform += `rotate${components[0].toUpperCase()}(${components[1]}) `;
+                }
+                else if (components.length == 4) {
+                    combinedTransform += `rotate3d(${components.join(", ")}) `;
+                }
+            }
+            if (scale != "none") {
+                const components = scale.split(" ");
+                if (components.length < 3) {
+                    combinedTransform += `scale(${components.join(", ")}) `;
+                }
+                else if (components.length == 3) {
+                    combinedTransform += `scale3d(${components.join(", ")}) `;
+                }
+            }
+            if (transform != "none") {
+                combinedTransform += transform;
+            }
+            combinedTransform += reverseTranslate;
+            matrix.multiplySelf(new DOMMatrix(combinedTransform));
+            if (!preserve3d) {
+                matrix.m13 = matrix.m23 = matrix.m43 = matrix.m31 = matrix.m32 = matrix.m34 = 0;
+                matrix.m33 = 1;
+            }
+        }
+        return matrix;
+    }
+    class Point2d extends DOMPoint {
+        constructor(x, y) {
+            super(x, y);
+        }
+        static copyOf(other) {
+            return new Point2d(other.x, other.y);
+        }
+        equals(other, y) {
+            if (typeof other == "number") {
+                return this.x == other && this.y == (y !== null && y !== void 0 ? y : 0);
+            }
+            else {
+                return this.x == other.x && this.y == other.y;
+            }
+        }
+        distanceFrom(other, y) {
+            if (typeof other == "number") {
+                const dx = this.x - other;
+                const dy = this.y - (y !== null && y !== void 0 ? y : 0);
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+            else {
+                const dx = this.x - other.x;
+                const dy = this.y - other.y;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+        }
+        addToSelf(other, y) {
+            if (typeof other == "number") {
+                this.x += other;
+                this.y += y !== null && y !== void 0 ? y : 0;
+            }
+            else {
+                this.x += other.x;
+                this.y += other.y;
+            }
+            return this;
+        }
+        subtractFromSelf(other, y) {
+            if (typeof other == "number") {
+                this.x -= other;
+                this.y -= y !== null && y !== void 0 ? y : 0;
+            }
+            else {
+                this.x -= other.x;
+                this.y -= other.y;
+            }
+            return this;
+        }
+        scaleSelfBy(v) {
+            this.x *= v;
+            this.y *= v;
+            return this;
+        }
+    }
+
+    const versionPrefix = "songVersion: ";
+    const maximumSongCount = 8;
+    const maximumWorkPerVersion = 3 * 60 * 1000;
+    const minimumWorkPerSpan = 1 * 60 * 1000;
+    function keyIsVersion(key) {
+        return key.indexOf(versionPrefix) == 0;
+    }
+    function keyToVersion(key) {
+        return JSON.parse(key.substring(versionPrefix.length));
+    }
+    function versionToKey(version) {
+        return versionPrefix + JSON.stringify(version);
+    }
+    function generateUid() {
+        return ((Math.random() * (-1 >>> 0)) >>> 0).toString(32);
+    }
+    function errorAlert(error) {
+        console.warn(error);
+        window.alert("Whoops, the song data appears to have been corrupted! Please try to recover the last working version of the song from the \"Recover Recent Song...\" option in BeepBox's \"File\" menu.");
+    }
+    function compareSongs(a, b) {
+        return b.versions[0].time - a.versions[0].time;
+    }
+    function compareVersions(a, b) {
+        return b.time - a.time;
+    }
+    class SongRecovery {
+        constructor() {
+            this._song = new Song();
+        }
+        static getAllRecoveredSongs() {
+            const songs = [];
+            const songsByUid = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const itemKey = localStorage.key(i);
+                if (keyIsVersion(itemKey)) {
+                    const version = keyToVersion(itemKey);
+                    let song = songsByUid[version.uid];
+                    if (song == undefined) {
+                        song = { versions: [] };
+                        songsByUid[version.uid] = song;
+                        songs.push(song);
+                    }
+                    song.versions.push(version);
+                }
+            }
+            for (const song of songs) {
+                song.versions.sort(compareVersions);
+            }
+            songs.sort(compareSongs);
+            return songs;
+        }
+        saveVersion(uid, songData) {
+            const newTime = Math.round(Date.now());
+            clearTimeout(this._saveVersionTimeoutHandle);
+            this._saveVersionTimeoutHandle = setTimeout(() => {
+                try {
+                    this._song.fromBase64String(songData);
+                }
+                catch (error) {
+                    errorAlert(error);
+                    return;
+                }
+                const songs = SongRecovery.getAllRecoveredSongs();
+                let currentSong = null;
+                for (const song of songs) {
+                    if (song.versions[0].uid == uid) {
+                        currentSong = song;
+                    }
+                }
+                if (currentSong == null) {
+                    currentSong = { versions: [] };
+                    songs.unshift(currentSong);
+                }
+                let versions = currentSong.versions;
+                let newWork = 1000;
+                if (versions.length > 0) {
+                    const mostRecentTime = versions[0].time;
+                    const mostRecentWork = versions[0].work;
+                    newWork = mostRecentWork + Math.min(maximumWorkPerVersion, newTime - mostRecentTime);
+                }
+                const newVersion = { uid: uid, time: newTime, work: newWork };
+                const newKey = versionToKey(newVersion);
+                versions.unshift(newVersion);
+                localStorage.setItem(newKey, songData);
+                let minSpan = minimumWorkPerSpan;
+                const spanMult = Math.pow(2, 1 / 2);
+                for (var i = 1; i < versions.length; i++) {
+                    const currentWork = versions[i].work;
+                    const olderWork = (i == versions.length - 1) ? 0.0 : versions[i + 1].work;
+                    if (currentWork - olderWork < minSpan) {
+                        let indexToDiscard = i;
+                        if (i < versions.length - 1) {
+                            const currentTime = versions[i].time;
+                            const newerTime = versions[i - 1].time;
+                            const olderTime = versions[i + 1].time;
+                            if ((currentTime - olderTime) < 0.5 * (newerTime - currentTime)) {
+                                indexToDiscard = i + 1;
+                            }
+                        }
+                        localStorage.removeItem(versionToKey(versions[indexToDiscard]));
+                        break;
+                    }
+                    minSpan *= spanMult;
+                }
+                while (songs.length > maximumSongCount) {
+                    let leastImportantSong = null;
+                    let leastImportance = Number.POSITIVE_INFINITY;
+                    for (let i = Math.round(maximumSongCount / 2); i < songs.length; i++) {
+                        const song = songs[i];
+                        const timePassed = newTime - song.versions[0].time;
+                        const timeScale = 1.0 / ((timePassed / (12 * 60 * 60 * 1000)) + 1.0);
+                        const adjustedWork = song.versions[0].work + 5 * 60 * 1000;
+                        const weight = adjustedWork * timeScale;
+                        if (leastImportance > weight) {
+                            leastImportance = weight;
+                            leastImportantSong = song;
+                        }
+                    }
+                    for (const version of leastImportantSong.versions) {
+                        localStorage.removeItem(versionToKey(version));
+                    }
+                    songs.splice(songs.indexOf(leastImportantSong), 1);
+                }
+            }, 750);
         }
     }
 
@@ -14174,6 +15520,1627 @@ var beepbox = (function (exports) {
         }
     }
 
+    class SongPerformance {
+        constructor(_doc) {
+            this._doc = _doc;
+            this._channelIsDrum = false;
+            this._channelOctave = -1;
+            this._songKey = -1;
+            this._pitchesAreTemporary = false;
+            this._recentlyAddedPitches = [];
+            this._songLengthWhenRecordingStarted = -1;
+            this._playheadPart = -1;
+            this._playheadPattern = null;
+            this._pitchesChanged = false;
+            this._lastNote = null;
+            this._recordingChange = null;
+            this._onAnimationFrame = () => {
+                window.requestAnimationFrame(this._onAnimationFrame);
+                if (this._doc.synth.recording) {
+                    const dirty = this._updateRecordedNotes();
+                    if (dirty) {
+                        this._doc.notifier.notifyWatchers();
+                    }
+                }
+            };
+            this._documentChanged = () => {
+                const isDrum = this._doc.song.getChannelIsNoise(this._doc.channel);
+                const octave = this._doc.song.channels[this._doc.channel].octave;
+                if (this._doc.synth.liveInputChannel != this._doc.channel || this._channelIsDrum != isDrum || this._channelOctave != octave || this._songKey != this._doc.song.key) {
+                    this._doc.synth.liveInputChannel = this._doc.channel;
+                    this._channelIsDrum = isDrum;
+                    this._channelOctave = octave;
+                    this._songKey = this._doc.song.key;
+                    this.clearAllPitches();
+                }
+                this._doc.synth.liveInputInstruments = this._doc.recentPatternInstruments[this._doc.channel];
+            };
+            this._doc.notifier.watch(this._documentChanged);
+            this._documentChanged();
+            window.requestAnimationFrame(this._onAnimationFrame);
+        }
+        play() {
+            this._doc.synth.play();
+            this._doc.synth.enableMetronome = false;
+            this._doc.synth.countInMetronome = false;
+            this._doc.synth.maintainLiveInput();
+        }
+        pause() {
+            this.clearAllPitches();
+            if (this._recordingChange != null) {
+                if (this._doc.song.barCount > this._songLengthWhenRecordingStarted && !this._lastBarHasPatterns()) {
+                    new ChangeDeleteBars(this._doc, this._doc.song.barCount - 1, 1);
+                    new ChangeChannelBar(this._doc, this._doc.channel, this._doc.song.barCount - 1);
+                }
+                if (!this._recordingChange.isNoop()) {
+                    this._doc.record(this._recordingChange);
+                    this._recordingChange = null;
+                }
+                this._lastNote = null;
+            }
+            this._doc.synth.pause();
+            this._doc.synth.resetEffects();
+            this._doc.synth.enableMetronome = false;
+            this._doc.synth.countInMetronome = false;
+            if (this._doc.prefs.autoFollow) {
+                this._doc.synth.goToBar(this._doc.bar);
+            }
+            this._doc.synth.snapToBar();
+        }
+        record() {
+            this._doc.synth.snapToBar();
+            const playheadBar = Math.floor(this._doc.synth.playhead);
+            if (playheadBar != this._doc.bar) {
+                new ChangeChannelBar(this._doc, this._doc.channel, playheadBar);
+            }
+            if (this._pitchesAreTemporary) {
+                this.clearAllPitches();
+                this._pitchesAreTemporary = false;
+            }
+            this._doc.synth.enableMetronome = this._doc.prefs.metronomeWhileRecording;
+            this._doc.synth.countInMetronome = this._doc.prefs.metronomeCountIn;
+            this._doc.synth.startRecording();
+            this._doc.synth.maintainLiveInput();
+            this._songLengthWhenRecordingStarted = this._doc.song.barCount;
+            this._playheadPart = this._getCurrentPlayheadPart();
+            this._playheadPattern = null;
+            this._pitchesChanged = false;
+            this._lastNote = null;
+            this._recentlyAddedPitches.length = 0;
+            this._recordingChange = new ChangeGroup();
+            this._doc.setProspectiveChange(this._recordingChange);
+        }
+        abortRecording() {
+            this._recordingChange = null;
+            this.pause();
+        }
+        pitchesAreTemporary() {
+            return this._pitchesAreTemporary;
+        }
+        _getMinDivision() {
+            if (this._doc.prefs.snapRecordedNotesToRhythm) {
+                return Config.partsPerBeat / Config.rhythms[this._doc.song.rhythm].stepsPerBeat;
+            }
+            else {
+                return 1;
+            }
+        }
+        _getCurrentPlayheadPart() {
+            const currentPart = this._doc.synth.playhead * this._doc.song.beatsPerBar * Config.partsPerBeat;
+            if (this._doc.prefs.snapRecordedNotesToRhythm) {
+                const minDivision = this._getMinDivision();
+                return Math.round(currentPart / minDivision) * minDivision;
+            }
+            return Math.round(currentPart);
+        }
+        _lastBarHasPatterns() {
+            for (let channelIndex = 0; channelIndex < this._doc.song.getChannelCount(); channelIndex++) {
+                if (this._doc.song.channels[channelIndex].bars[this._doc.song.barCount - 1] != 0)
+                    return true;
+            }
+            return false;
+        }
+        _updateRecordedNotes() {
+            if (this._recordingChange == null)
+                return false;
+            if (!this._doc.lastChangeWas(this._recordingChange)) {
+                this.abortRecording();
+                return false;
+            }
+            if (this._doc.synth.countInMetronome) {
+                this._recentlyAddedPitches.length = 0;
+                this._pitchesChanged = false;
+                return false;
+            }
+            const partsPerBar = this._doc.song.beatsPerBar * Config.partsPerBeat;
+            const oldPart = this._playheadPart % partsPerBar;
+            const oldBar = Math.floor(this._playheadPart / partsPerBar);
+            const oldPlayheadPart = this._playheadPart;
+            this._playheadPart = this._getCurrentPlayheadPart();
+            const newPart = this._playheadPart % partsPerBar;
+            const newBar = Math.floor(this._playheadPart / partsPerBar);
+            if (oldPart == newPart && oldBar == newBar)
+                return false;
+            if (this._playheadPart < oldPlayheadPart) {
+                this._lastNote = null;
+                this._playheadPattern = null;
+                return false;
+            }
+            let dirty = false;
+            for (let bar = oldBar; bar <= newBar; bar++) {
+                if (bar != oldBar)
+                    this._playheadPattern = null;
+                const startPart = (bar == oldBar) ? oldPart : 0;
+                const endPart = (bar == newBar) ? newPart : partsPerBar;
+                if (startPart == endPart)
+                    break;
+                if (this._lastNote != null && !this._pitchesChanged && startPart > 0 && this._doc.synth.liveInputPitches.length > 0) {
+                    this._recordingChange.append(new ChangePinTime(this._doc, this._lastNote, 1, endPart, this._lastNote.continuesLastPattern));
+                    this._doc.currentPatternIsDirty = true;
+                }
+                else {
+                    if (this._lastNote != null) {
+                        this._lastNote = null;
+                    }
+                    let noteStartPart = startPart;
+                    let noteEndPart = endPart;
+                    while (noteStartPart < endPart) {
+                        let addedAlreadyReleasedPitch = false;
+                        if (this._recentlyAddedPitches.length > 0 || this._doc.synth.liveInputPitches.length > 0) {
+                            if (this._playheadPattern == null) {
+                                this._doc.selection.erasePatternInBar(this._recordingChange, this._doc.synth.liveInputChannel, bar);
+                                this._recordingChange.append(new ChangeEnsurePatternExists(this._doc, this._doc.synth.liveInputChannel, bar));
+                                this._playheadPattern = this._doc.song.getPattern(this._doc.synth.liveInputChannel, bar);
+                            }
+                            if (this._playheadPattern == null)
+                                throw new Error();
+                            this._lastNote = new Note(-1, noteStartPart, noteEndPart, Config.noteSizeMax, this._doc.song.getChannelIsNoise(this._doc.synth.liveInputChannel));
+                            this._lastNote.continuesLastPattern = (noteStartPart == 0 && !this._pitchesChanged);
+                            this._lastNote.pitches.length = 0;
+                            while (this._recentlyAddedPitches.length > 0) {
+                                if (this._lastNote.pitches.length >= Config.maxChordSize)
+                                    break;
+                                const recentPitch = this._recentlyAddedPitches.shift();
+                                if (this._doc.synth.liveInputPitches.indexOf(recentPitch) == -1) {
+                                    this._lastNote.pitches.push(recentPitch);
+                                    addedAlreadyReleasedPitch = true;
+                                }
+                            }
+                            for (let i = 0; i < this._doc.synth.liveInputPitches.length; i++) {
+                                if (this._lastNote.pitches.length >= Config.maxChordSize)
+                                    break;
+                                this._lastNote.pitches.push(this._doc.synth.liveInputPitches[i]);
+                            }
+                            this._recordingChange.append(new ChangeNoteAdded(this._doc, this._playheadPattern, this._lastNote, this._playheadPattern.notes.length));
+                            if (addedAlreadyReleasedPitch) {
+                                noteEndPart = noteStartPart + this._getMinDivision();
+                                new ChangeNoteLength(this._doc, this._lastNote, this._lastNote.start, noteEndPart);
+                                this._lastNote = null;
+                            }
+                            dirty = true;
+                        }
+                        this._pitchesChanged = addedAlreadyReleasedPitch;
+                        noteStartPart = noteEndPart;
+                        noteEndPart = endPart;
+                    }
+                }
+                if (bar == this._doc.song.barCount - 1) {
+                    if (this._lastBarHasPatterns()) {
+                        new ChangeInsertBars(this._doc, this._doc.song.barCount, 1);
+                        this._doc.bar--;
+                        dirty = true;
+                    }
+                }
+            }
+            return dirty;
+        }
+        setTemporaryPitches(pitches, duration) {
+            this._updateRecordedNotes();
+            for (let i = 0; i < pitches.length; i++) {
+                this._doc.synth.liveInputPitches[i] = pitches[i];
+            }
+            this._doc.synth.liveInputPitches.length = Math.min(pitches.length, Config.maxChordSize);
+            this._doc.synth.liveInputDuration = duration;
+            this._doc.synth.liveInputStarted = true;
+            this._pitchesAreTemporary = true;
+            this._pitchesChanged = true;
+        }
+        addPerformedPitch(pitch) {
+            this._doc.synth.maintainLiveInput();
+            this._updateRecordedNotes();
+            if (this._pitchesAreTemporary) {
+                this.clearAllPitches();
+                this._pitchesAreTemporary = false;
+            }
+            if (this._doc.prefs.ignorePerformedNotesNotInScale && !Config.scales[this._doc.song.scale].flags[pitch % Config.pitchesPerOctave]) {
+                return;
+            }
+            if (this._doc.synth.liveInputPitches.indexOf(pitch) == -1) {
+                this._doc.synth.liveInputPitches.push(pitch);
+                this._pitchesChanged = true;
+                while (this._doc.synth.liveInputPitches.length > Config.maxChordSize) {
+                    this._doc.synth.liveInputPitches.shift();
+                }
+                this._doc.synth.liveInputDuration = Number.MAX_SAFE_INTEGER;
+                if (this._recordingChange != null) {
+                    const recentIndex = this._recentlyAddedPitches.indexOf(pitch);
+                    if (recentIndex != -1) {
+                        this._recentlyAddedPitches.splice(recentIndex, 1);
+                    }
+                    this._recentlyAddedPitches.push(pitch);
+                    while (this._recentlyAddedPitches.length > Config.maxChordSize * 4) {
+                        this._recentlyAddedPitches.shift();
+                    }
+                }
+            }
+        }
+        removePerformedPitch(pitch) {
+            this._updateRecordedNotes();
+            for (let i = 0; i < this._doc.synth.liveInputPitches.length; i++) {
+                if (this._doc.synth.liveInputPitches[i] == pitch) {
+                    this._doc.synth.liveInputPitches.splice(i, 1);
+                    this._pitchesChanged = true;
+                    i--;
+                }
+            }
+        }
+        clearAllPitches() {
+            this._updateRecordedNotes();
+            this._doc.synth.liveInputPitches.length = 0;
+            this._pitchesChanged = true;
+        }
+    }
+
+    class Selection {
+        constructor(_doc) {
+            this._doc = _doc;
+            this.boxSelectionX0 = 0;
+            this.boxSelectionY0 = 0;
+            this.boxSelectionX1 = 0;
+            this.boxSelectionY1 = 0;
+            this.digits = "";
+            this.instrumentDigits = "";
+            this.patternSelectionStart = 0;
+            this.patternSelectionEnd = 0;
+            this.patternSelectionActive = false;
+            this._changeTranspose = null;
+            this._changeReorder = null;
+            this._changeTrack = null;
+            this._changeInstrument = null;
+        }
+        toJSON() {
+            return {
+                "x0": this.boxSelectionX0,
+                "x1": this.boxSelectionX1,
+                "y0": this.boxSelectionY0,
+                "y1": this.boxSelectionY1,
+                "start": this.patternSelectionStart,
+                "end": this.patternSelectionEnd,
+            };
+        }
+        fromJSON(json) {
+            if (json == null)
+                return;
+            this.boxSelectionX0 = +json["x0"];
+            this.boxSelectionX1 = +json["x1"];
+            this.boxSelectionY0 = +json["y0"];
+            this.boxSelectionY1 = +json["y1"];
+            this.patternSelectionStart = +json["start"];
+            this.patternSelectionEnd = +json["end"];
+            this.digits = "";
+            this.instrumentDigits = "";
+            this.patternSelectionActive = this.patternSelectionStart < this.patternSelectionEnd;
+        }
+        selectionUpdated() {
+            this._doc.notifier.changed();
+            this.digits = "";
+            this.instrumentDigits = "";
+        }
+        get boxSelectionBar() {
+            return Math.min(this.boxSelectionX0, this.boxSelectionX1);
+        }
+        get boxSelectionChannel() {
+            return Math.min(this.boxSelectionY0, this.boxSelectionY1);
+        }
+        get boxSelectionWidth() {
+            return Math.abs(this.boxSelectionX0 - this.boxSelectionX1) + 1;
+        }
+        get boxSelectionHeight() {
+            return Math.abs(this.boxSelectionY0 - this.boxSelectionY1) + 1;
+        }
+        get boxSelectionActive() {
+            return this.boxSelectionWidth > 1 || this.boxSelectionHeight > 1;
+        }
+        scrollToSelectedPattern() {
+            this._doc.barScrollPos = Math.min(this._doc.bar, Math.max(this._doc.bar - (this._doc.trackVisibleBars - 1), this._doc.barScrollPos));
+            this._doc.channelScrollPos = Math.min(this._doc.channel, Math.max(this._doc.channel - (this._doc.trackVisibleChannels - 1), this._doc.channelScrollPos));
+        }
+        scrollToEndOfSelection() {
+            this._doc.barScrollPos = Math.min(this.boxSelectionX1, Math.max(this.boxSelectionX1 - (this._doc.trackVisibleBars - 1), this._doc.barScrollPos));
+            this._doc.channelScrollPos = Math.min(this.boxSelectionY1, Math.max(this.boxSelectionY1 - (this._doc.trackVisibleChannels - 1), this._doc.channelScrollPos));
+        }
+        setChannelBar(channelIndex, bar) {
+            if (channelIndex == this._doc.channel && bar == this._doc.bar)
+                return;
+            const canReplaceLastChange = this._doc.lastChangeWas(this._changeTrack);
+            this._changeTrack = new ChangeGroup();
+            this._changeTrack.append(new ChangeChannelBar(this._doc, channelIndex, bar));
+            const pattern = this._doc.getCurrentPattern(0);
+            if (pattern != null && this._doc.song.patternInstruments) {
+                if (pattern.instruments.indexOf(this._doc.viewedInstrument[this._doc.channel]) == -1) {
+                    this._doc.viewedInstrument[this._doc.channel] = pattern.instruments[0];
+                }
+            }
+            if (!this._doc.hasRedoHistory()) {
+                this._doc.record(this._changeTrack, canReplaceLastChange);
+            }
+            this.selectionUpdated();
+        }
+        setPattern(pattern) {
+            this._doc.record(new ChangePatternNumbers(this._doc, pattern, this.boxSelectionBar, this.boxSelectionChannel, this.boxSelectionWidth, this.boxSelectionHeight));
+        }
+        nextDigit(digit, forInstrument) {
+            const channel = this._doc.song.channels[this._doc.channel];
+            if (forInstrument) {
+                if (digit == "0")
+                    digit = "10";
+                this.instrumentDigits += digit;
+                var parsed = parseInt(this.instrumentDigits);
+                if (parsed != 0 && parsed <= channel.instruments.length) {
+                    this.selectInstrument(parsed - 1);
+                    return;
+                }
+                this.instrumentDigits = digit;
+                parsed = parseInt(this.instrumentDigits);
+                if (parsed != 0 && parsed <= channel.instruments.length) {
+                    this.selectInstrument(parsed - 1);
+                    return;
+                }
+                this.instrumentDigits = "";
+            }
+            else {
+                if (this.digits.length > 0 && this.digits != String(channel.bars[this.boxSelectionBar])) {
+                    this.digits = "";
+                }
+                this.digits += digit;
+                let parsed = parseInt(this.digits);
+                if (parsed <= this._doc.song.patternsPerChannel) {
+                    this.setPattern(parsed);
+                    return;
+                }
+                this.digits = digit;
+                parsed = parseInt(this.digits);
+                if (parsed <= this._doc.song.patternsPerChannel) {
+                    this.setPattern(parsed);
+                    return;
+                }
+                this.digits = "";
+            }
+        }
+        insertBars() {
+            this._doc.record(new ChangeInsertBars(this._doc, this.boxSelectionBar + this.boxSelectionWidth, this.boxSelectionWidth));
+            const width = this.boxSelectionWidth;
+            this.boxSelectionX0 += width;
+            this.boxSelectionX1 += width;
+        }
+        insertChannel() {
+            const group = new ChangeGroup();
+            const insertIndex = this.boxSelectionChannel + this.boxSelectionHeight;
+            const isNoise = this._doc.song.getChannelIsNoise(insertIndex - 1);
+            group.append(new ChangeAddChannel(this._doc, insertIndex, isNoise));
+            if (!group.isNoop()) {
+                this.boxSelectionY0 = this.boxSelectionY1 = insertIndex;
+                group.append(new ChangeChannelBar(this._doc, insertIndex, this._doc.bar));
+                this._doc.record(group);
+            }
+        }
+        deleteBars() {
+            const group = new ChangeGroup();
+            if (this._doc.selection.patternSelectionActive) {
+                if (this.boxSelectionActive) {
+                    group.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
+                }
+                for (const channelIndex of this._eachSelectedChannel()) {
+                    for (const pattern of this._eachSelectedPattern(channelIndex)) {
+                        group.append(new ChangeNoteTruncate(this._doc, pattern, this._doc.selection.patternSelectionStart, this._doc.selection.patternSelectionEnd));
+                    }
+                }
+                group.append(new ChangePatternSelection(this._doc, 0, 0));
+            }
+            else {
+                group.append(new ChangeDeleteBars(this._doc, this.boxSelectionBar, this.boxSelectionWidth));
+                const width = this.boxSelectionWidth;
+                this.boxSelectionX0 = Math.max(0, this.boxSelectionX0 - width);
+                this.boxSelectionX1 = Math.max(0, this.boxSelectionX1 - width);
+            }
+            this._doc.record(group);
+        }
+        deleteChannel() {
+            this._doc.record(new ChangeRemoveChannel(this._doc, this.boxSelectionChannel, this.boxSelectionChannel + this.boxSelectionHeight - 1));
+            this.boxSelectionY0 = this.boxSelectionY1 = this._doc.channel;
+        }
+        *_eachSelectedChannel() {
+            for (let channelIndex = this.boxSelectionChannel; channelIndex < this.boxSelectionChannel + this.boxSelectionHeight; channelIndex++) {
+                yield channelIndex;
+            }
+        }
+        *_eachSelectedBar() {
+            for (let bar = this.boxSelectionBar; bar < this.boxSelectionBar + this.boxSelectionWidth; bar++) {
+                yield bar;
+            }
+        }
+        *_eachSelectedPattern(channelIndex) {
+            const handledPatterns = {};
+            for (const bar of this._eachSelectedBar()) {
+                const currentPatternIndex = this._doc.song.channels[channelIndex].bars[bar];
+                if (currentPatternIndex == 0)
+                    continue;
+                if (handledPatterns[String(currentPatternIndex)])
+                    continue;
+                handledPatterns[String(currentPatternIndex)] = true;
+                const pattern = this._doc.song.getPattern(channelIndex, bar);
+                if (pattern == null)
+                    throw new Error();
+                yield pattern;
+            }
+        }
+        _parseCopiedInstrumentArray(patternCopy, channelIndex) {
+            const instruments = Array.from(patternCopy["instruments"]).map(i => i >>> 0);
+            discardInvalidPatternInstruments(instruments, this._doc.song, channelIndex);
+            return instruments;
+        }
+        _patternIndexIsUnused(channelIndex, patternIndex) {
+            for (let i = 0; i < this._doc.song.barCount; i++) {
+                if (this._doc.song.channels[channelIndex].bars[i] == patternIndex) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        copy() {
+            const channels = [];
+            for (const channelIndex of this._eachSelectedChannel()) {
+                const patterns = {};
+                const bars = [];
+                for (const bar of this._eachSelectedBar()) {
+                    const patternNumber = this._doc.song.channels[channelIndex].bars[bar];
+                    bars.push(patternNumber);
+                    if (patterns[String(patternNumber)] == undefined) {
+                        const pattern = this._doc.song.getPattern(channelIndex, bar);
+                        let instruments = this._doc.recentPatternInstruments[channelIndex];
+                        let notes = [];
+                        if (pattern != null) {
+                            instruments = pattern.instruments.concat();
+                            if (this.patternSelectionActive) {
+                                for (const note of pattern.cloneNotes()) {
+                                    if (note.end <= this.patternSelectionStart)
+                                        continue;
+                                    if (note.start >= this.patternSelectionEnd)
+                                        continue;
+                                    note.start -= this.patternSelectionStart;
+                                    note.end -= this.patternSelectionStart;
+                                    if (note.start < 0 || note.end > this.patternSelectionEnd - this.patternSelectionStart) {
+                                        new ChangeNoteLength(null, note, Math.max(note.start, 0), Math.min(this.patternSelectionEnd - this.patternSelectionStart, note.end));
+                                    }
+                                    notes.push(note);
+                                }
+                            }
+                            else {
+                                notes = pattern.notes;
+                            }
+                        }
+                        patterns[String(patternNumber)] = { "instruments": instruments, "notes": notes };
+                    }
+                }
+                const channelCopy = {
+                    "isNoise": this._doc.song.getChannelIsNoise(channelIndex),
+                    "patterns": patterns,
+                    "bars": bars,
+                };
+                channels.push(channelCopy);
+            }
+            const selectionCopy = {
+                "partDuration": this.patternSelectionActive ? this.patternSelectionEnd - this.patternSelectionStart : this._doc.song.beatsPerBar * Config.partsPerBeat,
+                "channels": channels,
+            };
+            window.localStorage.setItem("selectionCopy", JSON.stringify(selectionCopy));
+        }
+        pasteNotes() {
+            const selectionCopy = JSON.parse(String(window.localStorage.getItem("selectionCopy")));
+            if (selectionCopy == null)
+                return;
+            const channelCopies = selectionCopy["channels"] || [];
+            const copiedPartDuration = selectionCopy["partDuration"] >>> 0;
+            const group = new ChangeGroup();
+            const fillSelection = this.boxSelectionActive;
+            const pasteHeight = fillSelection ? this.boxSelectionHeight : Math.min(channelCopies.length, this._doc.song.getChannelCount() - this.boxSelectionChannel);
+            for (let pasteChannel = 0; pasteChannel < pasteHeight; pasteChannel++) {
+                const channelCopy = channelCopies[pasteChannel % channelCopies.length];
+                const channelIndex = this.boxSelectionChannel + pasteChannel;
+                const isNoise = !!channelCopy["isNoise"];
+                const patternCopies = channelCopy["patterns"] || {};
+                const copiedBars = channelCopy["bars"] || [];
+                if (copiedBars.length == 0)
+                    continue;
+                if (isNoise != this._doc.song.getChannelIsNoise(channelIndex))
+                    continue;
+                const pasteWidth = fillSelection ? this.boxSelectionWidth : Math.min(copiedBars.length, this._doc.song.barCount - this.boxSelectionBar);
+                if (!fillSelection && copiedBars.length == 1 && channelCopies.length == 1) {
+                    const copiedPatternIndex = copiedBars[0] >>> 0;
+                    const bar = this.boxSelectionBar;
+                    const currentPatternIndex = this._doc.song.channels[channelIndex].bars[bar];
+                    if (copiedPatternIndex == 0 && currentPatternIndex == 0)
+                        continue;
+                    const patternCopy = patternCopies[String(copiedPatternIndex)];
+                    const instrumentsCopy = this._parseCopiedInstrumentArray(patternCopy, channelIndex);
+                    if (currentPatternIndex == 0) {
+                        const existingPattern = this._doc.song.channels[channelIndex].patterns[copiedPatternIndex - 1];
+                        if (existingPattern != undefined &&
+                            !this.patternSelectionActive &&
+                            ((comparePatternNotes(patternCopy["notes"], existingPattern.notes) && patternsContainSameInstruments(instrumentsCopy, existingPattern.instruments)) ||
+                                this._patternIndexIsUnused(channelIndex, copiedPatternIndex))) {
+                            group.append(new ChangePatternNumbers(this._doc, copiedPatternIndex, bar, channelIndex, 1, 1));
+                        }
+                        else {
+                            group.append(new ChangeEnsurePatternExists(this._doc, channelIndex, bar));
+                        }
+                    }
+                    const pattern = this._doc.song.getPattern(channelIndex, bar);
+                    if (pattern == null)
+                        throw new Error();
+                    group.append(new ChangePaste(this._doc, pattern, patternCopy["notes"], this.patternSelectionActive ? this.patternSelectionStart : 0, this.patternSelectionActive ? this.patternSelectionEnd : Config.partsPerBeat * this._doc.song.beatsPerBar, copiedPartDuration));
+                    if (currentPatternIndex == 0)
+                        group.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instrumentsCopy, pattern));
+                }
+                else if (this.patternSelectionActive) {
+                    const reusablePatterns = {};
+                    const usedPatterns = {};
+                    group.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, pasteWidth, this.boxSelectionChannel, pasteHeight));
+                    for (let pasteBar = 0; pasteBar < pasteWidth; pasteBar++) {
+                        const bar = this.boxSelectionBar + pasteBar;
+                        const copiedPatternIndex = copiedBars[pasteBar % copiedBars.length] >>> 0;
+                        const currentPatternIndex = this._doc.song.channels[channelIndex].bars[bar];
+                        const reusedIndex = [copiedPatternIndex, currentPatternIndex].join(",");
+                        if (copiedPatternIndex == 0 && currentPatternIndex == 0)
+                            continue;
+                        if (reusablePatterns[reusedIndex] != undefined) {
+                            group.append(new ChangePatternNumbers(this._doc, reusablePatterns[reusedIndex], bar, channelIndex, 1, 1));
+                            continue;
+                        }
+                        if (currentPatternIndex == 0) {
+                            group.append(new ChangeEnsurePatternExists(this._doc, channelIndex, bar));
+                            const patternCopy = patternCopies[String(copiedPatternIndex)];
+                            const instrumentsCopy = this._parseCopiedInstrumentArray(patternCopy, channelIndex);
+                            const pattern = this._doc.song.getPattern(channelIndex, bar);
+                            group.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instrumentsCopy, pattern));
+                        }
+                        else {
+                            const pattern = this._doc.song.getPattern(channelIndex, bar);
+                            if (pattern == null)
+                                throw new Error();
+                            if (!usedPatterns[String(currentPatternIndex)]) {
+                                usedPatterns[String(currentPatternIndex)] = true;
+                            }
+                            else {
+                                group.append(new ChangePatternNumbers(this._doc, 0, bar, channelIndex, 1, 1));
+                                group.append(new ChangeEnsurePatternExists(this._doc, channelIndex, bar));
+                                const newPattern = this._doc.song.getPattern(channelIndex, bar);
+                                if (newPattern == null)
+                                    throw new Error();
+                                for (const note of pattern.cloneNotes()) {
+                                    group.append(new ChangeNoteAdded(this._doc, newPattern, note, newPattern.notes.length, false));
+                                }
+                            }
+                        }
+                        const pattern = this._doc.song.getPattern(channelIndex, bar);
+                        if (pattern == null)
+                            throw new Error();
+                        if (copiedPatternIndex == 0) {
+                            group.append(new ChangeNoteTruncate(this._doc, pattern, this.patternSelectionStart, this.patternSelectionEnd));
+                        }
+                        else {
+                            const patternCopy = patternCopies[String(copiedPatternIndex)];
+                            group.append(new ChangePaste(this._doc, pattern, patternCopy["notes"], this.patternSelectionStart, this.patternSelectionEnd, copiedPartDuration));
+                        }
+                        reusablePatterns[reusedIndex] = this._doc.song.channels[channelIndex].bars[bar];
+                    }
+                }
+                else {
+                    for (let pasteBar = 0; pasteBar < pasteWidth; pasteBar++) {
+                        this.erasePatternInBar(group, channelIndex, this.boxSelectionBar + pasteBar);
+                    }
+                    const reusablePatterns = {};
+                    for (let pasteBar = 0; pasteBar < pasteWidth; pasteBar++) {
+                        const bar = this.boxSelectionBar + pasteBar;
+                        const copiedPatternIndex = copiedBars[pasteBar % copiedBars.length] >>> 0;
+                        const reusedIndex = String(copiedPatternIndex);
+                        if (copiedPatternIndex == 0)
+                            continue;
+                        if (reusablePatterns[reusedIndex] != undefined) {
+                            group.append(new ChangePatternNumbers(this._doc, reusablePatterns[reusedIndex], bar, channelIndex, 1, 1));
+                            continue;
+                        }
+                        const patternCopy = patternCopies[String(copiedPatternIndex)];
+                        const instrumentsCopy = this._parseCopiedInstrumentArray(patternCopy, channelIndex);
+                        const existingPattern = this._doc.song.channels[channelIndex].patterns[copiedPatternIndex - 1];
+                        if (existingPattern != undefined &&
+                            copiedPartDuration == Config.partsPerBeat * this._doc.song.beatsPerBar &&
+                            comparePatternNotes(patternCopy["notes"], existingPattern.notes) &&
+                            patternsContainSameInstruments(instrumentsCopy, existingPattern.instruments)) {
+                            group.append(new ChangePatternNumbers(this._doc, copiedPatternIndex, bar, channelIndex, 1, 1));
+                        }
+                        else {
+                            if (existingPattern != undefined && this._patternIndexIsUnused(channelIndex, copiedPatternIndex)) {
+                                group.append(new ChangePatternNumbers(this._doc, copiedPatternIndex, bar, channelIndex, 1, 1));
+                            }
+                            else {
+                                group.append(new ChangeEnsurePatternExists(this._doc, channelIndex, bar));
+                            }
+                            const pattern = this._doc.song.getPattern(channelIndex, bar);
+                            if (pattern == null)
+                                throw new Error();
+                            group.append(new ChangePaste(this._doc, pattern, patternCopy["notes"], this.patternSelectionActive ? this.patternSelectionStart : 0, this.patternSelectionActive ? this.patternSelectionEnd : Config.partsPerBeat * this._doc.song.beatsPerBar, copiedPartDuration));
+                            group.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instrumentsCopy, pattern));
+                        }
+                        reusablePatterns[reusedIndex] = this._doc.song.channels[channelIndex].bars[bar];
+                    }
+                }
+            }
+            this._doc.record(group);
+        }
+        erasePatternInBar(group, channelIndex, bar) {
+            const removedPattern = this._doc.song.channels[channelIndex].bars[bar];
+            if (removedPattern != 0) {
+                group.append(new ChangePatternNumbers(this._doc, 0, bar, channelIndex, 1, 1));
+                if (this._patternIndexIsUnused(channelIndex, removedPattern)) {
+                    this._doc.song.channels[channelIndex].patterns[removedPattern - 1].notes.length = 0;
+                }
+            }
+        }
+        pasteNumbers() {
+            const selectionCopy = JSON.parse(String(window.localStorage.getItem("selectionCopy")));
+            if (selectionCopy == null)
+                return;
+            const channelCopies = selectionCopy["channels"] || [];
+            const group = new ChangeGroup();
+            const fillSelection = this.boxSelectionActive;
+            const pasteHeight = fillSelection ? this.boxSelectionHeight : Math.min(channelCopies.length, this._doc.song.getChannelCount() - this.boxSelectionChannel);
+            for (let pasteChannel = 0; pasteChannel < pasteHeight; pasteChannel++) {
+                const channelCopy = channelCopies[pasteChannel % channelCopies.length];
+                const channelIndex = this.boxSelectionChannel + pasteChannel;
+                const copiedBars = channelCopy["bars"] || [];
+                if (copiedBars.length == 0)
+                    continue;
+                const pasteWidth = fillSelection ? this.boxSelectionWidth : Math.min(copiedBars.length, this._doc.song.barCount - this.boxSelectionBar);
+                for (let pasteBar = 0; pasteBar < pasteWidth; pasteBar++) {
+                    const copiedPatternIndex = copiedBars[pasteBar % copiedBars.length] >>> 0;
+                    const bar = this.boxSelectionBar + pasteBar;
+                    if (copiedPatternIndex > this._doc.song.patternsPerChannel) {
+                        group.append(new ChangePatternsPerChannel(this._doc, copiedPatternIndex));
+                    }
+                    group.append(new ChangePatternNumbers(this._doc, copiedPatternIndex, bar, channelIndex, 1, 1));
+                }
+            }
+            this._doc.record(group);
+        }
+        selectAll() {
+            new ChangePatternSelection(this._doc, 0, 0);
+            if (this.boxSelectionBar == 0 &&
+                this.boxSelectionChannel == 0 &&
+                this.boxSelectionWidth == this._doc.song.barCount &&
+                this.boxSelectionHeight == this._doc.song.getChannelCount()) {
+                this.setTrackSelection(this._doc.bar, this._doc.bar, this._doc.channel, this._doc.channel);
+            }
+            else {
+                this.setTrackSelection(0, this._doc.song.barCount - 1, 0, this._doc.song.getChannelCount() - 1);
+            }
+            this.selectionUpdated();
+        }
+        selectChannel() {
+            new ChangePatternSelection(this._doc, 0, 0);
+            if (this.boxSelectionBar == 0 && this.boxSelectionWidth == this._doc.song.barCount) {
+                this.setTrackSelection(this._doc.bar, this._doc.bar, this.boxSelectionY0, this.boxSelectionY1);
+            }
+            else {
+                this.setTrackSelection(0, this._doc.song.barCount - 1, this.boxSelectionY0, this.boxSelectionY1);
+            }
+            this.selectionUpdated();
+        }
+        duplicatePatterns() {
+            this._doc.record(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
+        }
+        muteChannels(allChannels) {
+            if (allChannels) {
+                let anyMuted = false;
+                for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
+                    if (this._doc.song.channels[channelIndex].muted) {
+                        anyMuted = true;
+                        break;
+                    }
+                }
+                for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
+                    this._doc.song.channels[channelIndex].muted = !anyMuted;
+                }
+            }
+            else {
+                let anyUnmuted = false;
+                for (const channelIndex of this._eachSelectedChannel()) {
+                    if (!this._doc.song.channels[channelIndex].muted) {
+                        anyUnmuted = true;
+                        break;
+                    }
+                }
+                for (const channelIndex of this._eachSelectedChannel()) {
+                    this._doc.song.channels[channelIndex].muted = anyUnmuted;
+                }
+            }
+            this._doc.notifier.changed();
+        }
+        soloChannels(invert) {
+            let alreadySoloed = true;
+            for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
+                const shouldBeMuted = (channelIndex < this.boxSelectionChannel || channelIndex >= this.boxSelectionChannel + this.boxSelectionHeight) ? !invert : invert;
+                if (this._doc.song.channels[channelIndex].muted != shouldBeMuted) {
+                    alreadySoloed = false;
+                    break;
+                }
+            }
+            if (alreadySoloed) {
+                for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
+                    this._doc.song.channels[channelIndex].muted = false;
+                }
+            }
+            else {
+                for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
+                    this._doc.song.channels[channelIndex].muted = (channelIndex < this.boxSelectionChannel || channelIndex >= this.boxSelectionChannel + this.boxSelectionHeight) ? !invert : invert;
+                }
+            }
+            this._doc.notifier.changed();
+        }
+        forceRhythm() {
+            const group = new ChangeGroup();
+            if (this.boxSelectionActive) {
+                group.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
+            }
+            for (const channelIndex of this._eachSelectedChannel()) {
+                for (const pattern of this._eachSelectedPattern(channelIndex)) {
+                    group.append(new ChangePatternRhythm(this._doc, pattern));
+                }
+            }
+            this._doc.record(group);
+        }
+        forceScale() {
+            const group = new ChangeGroup();
+            if (this.boxSelectionActive) {
+                group.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
+            }
+            const scaleFlags = [true, false, false, false, false, false, false, false, false, false, false, false];
+            for (const channelIndex of this._eachSelectedChannel()) {
+                if (this._doc.song.getChannelIsNoise(channelIndex))
+                    continue;
+                for (const pattern of this._eachSelectedPattern(channelIndex)) {
+                    unionOfUsedNotes(pattern, scaleFlags);
+                }
+            }
+            const scaleMap = generateScaleMap(scaleFlags, this._doc.song.scale);
+            for (const channelIndex of this._eachSelectedChannel()) {
+                if (this._doc.song.getChannelIsNoise(channelIndex))
+                    continue;
+                for (const pattern of this._eachSelectedPattern(channelIndex)) {
+                    group.append(new ChangePatternScale(this._doc, pattern, scaleMap));
+                }
+            }
+            this._doc.record(group);
+        }
+        setTrackSelection(newX0, newX1, newY0, newY1) {
+            const canReplaceLastChange = this._doc.lastChangeWas(this._changeTrack);
+            this._changeTrack = new ChangeGroup();
+            this._changeTrack.append(new ChangeTrackSelection(this._doc, newX0, newX1, newY0, newY1));
+            if (!this._doc.hasRedoHistory()) {
+                this._doc.record(this._changeTrack, canReplaceLastChange);
+            }
+        }
+        transpose(upward, octave) {
+            const canReplaceLastChange = this._doc.lastChangeWas(this._changeTranspose);
+            this._changeTranspose = new ChangeGroup();
+            if (this.boxSelectionActive) {
+                this._changeTranspose.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
+            }
+            for (const channelIndex of this._eachSelectedChannel()) {
+                for (const pattern of this._eachSelectedPattern(channelIndex)) {
+                    this._changeTranspose.append(new ChangeTranspose(this._doc, channelIndex, pattern, upward, this._doc.prefs.notesOutsideScale, octave));
+                }
+            }
+            this._doc.record(this._changeTranspose, canReplaceLastChange);
+        }
+        swapChannels(offset) {
+            const possibleSectionBoundaries = [
+                this._doc.song.pitchChannelCount,
+                this._doc.song.pitchChannelCount + this._doc.song.noiseChannelCount,
+                this._doc.song.getChannelCount(),
+            ];
+            let channelSectionMin = 0;
+            let channelSectionMax = 0;
+            for (const nextBoundary of possibleSectionBoundaries) {
+                if ((this.boxSelectionChannel < nextBoundary && offset < 0) || (this.boxSelectionChannel + this.boxSelectionHeight <= nextBoundary)) {
+                    channelSectionMax = nextBoundary - 1;
+                    break;
+                }
+                channelSectionMin = nextBoundary;
+            }
+            const newSelectionMin = Math.max(this.boxSelectionChannel, channelSectionMin);
+            const newSelectionMax = Math.min(this.boxSelectionChannel + this.boxSelectionHeight - 1, channelSectionMax);
+            offset = Math.max(offset, channelSectionMin - newSelectionMin);
+            offset = Math.min(offset, channelSectionMax - newSelectionMax);
+            if (offset != 0) {
+                const canReplaceLastChange = this._doc.lastChangeWas(this._changeReorder);
+                this._changeReorder = new ChangeGroup();
+                this.boxSelectionY0 = newSelectionMin + offset;
+                this.boxSelectionY1 = newSelectionMax + offset;
+                this._changeReorder.append(new ChangeChannelOrder(this._doc, newSelectionMin, newSelectionMax, offset));
+                this._changeReorder.append(new ChangeChannelBar(this._doc, Math.max(this.boxSelectionY0, Math.min(this.boxSelectionY1, this._doc.channel + offset)), this._doc.bar));
+                this.selectionUpdated();
+                this._doc.record(this._changeReorder, canReplaceLastChange);
+            }
+        }
+        selectInstrument(instrument) {
+            if (this._doc.viewedInstrument[this._doc.channel] == instrument) {
+                if (this._doc.song.layeredInstruments && this._doc.song.patternInstruments) {
+                    const canReplaceLastChange = this._doc.lastChangeWas(this._changeInstrument);
+                    this._changeInstrument = new ChangeGroup();
+                    const instruments = this._doc.recentPatternInstruments[this._doc.channel];
+                    this._doc.notifier.changed();
+                    if (instruments.indexOf(instrument) == -1) {
+                        instruments.push(instrument);
+                        const maxLayers = this._doc.song.getMaxInstrumentsPerPattern(this._doc.channel);
+                        if (instruments.length > maxLayers) {
+                            instruments.splice(0, instruments.length - maxLayers);
+                        }
+                    }
+                    else {
+                        instruments.splice(instruments.indexOf(instrument), 1);
+                        if (instruments.length == 0)
+                            instruments[0] = 0;
+                    }
+                    if (this.boxSelectionActive) {
+                        this._changeInstrument.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
+                    }
+                    for (const channelIndex of this._eachSelectedChannel()) {
+                        for (const pattern of this._eachSelectedPattern(channelIndex)) {
+                            this._changeInstrument.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instruments, pattern));
+                        }
+                    }
+                    this._doc.record(this._changeInstrument, canReplaceLastChange);
+                }
+            }
+            else {
+                const canReplaceLastChange = this._doc.lastChangeWas(this._changeInstrument);
+                this._changeInstrument = new ChangeGroup();
+                this._changeInstrument.append(new ChangeViewInstrument(this._doc, instrument));
+                if (!this._doc.song.layeredInstruments && this._doc.song.patternInstruments) {
+                    if (this.boxSelectionActive) {
+                        this._changeInstrument.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
+                    }
+                    const instruments = [instrument];
+                    for (const channelIndex of this._eachSelectedChannel()) {
+                        for (const pattern of this._eachSelectedPattern(channelIndex)) {
+                            this._changeInstrument.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instruments, pattern));
+                        }
+                    }
+                    this._doc.record(this._changeInstrument, canReplaceLastChange);
+                }
+                else if (!this._doc.hasRedoHistory()) {
+                    this._doc.record(this._changeInstrument, canReplaceLastChange);
+                }
+            }
+        }
+        resetBoxSelection() {
+            this.boxSelectionX0 = this.boxSelectionX1 = this._doc.bar;
+            this.boxSelectionY0 = this.boxSelectionY1 = this._doc.channel;
+        }
+    }
+
+    class Preferences {
+        constructor() {
+            this.volume = 75;
+            this.visibleOctaves = Preferences.defaultVisibleOctaves;
+            this.reload();
+        }
+        reload() {
+            this.autoPlay = window.localStorage.getItem("autoPlay") == "true";
+            this.autoFollow = window.localStorage.getItem("autoFollow") != "false";
+            this.enableNotePreview = window.localStorage.getItem("enableNotePreview") != "false";
+            this.showFifth = window.localStorage.getItem("showFifth") == "true";
+            this.notesOutsideScale = window.localStorage.getItem("notesOutsideScale") == "true";
+            this.showLetters = window.localStorage.getItem("showLetters") == "true";
+            this.showChannels = window.localStorage.getItem("showChannels") == "true";
+            this.showScrollBar = window.localStorage.getItem("showScrollBar") == "true";
+            this.alwaysShowSettings = window.localStorage.getItem("alwaysShowSettings") == "true";
+            this.instrumentCopyPaste = window.localStorage.getItem("instrumentCopyPaste") == "true";
+            this.enableChannelMuting = window.localStorage.getItem("enableChannelMuting") == "true";
+            this.displayBrowserUrl = window.localStorage.getItem("displayBrowserUrl") != "false";
+            this.pressControlForShortcuts = window.localStorage.getItem("pressControlForShortcuts") == "true";
+            this.enableMidi = window.localStorage.getItem("enableMidi") != "false";
+            this.showRecordButton = window.localStorage.getItem("showRecordButton") == "true";
+            this.snapRecordedNotesToRhythm = window.localStorage.getItem("snapRecordedNotesToRhythm") == "true";
+            this.ignorePerformedNotesNotInScale = window.localStorage.getItem("ignorePerformedNotesNotInScale") == "true";
+            this.metronomeCountIn = window.localStorage.getItem("metronomeCountIn") != "false";
+            this.metronomeWhileRecording = window.localStorage.getItem("metronomeWhileRecording") != "false";
+            this.keyboardLayout = window.localStorage.getItem("keyboardLayout") || "wickiHayden";
+            this.layout = window.localStorage.getItem("layout") || "small";
+            this.colorTheme = window.localStorage.getItem("colorTheme") || "dark classic";
+            this.visibleOctaves = (window.localStorage.getItem("visibleOctaves") >>> 0) || Preferences.defaultVisibleOctaves;
+            const defaultScale = Config.scales.dictionary[window.localStorage.getItem("defaultScale")];
+            this.defaultScale = (defaultScale != undefined) ? defaultScale.index : 0;
+            if (window.localStorage.getItem("volume") != null) {
+                this.volume = Math.min(window.localStorage.getItem("volume") >>> 0, 75);
+            }
+            if (window.localStorage.getItem("fullScreen") != null) {
+                if (window.localStorage.getItem("fullScreen") == "true")
+                    this.layout = "long";
+                window.localStorage.removeItem("fullScreen");
+            }
+        }
+        save() {
+            window.localStorage.setItem("autoPlay", this.autoPlay ? "true" : "false");
+            window.localStorage.setItem("autoFollow", this.autoFollow ? "true" : "false");
+            window.localStorage.setItem("enableNotePreview", this.enableNotePreview ? "true" : "false");
+            window.localStorage.setItem("showFifth", this.showFifth ? "true" : "false");
+            window.localStorage.setItem("notesOutsideScale", this.notesOutsideScale ? "true" : "false");
+            window.localStorage.setItem("defaultScale", Config.scales[this.defaultScale].name);
+            window.localStorage.setItem("showLetters", this.showLetters ? "true" : "false");
+            window.localStorage.setItem("showChannels", this.showChannels ? "true" : "false");
+            window.localStorage.setItem("showScrollBar", this.showScrollBar ? "true" : "false");
+            window.localStorage.setItem("alwaysShowSettings", this.alwaysShowSettings ? "true" : "false");
+            window.localStorage.setItem("enableChannelMuting", this.enableChannelMuting ? "true" : "false");
+            window.localStorage.setItem("instrumentCopyPaste", this.instrumentCopyPaste ? "true" : "false");
+            window.localStorage.setItem("displayBrowserUrl", this.displayBrowserUrl ? "true" : "false");
+            window.localStorage.setItem("pressControlForShortcuts", this.pressControlForShortcuts ? "true" : "false");
+            window.localStorage.setItem("enableMidi", this.enableMidi ? "true" : "false");
+            window.localStorage.setItem("showRecordButton", this.showRecordButton ? "true" : "false");
+            window.localStorage.setItem("snapRecordedNotesToRhythm", this.snapRecordedNotesToRhythm ? "true" : "false");
+            window.localStorage.setItem("ignorePerformedNotesNotInScale", this.ignorePerformedNotesNotInScale ? "true" : "false");
+            window.localStorage.setItem("metronomeCountIn", this.metronomeCountIn ? "true" : "false");
+            window.localStorage.setItem("metronomeWhileRecording", this.metronomeWhileRecording ? "true" : "false");
+            window.localStorage.setItem("keyboardLayout", this.keyboardLayout);
+            window.localStorage.setItem("layout", this.layout);
+            window.localStorage.setItem("colorTheme", this.colorTheme);
+            window.localStorage.setItem("volume", String(this.volume));
+            window.localStorage.setItem("visibleOctaves", String(this.visibleOctaves));
+        }
+    }
+    Preferences.defaultVisibleOctaves = 3;
+
+    class ChangeNotifier {
+        constructor() {
+            this._watchers = [];
+            this._dirty = false;
+        }
+        watch(watcher) {
+            if (this._watchers.indexOf(watcher) == -1) {
+                this._watchers.push(watcher);
+            }
+        }
+        unwatch(watcher) {
+            const index = this._watchers.indexOf(watcher);
+            if (index != -1) {
+                this._watchers.splice(index, 1);
+            }
+        }
+        changed() {
+            this._dirty = true;
+        }
+        notifyWatchers() {
+            if (!this._dirty)
+                return;
+            this._dirty = false;
+            for (const watcher of this._watchers.concat()) {
+                watcher();
+            }
+        }
+    }
+
+    class SongDocument {
+        constructor() {
+            this.notifier = new ChangeNotifier();
+            this.selection = new Selection(this);
+            this.prefs = new Preferences();
+            this.channel = 0;
+            this.bar = 0;
+            this.recentPatternInstruments = [];
+            this.viewedInstrument = [];
+            this.trackVisibleBars = 16;
+            this.trackVisibleChannels = 4;
+            this.barScrollPos = 0;
+            this.channelScrollPos = 0;
+            this.prompt = null;
+            this.addedEffect = false;
+            this.addedEnvelope = false;
+            this.currentPatternIsDirty = false;
+            this._recovery = new SongRecovery();
+            this._recentChange = null;
+            this._sequenceNumber = 0;
+            this._lastSequenceNumber = 0;
+            this._stateShouldBePushed = false;
+            this._recordedNewSong = false;
+            this._waitingToUpdateState = false;
+            this._whenHistoryStateChanged = () => {
+                if (this.synth.recording) {
+                    this.performance.abortRecording();
+                }
+                if (window.history.state == null && window.location.hash != "") {
+                    this._sequenceNumber++;
+                    this._resetSongRecoveryUid();
+                    const state = { canUndo: true, sequenceNumber: this._sequenceNumber, bar: this.bar, channel: this.channel, instrument: this.viewedInstrument[this.channel], recoveryUid: this._recoveryUid, prompt: null, selection: this.selection.toJSON() };
+                    try {
+                        new ChangeSong(this, window.location.hash);
+                    }
+                    catch (error) {
+                        errorAlert(error);
+                    }
+                    this.prompt = state.prompt;
+                    if (this.prefs.displayBrowserUrl) {
+                        this._replaceState(state, this.song.toBase64String());
+                    }
+                    else {
+                        this._pushState(state, this.song.toBase64String());
+                    }
+                    this.forgetLastChange();
+                    this.notifier.notifyWatchers();
+                    return;
+                }
+                const state = this._getHistoryState();
+                if (state == null)
+                    throw new Error("History state is null.");
+                if (state.sequenceNumber == this._sequenceNumber)
+                    return;
+                this.bar = state.bar;
+                this.channel = state.channel;
+                this.viewedInstrument[this.channel] = state.instrument;
+                this._sequenceNumber = state.sequenceNumber;
+                this.prompt = state.prompt;
+                try {
+                    new ChangeSong(this, this._getHash());
+                }
+                catch (error) {
+                    errorAlert(error);
+                }
+                this._recoveryUid = state.recoveryUid;
+                this.selection.fromJSON(state.selection);
+                this.forgetLastChange();
+                this.notifier.notifyWatchers();
+            };
+            this._cleanDocument = () => {
+                this.notifier.notifyWatchers();
+            };
+            this._validateDocState = () => {
+                const channelCount = this.song.getChannelCount();
+                for (let i = this.recentPatternInstruments.length; i < channelCount; i++) {
+                    this.recentPatternInstruments[i] = [0];
+                }
+                this.recentPatternInstruments.length = channelCount;
+                for (let i = 0; i < channelCount; i++) {
+                    if (i == this.channel) {
+                        if (this.song.patternInstruments) {
+                            const pattern = this.song.getPattern(this.channel, this.bar);
+                            if (pattern != null) {
+                                this.recentPatternInstruments[i] = pattern.instruments.concat();
+                            }
+                        }
+                        else {
+                            const channel = this.song.channels[this.channel];
+                            for (let j = 0; j < channel.instruments.length; j++) {
+                                this.recentPatternInstruments[i][j] = j;
+                            }
+                            this.recentPatternInstruments[i].length = channel.instruments.length;
+                        }
+                    }
+                    discardInvalidPatternInstruments(this.recentPatternInstruments[i], this.song, i);
+                }
+                for (let i = this.viewedInstrument.length; i < channelCount; i++) {
+                    this.viewedInstrument[i] = 0;
+                }
+                this.viewedInstrument.length = channelCount;
+                for (let i = 0; i < channelCount; i++) {
+                    if (this.song.patternInstruments && !this.song.layeredInstruments && i == this.channel) {
+                        const pattern = this.song.getPattern(this.channel, this.bar);
+                        if (pattern != null) {
+                            this.viewedInstrument[i] = pattern.instruments[0];
+                        }
+                    }
+                    this.viewedInstrument[i] = Math.min(this.viewedInstrument[i] | 0, this.song.channels[i].instruments.length - 1);
+                }
+                const highlightedPattern = this.getCurrentPattern();
+                if (highlightedPattern != null && this.song.patternInstruments) {
+                    this.recentPatternInstruments[this.channel] = highlightedPattern.instruments.concat();
+                }
+                if ((!this.synth.playing && (this.bar < this.selection.boxSelectionBar || this.selection.boxSelectionBar + this.selection.boxSelectionWidth <= this.bar)) ||
+                    this.channel < this.selection.boxSelectionChannel ||
+                    this.selection.boxSelectionChannel + this.selection.boxSelectionHeight <= this.channel ||
+                    this.song.barCount < this.selection.boxSelectionBar + this.selection.boxSelectionWidth ||
+                    channelCount < this.selection.boxSelectionChannel + this.selection.boxSelectionHeight ||
+                    (this.selection.boxSelectionWidth == 1 && this.selection.boxSelectionHeight == 1)) {
+                    this.selection.resetBoxSelection();
+                }
+                this.barScrollPos = Math.max(0, Math.min(this.song.barCount - this.trackVisibleBars, this.barScrollPos));
+                this.channelScrollPos = Math.max(0, Math.min(this.song.getChannelCount() - this.trackVisibleChannels, this.channelScrollPos));
+            };
+            this._updateHistoryState = () => {
+                this._waitingToUpdateState = false;
+                let hash;
+                try {
+                    hash = this.song.toBase64String();
+                }
+                catch (error) {
+                    errorAlert(error);
+                    return;
+                }
+                if (this._stateShouldBePushed)
+                    this._sequenceNumber++;
+                if (this._recordedNewSong) {
+                    this._resetSongRecoveryUid();
+                }
+                else {
+                    this._recovery.saveVersion(this._recoveryUid, hash);
+                }
+                let state = { canUndo: true, sequenceNumber: this._sequenceNumber, bar: this.bar, channel: this.channel, instrument: this.viewedInstrument[this.channel], recoveryUid: this._recoveryUid, prompt: this.prompt, selection: this.selection.toJSON() };
+                if (this._stateShouldBePushed) {
+                    this._pushState(state, hash);
+                }
+                else {
+                    this._replaceState(state, hash);
+                }
+                this._stateShouldBePushed = false;
+                this._recordedNewSong = false;
+            };
+            this.notifier.watch(this._validateDocState);
+            ColorConfig.setTheme(this.prefs.colorTheme);
+            Layout.setLayout(this.prefs.layout);
+            if (window.sessionStorage.getItem("currentUndoIndex") == null) {
+                window.sessionStorage.setItem("currentUndoIndex", "0");
+                window.sessionStorage.setItem("oldestUndoIndex", "0");
+                window.sessionStorage.setItem("newestUndoIndex", "0");
+            }
+            let songString = window.location.hash;
+            if (songString == "") {
+                songString = this._getHash();
+            }
+            try {
+                this.song = new Song(songString);
+                if (songString == "" || songString == undefined) {
+                    setDefaultInstruments(this.song);
+                    this.song.scale = this.prefs.defaultScale;
+                }
+            }
+            catch (error) {
+                errorAlert(error);
+            }
+            songString = this.song.toBase64String();
+            this.synth = new Synth(this.song);
+            this.synth.volume = this._calcVolume();
+            this.synth.anticipatePoorPerformance = isMobile;
+            let state = this._getHistoryState();
+            if (state == null) {
+                state = { canUndo: false, sequenceNumber: 0, bar: 0, channel: 0, instrument: 0, recoveryUid: generateUid(), prompt: null, selection: this.selection.toJSON() };
+            }
+            if (state.recoveryUid == undefined)
+                state.recoveryUid = generateUid();
+            this._replaceState(state, songString);
+            window.addEventListener("hashchange", this._whenHistoryStateChanged);
+            window.addEventListener("popstate", this._whenHistoryStateChanged);
+            this.bar = state.bar | 0;
+            this.channel = state.channel | 0;
+            for (let i = 0; i <= this.channel; i++)
+                this.viewedInstrument[i] = 0;
+            this.viewedInstrument[this.channel] = state.instrument | 0;
+            this._recoveryUid = state.recoveryUid;
+            this.prompt = state.prompt;
+            this.selection.fromJSON(state.selection);
+            this.selection.scrollToSelectedPattern();
+            for (const eventName of ["input", "change", "click", "keyup", "keydown", "mousedown", "mousemove", "mouseup", "touchstart", "touchmove", "touchend", "touchcancel", "pointerdown", "pointermove", "pointerup", "pointercancel"]) {
+                window.addEventListener(eventName, this._cleanDocument);
+            }
+            this._validateDocState();
+            this.performance = new SongPerformance(this);
+        }
+        toggleDisplayBrowserUrl() {
+            const state = this._getHistoryState();
+            if (state == null)
+                throw new Error("History state is null.");
+            this.prefs.displayBrowserUrl = !this.prefs.displayBrowserUrl;
+            this._replaceState(state, this.song.toBase64String());
+        }
+        _getHistoryState() {
+            if (this.prefs.displayBrowserUrl) {
+                return window.history.state;
+            }
+            else {
+                const json = JSON.parse(window.sessionStorage.getItem(window.sessionStorage.getItem("currentUndoIndex")));
+                return json == null ? null : json.state;
+            }
+        }
+        _getHash() {
+            if (this.prefs.displayBrowserUrl) {
+                return window.location.hash;
+            }
+            else {
+                const json = JSON.parse(window.sessionStorage.getItem(window.sessionStorage.getItem("currentUndoIndex")));
+                return json == null ? "" : json.hash;
+            }
+        }
+        _replaceState(state, hash) {
+            if (this.prefs.displayBrowserUrl) {
+                window.history.replaceState(state, "", "#" + hash);
+            }
+            else {
+                window.sessionStorage.setItem(window.sessionStorage.getItem("currentUndoIndex") || "0", JSON.stringify({ state, hash }));
+                window.history.replaceState(null, "", location.pathname);
+            }
+        }
+        _pushState(state, hash) {
+            if (this.prefs.displayBrowserUrl) {
+                window.history.pushState(state, "", "#" + hash);
+            }
+            else {
+                let currentIndex = Number(window.sessionStorage.getItem("currentUndoIndex"));
+                let oldestIndex = Number(window.sessionStorage.getItem("oldestUndoIndex"));
+                currentIndex = (currentIndex + 1) % SongDocument._maximumUndoHistory;
+                window.sessionStorage.setItem("currentUndoIndex", String(currentIndex));
+                window.sessionStorage.setItem("newestUndoIndex", String(currentIndex));
+                if (currentIndex == oldestIndex) {
+                    oldestIndex = (oldestIndex + 1) % SongDocument._maximumUndoHistory;
+                    window.sessionStorage.setItem("oldestUndoIndex", String(oldestIndex));
+                }
+                window.sessionStorage.setItem(String(currentIndex), JSON.stringify({ state, hash }));
+                window.history.replaceState(null, "", location.pathname);
+            }
+            this._lastSequenceNumber = state.sequenceNumber;
+        }
+        hasRedoHistory() {
+            return this._lastSequenceNumber > this._sequenceNumber;
+        }
+        _forward() {
+            if (this.prefs.displayBrowserUrl) {
+                window.history.forward();
+            }
+            else {
+                let currentIndex = Number(window.sessionStorage.getItem("currentUndoIndex"));
+                let newestIndex = Number(window.sessionStorage.getItem("newestUndoIndex"));
+                if (currentIndex != newestIndex) {
+                    currentIndex = (currentIndex + 1) % SongDocument._maximumUndoHistory;
+                    window.sessionStorage.setItem("currentUndoIndex", String(currentIndex));
+                    setTimeout(this._whenHistoryStateChanged);
+                }
+            }
+        }
+        _back() {
+            if (this.prefs.displayBrowserUrl) {
+                window.history.back();
+            }
+            else {
+                let currentIndex = Number(window.sessionStorage.getItem("currentUndoIndex"));
+                let oldestIndex = Number(window.sessionStorage.getItem("oldestUndoIndex"));
+                if (currentIndex != oldestIndex) {
+                    currentIndex = (currentIndex + SongDocument._maximumUndoHistory - 1) % SongDocument._maximumUndoHistory;
+                    window.sessionStorage.setItem("currentUndoIndex", String(currentIndex));
+                    setTimeout(this._whenHistoryStateChanged);
+                }
+            }
+        }
+        record(change, replace = false, newSong = false) {
+            if (change.isNoop()) {
+                this._recentChange = null;
+                if (replace)
+                    this._back();
+            }
+            else {
+                change.commit();
+                this._recentChange = change;
+                this._stateShouldBePushed = this._stateShouldBePushed || !replace;
+                this._recordedNewSong = this._recordedNewSong || newSong;
+                if (!this._waitingToUpdateState) {
+                    window.requestAnimationFrame(this._updateHistoryState);
+                    this._waitingToUpdateState = true;
+                }
+            }
+        }
+        _resetSongRecoveryUid() {
+            this._recoveryUid = generateUid();
+        }
+        openPrompt(prompt) {
+            this.prompt = prompt;
+            const hash = this.song.toBase64String();
+            this._sequenceNumber++;
+            const state = { canUndo: true, sequenceNumber: this._sequenceNumber, bar: this.bar, channel: this.channel, instrument: this.viewedInstrument[this.channel], recoveryUid: this._recoveryUid, prompt: this.prompt, selection: this.selection.toJSON() };
+            this._pushState(state, hash);
+        }
+        undo() {
+            const state = this._getHistoryState();
+            if (state == null || state.canUndo)
+                this._back();
+        }
+        redo() {
+            this._forward();
+        }
+        setProspectiveChange(change) {
+            this._recentChange = change;
+        }
+        forgetLastChange() {
+            this._recentChange = null;
+        }
+        lastChangeWas(change) {
+            return change != null && change == this._recentChange;
+        }
+        goBackToStart() {
+            this.bar = 0;
+            this.channel = 0;
+            this.barScrollPos = 0;
+            this.channelScrollPos = 0;
+            this.synth.snapToStart();
+            this.notifier.changed();
+        }
+        setVolume(val) {
+            this.prefs.volume = val;
+            this.prefs.save();
+            this.synth.volume = this._calcVolume();
+        }
+        _calcVolume() {
+            return Math.min(1.0, Math.pow(this.prefs.volume / 50.0, 0.5)) * Math.pow(2.0, (this.prefs.volume - 75.0) / 25.0);
+        }
+        getCurrentPattern(barOffset = 0) {
+            return this.song.getPattern(this.channel, this.bar + barOffset);
+        }
+        getCurrentInstrument(barOffset = 0) {
+            return this.viewedInstrument[this.channel];
+        }
+        getMobileLayout() {
+            return window.innerWidth <= 710;
+        }
+        getBarWidth() {
+            return (!this.getMobileLayout() && this.prefs.enableChannelMuting && !this.getFullScreen()) ? 30 : 32;
+        }
+        getFullScreen() {
+            return !this.getMobileLayout() && (this.prefs.layout != "small");
+        }
+        getVisibleOctaveCount() {
+            return this.getFullScreen() ? this.prefs.visibleOctaves : Preferences.defaultVisibleOctaves;
+        }
+        getVisiblePitchCount() {
+            return this.getVisibleOctaveCount() * Config.pitchesPerOctave + 1;
+        }
+        getBaseVisibleOctave(channel) {
+            const visibleOctaveCount = this.getVisibleOctaveCount();
+            return Math.max(0, Math.min(Config.pitchOctaves - visibleOctaveCount, Math.ceil(this.song.channels[channel].octave - visibleOctaveCount * 0.5)));
+        }
+    }
+    SongDocument._maximumUndoHistory = 100;
+
+    const { button: button$b, div: div$b, p: p$4, h2: h2$a } = HTML;
+    class TipPrompt {
+        constructor(_doc, type) {
+            this._doc = _doc;
+            this._closeButton = button$b({ class: "cancelButton" });
+            this._close = () => {
+                this._doc.undo();
+            };
+            this.cleanUp = () => {
+                this._closeButton.removeEventListener("click", this._close);
+            };
+            let message;
+            switch (type) {
+                case "scale":
+                    {
+                        message = div$b(h2$a("Scale"), p$4("This setting limits the available pitches for adding notes. You may think that there's no point in limiting your choices, but the set of pitches you use has a strong influence on the mood and feel of your song, and these scales serve as guides to help you choose appropriate pitches. Don't worry, you can change the scale at any time, so you're not locked into it. Try making little melodies using all the available pitches of a scale to get a sense for how it sounds."), p$4("Most of the scales have a major version, marked with a smiley face, and a minor version, marked with a sad face. Assuming your song uses all pitches in the scale and especially \"tonic\" pitches (the brown rows in the pattern editor) then major scales tend to sound more playful or optimistic, whereas minor scales sound more serious or sad."));
+                    }
+                    break;
+                case "key":
+                    {
+                        message = div$b(h2$a("Song Key"), p$4("This setting can shift the frequency of every note in your entire song up or down, keeping the \"tonic\" pitches (the brown rows in the pattern editor) aligned with the selected \"key\" pitch."), p$4("If you've already placed some notes but they don't emphasize \"tonic\" pitches then the selected key isn't very meaningful. You can select the \"Detect Key\" option in the key menu to automatically align the most emphasized notes with \"tonic\" pitches."));
+                    }
+                    break;
+                case "tempo":
+                    {
+                        message = div$b(h2$a("Song Tempo"), p$4("This setting controls the speed of your song, measured in beats-per-minute. A \"beat\" is the duration of the little gray rectangles in the pattern editor. (In conventional music notation, a \"quarter note\" is usually equivalent to \"beat\".)"));
+                    }
+                    break;
+                case "reverb":
+                    {
+                        message = div$b(h2$a("Reverb"), p$4("Reverb is like a continuous echo effect. A little bit helps instruments sound more natural. Adding a lot of reverb can add sense of depth or mystery, but too much reverb can kinda \"smear\" sounds so that it's harder to distinguish notes or instruments, especially for lower \"bass\" notes."));
+                    }
+                    break;
+                case "rhythm":
+                    {
+                        message = div$b(h2$a("Rhythm"), p$4("This setting determines how beats are divided. The pattern editor helps you align notes to fractions of a beat based on this setting."), p$4("If you've already placed some notes but they don't align with the selected rhythm, you can select the \"Snap Notes To Rhythm\" option in the rhythm menu to force the notes in the currently selected pattern(s) to align with the selected rhythm."));
+                    }
+                    break;
+                case "instrumentIndex":
+                    {
+                        message = div$b(h2$a("Instrument Number"), p$4("In the \"Channel Settings\" option from BeepBox's \"Edit\" menu, there are a few ways to enable multiple instruments per channel."), p$4("First, you could enable multiple simultaneous instruments per channel. All of the channel's instruments will play all of the notes in the channel at the same time, and you can click an instrument number to view and edit its settings."), p$4("Second, you could enable different instruments per pattern. Only one of the instruments will play at any given time, but you can click the instrument number to change which instrument is used for the currently selected pattern(s)."), p$4("Finally, you can enable them both, in which case you can click an instrument number once to view it, and again to toggle whether the instrument is used for the currently selected pattern(s)."), p$4("Either way, you can click the + button to add more instruments to a channel, and you can press shift and a number key on your keyboard to select an instrument as if you had clicked the corresponding button here."));
+                    }
+                    break;
+                case "instrumentVolume":
+                    {
+                        message = div$b(h2$a("Instrument Volume"), p$4("This setting controls the volume of the selected instrument without affecting the volume of the other instruments. This allows you to balance the loudness of each instrument relative to each other."));
+                    }
+                    break;
+                case "pan":
+                    {
+                        message = div$b(h2$a("Instrument Panning"), p$4("If you're listening through headphones or some other stereo sound system, this controls the position of the instrument and where the sound is coming from, ranging from left to right."), p$4("As a suggestion, composers often put lead melodies, drums, and basses in the center, and spread other instruments toward either side. If too many instruments seem like they're coming from the same place, it can feel crowded and harder to distinguish individual sounds, especially if they cover a similar pitch range."));
+                    }
+                    break;
+                case "instrumentType":
+                    {
+                        message = div$b(h2$a("Instrument Type"), p$4("BeepBox comes with many instrument presets, try them out! You can also create your own custom instruments!"), p$4("There are also options for copying and pasting instrument settings and for generating random instruments at the top of the instrument type menu."));
+                    }
+                    break;
+                case "eqFilter":
+                    {
+                        message = div$b(h2$a("EQ Filter"), p$4("Filters are a way of emphasizing or diminishing different parts of a sound. Musical notes have a fundamental (base) frequency, but the sound of a musical note also has parts at higher frequencies and filters can adjust the volume of each of these parts based on their frequency."), p$4("Click in the filter editor to insert, delete, or drag a filter control point. The horizontal position of the point determines which frequencies it affects, and the vertical position determines how the volume is affected at that frequency."), p$4("Insert a new point on the left side of the filter editor to add a \"high-pass\" filter point, which additionally reduces the volume of lower frequencies, or insert a new point on the right side to add a \"low-pass\" filter point which reduces the volume of higher frequencies."), p$4("You can also enable a \"Note Filter\" as an effect. EQ and note filters are mostly the same, but have different purposes. EQ filters are for overall adjustments, whereas note filters are for dynamic control and can be moved with envelopes. Note filters also change how the distortion effect sounds."));
+                    }
+                    break;
+                case "noteFilter":
+                    {
+                        message = div$b(h2$a("Note Filter"), p$4("Note filters are mostly the same as EQ filters, but have a different purpose. EQ filters are for overall adjustments, whereas note filters are for dynamic control and can be moved with envelopes. Note filters also change how the distortion effect sounds."), p$4("Filters are a way of emphasizing or diminishing different parts of a sound. Musical notes have a fundamental (base) frequency, but the sound of a musical note also has parts at higher frequencies and filters can adjust the volume of each of these parts based on their frequency."), p$4("Click in the filter editor to insert, delete, or drag a filter control point. The horizontal position of the point determines which frequencies it affects, and the vertical position determines how the volume is affected at that frequency."), p$4("Insert a new point on the left side of the filter editor to add a \"high-pass\" filter point, which additionally reduces the volume of lower frequencies, or insert a new point on the right side to add a \"low-pass\" filter point which reduces the volume of higher frequencies."));
+                    }
+                    break;
+                case "fadeInOut":
+                    {
+                        message = div$b(h2$a("Fade In/Out"), p$4("This setting controls how long it takes for notes to reach full volume at the beginning or decay to silence at the end."), p$4("An instant fade-in sounds like instruments that are played by hitting or plucking, whereas slower fade-ins sound like instruments that are played by blowing air."), p$4("You can also make the fade-out start before the note ends to leave a gap before the next note starts, or after the note ends to allow the sound of the end of the note to overlap with the start of the next note."));
+                    }
+                    break;
+                case "transition":
+                    {
+                        message = div$b(h2$a("Transition"), p$4("Usually, when one note ends at the same time another begins, the old note will fade out and the new note will fade in based on the fade in/out settings, but this setting can override that, connecting the end of one note to the beginning of the next."), p$4("The \"interrupt\" transition makes the wave suddenly change from the old note's frequency to the new note's frequency without any fading, but still restarts envelopes at the beginning of the new note. The \"continue\" transition is similar but it doesn't even restart envelopes, and can be used to make each of the notes in a chord start or stop at different times!"), p$4("The \"slide\" transition makes the pitch shift quickly but not instantaneously from the old note's frequency to the new note's frequency, and softly restarts envelopes. The \"slide in pattern\" transition is the same except it doesn't connect the last note in a pattern to the first note in the next pattern."));
+                    }
+                    break;
+                case "chipWave":
+                    {
+                        message = div$b(h2$a("Chip Wave"), p$4("BeepBox comes with some sound waves based on classic electronic sound chips, as well as several unique waves. This is the basic source of the sound of the instrument, which is modified by the other instrument settings."));
+                    }
+                    break;
+                case "chipNoise":
+                    {
+                        message = div$b(h2$a("Noise"), p$4("BeepBox comes with several basic noise sounds. These do not have any distinct musical pitch, and can be used like drums to create beats and emphasize your song's rhythm."));
+                    }
+                    break;
+                case "supersawDynamism":
+                    {
+                        message = div$b(h2$a("Supersaw Dynamism"), p$4("A supersaw is a combination of many sawtooth waves, and this setting controls the contribution of extra sawtooth waves."), p$4("At the low end of the slider, only the first wave is contributing to the sound, which sounds like an ordinary static sawtooth wave. At the maximum setting, all of the waves are contributing equally and the resulting tone can randomly shift depending on how the waves line up with each other, similar to the \"unison\" and \"chorus\" settings."));
+                    }
+                    break;
+                case "supersawSpread":
+                    {
+                        message = div$b(h2$a("Supersaw Spread"), p$4("A supersaw is a combination of many sawtooth waves, and this setting controls the distance between their frequencies. The dynamism setting must be used for the extra waves to have any effect."), p$4("At the low end of the spread slider, all of the voices have the same frequency but random phase, resulting in a different sound every time a note starts. In the middle, the waves all have slightly different frequencies that shift in and out of phase over time similar to the \"unison\" and \"chorus\" settings, creating a classic supersaw sound. At the extreme end, the frequencies are so far apart they sound dissonant."));
+                    }
+                    break;
+                case "supersawShape":
+                    {
+                        message = div$b(h2$a("Supersaw Shape"), p$4("This supersaw instrument includes an option to change the shape of the waves from sawtooth waves to pulse waves. Use this setting to morph between the two shapes."), p$4("When a pulse wave shape is used, you can also control the pulse width with a separate setting."));
+                    }
+                    break;
+                case "pulseWidth":
+                    {
+                        message = div$b(h2$a("Pulse Wave Width"), p$4("This setting controls the shape and sound of a pulse wave. At the minimum width, it sounds light and buzzy. At the maximum width, it is shaped like a classic square wave."));
+                    }
+                    break;
+                case "unison":
+                    {
+                        message = div$b(h2$a("Unison"), p$4("This instrument can play two identical waves at different frequencies. When two waves play at slightly different frequencies, they move in and out of phase with each other over time as different parts of the waves line up. This creates a dynamic, shifting sound. Pianos are a common example of this kind of sound, because each piano key strikes multiple strings that are tuned to slightly different frequencies."), p$4("The distance between two frequencies is called an \"interval\", and this setting controls how large it is. If the interval is too wide, then the waves may sound out-of-tune and \"dissonant\". However, if the interval is even larger, then the two frequencies can even be distinct pitches."));
+                    }
+                    break;
+                case "chords":
+                    {
+                        message = div$b(h2$a("Chords"), p$4("When multiple different notes occur at the same time, this is called a chord. Chords can be created in BeepBox's pattern editor by adding notes above or below another note."), p$4("This setting determines how chords are played. The standard option is \"simultaneous\" which starts playing all of the pitches in a chord at the same instant. The \"strum\" option is similar, but plays the notes starting at slightly different times. The \"arpeggio\" option is used in \"chiptune\" style music and plays a single tone that rapidly alternates between all of the pitches in the chord."), p$4("Some BeepBox instruments have an option called \"custom interval\" which uses the chord notes to control the interval between the waves of a single tone. This can create strange sound effects when combined with FM modulators."));
+                    }
+                    break;
+                case "vibrato":
+                    {
+                        message = div$b(h2$a("Vibrato"), p$4("This setting causes the frequency of a note to wobble slightly. Singers and violinists often use vibrato."));
+                    }
+                    break;
+                case "algorithm":
+                    {
+                        message = div$b(h2$a("FM Algorithm"), p$4('FM Synthesis is a mysterious but powerful technique for crafting sounds, popularized by Yamaha keyboards and the Sega Genesis/Mega Drive. It may seem confusing, but try playing around with the options until you get a feel for it, or check out some of the preset examples!'), p$4('This FM synthesizer uses up to four waves, numbered 1, 2, 3, and 4. Each wave may have its own frequency and volume.'), p$4('There are two kinds of waves: "carrier" waves play a tone out loud, but "modulator" waves distort other waves instead. Wave 1 is always a carrier and plays a tone, but other waves may distort it. The "Algorithm" setting determines which waves are modulators, and which other waves those modulators distort. For example, "1←2" means that wave 2 modulates wave 1, and wave 1 plays out loud.'));
+                    }
+                    break;
+                case "feedbackType":
+                    {
+                        message = div$b(h2$a("Feedback Type"), p$4('Modulators distort in one direction (like 1←2), but you can also use the feedback setting to make any wave distort in the opposite direction (1→2), or even itself (1⟲).'));
+                    }
+                    break;
+                case "feedbackVolume":
+                    {
+                        message = div$b(h2$a("Feedback Distortion"), p$4("This setting controls the amount of feedback distortion based on the feedback type setting."));
+                    }
+                    break;
+                case "operatorFrequency":
+                    {
+                        message = div$b(h2$a("Operator Frequency"), p$4('This setting controls the frequency of an individual FM wave, relative to the fundamental frequency of the note. The multiplier 1× is the same as the fundamental frequency, whereas 2x would be an octave (12 semitones) above it. The frequencies with a "~" are slightly detuned and shift in and out of phase over time compared to the other frequencies.'), p$4('Try different combinations of a "carrier" wave and a "modulator" wave with different frequencies to get a feel for how they sound together.'));
+                    }
+                    break;
+                case "operatorVolume":
+                    {
+                        message = div$b(h2$a("Operator Volume"), p$4("This setting controls the volume of \"carrier\" waves, or the amount of distortion that \"modulator\" waves apply to other waves."));
+                    }
+                    break;
+                case "spectrum":
+                    {
+                        message = div$b(h2$a("Spectrum"), p$4("This setting allows you to draw your own noise spectrum! This is good for making drum sounds."), p$4("If you only use certain frequencies and a soft fade in/out, it's also possible to make howling wind sounds or even musical wind instruments."), p$4("The left side of the spectrum editor controls the noise energy at lower frequencies, and the right side controls higher frequencies."));
+                    }
+                    break;
+                case "harmonics":
+                    {
+                        message = div$b(h2$a("Harmonics"), p$4("This setting allows you to design your own sound wave! Most musical waves are actually a combination of sine waves at certain frequencies, and this lets you control the volume of each sine wave individually."), p$4("The left side of the harmonics editor controls the sine wave volumes at lower frequencies, and the right side controls higher frequencies."));
+                    }
+                    break;
+                case "effects":
+                    {
+                        message = div$b(h2$a("Effects"), p$4("BeepBox has many different kinds of special effects you can add to instruments. You can turn on multiple effects at once, and they can be configured individually. Try them all out!"));
+                    }
+                    break;
+                case "drumsetEnvelope":
+                    {
+                        message = div$b(h2$a("Drumset Envelope"), p$4("This drumset comes with a low-pass filter, and this setting can dynamically change the low-pass filter frequency over time. Each row in the pattern editor can have a different envelope shape."));
+                    }
+                    break;
+                case "drumsetSpectrum":
+                    {
+                        message = div$b(h2$a("Drumset Spectrum"), p$4("This setting allows you to draw your own noise spectrum! This is good for making drumsets. Each row in the pattern editor gets its own spectrum."), p$4("The left side of the spectrum editor controls the noise energy at lower frequencies, and the right side controls higher frequencies."));
+                    }
+                    break;
+                case "chorus":
+                    {
+                        message = div$b(h2$a("Chorus"), p$4("The chorus effect combines multiple copies of the instrument's sound and adds a bit of vibrato to simulate an ensemble of instruments or voices. Drag the slider to control how much chorus is added."));
+                    }
+                    break;
+                case "echoSustain":
+                    {
+                        message = div$b(h2$a("Echo Volume"), p$4("The echo effect repeats the instrument's sound after a delay. Each echo is a little bit quieter than the last, and this setting controls how much quieter."));
+                    }
+                    break;
+                case "echoDelay":
+                    {
+                        message = div$b(h2$a("Echo Delay"), p$4("The echo effect repeats the instrument's sound after a delay, and this setting controls how long the delay is."));
+                    }
+                    break;
+                case "pitchShift":
+                    {
+                        message = div$b(h2$a("Pitch Shift"), p$4("This setting makes instruments play higher or lower pitches than the ones displayed in the pattern editor. Be careful that you don't confuse yourself!"), p$4("You can combine this with envelopes to bend pitch over time, or play multiple simultaneous instruments with different pitch shifts for interesting layered sounds."), p$4("The intervals created by this setting are in \"just intonation\" which means they stay in phase with the original pitch instead of shifting in and out of phase over time. If you want the shifting, add the detune effect!"));
+                    }
+                    break;
+                case "detune":
+                    {
+                        message = div$b(h2$a("Detune"), p$4("This setting slightly adjusts the frequency of notes played by the instrument. You can use a little bit to add a pleasing shifting sound similar to the \"unison\" feature when combined with other instruments. If you use too much, then the instrument may sound unpleasantly out-of-tune."));
+                    }
+                    break;
+                case "distortion":
+                    {
+                        message = div$b(h2$a("Distortion"), p$4("This is the famous electric guitar effect! However, there are some things to be aware of."), p$4("First, most chords don't sound right when combined with heavy distortion. The only chords commonly used with distorted electric guitars are \"power chords\" which consist of a root note, a \"fifth\" note above that, and/or any octaves of those two notes."), p$4("Second, the distortion sound depends a lot on filtering. In particular, I recommend enabling the note filter effect, and adding both high-pass and low-pass points to the note filter. (Note filters are applied first, then distortion which transforms the sound based on that filtering, then the EQ filter is applied last.)"), p$4("Finally, I recommend adjusting the fade-out setting to allow the end of each note to overlap a little bit with the beginning of the next, but not too much!"));
+                    }
+                    break;
+                case "bitcrusherQuantization":
+                    {
+                        message = div$b(h2$a("Bitcrusher Quantization"), p$4("This effect makes stuff sounds harsher, artificial, and \"low quality\", which is great if that's what you're going for!"));
+                    }
+                    break;
+                case "bitcrusherFreq":
+                    {
+                        message = div$b(h2$a("Frequency Quantization"), p$4("The bitcrusher effect comes with an additional frequency quantization effect! This is a fun one to play with, especially when combined with the note filter effect."), p$4("Every other notch on this slider is aligned with the currently selected key of the song, and the in-between notches are aligned with the tritones of the key."));
+                    }
+                    break;
+                case "envelopes":
+                    {
+                        message = div$b(h2$a("Envelopes"), p$4("Envelopes are a way to dynamically adjust various other settings over time, usually based on how long the note lasts. Press the + button to add an envelope, then use the menus below to select which setting to control and the curve of the envelope. Try different combinations to see how they sound!"), p$4("Most envelope curves restart from the beginning every time a new note plays. The \"note size\" option is based on the note width as drawn in the pattern editor."), p$4("Envelope curves move in the range from 0 to 1 (or vice versa), where 0 means as quiet as possible and 1 is the same as the corresponding position selected in the instrument settings above. If multiple envelopes are targetting the same setting, they are multiplied before applying to the setting."));
+                    }
+                    break;
+                default: throw new Error("Unhandled TipPrompt type: " + type);
+            }
+            this.container = div$b({ class: "prompt", style: "width: 300px;" }, message, this._closeButton);
+            setTimeout(() => this._closeButton.focus());
+            this._closeButton.addEventListener("click", this._close);
+        }
+    }
+
     function makeEmptyReplacementElement(node) {
         const clone = node.cloneNode(false);
         node.parentNode.replaceChild(clone, node);
@@ -14182,6 +17149,7 @@ var beepbox = (function (exports) {
     class PatternCursor {
         constructor() {
             this.valid = false;
+            this.isNearNote = false;
             this.prevNote = null;
             this.curNote = null;
             this.nextNote = null;
@@ -14201,31 +17169,28 @@ var beepbox = (function (exports) {
             this._doc = _doc;
             this._interactive = _interactive;
             this._barOffset = _barOffset;
-            this._svgNoteBackground = SVG.pattern({ id: "patternEditorNoteBackground" + this._barOffset, x: "0", y: "0", patternUnits: "userSpaceOnUse" });
-            this._svgDrumBackground = SVG.pattern({ id: "patternEditorDrumBackground" + this._barOffset, x: "0", y: "0", patternUnits: "userSpaceOnUse" });
-            this._svgBackground = SVG.rect({ x: "0", y: "0", "pointer-events": "none", fill: "url(#patternEditorNoteBackground" + this._barOffset + ")" });
+            this._svgNoteBackground = SVG.pattern({ x: "0", y: "0", patternUnits: "userSpaceOnUse" });
+            this._svgDrumBackground = SVG.pattern({ x: "0", y: "0", patternUnits: "userSpaceOnUse" });
+            this._svgBackground = SVG.rect({ x: "0", y: "0", "pointer-events": "none" });
             this._svgNoteContainer = SVG.svg();
             this._svgPlayhead = SVG.rect({ x: "0", y: "0", width: "4", fill: ColorConfig.playhead, "pointer-events": "none" });
-            this._selectionRect = SVG.rect({ fill: ColorConfig.boxSelectionFill, stroke: ColorConfig.hoverPreview, "stroke-width": 2, "stroke-dasharray": "5, 3", "pointer-events": "none", visibility: "hidden" });
+            this._selectionRect = SVG.rect({ fill: ColorConfig.boxSelectionFill, stroke: ColorConfig.hoverPreview, "stroke-width": 2, "stroke-dasharray": "5, 3", "pointer-events": "none", display: "none" });
             this._svgPreview = SVG.path({ fill: "none", stroke: ColorConfig.hoverPreview, "stroke-width": "2", "pointer-events": "none" });
-            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground}; touch-action: none; position: absolute;`, width: "100%", height: "100%" }, SVG.defs(this._svgNoteBackground, this._svgDrumBackground), this._svgBackground, this._selectionRect, this._svgNoteContainer, this._svgPreview, this._svgPlayhead);
-            this.container = HTML.div({ style: "height: 100%; overflow:hidden; position: relative; flex-grow: 1;" }, this._svg);
+            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground}; touch-action: pan-y; position: absolute;`, width: "100%", height: "100%" }, SVG.defs(this._svgNoteBackground, this._svgDrumBackground), this._svgBackground, this._selectionRect, this._svgNoteContainer, this._svgPreview, this._svgPlayhead);
+            this.container = HTML.div({ style: "height: 100%; overflow:hidden; position: relative; flex-grow: 1; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;" }, this._svg);
+            this._pointers = new EasyPointers(this._svg, { holdStillMinMillis: 800 });
             this._backgroundPitchRows = [];
             this._backgroundDrumRow = SVG.rect();
             this._pitchHeight = -1;
             this._mouseX = 0;
             this._mouseY = 0;
-            this._mouseDown = false;
-            this._mouseOver = false;
             this._mouseDragging = false;
             this._mouseHorizontal = false;
-            this._usingTouch = false;
             this._copiedPinChannels = [];
             this._mouseXStart = 0;
             this._mouseYStart = 0;
             this._ctrlHeld = false;
             this._shiftHeld = false;
-            this._touchTime = 0;
             this._draggingStartOfSelection = false;
             this._draggingEndOfSelection = false;
             this._draggingSelectionContents = false;
@@ -14261,15 +17226,9 @@ var beepbox = (function (exports) {
                 }
             };
             this._animatePlayhead = (timestamp) => {
-                if (this._usingTouch && !this._shiftHeld && !this._mouseDragging && this._mouseDown && performance.now() > this._touchTime + 1000 && this._cursor.valid && this._doc.lastChangeWas(this._dragChange)) {
-                    this._dragChange.undo();
-                    this._shiftHeld = true;
-                    this._whenCursorPressed();
-                    this._doc.notifier.notifyWatchers();
-                }
                 const playheadBar = Math.floor(this._doc.synth.playhead);
                 if (this._doc.synth.playing && ((this._pattern != null && this._doc.song.getPattern(this._doc.channel, Math.floor(this._doc.synth.playhead)) == this._pattern) || Math.floor(this._doc.synth.playhead) == this._doc.bar + this._barOffset)) {
-                    this._svgPlayhead.setAttribute("visibility", "visible");
+                    this._svgPlayhead.setAttribute("display", "");
                     const modPlayhead = this._doc.synth.playhead - playheadBar;
                     if (Math.abs(modPlayhead - this._playheadX) > 0.1) {
                         this._playheadX = modPlayhead;
@@ -14280,7 +17239,7 @@ var beepbox = (function (exports) {
                     this._svgPlayhead.setAttribute("x", "" + prettyNumber(this._playheadX * this._editorWidth - 2));
                 }
                 else {
-                    this._svgPlayhead.setAttribute("visibility", "hidden");
+                    this._svgPlayhead.setAttribute("display", "none");
                 }
                 if (this._doc.synth.playing && (this._doc.synth.recording || this._doc.prefs.autoFollow) && this._followPlayheadBar != playheadBar) {
                     new ChangeChannelBar(this._doc, this._doc.channel, playheadBar);
@@ -14292,75 +17251,326 @@ var beepbox = (function (exports) {
                 }
                 window.requestAnimationFrame(this._animatePlayhead);
             };
-            this._whenMouseOver = (event) => {
-                if (this._mouseOver)
-                    return;
-                this._mouseOver = true;
-                this._usingTouch = false;
+            this._onPointerLeave = (event) => {
+                this._updatePreview();
             };
-            this._whenMouseOut = (event) => {
-                if (!this._mouseOver)
-                    return;
-                this._mouseOver = false;
-            };
-            this._whenMousePressed = (event) => {
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._usingTouch = false;
+            this._onPointerDown = (event) => {
+                const point = event.pointer.getPointIn(this.container);
+                this._mouseX = point.x;
+                this._mouseY = point.y;
                 this._ctrlHeld = event.ctrlKey || event.metaKey;
-                this._shiftHeld = event.shiftKey;
+                this._shiftHeld = event.shiftKey || event.pointer.wasHeldStill;
+                this._pointers.preventContextMenu = event.pointer.isTouch;
+                this._mouseXStart = this._mouseX;
+                this._mouseYStart = this._mouseY;
+                this._updateCursorStatus();
                 this._whenCursorPressed();
             };
-            this._whenTouchPressed = (event) => {
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._usingTouch = true;
-                this._ctrlHeld = event.ctrlKey || event.metaKey;
-                this._shiftHeld = event.shiftKey;
-                this._touchTime = performance.now();
-                this._whenCursorPressed();
+            this._onPointerMove = (event) => {
+                const point = event.pointer.getPointIn(this.container);
+                this._mouseX = point.x;
+                this._mouseY = point.y;
+                if (this._doc.prefs.enableNotePreview)
+                    this._doc.synth.maintainLiveInput();
+                const continuousState = this._doc.lastChangeWas(this._dragChange);
+                if (!this._mouseDragging && event.pointer.isDown && this._cursor.valid && continuousState) {
+                    const dx = this._mouseX - this._mouseXStart;
+                    const dy = this._mouseY - this._mouseYStart;
+                    if (Math.sqrt(dx * dx + dy * dy) > 5) {
+                        this._mouseDragging = true;
+                        this._mouseHorizontal = Math.abs(dx) >= Math.abs(dy);
+                    }
+                }
+                if (this._mouseDragging && event.pointer.isDown && this._cursor.valid && continuousState) {
+                    this._dragChange.undo();
+                    const sequence = new ChangeSequence();
+                    this._dragChange = sequence;
+                    this._doc.setProspectiveChange(this._dragChange);
+                    const minDivision = this._getMinDivision();
+                    const currentPart = this._snapToMinDivision(this._mouseX / this._partWidth);
+                    if (this._draggingStartOfSelection) {
+                        sequence.append(new ChangePatternSelection(this._doc, Math.max(0, Math.min(this._doc.song.beatsPerBar * Config.partsPerBeat, currentPart)), this._doc.selection.patternSelectionEnd));
+                        this._updateSelection();
+                    }
+                    else if (this._draggingEndOfSelection) {
+                        sequence.append(new ChangePatternSelection(this._doc, this._doc.selection.patternSelectionStart, Math.max(0, Math.min(this._doc.song.beatsPerBar * Config.partsPerBeat, currentPart))));
+                        this._updateSelection();
+                    }
+                    else if (this._draggingSelectionContents) {
+                        const pattern = this._doc.getCurrentPattern(this._barOffset);
+                        if (this._mouseDragging && pattern != null) {
+                            this._dragChange.undo();
+                            const sequence = new ChangeSequence();
+                            this._dragChange = sequence;
+                            this._doc.setProspectiveChange(this._dragChange);
+                            const notesInScale = Config.scales[this._doc.song.scale].flags.filter(x => x).length;
+                            const pitchRatio = this._doc.song.getChannelIsNoise(this._doc.channel) ? 1 : 12 / notesInScale;
+                            const draggedParts = Math.round((this._mouseX - this._mouseXStart) / (this._partWidth * minDivision)) * minDivision;
+                            const draggedTranspose = Math.round((this._mouseYStart - this._mouseY) / (this._pitchHeight * pitchRatio));
+                            sequence.append(new ChangeDragSelectedNotes(this._doc, this._doc.channel, pattern, draggedParts, draggedTranspose));
+                        }
+                    }
+                    else if (this._shiftHeld) {
+                        if (this._mouseDragging) {
+                            let start = Math.max(0, Math.min((this._doc.song.beatsPerBar - 1) * Config.partsPerBeat, Math.floor(this._cursor.exactPart / Config.partsPerBeat) * Config.partsPerBeat));
+                            let end = start + Config.partsPerBeat;
+                            if (this._cursor.curNote != null) {
+                                start = Math.max(start, this._cursor.curNote.start);
+                                end = Math.min(end, this._cursor.curNote.end);
+                            }
+                            if (currentPart < start) {
+                                start = 0;
+                                const pattern = this._doc.getCurrentPattern(this._barOffset);
+                                if (pattern != null) {
+                                    for (let i = 0; i < pattern.notes.length; i++) {
+                                        if (pattern.notes[i].start <= currentPart) {
+                                            start = pattern.notes[i].start;
+                                        }
+                                        if (pattern.notes[i].end <= currentPart) {
+                                            start = pattern.notes[i].end;
+                                        }
+                                    }
+                                }
+                                for (let beat = 0; beat <= this._doc.song.beatsPerBar; beat++) {
+                                    const part = beat * Config.partsPerBeat;
+                                    if (start <= part && part <= currentPart) {
+                                        start = part;
+                                    }
+                                }
+                            }
+                            if (currentPart > end) {
+                                end = Config.partsPerBeat * this._doc.song.beatsPerBar;
+                                const pattern = this._doc.getCurrentPattern(this._barOffset);
+                                if (pattern != null) {
+                                    for (let i = 0; i < pattern.notes.length; i++) {
+                                        if (pattern.notes[i].start >= currentPart) {
+                                            end = pattern.notes[i].start;
+                                            break;
+                                        }
+                                        if (pattern.notes[i].end >= currentPart) {
+                                            end = pattern.notes[i].end;
+                                            break;
+                                        }
+                                    }
+                                }
+                                for (let beat = 0; beat <= this._doc.song.beatsPerBar; beat++) {
+                                    const part = beat * Config.partsPerBeat;
+                                    if (currentPart < part && part < end) {
+                                        end = part;
+                                    }
+                                }
+                            }
+                            sequence.append(new ChangePatternSelection(this._doc, start, end));
+                            this._updateSelection();
+                        }
+                    }
+                    else {
+                        if (this._cursor.curNote == null) {
+                            sequence.append(new ChangePatternSelection(this._doc, 0, 0));
+                            let backwards;
+                            let directLength;
+                            if (currentPart < this._cursor.start) {
+                                backwards = true;
+                                directLength = this._cursor.start - currentPart;
+                            }
+                            else {
+                                backwards = false;
+                                directLength = currentPart - this._cursor.start + minDivision;
+                            }
+                            let defaultLength = minDivision;
+                            for (let i = minDivision; i <= this._doc.song.beatsPerBar * Config.partsPerBeat; i += minDivision) {
+                                if (minDivision == 1) {
+                                    if (i < 5) ;
+                                    else if (i <= Config.partsPerBeat / 2.0) {
+                                        if (i % 3 != 0 && i % 4 != 0) {
+                                            continue;
+                                        }
+                                    }
+                                    else if (i <= Config.partsPerBeat * 1.5) {
+                                        if (i % 6 != 0 && i % 8 != 0) {
+                                            continue;
+                                        }
+                                    }
+                                    else if (i % Config.partsPerBeat != 0) {
+                                        continue;
+                                    }
+                                }
+                                else {
+                                    if (i >= 5 * minDivision &&
+                                        i % Config.partsPerBeat != 0 &&
+                                        i != Config.partsPerBeat * 3.0 / 4.0 &&
+                                        i != Config.partsPerBeat * 3.0 / 2.0 &&
+                                        i != Config.partsPerBeat * 4.0 / 3.0) {
+                                        continue;
+                                    }
+                                }
+                                const blessedLength = i;
+                                if (blessedLength == directLength) {
+                                    defaultLength = blessedLength;
+                                    break;
+                                }
+                                if (blessedLength < directLength) {
+                                    defaultLength = blessedLength;
+                                }
+                                if (blessedLength > directLength) {
+                                    if (defaultLength < directLength - minDivision) {
+                                        defaultLength = blessedLength;
+                                    }
+                                    break;
+                                }
+                            }
+                            let start;
+                            let end;
+                            if (backwards) {
+                                end = this._cursor.start;
+                                start = end - defaultLength;
+                            }
+                            else {
+                                start = this._cursor.start;
+                                end = start + defaultLength;
+                            }
+                            const continuesLastPattern = (start < 0);
+                            if (start < 0)
+                                start = 0;
+                            if (end > this._doc.song.beatsPerBar * Config.partsPerBeat)
+                                end = this._doc.song.beatsPerBar * Config.partsPerBeat;
+                            if (start < end) {
+                                sequence.append(new ChangeEnsurePatternExists(this._doc, this._doc.channel, this._doc.bar));
+                                const pattern = this._doc.getCurrentPattern(this._barOffset);
+                                if (pattern == null)
+                                    throw new Error();
+                                sequence.append(new ChangeNoteTruncate(this._doc, pattern, start, end));
+                                let i;
+                                for (i = 0; i < pattern.notes.length; i++) {
+                                    if (pattern.notes[i].start >= end)
+                                        break;
+                                }
+                                const theNote = new Note(this._cursor.pitch, start, end, Config.noteSizeMax, this._doc.song.getChannelIsNoise(this._doc.channel));
+                                theNote.continuesLastPattern = continuesLastPattern;
+                                sequence.append(new ChangeNoteAdded(this._doc, pattern, theNote, i));
+                                this._copyPins(theNote);
+                                this._dragTime = backwards ? start : end;
+                                this._dragPitch = this._cursor.pitch;
+                                this._dragSize = theNote.pins[backwards ? 0 : 1].size;
+                                this._dragVisible = true;
+                            }
+                            this._pattern = this._doc.getCurrentPattern(this._barOffset);
+                        }
+                        else if (this._mouseHorizontal) {
+                            sequence.append(new ChangePatternSelection(this._doc, 0, 0));
+                            const shift = (this._mouseX - this._mouseXStart) / this._partWidth;
+                            const shiftedPin = this._cursor.curNote.pins[this._cursor.nearPinIndex];
+                            let shiftedTime = Math.round((this._cursor.curNote.start + shiftedPin.time + shift) / minDivision) * minDivision;
+                            const continuesLastPattern = (shiftedTime < 0.0);
+                            if (shiftedTime < 0)
+                                shiftedTime = 0;
+                            if (shiftedTime > this._doc.song.beatsPerBar * Config.partsPerBeat)
+                                shiftedTime = this._doc.song.beatsPerBar * Config.partsPerBeat;
+                            if (this._pattern == null)
+                                throw new Error();
+                            if (shiftedTime <= this._cursor.curNote.start && this._cursor.nearPinIndex == this._cursor.curNote.pins.length - 1 ||
+                                shiftedTime >= this._cursor.curNote.end && this._cursor.nearPinIndex == 0) {
+                                sequence.append(new ChangeNoteAdded(this._doc, this._pattern, this._cursor.curNote, this._cursor.curIndex, true));
+                                this._dragVisible = false;
+                            }
+                            else {
+                                const start = Math.min(this._cursor.curNote.start, shiftedTime);
+                                const end = Math.max(this._cursor.curNote.end, shiftedTime);
+                                this._dragTime = shiftedTime;
+                                this._dragPitch = this._cursor.curNote.pitches[this._cursor.pitchIndex == -1 ? 0 : this._cursor.pitchIndex] + this._cursor.curNote.pins[this._cursor.nearPinIndex].interval;
+                                this._dragSize = this._cursor.curNote.pins[this._cursor.nearPinIndex].size;
+                                this._dragVisible = true;
+                                sequence.append(new ChangeNoteTruncate(this._doc, this._pattern, start, end, this._cursor.curNote));
+                                sequence.append(new ChangePinTime(this._doc, this._cursor.curNote, this._cursor.nearPinIndex, shiftedTime, continuesLastPattern));
+                                this._copyPins(this._cursor.curNote);
+                            }
+                        }
+                        else if (this._cursor.pitchIndex == -1) {
+                            sequence.append(new ChangePatternSelection(this._doc, 0, 0));
+                            const bendPart = Math.max(this._cursor.curNote.start, Math.min(this._cursor.curNote.end, Math.round(this._mouseX / (this._partWidth * minDivision)) * minDivision)) - this._cursor.curNote.start;
+                            let prevPin;
+                            let nextPin = this._cursor.curNote.pins[0];
+                            let bendSize = 0;
+                            let bendInterval = 0;
+                            for (let i = 1; i < this._cursor.curNote.pins.length; i++) {
+                                prevPin = nextPin;
+                                nextPin = this._cursor.curNote.pins[i];
+                                if (bendPart > nextPin.time)
+                                    continue;
+                                if (bendPart < prevPin.time)
+                                    throw new Error();
+                                const sizeRatio = (bendPart - prevPin.time) / (nextPin.time - prevPin.time);
+                                bendSize = Math.round(prevPin.size * (1.0 - sizeRatio) + nextPin.size * sizeRatio + ((this._mouseYStart - this._mouseY) / (75.0 / Config.noteSizeMax)));
+                                if (bendSize < 0)
+                                    bendSize = 0;
+                                if (bendSize > Config.noteSizeMax)
+                                    bendSize = Config.noteSizeMax;
+                                bendInterval = this._snapToPitch(Math.round(prevPin.interval * (1.0 - sizeRatio) + nextPin.interval * sizeRatio + this._cursor.curNote.pitches[0]), 0, this._getMaxPitch()) - this._cursor.curNote.pitches[0];
+                                break;
+                            }
+                            this._dragTime = this._cursor.curNote.start + bendPart;
+                            this._dragPitch = this._cursor.curNote.pitches[this._cursor.pitchIndex == -1 ? 0 : this._cursor.pitchIndex] + bendInterval;
+                            this._dragSize = bendSize;
+                            this._dragVisible = true;
+                            sequence.append(new ChangeSizeBend(this._doc, this._cursor.curNote, bendPart, bendSize, bendInterval, this._ctrlHeld));
+                            this._copyPins(this._cursor.curNote);
+                        }
+                        else {
+                            sequence.append(new ChangePatternSelection(this._doc, 0, 0));
+                            this._dragSize = this._cursor.curNote.pins[this._cursor.nearPinIndex].size;
+                            if (this._pattern == null)
+                                throw new Error();
+                            let bendStart;
+                            let bendEnd;
+                            if (this._mouseX >= this._mouseXStart) {
+                                bendStart = Math.max(this._cursor.curNote.start, this._cursor.part);
+                                bendEnd = currentPart + minDivision;
+                            }
+                            else {
+                                bendStart = Math.min(this._cursor.curNote.end, this._cursor.part + minDivision);
+                                bendEnd = currentPart;
+                            }
+                            if (bendEnd < 0)
+                                bendEnd = 0;
+                            if (bendEnd > this._doc.song.beatsPerBar * Config.partsPerBeat)
+                                bendEnd = this._doc.song.beatsPerBar * Config.partsPerBeat;
+                            if (bendEnd > this._cursor.curNote.end) {
+                                sequence.append(new ChangeNoteTruncate(this._doc, this._pattern, this._cursor.curNote.start, bendEnd, this._cursor.curNote));
+                            }
+                            if (bendEnd < this._cursor.curNote.start) {
+                                sequence.append(new ChangeNoteTruncate(this._doc, this._pattern, bendEnd, this._cursor.curNote.end, this._cursor.curNote));
+                            }
+                            let minPitch = Number.MAX_VALUE;
+                            let maxPitch = -Number.MAX_VALUE;
+                            for (const pitch of this._cursor.curNote.pitches) {
+                                if (minPitch > pitch)
+                                    minPitch = pitch;
+                                if (maxPitch < pitch)
+                                    maxPitch = pitch;
+                            }
+                            minPitch -= this._cursor.curNote.pitches[this._cursor.pitchIndex];
+                            maxPitch -= this._cursor.curNote.pitches[this._cursor.pitchIndex];
+                            const bendTo = this._snapToPitch(this._findMousePitch(this._mouseY), -minPitch, this._getMaxPitch() - maxPitch);
+                            sequence.append(new ChangePitchBend(this._doc, this._cursor.curNote, bendStart, bendEnd, bendTo, this._cursor.pitchIndex));
+                            this._copyPins(this._cursor.curNote);
+                            this._dragTime = bendEnd;
+                            this._dragPitch = bendTo;
+                            this._dragVisible = true;
+                        }
+                    }
+                }
+                if (!(event.pointer.isDown && this._cursor.valid && continuousState)) {
+                    this._updateCursorStatus();
+                    this._pointers.preventTouchGestureScrolling = (this._cursor.valid && this._cursor.isNearNote) || this._cursorIsInSelection();
+                    this._pointers.deferInitialEvents = event.pointer.isTouch;
+                    this._updatePreview();
+                }
             };
-            this._whenMouseMoved = (event) => {
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._usingTouch = false;
-                this._whenCursorMoved();
-            };
-            this._whenTouchMoved = (event) => {
-                if (!this._mouseDown)
-                    return;
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._whenCursorMoved();
-            };
-            this._whenCursorReleased = (event) => {
+            this._onPointerUp = (event) => {
                 if (!this._cursor.valid)
                     return;
                 const continuousState = this._doc.lastChangeWas(this._dragChange);
-                if (this._mouseDown && continuousState && this._dragChange != null) {
+                if (continuousState && this._dragChange != null) {
                     if (this._draggingSelectionContents) {
                         this._doc.record(this._dragChange);
                         this._dragChange = null;
@@ -14369,9 +17579,16 @@ var beepbox = (function (exports) {
                         this._setPatternSelection(this._dragChange);
                         this._dragChange = null;
                     }
-                    else if (this._mouseDragging || this._cursor.curNote == null || !this._dragChange.isNoop() || this._draggingStartOfSelection || this._draggingEndOfSelection || this._draggingSelectionContents || this._shiftHeld) {
+                    else if (this._mouseDragging || !this._dragChange.isNoop()) {
                         this._doc.record(this._dragChange);
                         this._dragChange = null;
+                    }
+                    else if (this._cursor.curNote == null) {
+                        if (this._pointers.latest.isTouch) {
+                            const sequence = new ChangeSequence();
+                            this._addNewNoteAtPointer(sequence);
+                            this._doc.record(sequence);
+                        }
                     }
                     else {
                         if (this._pattern == null)
@@ -14400,7 +17617,7 @@ var beepbox = (function (exports) {
                         this._doc.record(sequence);
                     }
                 }
-                this._mouseDown = false;
+                this._dragChange = null;
                 this._mouseDragging = false;
                 this._draggingStartOfSelection = false;
                 this._draggingEndOfSelection = false;
@@ -14409,6 +17626,23 @@ var beepbox = (function (exports) {
                 this._updateCursorStatus();
                 this._updatePreview();
             };
+            this._onPointerCancel = (event) => {
+                const continuousState = this._doc.lastChangeWas(this._dragChange);
+                if (continuousState && this._dragChange != null) {
+                    this._dragChange.undo();
+                }
+                this._dragChange = null;
+                this._mouseDragging = false;
+                this._draggingStartOfSelection = false;
+                this._draggingEndOfSelection = false;
+                this._draggingSelectionContents = false;
+                this._lastChangeWasPatternSelection = false;
+                this._updateCursorStatus();
+                this._updatePreview();
+            };
+            this._svgNoteBackground.setAttribute("id", "patternEditorNoteBackground" + this._barOffset);
+            this._svgDrumBackground.setAttribute("id", "patternEditorDrumBackground" + this._barOffset);
+            this._svgBackground.setAttribute("fill", "url(#patternEditorNoteBackground" + this._barOffset + ")");
             for (let i = 0; i < Config.pitchesPerOctave; i++) {
                 const rectangle = SVG.rect();
                 rectangle.setAttribute("x", "1");
@@ -14424,15 +17658,12 @@ var beepbox = (function (exports) {
                 this._updateCursorStatus();
                 this._updatePreview();
                 window.requestAnimationFrame(this._animatePlayhead);
-                this._svg.addEventListener("mousedown", this._whenMousePressed);
-                document.addEventListener("mousemove", this._whenMouseMoved);
-                document.addEventListener("mouseup", this._whenCursorReleased);
-                this._svg.addEventListener("mouseover", this._whenMouseOver);
-                this._svg.addEventListener("mouseout", this._whenMouseOut);
-                this._svg.addEventListener("touchstart", this._whenTouchPressed);
-                this._svg.addEventListener("touchmove", this._whenTouchMoved);
-                this._svg.addEventListener("touchend", this._whenCursorReleased);
-                this._svg.addEventListener("touchcancel", this._whenCursorReleased);
+                this._svg.addEventListener("pointerenter", this._onPointerMove);
+                this._svg.addEventListener("pointerleave", this._onPointerLeave);
+                this._svg.addEventListener("pointerdown", this._onPointerDown);
+                this._svg.addEventListener("pointermove", this._onPointerMove);
+                this._svg.addEventListener("pointerup", this._onPointerUp);
+                this._svg.addEventListener("pointercancel", this._onPointerCancel);
             }
             else {
                 this._svgPlayhead.style.display = "none";
@@ -14542,6 +17773,18 @@ var beepbox = (function (exports) {
                     if (this._cursor.curNote.pitches[i] == this._cursor.pitch) {
                         this._cursor.pitchIndex = i;
                         break;
+                    }
+                }
+                if (this._cursor.pitchIndex != -1) {
+                    this._cursor.isNearNote = true;
+                }
+                else if (this._pointers.latest.isTouch) {
+                    for (let i = 0; i < this._cursor.curNote.pitches.length; i++) {
+                        const distance = this._cursor.curNote.pitches[i] - mousePitch + 0.5;
+                        if (-15.5 < distance && distance < 0) {
+                            this._cursor.isNearNote = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -14683,7 +17926,7 @@ var beepbox = (function (exports) {
             this._copiedPinChannels[this._doc.channel] = this._copiedPins;
         }
         movePlayheadToMouse() {
-            if (this._mouseOver) {
+            if (this._pointers.latest.isPresent) {
                 this._doc.synth.playhead = this._doc.bar + this._barOffset + (this._mouseX / this._editorWidth);
                 return true;
             }
@@ -14692,10 +17935,6 @@ var beepbox = (function (exports) {
         _whenCursorPressed() {
             if (this._doc.prefs.enableNotePreview)
                 this._doc.synth.maintainLiveInput();
-            this._mouseDown = true;
-            this._mouseXStart = this._mouseX;
-            this._mouseYStart = this._mouseY;
-            this._updateCursorStatus();
             this._updatePreview();
             const sequence = new ChangeSequence();
             this._dragChange = sequence;
@@ -14725,318 +17964,26 @@ var beepbox = (function (exports) {
             else if (this._cursorIsInSelection()) {
                 this._draggingSelectionContents = true;
             }
-            else if (this._cursor.valid && this._cursor.curNote == null) {
-                sequence.append(new ChangePatternSelection(this._doc, 0, 0));
-                const note = new Note(this._cursor.pitch, this._cursor.start, this._cursor.end, Config.noteSizeMax, this._doc.song.getChannelIsNoise(this._doc.channel));
-                note.pins = [];
-                for (const oldPin of this._cursor.pins) {
-                    note.pins.push(makeNotePin(0, oldPin.time, oldPin.size));
-                }
-                sequence.append(new ChangeEnsurePatternExists(this._doc, this._doc.channel, this._doc.bar));
-                const pattern = this._doc.getCurrentPattern(this._barOffset);
-                if (pattern == null)
-                    throw new Error();
-                sequence.append(new ChangeNoteAdded(this._doc, pattern, note, this._cursor.curIndex));
-                if (this._doc.prefs.enableNotePreview && !this._doc.synth.playing) {
-                    const duration = Math.min(Config.partsPerBeat, this._cursor.end - this._cursor.start);
-                    this._doc.performance.setTemporaryPitches([this._cursor.pitch], duration);
-                }
+            else if (this._cursor.valid && this._cursor.curNote == null && !this._pointers.latest.isTouch) {
+                this._addNewNoteAtPointer(sequence);
             }
             this._updateSelection();
         }
-        _whenCursorMoved() {
-            if (this._doc.prefs.enableNotePreview && this._mouseOver)
-                this._doc.synth.maintainLiveInput();
-            const continuousState = this._doc.lastChangeWas(this._dragChange);
-            if (!this._mouseDragging && this._mouseDown && this._cursor.valid && continuousState) {
-                const dx = this._mouseX - this._mouseXStart;
-                const dy = this._mouseY - this._mouseYStart;
-                if (Math.sqrt(dx * dx + dy * dy) > 5) {
-                    this._mouseDragging = true;
-                    this._mouseHorizontal = Math.abs(dx) >= Math.abs(dy);
-                }
+        _addNewNoteAtPointer(sequence) {
+            sequence.append(new ChangePatternSelection(this._doc, 0, 0));
+            const note = new Note(this._cursor.pitch, this._cursor.start, this._cursor.end, Config.noteSizeMax, this._doc.song.getChannelIsNoise(this._doc.channel));
+            note.pins = [];
+            for (const oldPin of this._cursor.pins) {
+                note.pins.push(makeNotePin(0, oldPin.time, oldPin.size));
             }
-            if (this._mouseDragging && this._mouseDown && this._cursor.valid && continuousState) {
-                this._dragChange.undo();
-                const sequence = new ChangeSequence();
-                this._dragChange = sequence;
-                this._doc.setProspectiveChange(this._dragChange);
-                const minDivision = this._getMinDivision();
-                const currentPart = this._snapToMinDivision(this._mouseX / this._partWidth);
-                if (this._draggingStartOfSelection) {
-                    sequence.append(new ChangePatternSelection(this._doc, Math.max(0, Math.min(this._doc.song.beatsPerBar * Config.partsPerBeat, currentPart)), this._doc.selection.patternSelectionEnd));
-                    this._updateSelection();
-                }
-                else if (this._draggingEndOfSelection) {
-                    sequence.append(new ChangePatternSelection(this._doc, this._doc.selection.patternSelectionStart, Math.max(0, Math.min(this._doc.song.beatsPerBar * Config.partsPerBeat, currentPart))));
-                    this._updateSelection();
-                }
-                else if (this._draggingSelectionContents) {
-                    const pattern = this._doc.getCurrentPattern(this._barOffset);
-                    if (this._mouseDragging && pattern != null) {
-                        this._dragChange.undo();
-                        const sequence = new ChangeSequence();
-                        this._dragChange = sequence;
-                        this._doc.setProspectiveChange(this._dragChange);
-                        const notesInScale = Config.scales[this._doc.song.scale].flags.filter(x => x).length;
-                        const pitchRatio = this._doc.song.getChannelIsNoise(this._doc.channel) ? 1 : 12 / notesInScale;
-                        const draggedParts = Math.round((this._mouseX - this._mouseXStart) / (this._partWidth * minDivision)) * minDivision;
-                        const draggedTranspose = Math.round((this._mouseYStart - this._mouseY) / (this._pitchHeight * pitchRatio));
-                        sequence.append(new ChangeDragSelectedNotes(this._doc, this._doc.channel, pattern, draggedParts, draggedTranspose));
-                    }
-                }
-                else if (this._shiftHeld) {
-                    if (this._mouseDragging) {
-                        let start = Math.max(0, Math.min((this._doc.song.beatsPerBar - 1) * Config.partsPerBeat, Math.floor(this._cursor.exactPart / Config.partsPerBeat) * Config.partsPerBeat));
-                        let end = start + Config.partsPerBeat;
-                        if (this._cursor.curNote != null) {
-                            start = Math.max(start, this._cursor.curNote.start);
-                            end = Math.min(end, this._cursor.curNote.end);
-                        }
-                        if (currentPart < start) {
-                            start = 0;
-                            const pattern = this._doc.getCurrentPattern(this._barOffset);
-                            if (pattern != null) {
-                                for (let i = 0; i < pattern.notes.length; i++) {
-                                    if (pattern.notes[i].start <= currentPart) {
-                                        start = pattern.notes[i].start;
-                                    }
-                                    if (pattern.notes[i].end <= currentPart) {
-                                        start = pattern.notes[i].end;
-                                    }
-                                }
-                            }
-                            for (let beat = 0; beat <= this._doc.song.beatsPerBar; beat++) {
-                                const part = beat * Config.partsPerBeat;
-                                if (start <= part && part <= currentPart) {
-                                    start = part;
-                                }
-                            }
-                        }
-                        if (currentPart > end) {
-                            end = Config.partsPerBeat * this._doc.song.beatsPerBar;
-                            const pattern = this._doc.getCurrentPattern(this._barOffset);
-                            if (pattern != null) {
-                                for (let i = 0; i < pattern.notes.length; i++) {
-                                    if (pattern.notes[i].start >= currentPart) {
-                                        end = pattern.notes[i].start;
-                                        break;
-                                    }
-                                    if (pattern.notes[i].end >= currentPart) {
-                                        end = pattern.notes[i].end;
-                                        break;
-                                    }
-                                }
-                            }
-                            for (let beat = 0; beat <= this._doc.song.beatsPerBar; beat++) {
-                                const part = beat * Config.partsPerBeat;
-                                if (currentPart < part && part < end) {
-                                    end = part;
-                                }
-                            }
-                        }
-                        sequence.append(new ChangePatternSelection(this._doc, start, end));
-                        this._updateSelection();
-                    }
-                }
-                else {
-                    if (this._cursor.curNote == null) {
-                        sequence.append(new ChangePatternSelection(this._doc, 0, 0));
-                        let backwards;
-                        let directLength;
-                        if (currentPart < this._cursor.start) {
-                            backwards = true;
-                            directLength = this._cursor.start - currentPart;
-                        }
-                        else {
-                            backwards = false;
-                            directLength = currentPart - this._cursor.start + minDivision;
-                        }
-                        let defaultLength = minDivision;
-                        for (let i = minDivision; i <= this._doc.song.beatsPerBar * Config.partsPerBeat; i += minDivision) {
-                            if (minDivision == 1) {
-                                if (i < 5) ;
-                                else if (i <= Config.partsPerBeat / 2.0) {
-                                    if (i % 3 != 0 && i % 4 != 0) {
-                                        continue;
-                                    }
-                                }
-                                else if (i <= Config.partsPerBeat * 1.5) {
-                                    if (i % 6 != 0 && i % 8 != 0) {
-                                        continue;
-                                    }
-                                }
-                                else if (i % Config.partsPerBeat != 0) {
-                                    continue;
-                                }
-                            }
-                            else {
-                                if (i >= 5 * minDivision &&
-                                    i % Config.partsPerBeat != 0 &&
-                                    i != Config.partsPerBeat * 3.0 / 4.0 &&
-                                    i != Config.partsPerBeat * 3.0 / 2.0 &&
-                                    i != Config.partsPerBeat * 4.0 / 3.0) {
-                                    continue;
-                                }
-                            }
-                            const blessedLength = i;
-                            if (blessedLength == directLength) {
-                                defaultLength = blessedLength;
-                                break;
-                            }
-                            if (blessedLength < directLength) {
-                                defaultLength = blessedLength;
-                            }
-                            if (blessedLength > directLength) {
-                                if (defaultLength < directLength - minDivision) {
-                                    defaultLength = blessedLength;
-                                }
-                                break;
-                            }
-                        }
-                        let start;
-                        let end;
-                        if (backwards) {
-                            end = this._cursor.start;
-                            start = end - defaultLength;
-                        }
-                        else {
-                            start = this._cursor.start;
-                            end = start + defaultLength;
-                        }
-                        const continuesLastPattern = (start < 0);
-                        if (start < 0)
-                            start = 0;
-                        if (end > this._doc.song.beatsPerBar * Config.partsPerBeat)
-                            end = this._doc.song.beatsPerBar * Config.partsPerBeat;
-                        if (start < end) {
-                            sequence.append(new ChangeEnsurePatternExists(this._doc, this._doc.channel, this._doc.bar));
-                            const pattern = this._doc.getCurrentPattern(this._barOffset);
-                            if (pattern == null)
-                                throw new Error();
-                            sequence.append(new ChangeNoteTruncate(this._doc, pattern, start, end));
-                            let i;
-                            for (i = 0; i < pattern.notes.length; i++) {
-                                if (pattern.notes[i].start >= end)
-                                    break;
-                            }
-                            const theNote = new Note(this._cursor.pitch, start, end, Config.noteSizeMax, this._doc.song.getChannelIsNoise(this._doc.channel));
-                            theNote.continuesLastPattern = continuesLastPattern;
-                            sequence.append(new ChangeNoteAdded(this._doc, pattern, theNote, i));
-                            this._copyPins(theNote);
-                            this._dragTime = backwards ? start : end;
-                            this._dragPitch = this._cursor.pitch;
-                            this._dragSize = theNote.pins[backwards ? 0 : 1].size;
-                            this._dragVisible = true;
-                        }
-                        this._pattern = this._doc.getCurrentPattern(this._barOffset);
-                    }
-                    else if (this._mouseHorizontal) {
-                        sequence.append(new ChangePatternSelection(this._doc, 0, 0));
-                        const shift = (this._mouseX - this._mouseXStart) / this._partWidth;
-                        const shiftedPin = this._cursor.curNote.pins[this._cursor.nearPinIndex];
-                        let shiftedTime = Math.round((this._cursor.curNote.start + shiftedPin.time + shift) / minDivision) * minDivision;
-                        const continuesLastPattern = (shiftedTime < 0.0);
-                        if (shiftedTime < 0)
-                            shiftedTime = 0;
-                        if (shiftedTime > this._doc.song.beatsPerBar * Config.partsPerBeat)
-                            shiftedTime = this._doc.song.beatsPerBar * Config.partsPerBeat;
-                        if (this._pattern == null)
-                            throw new Error();
-                        if (shiftedTime <= this._cursor.curNote.start && this._cursor.nearPinIndex == this._cursor.curNote.pins.length - 1 ||
-                            shiftedTime >= this._cursor.curNote.end && this._cursor.nearPinIndex == 0) {
-                            sequence.append(new ChangeNoteAdded(this._doc, this._pattern, this._cursor.curNote, this._cursor.curIndex, true));
-                            this._dragVisible = false;
-                        }
-                        else {
-                            const start = Math.min(this._cursor.curNote.start, shiftedTime);
-                            const end = Math.max(this._cursor.curNote.end, shiftedTime);
-                            this._dragTime = shiftedTime;
-                            this._dragPitch = this._cursor.curNote.pitches[this._cursor.pitchIndex == -1 ? 0 : this._cursor.pitchIndex] + this._cursor.curNote.pins[this._cursor.nearPinIndex].interval;
-                            this._dragSize = this._cursor.curNote.pins[this._cursor.nearPinIndex].size;
-                            this._dragVisible = true;
-                            sequence.append(new ChangeNoteTruncate(this._doc, this._pattern, start, end, this._cursor.curNote));
-                            sequence.append(new ChangePinTime(this._doc, this._cursor.curNote, this._cursor.nearPinIndex, shiftedTime, continuesLastPattern));
-                            this._copyPins(this._cursor.curNote);
-                        }
-                    }
-                    else if (this._cursor.pitchIndex == -1) {
-                        sequence.append(new ChangePatternSelection(this._doc, 0, 0));
-                        const bendPart = Math.max(this._cursor.curNote.start, Math.min(this._cursor.curNote.end, Math.round(this._mouseX / (this._partWidth * minDivision)) * minDivision)) - this._cursor.curNote.start;
-                        let prevPin;
-                        let nextPin = this._cursor.curNote.pins[0];
-                        let bendSize = 0;
-                        let bendInterval = 0;
-                        for (let i = 1; i < this._cursor.curNote.pins.length; i++) {
-                            prevPin = nextPin;
-                            nextPin = this._cursor.curNote.pins[i];
-                            if (bendPart > nextPin.time)
-                                continue;
-                            if (bendPart < prevPin.time)
-                                throw new Error();
-                            const sizeRatio = (bendPart - prevPin.time) / (nextPin.time - prevPin.time);
-                            bendSize = Math.round(prevPin.size * (1.0 - sizeRatio) + nextPin.size * sizeRatio + ((this._mouseYStart - this._mouseY) / (75.0 / Config.noteSizeMax)));
-                            if (bendSize < 0)
-                                bendSize = 0;
-                            if (bendSize > Config.noteSizeMax)
-                                bendSize = Config.noteSizeMax;
-                            bendInterval = this._snapToPitch(Math.round(prevPin.interval * (1.0 - sizeRatio) + nextPin.interval * sizeRatio + this._cursor.curNote.pitches[0]), 0, this._getMaxPitch()) - this._cursor.curNote.pitches[0];
-                            break;
-                        }
-                        this._dragTime = this._cursor.curNote.start + bendPart;
-                        this._dragPitch = this._cursor.curNote.pitches[this._cursor.pitchIndex == -1 ? 0 : this._cursor.pitchIndex] + bendInterval;
-                        this._dragSize = bendSize;
-                        this._dragVisible = true;
-                        sequence.append(new ChangeSizeBend(this._doc, this._cursor.curNote, bendPart, bendSize, bendInterval, this._ctrlHeld));
-                        this._copyPins(this._cursor.curNote);
-                    }
-                    else {
-                        sequence.append(new ChangePatternSelection(this._doc, 0, 0));
-                        this._dragSize = this._cursor.curNote.pins[this._cursor.nearPinIndex].size;
-                        if (this._pattern == null)
-                            throw new Error();
-                        let bendStart;
-                        let bendEnd;
-                        if (this._mouseX >= this._mouseXStart) {
-                            bendStart = Math.max(this._cursor.curNote.start, this._cursor.part);
-                            bendEnd = currentPart + minDivision;
-                        }
-                        else {
-                            bendStart = Math.min(this._cursor.curNote.end, this._cursor.part + minDivision);
-                            bendEnd = currentPart;
-                        }
-                        if (bendEnd < 0)
-                            bendEnd = 0;
-                        if (bendEnd > this._doc.song.beatsPerBar * Config.partsPerBeat)
-                            bendEnd = this._doc.song.beatsPerBar * Config.partsPerBeat;
-                        if (bendEnd > this._cursor.curNote.end) {
-                            sequence.append(new ChangeNoteTruncate(this._doc, this._pattern, this._cursor.curNote.start, bendEnd, this._cursor.curNote));
-                        }
-                        if (bendEnd < this._cursor.curNote.start) {
-                            sequence.append(new ChangeNoteTruncate(this._doc, this._pattern, bendEnd, this._cursor.curNote.end, this._cursor.curNote));
-                        }
-                        let minPitch = Number.MAX_VALUE;
-                        let maxPitch = -Number.MAX_VALUE;
-                        for (const pitch of this._cursor.curNote.pitches) {
-                            if (minPitch > pitch)
-                                minPitch = pitch;
-                            if (maxPitch < pitch)
-                                maxPitch = pitch;
-                        }
-                        minPitch -= this._cursor.curNote.pitches[this._cursor.pitchIndex];
-                        maxPitch -= this._cursor.curNote.pitches[this._cursor.pitchIndex];
-                        const bendTo = this._snapToPitch(this._findMousePitch(this._mouseY), -minPitch, this._getMaxPitch() - maxPitch);
-                        sequence.append(new ChangePitchBend(this._doc, this._cursor.curNote, bendStart, bendEnd, bendTo, this._cursor.pitchIndex));
-                        this._copyPins(this._cursor.curNote);
-                        this._dragTime = bendEnd;
-                        this._dragPitch = bendTo;
-                        this._dragVisible = true;
-                    }
-                }
-            }
-            if (!(this._mouseDown && this._cursor.valid && continuousState)) {
-                this._updateCursorStatus();
-                this._updatePreview();
+            sequence.append(new ChangeEnsurePatternExists(this._doc, this._doc.channel, this._doc.bar));
+            const pattern = this._doc.getCurrentPattern(this._barOffset);
+            if (pattern == null)
+                throw new Error();
+            sequence.append(new ChangeNoteAdded(this._doc, pattern, note, this._cursor.curIndex));
+            if (this._doc.prefs.enableNotePreview && !this._doc.synth.playing) {
+                const duration = Math.min(Config.partsPerBeat, this._cursor.end - this._cursor.start);
+                this._doc.performance.setTemporaryPitches([this._cursor.pitch], duration);
             }
         }
         _setPatternSelection(change) {
@@ -15046,12 +17993,12 @@ var beepbox = (function (exports) {
             }
         }
         _updatePreview() {
-            if (this._usingTouch) {
-                if (!this._mouseDown || !this._cursor.valid || !this._mouseDragging || !this._dragVisible || this._shiftHeld || this._draggingStartOfSelection || this._draggingEndOfSelection || this._draggingSelectionContents) {
-                    this._svgPreview.setAttribute("visibility", "hidden");
+            if (this._pointers.latest.isTouch) {
+                if (!this._pointers.latest.isDown || !this._cursor.valid || !this._mouseDragging || !this._dragVisible || this._shiftHeld || this._draggingStartOfSelection || this._draggingEndOfSelection || this._draggingSelectionContents) {
+                    this._svgPreview.setAttribute("display", "none");
                 }
                 else {
-                    this._svgPreview.setAttribute("visibility", "visible");
+                    this._svgPreview.setAttribute("display", "");
                     const x = this._partWidth * this._dragTime;
                     const y = this._pitchToPixelHeight(this._dragPitch - this._octaveOffset);
                     const radius = this._pitchHeight / 2;
@@ -15075,11 +18022,11 @@ var beepbox = (function (exports) {
                 }
             }
             else {
-                if (!this._mouseOver || this._mouseDown || !this._cursor.valid) {
-                    this._svgPreview.setAttribute("visibility", "hidden");
+                if (!this._pointers.latest.isPresent || this._pointers.latest.isDown || !this._cursor.valid) {
+                    this._svgPreview.setAttribute("display", "none");
                 }
                 else {
-                    this._svgPreview.setAttribute("visibility", "visible");
+                    this._svgPreview.setAttribute("display", "");
                     if (this._cursorAtStartOfSelection()) {
                         const center = this._partWidth * this._doc.selection.patternSelectionStart;
                         const left = prettyNumber(center - 4);
@@ -15108,19 +18055,19 @@ var beepbox = (function (exports) {
         }
         _updateSelection() {
             if (this._doc.selection.patternSelectionActive) {
-                this._selectionRect.setAttribute("visibility", "visible");
+                this._selectionRect.setAttribute("display", "");
                 this._selectionRect.setAttribute("x", String(this._partWidth * this._doc.selection.patternSelectionStart));
                 this._selectionRect.setAttribute("width", String(this._partWidth * (this._doc.selection.patternSelectionEnd - this._doc.selection.patternSelectionStart)));
             }
             else {
-                this._selectionRect.setAttribute("visibility", "hidden");
+                this._selectionRect.setAttribute("display", "none");
             }
         }
         render() {
             const nextPattern = this._doc.getCurrentPattern(this._barOffset);
             if (this._pattern != nextPattern && this._pattern != null) {
                 this._dragChange = null;
-                this._whenCursorReleased(null);
+                this._pointers.latest.cancel();
             }
             this._pattern = nextPattern;
             this._editorWidth = this.container.clientWidth;
@@ -15166,7 +18113,7 @@ var beepbox = (function (exports) {
                 }
             }
             if (this._interactive) {
-                if (!this._mouseDown)
+                if (!this._pointers.latest.isDown)
                     this._updateCursorStatus();
                 this._updatePreview();
                 this._updateSelection();
@@ -15433,8 +18380,8 @@ var beepbox = (function (exports) {
             this._fadeCurve = SVG.path({ fill: ColorConfig.uiWidgetBackground, "pointer-events": "none" });
             this._dottedLinePath = SVG.path({ fill: "none", stroke: "currentColor", "stroke-width": 1, "stroke-dasharray": "3, 2", "pointer-events": "none" });
             this._controlCurve = SVG.path({ fill: "none", stroke: "currentColor", "stroke-width": 2, "pointer-events": "none" });
-            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground}; touch-action: none; cursor: crosshair;`, width: "100%", height: "100%", viewBox: "0 0 " + this._editorWidth + " " + this._editorHeight, preserveAspectRatio: "none" }, this._fadeCurve, this._dottedLinePath, this._controlCurve);
-            this.container = HTML.div({ class: "fadeInOut", style: "height: 100%;" }, this._svg);
+            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground};`, width: "100%", height: "100%", viewBox: "0 0 " + this._editorWidth + " " + this._editorHeight, preserveAspectRatio: "none" }, this._fadeCurve, this._dottedLinePath, this._controlCurve);
+            this.container = HTML.div({ class: "fadeInOut", style: "height: 100%; touch-action: pan-y; cursor: col-resize;" }, this._svg);
             this._mouseX = 0;
             this._mouseXStart = 0;
             this._mouseDown = false;
@@ -15443,42 +18390,46 @@ var beepbox = (function (exports) {
             this._dragChange = null;
             this._renderedFadeIn = -1;
             this._renderedFadeOut = -1;
-            this._whenMousePressed = (event) => {
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left);
-                this._whenCursorPressed();
+            this._onPointerDown = (event) => {
+                this._mouseX = event.pointer.getPointIn(this._svg).x;
+                this._mouseXStart = this._mouseX;
+                this._mouseDown = true;
+                this._mouseDragging = false;
+                const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
+                const fadeInX = this._fadeInToX(instrument.fadeIn);
+                const fadeOutX = this._fadeOutToX(instrument.fadeOut);
+                this._draggingFadeIn = this._mouseXStart < (fadeInX + fadeOutX) / 2.0;
+                this._dragChange = new ChangeSequence();
+                this._doc.setProspectiveChange(this._dragChange);
             };
-            this._whenTouchPressed = (event) => {
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left);
-                this._whenCursorPressed();
+            this._onPointerMove = (event) => {
+                this._mouseX = event.pointer.getPointIn(this._svg).x;
+                if (this._dragChange != null && this._doc.lastChangeWas(this._dragChange)) {
+                    this._dragChange.undo();
+                }
+                else {
+                    this._mouseDown = false;
+                }
+                this._dragChange = null;
+                if (this._mouseDown) {
+                    const sequence = new ChangeSequence();
+                    this._dragChange = sequence;
+                    this._doc.setProspectiveChange(this._dragChange);
+                    if (Math.abs(this._mouseX - this._mouseXStart) > 4.0) {
+                        this._mouseDragging = true;
+                    }
+                    if (this._mouseDragging) {
+                        const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
+                        if (this._draggingFadeIn) {
+                            sequence.append(new ChangeFadeInOut(this._doc, this._xToFadeIn(this._fadeInToX(instrument.fadeIn) + this._mouseX - this._mouseXStart), instrument.fadeOut));
+                        }
+                        else {
+                            sequence.append(new ChangeFadeInOut(this._doc, instrument.fadeIn, this._xToFadeOut(this._fadeOutToX(instrument.fadeOut) + this._mouseX - this._mouseXStart)));
+                        }
+                    }
+                }
             };
-            this._whenMouseMoved = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                this._whenCursorMoved();
-            };
-            this._whenTouchMoved = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
-                if (!this._mouseDown)
-                    return;
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                this._whenCursorMoved();
-            };
-            this._whenCursorReleased = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
+            this._onPointerUp = (event) => {
                 if (this._mouseDown && this._doc.lastChangeWas(this._dragChange) && this._dragChange != null) {
                     if (!this._mouseDragging) {
                         const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
@@ -15499,13 +18450,11 @@ var beepbox = (function (exports) {
             };
             const dottedLineX = this._fadeOutToX(Config.fadeOutNeutral);
             this._dottedLinePath.setAttribute("d", `M ${dottedLineX} 0 L ${dottedLineX} ${this._editorHeight}`);
-            this.container.addEventListener("mousedown", this._whenMousePressed);
-            document.addEventListener("mousemove", this._whenMouseMoved);
-            document.addEventListener("mouseup", this._whenCursorReleased);
-            this.container.addEventListener("touchstart", this._whenTouchPressed);
-            this.container.addEventListener("touchmove", this._whenTouchMoved);
-            this.container.addEventListener("touchend", this._whenCursorReleased);
-            this.container.addEventListener("touchcancel", this._whenCursorReleased);
+            new EasyPointers(this.container);
+            this.container.addEventListener("pointerdown", this._onPointerDown);
+            this.container.addEventListener("pointermove", this._onPointerMove);
+            this.container.addEventListener("pointerup", this._onPointerUp);
+            this.container.addEventListener("pointercancel", this._onPointerUp);
         }
         _fadeInToX(fadeIn) {
             return 1.0 + (this._editorWidth - 2.0) * 0.4 * fadeIn / (Config.fadeInRange - 1);
@@ -15518,45 +18467,6 @@ var beepbox = (function (exports) {
         }
         _xToFadeOut(x) {
             return clamp(0, Config.fadeOutTicks.length, Math.round((Config.fadeOutTicks.length - 1) * ((x - 1.0) / (this._editorWidth - 2.0) - 0.5) / 0.5));
-        }
-        _whenCursorPressed() {
-            if (isNaN(this._mouseX))
-                this._mouseX = 0;
-            this._mouseXStart = this._mouseX;
-            this._mouseDown = true;
-            this._mouseDragging = false;
-            const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
-            const fadeInX = this._fadeInToX(instrument.fadeIn);
-            const fadeOutX = this._fadeOutToX(instrument.fadeOut);
-            this._draggingFadeIn = this._mouseXStart < (fadeInX + fadeOutX) / 2.0;
-            this._dragChange = new ChangeSequence();
-            this._doc.setProspectiveChange(this._dragChange);
-        }
-        _whenCursorMoved() {
-            if (this._dragChange != null && this._doc.lastChangeWas(this._dragChange)) {
-                this._dragChange.undo();
-            }
-            else {
-                this._mouseDown = false;
-            }
-            this._dragChange = null;
-            if (this._mouseDown) {
-                const sequence = new ChangeSequence();
-                this._dragChange = sequence;
-                this._doc.setProspectiveChange(this._dragChange);
-                if (Math.abs(this._mouseX - this._mouseXStart) > 4.0) {
-                    this._mouseDragging = true;
-                }
-                if (this._mouseDragging) {
-                    const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
-                    if (this._draggingFadeIn) {
-                        sequence.append(new ChangeFadeInOut(this._doc, this._xToFadeIn(this._fadeInToX(instrument.fadeIn) + this._mouseX - this._mouseXStart), instrument.fadeOut));
-                    }
-                    else {
-                        sequence.append(new ChangeFadeInOut(this._doc, instrument.fadeIn, this._xToFadeOut(this._fadeOutToX(instrument.fadeOut) + this._mouseX - this._mouseXStart)));
-                    }
-                }
-            }
         }
         render() {
             const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
@@ -15588,19 +18498,19 @@ var beepbox = (function (exports) {
             this._doc = _doc;
             this._editorWidth = 120;
             this._editorHeight = 26;
+            this._pointRadius = 2;
             this._responsePath = SVG.path({ fill: ColorConfig.uiWidgetBackground, "pointer-events": "none" });
             this._controlPointPath = SVG.path({ fill: "currentColor", "pointer-events": "none" });
             this._dottedLinePath = SVG.path({ fill: "none", stroke: "currentColor", "stroke-width": 1, "stroke-dasharray": "3, 2", "pointer-events": "none" });
             this._highlight = SVG.circle({ fill: "white", stroke: "none", "pointer-events": "none", r: 4 });
-            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground}; touch-action: none;`, width: "100%", height: "100%", viewBox: "0 0 " + this._editorWidth + " " + this._editorHeight, preserveAspectRatio: "none" }, this._responsePath, this._dottedLinePath, this._highlight, this._controlPointPath);
+            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground};`, width: "100%", height: "100%", viewBox: "0 0 " + this._editorWidth + " " + this._editorHeight, preserveAspectRatio: "none" }, this._responsePath, this._dottedLinePath, this._highlight, this._controlPointPath);
             this._label = HTML.div({ style: "position: absolute; bottom: 0; left: 2px; font-size: 8px; line-height: 1; pointer-events: none;" });
-            this.container = HTML.div({ class: "filterEditor", style: "height: 100%; position: relative;" }, this._svg, this._label);
-            this._pointRadius = 2;
+            this.container = HTML.div({ class: "filterEditor", style: "height: 100%; position: relative; touch-action: none;" }, this._svg, this._label);
+            this._pointers = new EasyPointers(this.container, { preventTouchGestureScrolling: true });
             this._useNoteFilter = false;
             this._touchMode = false;
             this._mouseX = 0;
             this._mouseY = 0;
-            this._mouseOver = false;
             this._mouseDown = false;
             this._mouseDragging = false;
             this._addingPoint = false;
@@ -15615,70 +18525,26 @@ var beepbox = (function (exports) {
             this._renderedPointTypes = -1;
             this._renderedPointFreqs = -1;
             this._renderedPointGains = -1;
-            this._whenMouseOver = (event) => {
-                this._mouseOver = true;
-            };
-            this._whenMouseOut = (event) => {
-                this._mouseOver = false;
+            this._onPointerLeave = (event) => {
                 this._updatePath();
             };
-            this._whenMousePressed = (event) => {
-                event.preventDefault();
-                this._touchMode = false;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._whenCursorPressed();
+            this._onPointerDown = (event) => {
+                this._mouseDown = true;
+                this._touchMode = event.pointer.isTouch;
+                this._updateMousePos(event);
+                const sequence = new ChangeSequence();
+                this._dragChange = sequence;
+                this._doc.setProspectiveChange(this._dragChange);
+                this._updateCursor();
+                this._whenCursorMoved(event);
             };
-            this._whenTouchPressed = (event) => {
-                event.preventDefault();
-                this._touchMode = true;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._whenCursorPressed();
-            };
-            this._whenMouseMoved = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
+            this._onPointerMove = (event) => {
+                this._updateMousePos(event);
                 if (!this._mouseDown)
                     this._updateCursor();
-                this._whenCursorMoved();
+                this._whenCursorMoved(event);
             };
-            this._whenTouchMoved = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
-                if (this._mouseDown)
-                    event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                if (!this._mouseDown)
-                    this._updateCursor();
-                this._whenCursorMoved();
-            };
-            this._whenCursorReleased = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
+            this._onPointerUp = (event) => {
                 if (this._mouseDown && this._doc.lastChangeWas(this._dragChange) && this._dragChange != null) {
                     if (!this._addingPoint && !this._mouseDragging && !this._touchMode) {
                         if (this._selectedIndex < this._filterSettings.controlPointCount && this._selectedIndex != -1) {
@@ -15698,15 +18564,12 @@ var beepbox = (function (exports) {
                 this._updateCursor();
             };
             this._useNoteFilter = useNoteFilter;
-            this.container.addEventListener("mousedown", this._whenMousePressed);
-            this.container.addEventListener("mouseover", this._whenMouseOver);
-            this.container.addEventListener("mouseout", this._whenMouseOut);
-            document.addEventListener("mousemove", this._whenMouseMoved);
-            document.addEventListener("mouseup", this._whenCursorReleased);
-            this.container.addEventListener("touchstart", this._whenTouchPressed);
-            this.container.addEventListener("touchmove", this._whenTouchMoved);
-            this.container.addEventListener("touchend", this._whenCursorReleased);
-            this.container.addEventListener("touchcancel", this._whenCursorReleased);
+            this.container.addEventListener("pointerenter", this._onPointerMove);
+            this.container.addEventListener("pointerleave", this._onPointerLeave);
+            this.container.addEventListener("pointerdown", this._onPointerDown);
+            this.container.addEventListener("pointermove", this._onPointerMove);
+            this.container.addEventListener("pointerup", this._onPointerUp);
+            this.container.addEventListener("pointercancel", this._onPointerUp);
         }
         _xToFreq(x) {
             return Config.filterFreqRange * x / this._editorWidth - 0.5;
@@ -15720,13 +18583,10 @@ var beepbox = (function (exports) {
         _gainToY(gain) {
             return (this._editorHeight - 1) * (1 - gain / (Config.filterGainRange - 1)) + .5;
         }
-        _whenCursorPressed() {
-            this._mouseDown = true;
-            const sequence = new ChangeSequence();
-            this._dragChange = sequence;
-            this._doc.setProspectiveChange(this._dragChange);
-            this._updateCursor();
-            this._whenCursorMoved();
+        _updateMousePos(event) {
+            const point = event.pointer.getPointInNormalized(this.container);
+            this._mouseX = point.x * this._editorWidth;
+            this._mouseY = point.y * this._editorHeight;
         }
         _updateCursor() {
             this._freqStart = this._xToFreq(this._mouseX);
@@ -15756,7 +18616,7 @@ var beepbox = (function (exports) {
                 }
             }
         }
-        _whenCursorMoved() {
+        _whenCursorMoved(event) {
             if (this._dragChange != null && this._doc.lastChangeWas(this._dragChange)) {
                 this._dragChange.undo();
             }
@@ -15805,9 +18665,7 @@ var beepbox = (function (exports) {
                     }
                 }
             }
-            if (this._mouseDown || this._mouseOver) {
-                this._updatePath();
-            }
+            this._updatePath();
         }
         _findNearestFreqSlot(filterSettings, targetFreq, ignoreIndex) {
             const roundedFreq = Math.round(targetFreq);
@@ -15855,18 +18713,18 @@ var beepbox = (function (exports) {
                 else if (point.type == 0) {
                     dottedLinePath += "M " + this._editorWidth + " " + pointY + " L " + pointX + " " + pointY + " ";
                 }
-                if (this._selectedIndex == i && this._mouseOver && !this._mouseDown) {
+                if (this._selectedIndex == i && this._pointers.latest.isHovering) {
                     this._highlight.setAttribute("cx", String(pointX));
                     this._highlight.setAttribute("cy", String(pointY));
                     this._highlight.style.display = "";
                 }
-                if ((this._selectedIndex == i || (this._addingPoint && this._mouseDown && i == this._filterSettings.controlPointCount - 1)) && (this._mouseOver || this._mouseDown) && !this._deletingPoint) {
+                if ((this._selectedIndex == i || (this._addingPoint && this._mouseDown && i == this._filterSettings.controlPointCount - 1)) && (this._pointers.latest.isPresent) && !this._deletingPoint) {
                     this._label.textContent = (i + 1) + ": " + Config.filterTypeNames[point.type];
                 }
             }
             this._controlPointPath.setAttribute("d", controlPointPath);
             this._dottedLinePath.setAttribute("d", dottedLinePath);
-            if (this._addingPoint && !this._mouseDown && this._mouseOver) {
+            if (this._addingPoint && this._pointers.latest.isHovering) {
                 this._label.textContent = "+ " + Config.filterTypeNames[this._addedType];
             }
             const standardSampleRate = 44800;
@@ -16047,10 +18905,11 @@ var beepbox = (function (exports) {
             this._boxHighlight = SVG.rect({ fill: "none", stroke: ColorConfig.hoverPreview, "stroke-width": 2, "pointer-events": "none", x: 1, y: 1, width: 30, height: 30 });
             this._upHighlight = SVG.path({ fill: ColorConfig.invertedText, stroke: ColorConfig.invertedText, "stroke-width": 1, "pointer-events": "none" });
             this._downHighlight = SVG.path({ fill: ColorConfig.invertedText, stroke: ColorConfig.invertedText, "stroke-width": 1, "pointer-events": "none" });
-            this._selectionRect = SVG.rect({ fill: ColorConfig.boxSelectionFill, stroke: ColorConfig.hoverPreview, "stroke-width": 2, "stroke-dasharray": "5, 3", "pointer-events": "none", visibility: "hidden", x: 1, y: 1, width: 62, height: 62 });
+            this._selectionRect = SVG.rect({ fill: ColorConfig.boxSelectionFill, stroke: ColorConfig.hoverPreview, "stroke-width": 2, "stroke-dasharray": "5, 3", "pointer-events": "none", display: "none", x: 1, y: 1, width: 62, height: 62 });
             this._svg = SVG.svg({ style: `position: absolute; top: 0;` }, this._selectionRect, this._boxHighlight, this._upHighlight, this._downHighlight, this._playhead);
             this._select = HTML.select({ class: "trackSelectBox", style: "background: none; border: none; appearance: none; border-radius: initial; box-shadow: none; color: transparent; position: absolute; touch-action: none;" });
             this.container = HTML.div({ class: "noSelection", style: "position: relative; overflow: hidden;" }, this._channelRowContainer, this._svg, this._select);
+            this._pointers = new EasyPointers(this.container);
             this._channels = [];
             this._mouseX = 0;
             this._mouseY = 0;
@@ -16058,15 +18917,12 @@ var beepbox = (function (exports) {
             this._mouseStartChannel = 0;
             this._mouseBar = 0;
             this._mouseChannel = 0;
-            this._mouseOver = false;
-            this._mousePressed = false;
             this._mouseDragging = false;
             this._barWidth = 32;
             this._renderedEditorWidth = -1;
             this._renderedEditorHeight = -1;
             this._renderedPatternCount = 0;
             this._renderedPlayhead = -1;
-            this._touchMode = isMobile;
             this._whenSelectChanged = () => {
                 this._doc.selection.setPattern(this._select.selectedIndex);
             };
@@ -16078,44 +18934,17 @@ var beepbox = (function (exports) {
                 }
                 window.requestAnimationFrame(this._animatePlayhead);
             };
-            this._whenSelectPressed = (event) => {
-                this._mousePressed = true;
-                this._mouseDragging = true;
-                this._updateSelectPos(event);
-                this._mouseStartBar = this._mouseBar;
-                this._mouseStartChannel = this._mouseChannel;
-            };
-            this._whenSelectMoved = (event) => {
-                this._updateSelectPos(event);
-                if (this._mouseStartBar != this._mouseBar || this._mouseStartChannel != this._mouseChannel) {
-                    event.preventDefault();
-                }
-                if (this._mousePressed)
-                    this._dragBoxSelection();
+            this._onPointerLeave = (event) => {
                 this._updatePreview();
             };
-            this._whenSelectReleased = (event) => {
-                this._mousePressed = false;
-                this._mouseDragging = false;
-                this._updatePreview();
-            };
-            this._whenMouseOver = (event) => {
-                if (this._mouseOver)
-                    return;
-                this._mouseOver = true;
-            };
-            this._whenMouseOut = (event) => {
-                if (!this._mouseOver)
-                    return;
-                this._mouseOver = false;
-            };
-            this._whenMousePressed = (event) => {
-                event.preventDefault();
-                this._mousePressed = true;
+            this._onPointerDown = (event) => {
                 this._updateMousePos(event);
                 this._mouseStartBar = this._mouseBar;
                 this._mouseStartChannel = this._mouseChannel;
-                if (event.shiftKey) {
+                if (event.target == this._select) {
+                    this._mouseDragging = true;
+                }
+                else if (event.shiftKey) {
                     this._mouseDragging = true;
                     this._doc.selection.setTrackSelection(this._doc.selection.boxSelectionX0, this._mouseBar, this._doc.selection.boxSelectionY0, this._mouseChannel);
                     this._doc.selection.selectionUpdated();
@@ -16129,9 +18958,9 @@ var beepbox = (function (exports) {
                     this._doc.selection.resetBoxSelection();
                 }
             };
-            this._whenMouseMoved = (event) => {
+            this._onPointerMove = (event) => {
                 this._updateMousePos(event);
-                if (this._mousePressed) {
+                if (event.pointer.isDown) {
                     if (this._mouseStartBar != this._mouseBar || this._mouseStartChannel != this._mouseChannel) {
                         this._mouseDragging = true;
                     }
@@ -16139,47 +18968,28 @@ var beepbox = (function (exports) {
                 }
                 this._updatePreview();
             };
-            this._whenMouseReleased = (event) => {
-                if (this._mousePressed && !this._mouseDragging) {
+            this._onPointerUp = (event) => {
+                if (!this._mouseDragging && !event.pointer.isTouch) {
                     if (this._doc.channel == this._mouseChannel && this._doc.bar == this._mouseBar) {
                         const up = (this._mouseY % ChannelRow.patternHeight) < ChannelRow.patternHeight / 2;
                         const patternCount = this._doc.song.patternsPerChannel;
                         this._doc.selection.setPattern((this._doc.song.channels[this._mouseChannel].bars[this._mouseBar] + (up ? 1 : patternCount)) % (patternCount + 1));
                     }
                 }
-                this._mousePressed = false;
                 this._mouseDragging = false;
                 this._updatePreview();
             };
             window.requestAnimationFrame(this._animatePlayhead);
-            this._svg.addEventListener("mousedown", this._whenMousePressed);
-            document.addEventListener("mousemove", this._whenMouseMoved);
-            document.addEventListener("mouseup", this._whenMouseReleased);
-            this._svg.addEventListener("mouseover", this._whenMouseOver);
-            this._svg.addEventListener("mouseout", this._whenMouseOut);
+            this._svg.addEventListener("mousedown", event => { });
+            this.container.addEventListener("pointerenter", this._onPointerMove);
+            this.container.addEventListener("pointerleave", this._onPointerLeave);
+            this.container.addEventListener("pointerdown", this._onPointerDown);
+            this.container.addEventListener("pointermove", this._onPointerMove);
+            this.container.addEventListener("pointerup", this._onPointerUp);
             this._select.addEventListener("change", this._whenSelectChanged);
-            this._select.addEventListener("touchstart", this._whenSelectPressed);
-            this._select.addEventListener("touchmove", this._whenSelectMoved);
-            this._select.addEventListener("touchend", this._whenSelectReleased);
-            this._select.addEventListener("touchcancel", this._whenSelectReleased);
-            let determinedCursorType = false;
-            document.addEventListener("mousedown", () => {
-                if (!determinedCursorType) {
-                    this._touchMode = false;
-                    this._updatePreview();
-                }
-                determinedCursorType = true;
-            }, true);
-            document.addEventListener("touchstart", () => {
-                if (!determinedCursorType) {
-                    this._touchMode = true;
-                    this._updatePreview();
-                }
-                determinedCursorType = true;
-            }, true);
         }
         movePlayheadToMouse() {
-            if (this._mouseOver) {
+            if (this._pointers.latest.isPresent) {
                 this._doc.synth.playhead = this._mouseBar + (this._mouseX % this._barWidth) / this._barWidth;
                 return true;
             }
@@ -16189,64 +18999,49 @@ var beepbox = (function (exports) {
             this._doc.selection.setTrackSelection(this._doc.selection.boxSelectionX0, this._mouseBar, this._doc.selection.boxSelectionY0, this._mouseChannel);
             this._doc.selection.selectionUpdated();
         }
-        _updateSelectPos(event) {
-            const boundingRect = this._svg.getBoundingClientRect();
-            this._mouseX = event.touches[0].clientX - boundingRect.left;
-            this._mouseY = event.touches[0].clientY - boundingRect.top;
-            if (isNaN(this._mouseX))
-                this._mouseX = 0;
-            if (isNaN(this._mouseY))
-                this._mouseY = 0;
-            this._mouseBar = Math.floor(Math.min(this._doc.song.barCount - 1, Math.max(0, this._mouseX / this._barWidth)));
-            this._mouseChannel = Math.floor(Math.min(this._doc.song.getChannelCount() - 1, Math.max(0, this._mouseY / ChannelRow.patternHeight)));
-        }
         _updateMousePos(event) {
-            const boundingRect = this._svg.getBoundingClientRect();
-            this._mouseX = (event.clientX || event.pageX) - boundingRect.left;
-            this._mouseY = (event.clientY || event.pageY) - boundingRect.top;
+            const point = event.pointer.getPointIn(this.container);
+            this._mouseX = point.x;
+            this._mouseY = point.y;
             this._mouseBar = Math.floor(Math.min(this._doc.song.barCount - 1, Math.max(0, this._mouseX / this._barWidth)));
             this._mouseChannel = Math.floor(Math.min(this._doc.song.getChannelCount() - 1, Math.max(0, this._mouseY / ChannelRow.patternHeight)));
         }
         _updatePreview() {
             let channel = this._mouseChannel;
             let bar = this._mouseBar;
-            if (this._touchMode) {
+            if (this._pointers.latest.isTouch) {
                 bar = this._doc.bar;
                 channel = this._doc.channel;
             }
             const selected = (bar == this._doc.bar && channel == this._doc.channel);
-            if (this._mouseOver && !this._mousePressed && !selected) {
+            if (this._pointers.latest.isHovering && !selected) {
                 this._boxHighlight.setAttribute("x", "" + (1 + this._barWidth * bar));
                 this._boxHighlight.setAttribute("y", "" + (1 + (ChannelRow.patternHeight * channel)));
                 this._boxHighlight.setAttribute("height", "" + (ChannelRow.patternHeight - 2));
                 this._boxHighlight.setAttribute("width", "" + (this._barWidth - 2));
-                this._boxHighlight.style.visibility = "visible";
+                this._boxHighlight.style.display = "";
             }
             else {
-                this._boxHighlight.style.visibility = "hidden";
+                this._boxHighlight.style.display = "none";
             }
-            if ((this._mouseOver || this._touchMode) && selected) {
+            if ((this._pointers.latest.isPresent && selected) || this._pointers.latest.isTouch) {
                 const up = (this._mouseY % ChannelRow.patternHeight) < ChannelRow.patternHeight / 2;
                 const center = this._barWidth * (bar + 0.8);
                 const middle = ChannelRow.patternHeight * (channel + 0.5);
                 const base = ChannelRow.patternHeight * 0.1;
                 const tip = ChannelRow.patternHeight * 0.4;
                 const width = ChannelRow.patternHeight * 0.175;
-                this._upHighlight.setAttribute("fill", up && !this._touchMode ? ColorConfig.hoverPreview : ColorConfig.invertedText);
-                this._downHighlight.setAttribute("fill", !up && !this._touchMode ? ColorConfig.hoverPreview : ColorConfig.invertedText);
+                this._upHighlight.setAttribute("fill", up && !this._pointers.latest.isTouch ? ColorConfig.hoverPreview : ColorConfig.invertedText);
+                this._downHighlight.setAttribute("fill", !up && !this._pointers.latest.isTouch ? ColorConfig.hoverPreview : ColorConfig.invertedText);
                 this._upHighlight.setAttribute("d", `M ${center} ${middle - tip} L ${center + width} ${middle - base} L ${center - width} ${middle - base} z`);
                 this._downHighlight.setAttribute("d", `M ${center} ${middle + tip} L ${center + width} ${middle + base} L ${center - width} ${middle + base} z`);
-                this._upHighlight.style.visibility = "visible";
-                this._downHighlight.style.visibility = "visible";
+                this._upHighlight.style.display = "";
+                this._downHighlight.style.display = "";
             }
             else {
-                this._upHighlight.style.visibility = "hidden";
-                this._downHighlight.style.visibility = "hidden";
+                this._upHighlight.style.display = "none";
+                this._downHighlight.style.display = "none";
             }
-            this._select.style.left = (this._barWidth * this._doc.bar) + "px";
-            this._select.style.width = this._barWidth + "px";
-            this._select.style.top = (ChannelRow.patternHeight * this._doc.channel) + "px";
-            this._select.style.height = ChannelRow.patternHeight + "px";
             const patternCount = this._doc.song.patternsPerChannel + 1;
             for (let i = this._renderedPatternCount; i < patternCount; i++) {
                 this._select.appendChild(HTML.option({ value: i }, i));
@@ -16271,7 +19066,7 @@ var beepbox = (function (exports) {
                     this._channelRowContainer.removeChild(this._channels[y].container);
                 }
                 this._channels.length = this._doc.song.getChannelCount();
-                this._mousePressed = false;
+                this._pointers.latest.cancel();
             }
             for (let j = 0; j < this._doc.song.getChannelCount(); j++) {
                 this._channels[j].render();
@@ -16282,7 +19077,7 @@ var beepbox = (function (exports) {
                 this._channelRowContainer.style.width = editorWidth + "px";
                 this.container.style.width = editorWidth + "px";
                 this._svg.setAttribute("width", editorWidth + "");
-                this._mousePressed = false;
+                this._pointers.latest.cancel();
             }
             const editorHeight = this._doc.song.getChannelCount() * ChannelRow.patternHeight;
             if (this._renderedEditorHeight != editorHeight) {
@@ -16291,16 +19086,22 @@ var beepbox = (function (exports) {
                 this._playhead.setAttribute("height", "" + editorHeight);
                 this.container.style.height = editorHeight + "px";
             }
-            this._select.style.display = this._touchMode ? "" : "none";
+            setTimeout(() => {
+                this._select.style.display = this._pointers.latest.isTouch ? "" : "none";
+                this._select.style.left = (this._barWidth * this._doc.bar) + "px";
+                this._select.style.width = this._barWidth + "px";
+                this._select.style.top = (ChannelRow.patternHeight * this._doc.channel) + "px";
+                this._select.style.height = ChannelRow.patternHeight + "px";
+            }, 50);
             if (this._doc.selection.boxSelectionActive) {
                 this._selectionRect.setAttribute("x", String(this._barWidth * this._doc.selection.boxSelectionBar + 1));
                 this._selectionRect.setAttribute("y", String(ChannelRow.patternHeight * this._doc.selection.boxSelectionChannel + 1));
                 this._selectionRect.setAttribute("width", String(this._barWidth * this._doc.selection.boxSelectionWidth - 2));
                 this._selectionRect.setAttribute("height", String(ChannelRow.patternHeight * this._doc.selection.boxSelectionHeight - 2));
-                this._selectionRect.setAttribute("visibility", "visible");
+                this._selectionRect.setAttribute("display", "");
             }
             else {
-                this._selectionRect.setAttribute("visibility", "hidden");
+                this._selectionRect.setAttribute("display", "none");
             }
             this._updatePreview();
         }
@@ -16374,8 +19175,8 @@ var beepbox = (function (exports) {
             this._bothMode = 2;
             this._loop = SVG.path({ fill: "none", stroke: ColorConfig.loopAccent, "stroke-width": 4 });
             this._highlight = SVG.path({ fill: ColorConfig.hoverPreview, "pointer-events": "none" });
-            this._svg = SVG.svg({ style: `touch-action: pan-y; position: absolute;`, height: this._editorHeight }, this._loop, this._highlight);
-            this.container = HTML.div({ class: "loopEditor" }, this._svg);
+            this._svg = SVG.svg({ style: "position: absolute;", height: this._editorHeight }, this._loop, this._highlight);
+            this.container = HTML.div({ class: "loopEditor", style: "touch-action: pan-y;" }, this._svg);
             this._barWidth = 32;
             this._change = null;
             this._cursor = { startBar: -1, mode: -1 };
@@ -16479,8 +19280,11 @@ var beepbox = (function (exports) {
             this.container.addEventListener("touchend", this._whenTouchReleased);
             this.container.addEventListener("touchcancel", this._whenTouchReleased);
         }
+        _getPointerBarPos() {
+            return this._mouseX / this._barWidth;
+        }
         _updateCursorStatus() {
-            const bar = this._mouseX / this._barWidth;
+            const bar = this._getPointerBarPos();
             this._cursor.startBar = bar;
             if (bar > this._doc.song.loopStart - 0.25 && bar < this._doc.song.loopStart + this._doc.song.loopLength + 0.25) {
                 if (bar - this._doc.song.loopStart < this._doc.song.loopLength * 0.5) {
@@ -16515,7 +19319,7 @@ var beepbox = (function (exports) {
                     oldStart = this._change.oldStart;
                     oldEnd = oldStart + this._change.oldLength;
                 }
-                const bar = this._mouseX / this._barWidth;
+                const bar = this._getPointerBarPos();
                 let start;
                 let end;
                 let temp;
@@ -16570,7 +19374,7 @@ var beepbox = (function (exports) {
         }
         _updatePreview() {
             const showHighlight = this._mouseOver && !this._mouseDown;
-            this._highlight.style.visibility = showHighlight ? "visible" : "hidden";
+            this._highlight.style.display = showHighlight ? "" : "none";
             if (showHighlight) {
                 const radius = this._editorHeight / 2;
                 let highlightStart = (this._doc.song.loopStart) * this._barWidth;
@@ -16631,77 +19435,28 @@ var beepbox = (function (exports) {
             this._fifths = SVG.svg({ "pointer-events": "none" });
             this._curve = SVG.path({ fill: "none", stroke: "currentColor", "stroke-width": 2, "pointer-events": "none" });
             this._arrow = SVG.path({ fill: "currentColor", "pointer-events": "none" });
-            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground}; touch-action: none; cursor: crosshair;`, width: "100%", height: "100%", viewBox: "0 0 " + this._editorWidth + " " + this._editorHeight, preserveAspectRatio: "none" }, this._fill, this._octaves, this._fifths, this._curve, this._arrow);
-            this.container = HTML.div({ class: "spectrum", style: "height: 100%;" }, this._svg);
+            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground};`, width: "100%", height: "100%", viewBox: "0 0 " + this._editorWidth + " " + this._editorHeight, preserveAspectRatio: "none" }, this._fill, this._octaves, this._fifths, this._curve, this._arrow);
+            this.container = HTML.div({ class: "spectrum", style: "height: 100%; touch-action: none; cursor: crosshair;" }, this._svg);
             this._mouseX = 0;
             this._mouseY = 0;
             this._freqPrev = 0;
             this._ampPrev = 0;
-            this._mouseDown = false;
             this._change = null;
             this._renderedPath = "";
             this._renderedFifths = true;
-            this._whenMousePressed = (event) => {
-                event.preventDefault();
-                this._mouseDown = true;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
+            this._onPointerDown = (event) => {
+                this._updateMousePos(event);
                 this._freqPrev = this._xToFreq(this._mouseX);
                 this._ampPrev = this._yToAmp(this._mouseY);
-                this._whenCursorMoved();
+                this._whenCursorMoved(event);
             };
-            this._whenTouchPressed = (event) => {
-                event.preventDefault();
-                this._mouseDown = true;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._freqPrev = this._xToFreq(this._mouseX);
-                this._ampPrev = this._yToAmp(this._mouseY);
-                this._whenCursorMoved();
+            this._onPointerMove = (event) => {
+                this._updateMousePos(event);
+                this._whenCursorMoved(event);
             };
-            this._whenMouseMoved = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._whenCursorMoved();
-            };
-            this._whenTouchMoved = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
-                if (!this._mouseDown)
-                    return;
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._whenCursorMoved();
-            };
-            this._whenCursorReleased = (event) => {
-                if (this._mouseDown) {
-                    this._doc.record(this._change);
-                    this._change = null;
-                }
-                this._mouseDown = false;
+            this._onPointerUp = (event) => {
+                this._doc.record(this._change);
+                this._change = null;
             };
             for (let i = 0; i < Config.spectrumControlPoints; i += Config.spectrumControlPointsPerOctave) {
                 this._octaves.appendChild(SVG.rect({ fill: ColorConfig.tonic, x: (i + 1) * this._editorWidth / (Config.spectrumControlPoints + 2) - 1, y: 0, width: 2, height: this._editorHeight }));
@@ -16709,13 +19464,11 @@ var beepbox = (function (exports) {
             for (let i = 4; i <= Config.spectrumControlPoints; i += Config.spectrumControlPointsPerOctave) {
                 this._fifths.appendChild(SVG.rect({ fill: ColorConfig.fifthNote, x: (i + 1) * this._editorWidth / (Config.spectrumControlPoints + 2) - 1, y: 0, width: 2, height: this._editorHeight }));
             }
-            this.container.addEventListener("mousedown", this._whenMousePressed);
-            document.addEventListener("mousemove", this._whenMouseMoved);
-            document.addEventListener("mouseup", this._whenCursorReleased);
-            this.container.addEventListener("touchstart", this._whenTouchPressed);
-            this.container.addEventListener("touchmove", this._whenTouchMoved);
-            this.container.addEventListener("touchend", this._whenCursorReleased);
-            this.container.addEventListener("touchcancel", this._whenCursorReleased);
+            new EasyPointers(this.container, { preventTouchGestureScrolling: true });
+            this.container.addEventListener("pointerdown", this._onPointerDown);
+            this.container.addEventListener("pointermove", this._onPointerMove);
+            this.container.addEventListener("pointerup", this._onPointerUp);
+            this.container.addEventListener("pointercancel", this._onPointerUp);
         }
         _xToFreq(x) {
             return (Config.spectrumControlPoints + 2) * x / this._editorWidth - 1;
@@ -16723,8 +19476,13 @@ var beepbox = (function (exports) {
         _yToAmp(y) {
             return Config.spectrumMax * (1 - (y - 1) / (this._editorHeight - 2));
         }
-        _whenCursorMoved() {
-            if (this._mouseDown) {
+        _updateMousePos(event) {
+            const point = event.pointer.getPointInNormalized(this.container);
+            this._mouseX = point.x * this._editorWidth;
+            this._mouseY = point.y * this._editorHeight;
+        }
+        _whenCursorMoved(event) {
+            if (event.pointer.isDown) {
                 const freq = this._xToFreq(this._mouseX);
                 const amp = this._yToAmp(this._mouseY);
                 const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
@@ -16794,77 +19552,28 @@ var beepbox = (function (exports) {
             this._curve = SVG.path({ fill: "none", stroke: "currentColor", "stroke-width": 2, "pointer-events": "none" });
             this._lastControlPoints = [];
             this._lastControlPointContainer = SVG.svg({ "pointer-events": "none" });
-            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground}; touch-action: none; cursor: crosshair;`, width: "100%", height: "100%", viewBox: "0 0 " + this._editorWidth + " " + this._editorHeight, preserveAspectRatio: "none" }, this._octaves, this._fifths, this._curve, this._lastControlPointContainer);
-            this.container = HTML.div({ class: "harmonics", style: "height: 100%;" }, this._svg);
+            this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground};`, width: "100%", height: "100%", viewBox: "0 0 " + this._editorWidth + " " + this._editorHeight, preserveAspectRatio: "none" }, this._octaves, this._fifths, this._curve, this._lastControlPointContainer);
+            this.container = HTML.div({ class: "harmonics", style: "height: 100%; touch-action: none; cursor: crosshair;" }, this._svg);
             this._mouseX = 0;
             this._mouseY = 0;
             this._freqPrev = 0;
             this._ampPrev = 0;
-            this._mouseDown = false;
             this._change = null;
             this._renderedPath = "";
             this._renderedFifths = true;
-            this._whenMousePressed = (event) => {
-                event.preventDefault();
-                this._mouseDown = true;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
+            this._onPointerDown = (event) => {
+                this._updateMousePos(event);
                 this._freqPrev = this._xToFreq(this._mouseX);
                 this._ampPrev = this._yToAmp(this._mouseY);
-                this._whenCursorMoved();
+                this._whenCursorMoved(event);
             };
-            this._whenTouchPressed = (event) => {
-                event.preventDefault();
-                this._mouseDown = true;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._freqPrev = this._xToFreq(this._mouseX);
-                this._ampPrev = this._yToAmp(this._mouseY);
-                this._whenCursorMoved();
+            this._onPointerMove = (event) => {
+                this._updateMousePos(event);
+                this._whenCursorMoved(event);
             };
-            this._whenMouseMoved = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = ((event.clientX || event.pageX) - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._whenCursorMoved();
-            };
-            this._whenTouchMoved = (event) => {
-                if (this.container.offsetParent == null)
-                    return;
-                if (!this._mouseDown)
-                    return;
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.touches[0].clientX - boundingRect.left) * this._editorWidth / (boundingRect.right - boundingRect.left);
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseX))
-                    this._mouseX = 0;
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._whenCursorMoved();
-            };
-            this._whenCursorReleased = (event) => {
-                if (this._mouseDown) {
-                    this._doc.record(this._change);
-                    this._change = null;
-                }
-                this._mouseDown = false;
+            this._onPointerUp = (event) => {
+                this._doc.record(this._change);
+                this._change = null;
             };
             for (let i = 1; i <= Config.harmonicsControlPoints; i = i * 2) {
                 this._octaves.appendChild(SVG.rect({ fill: ColorConfig.tonic, x: (i - 0.5) * (this._editorWidth - 8) / (Config.harmonicsControlPoints - 1) - 1, y: 0, width: 2, height: this._editorHeight }));
@@ -16877,13 +19586,11 @@ var beepbox = (function (exports) {
                 this._lastControlPoints.push(rect);
                 this._lastControlPointContainer.appendChild(rect);
             }
-            this.container.addEventListener("mousedown", this._whenMousePressed);
-            document.addEventListener("mousemove", this._whenMouseMoved);
-            document.addEventListener("mouseup", this._whenCursorReleased);
-            this.container.addEventListener("touchstart", this._whenTouchPressed);
-            this.container.addEventListener("touchmove", this._whenTouchMoved);
-            this.container.addEventListener("touchend", this._whenCursorReleased);
-            this.container.addEventListener("touchcancel", this._whenCursorReleased);
+            new EasyPointers(this.container, { preventTouchGestureScrolling: true });
+            this.container.addEventListener("pointerdown", this._onPointerDown);
+            this.container.addEventListener("pointermove", this._onPointerMove);
+            this.container.addEventListener("pointerup", this._onPointerUp);
+            this.container.addEventListener("pointercancel", this._onPointerUp);
         }
         _xToFreq(x) {
             return (Config.harmonicsControlPoints - 1) * x / (this._editorWidth - 8) - 0.5;
@@ -16891,8 +19598,13 @@ var beepbox = (function (exports) {
         _yToAmp(y) {
             return Config.harmonicsMax * (1 - y / this._editorHeight);
         }
-        _whenCursorMoved() {
-            if (this._mouseDown) {
+        _updateMousePos(event) {
+            const point = event.pointer.getPointInNormalized(this.container);
+            this._mouseX = point.x * this._editorWidth;
+            this._mouseY = point.y * this._editorHeight;
+        }
+        _whenCursorMoved(event) {
+            if (event.pointer.isDown) {
                 const freq = this._xToFreq(this._mouseX);
                 const amp = this._yToAmp(this._mouseY);
                 const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
@@ -16959,61 +19671,50 @@ var beepbox = (function (exports) {
             this._rightHighlight = SVG.path({ fill: ColorConfig.hoverPreview, "pointer-events": "none" });
             this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground}; touch-action: pan-y; position: absolute;`, width: this._editorWidth, height: this._editorHeight }, this._notches, this._handle, this._handleHighlight, this._leftHighlight, this._rightHighlight);
             this.container = HTML.div({ class: "barScrollBar", style: "width: 512px; height: 20px; overflow: hidden; position: relative;" }, this._svg);
+            this._pointers = new EasyPointers(this.container);
             this._mouseX = 0;
-            this._mouseDown = false;
-            this._mouseOver = false;
             this._dragging = false;
             this._renderedNotchCount = -1;
             this._renderedScrollBarPos = -1;
-            this._whenMouseOver = (event) => {
-                if (this._mouseOver)
-                    return;
-                this._mouseOver = true;
+            this._onPointerLeave = (event) => {
                 this._updatePreview();
             };
-            this._whenMouseOut = (event) => {
-                if (!this._mouseOver)
-                    return;
-                this._mouseOver = false;
-                this._updatePreview();
-            };
-            this._whenMousePressed = (event) => {
-                event.preventDefault();
-                this._mouseDown = true;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.clientX || event.pageX) - boundingRect.left;
+            this._onPointerDown = (event) => {
+                this._mouseX = (this._pointers.latest.getPointIn(this._svg).x);
                 this._updatePreview();
                 if (this._mouseX >= this._doc.barScrollPos * this._notchSpace && this._mouseX <= (this._doc.barScrollPos + this._doc.trackVisibleBars) * this._notchSpace) {
                     this._dragging = true;
                     this._dragStart = this._mouseX;
                 }
             };
-            this._whenTouchPressed = (event) => {
-                event.preventDefault();
-                this._mouseDown = true;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = event.touches[0].clientX - boundingRect.left;
-                this._updatePreview();
-                if (this._mouseX >= this._doc.barScrollPos * this._notchSpace && this._mouseX <= (this._doc.barScrollPos + this._doc.trackVisibleBars) * this._notchSpace) {
-                    this._dragging = true;
-                    this._dragStart = this._mouseX;
+            this._onPointerMove = (event) => {
+                this._mouseX = (this._pointers.latest.getPointIn(this._svg).x);
+                if (this._dragging) {
+                    while (this._mouseX - this._dragStart < -this._notchSpace * 0.5) {
+                        if (this._doc.barScrollPos > 0) {
+                            this._doc.barScrollPos--;
+                            this._dragStart -= this._notchSpace;
+                            this._doc.notifier.changed();
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                    while (this._mouseX - this._dragStart > this._notchSpace * 0.5) {
+                        if (this._doc.barScrollPos < this._doc.song.barCount - this._doc.trackVisibleBars) {
+                            this._doc.barScrollPos++;
+                            this._dragStart += this._notchSpace;
+                            this._doc.notifier.changed();
+                        }
+                        else {
+                            break;
+                        }
+                    }
                 }
+                this._updatePreview();
             };
-            this._whenMouseMoved = (event) => {
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = (event.clientX || event.pageX) - boundingRect.left;
-                this._whenCursorMoved();
-            };
-            this._whenTouchMoved = (event) => {
-                if (!this._mouseDown)
-                    return;
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseX = event.touches[0].clientX - boundingRect.left;
-                this._whenCursorMoved();
-            };
-            this._whenCursorReleased = (event) => {
-                if (!this._dragging && this._mouseDown) {
+            this._onPointerUp = (event) => {
+                if (!this._dragging) {
                     if (this._mouseX < (this._doc.barScrollPos + 8) * this._notchSpace) {
                         if (this._doc.barScrollPos > 0)
                             this._doc.barScrollPos--;
@@ -17025,7 +19726,6 @@ var beepbox = (function (exports) {
                         this._doc.notifier.changed();
                     }
                 }
-                this._mouseDown = false;
                 this._dragging = false;
                 this._updatePreview();
             };
@@ -17035,44 +19735,15 @@ var beepbox = (function (exports) {
             const arrowHeight = 6;
             this._leftHighlight.setAttribute("d", `M ${tip} ${center} L ${base} ${center + arrowHeight} L ${base} ${center - arrowHeight} z`);
             this._rightHighlight.setAttribute("d", `M ${this._editorWidth - tip} ${center} L ${this._editorWidth - base} ${center + arrowHeight} L ${this._editorWidth - base} ${center - arrowHeight} z`);
-            this.container.addEventListener("mousedown", this._whenMousePressed);
-            document.addEventListener("mousemove", this._whenMouseMoved);
-            document.addEventListener("mouseup", this._whenCursorReleased);
-            this.container.addEventListener("mouseover", this._whenMouseOver);
-            this.container.addEventListener("mouseout", this._whenMouseOut);
-            this.container.addEventListener("touchstart", this._whenTouchPressed);
-            this.container.addEventListener("touchmove", this._whenTouchMoved);
-            this.container.addEventListener("touchend", this._whenCursorReleased);
-            this.container.addEventListener("touchcancel", this._whenCursorReleased);
-        }
-        _whenCursorMoved() {
-            if (this._dragging) {
-                while (this._mouseX - this._dragStart < -this._notchSpace * 0.5) {
-                    if (this._doc.barScrollPos > 0) {
-                        this._doc.barScrollPos--;
-                        this._dragStart -= this._notchSpace;
-                        this._doc.notifier.changed();
-                    }
-                    else {
-                        break;
-                    }
-                }
-                while (this._mouseX - this._dragStart > this._notchSpace * 0.5) {
-                    if (this._doc.barScrollPos < this._doc.song.barCount - this._doc.trackVisibleBars) {
-                        this._doc.barScrollPos++;
-                        this._dragStart += this._notchSpace;
-                        this._doc.notifier.changed();
-                    }
-                    else {
-                        break;
-                    }
-                }
-            }
-            if (this._mouseOver)
-                this._updatePreview();
+            this.container.addEventListener("pointerenter", this._onPointerMove);
+            this.container.addEventListener("pointerleave", this._onPointerLeave);
+            this.container.addEventListener("pointerdown", this._onPointerDown);
+            this.container.addEventListener("pointermove", this._onPointerMove);
+            this.container.addEventListener("pointerup", this._onPointerUp);
+            this.container.addEventListener("pointercancel", this._onPointerUp);
         }
         _updatePreview() {
-            const showHighlight = this._mouseOver && !this._mouseDown;
+            const showHighlight = this._pointers.latest.isHovering;
             let showleftHighlight = false;
             let showRightHighlight = false;
             let showHandleHighlight = false;
@@ -17087,9 +19758,9 @@ var beepbox = (function (exports) {
                     showHandleHighlight = true;
                 }
             }
-            this._leftHighlight.style.visibility = showleftHighlight ? "visible" : "hidden";
-            this._rightHighlight.style.visibility = showRightHighlight ? "visible" : "hidden";
-            this._handleHighlight.style.visibility = showHandleHighlight ? "visible" : "hidden";
+            this._leftHighlight.style.display = showleftHighlight ? "" : "none";
+            this._rightHighlight.style.display = showRightHighlight ? "" : "none";
+            this._handleHighlight.style.display = showHandleHighlight ? "" : "none";
         }
         render() {
             this._notchSpace = (this._editorWidth - 1) / Math.max(this._doc.trackVisibleBars, this._doc.song.barCount);
@@ -17128,32 +19799,17 @@ var beepbox = (function (exports) {
             this._downHighlight = SVG.path({ fill: ColorConfig.hoverPreview, "pointer-events": "none" });
             this._svg = SVG.svg({ style: `background-color: ${ColorConfig.editorBackground}; touch-action: pan-x; position: absolute;`, width: this._editorWidth, height: "100%", viewBox: "0 0 20 481", preserveAspectRatio: "none" });
             this.container = HTML.div({ id: "octaveScrollBarContainer", style: "width: 20px; height: 100%; overflow: hidden; position: relative; flex-shrink: 0;" }, this._svg);
+            this._pointers = new EasyPointers(this.container, { preventTouchGestureScrolling: true });
             this._mouseY = 0;
-            this._mouseDown = false;
-            this._mouseOver = false;
             this._dragging = false;
             this._renderedBarBottom = -1;
             this._renderedVisibleOctaveCount = -1;
             this._change = null;
-            this._whenMouseOver = (event) => {
-                if (this._mouseOver)
-                    return;
-                this._mouseOver = true;
+            this._onPointerLeave = (event) => {
                 this._updatePreview();
             };
-            this._whenMouseOut = (event) => {
-                if (!this._mouseOver)
-                    return;
-                this._mouseOver = false;
-                this._updatePreview();
-            };
-            this._whenMousePressed = (event) => {
-                event.preventDefault();
-                this._mouseDown = true;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
+            this._onPointerDown = (event) => {
+                this._mouseY = (this._pointers.latest.getPointInNormalized(this.container).y) * this._editorHeight;
                 if (this._doc.song.getChannelIsNoise(this._doc.channel))
                     return;
                 this._updatePreview();
@@ -17163,41 +19819,42 @@ var beepbox = (function (exports) {
                     this._dragStart = this._mouseY;
                 }
             };
-            this._whenTouchPressed = (event) => {
-                event.preventDefault();
-                this._mouseDown = true;
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
+            this._onPointerMove = (event) => {
+                this._mouseY = (this._pointers.latest.getPointInNormalized(this.container).y) * this._editorHeight;
                 if (this._doc.song.getChannelIsNoise(this._doc.channel))
                     return;
-                this._updatePreview();
-                if (this._mouseY >= this._barBottom - this._barHeight && this._mouseY <= this._barBottom) {
-                    this._dragging = true;
-                    this._change = null;
-                    this._dragStart = this._mouseY;
+                if (this._dragging) {
+                    const visibleOctaveCount = this._doc.getVisibleOctaveCount();
+                    const scrollableOctaves = Config.pitchOctaves - visibleOctaveCount;
+                    const continuingProspectiveChange = this._doc.lastChangeWas(this._change);
+                    const oldValue = continuingProspectiveChange ? this._change.oldValue : this._doc.song.channels[this._doc.channel].octave;
+                    const currentOctave = this._doc.getBaseVisibleOctave(this._doc.channel);
+                    let octave = currentOctave;
+                    while (this._mouseY - this._dragStart < -this._octaveHeight * 0.5) {
+                        if (octave < scrollableOctaves) {
+                            octave++;
+                            this._dragStart -= this._octaveHeight;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                    while (this._mouseY - this._dragStart > this._octaveHeight * 0.5) {
+                        if (octave > 0) {
+                            octave--;
+                            this._dragStart += this._octaveHeight;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                    this._change = new ChangeOctave(this._doc, oldValue, Math.floor(octave + visibleOctaveCount * 0.5));
+                    this._doc.setProspectiveChange(this._change);
                 }
+                this._updatePreview();
             };
-            this._whenMouseMoved = (event) => {
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._whenCursorMoved();
-            };
-            this._whenTouchMoved = (event) => {
-                if (!this._mouseDown)
-                    return;
-                event.preventDefault();
-                const boundingRect = this._svg.getBoundingClientRect();
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._whenCursorMoved();
-            };
-            this._whenCursorReleased = (event) => {
-                if (!this._doc.song.getChannelIsNoise(this._doc.channel) && this._mouseDown) {
+            this._onPointerUp = (event) => {
+                if (!this._doc.song.getChannelIsNoise(this._doc.channel)) {
                     if (this._dragging) {
                         if (this._change != null)
                             this._doc.record(this._change);
@@ -17222,13 +19879,12 @@ var beepbox = (function (exports) {
                         }
                     }
                 }
-                this._mouseDown = false;
                 this._dragging = false;
                 this._updatePreview();
             };
             this._documentChanged = () => {
                 this._barBottom = this._editorHeight - (this._octaveHeight * this._doc.getBaseVisibleOctave(this._doc.channel));
-                this._svg.style.visibility = (this._doc.song.getChannelIsNoise(this._doc.channel)) ? "hidden" : "visible";
+                this._svg.style.display = (this._doc.song.getChannelIsNoise(this._doc.channel)) ? "none" : "";
                 const visibleOctaveCount = this._doc.getVisibleOctaveCount();
                 if (this._renderedBarBottom != this._barBottom || this._renderedVisibleOctaveCount != visibleOctaveCount) {
                     this._renderedBarBottom = this._barBottom;
@@ -17256,52 +19912,15 @@ var beepbox = (function (exports) {
             const arrowWidth = 6;
             this._upHighlight.setAttribute("d", `M ${center} ${tip} L ${center + arrowWidth} ${base} L ${center - arrowWidth} ${base} z`);
             this._downHighlight.setAttribute("d", `M ${center} ${this._editorHeight - tip} L ${center + arrowWidth} ${this._editorHeight - base} L ${center - arrowWidth} ${this._editorHeight - base} z`);
-            this.container.addEventListener("mousedown", this._whenMousePressed);
-            document.addEventListener("mousemove", this._whenMouseMoved);
-            document.addEventListener("mouseup", this._whenCursorReleased);
-            this.container.addEventListener("mouseover", this._whenMouseOver);
-            this.container.addEventListener("mouseout", this._whenMouseOut);
-            this.container.addEventListener("touchstart", this._whenTouchPressed);
-            this.container.addEventListener("touchmove", this._whenTouchMoved);
-            this.container.addEventListener("touchend", this._whenCursorReleased);
-            this.container.addEventListener("touchcancel", this._whenCursorReleased);
-        }
-        _whenCursorMoved() {
-            if (this._doc.song.getChannelIsNoise(this._doc.channel))
-                return;
-            if (this._dragging) {
-                const visibleOctaveCount = this._doc.getVisibleOctaveCount();
-                const scrollableOctaves = Config.pitchOctaves - visibleOctaveCount;
-                const continuingProspectiveChange = this._doc.lastChangeWas(this._change);
-                const oldValue = continuingProspectiveChange ? this._change.oldValue : this._doc.song.channels[this._doc.channel].octave;
-                const currentOctave = this._doc.getBaseVisibleOctave(this._doc.channel);
-                let octave = currentOctave;
-                while (this._mouseY - this._dragStart < -this._octaveHeight * 0.5) {
-                    if (octave < scrollableOctaves) {
-                        octave++;
-                        this._dragStart -= this._octaveHeight;
-                    }
-                    else {
-                        break;
-                    }
-                }
-                while (this._mouseY - this._dragStart > this._octaveHeight * 0.5) {
-                    if (octave > 0) {
-                        octave--;
-                        this._dragStart += this._octaveHeight;
-                    }
-                    else {
-                        break;
-                    }
-                }
-                this._change = new ChangeOctave(this._doc, oldValue, Math.floor(octave + visibleOctaveCount * 0.5));
-                this._doc.setProspectiveChange(this._change);
-            }
-            if (this._mouseOver)
-                this._updatePreview();
+            this.container.addEventListener("pointerenter", this._onPointerMove);
+            this.container.addEventListener("pointerleave", this._onPointerLeave);
+            this.container.addEventListener("pointerdown", this._onPointerDown);
+            this.container.addEventListener("pointermove", this._onPointerMove);
+            this.container.addEventListener("pointerup", this._onPointerUp);
+            this.container.addEventListener("pointercancel", this._onPointerUp);
         }
         _updatePreview() {
-            const showHighlight = this._mouseOver && !this._mouseDown;
+            const showHighlight = this._pointers.latest.isHovering;
             let showUpHighlight = false;
             let showDownHighlight = false;
             let showHandleHighlight = false;
@@ -17316,9 +19935,9 @@ var beepbox = (function (exports) {
                     showHandleHighlight = true;
                 }
             }
-            this._upHighlight.style.visibility = showUpHighlight ? "inherit" : "hidden";
-            this._downHighlight.style.visibility = showDownHighlight ? "inherit" : "hidden";
-            this._handleHighlight.style.visibility = showHandleHighlight ? "inherit" : "hidden";
+            this._upHighlight.style.display = showUpHighlight ? "" : "none";
+            this._downHighlight.style.display = showDownHighlight ? "" : "none";
+            this._handleHighlight.style.display = showHandleHighlight ? "" : "none";
         }
     }
 
@@ -17720,86 +20339,35 @@ var beepbox = (function (exports) {
             this._drumContainer = HTML.div({ style: "width: 100%; height: 100%; display: flex; flex-direction: column-reverse; align-items: stretch;" });
             this._preview = HTML.div({ style: `width: 100%; height: 40px; border: 2px solid ${ColorConfig.primaryText}; position: absolute; box-sizing: border-box; pointer-events: none;` });
             this.container = HTML.div({ style: "width: 32px; height: 100%; overflow: hidden; position: relative; flex-shrink: 0; touch-action: none;" }, this._pianoContainer, this._drumContainer, this._preview);
+            this._pointers = new EasyPointers(this.container, { preventTouchGestureScrolling: true });
             this._editorHeight = 481;
             this._pianoKeys = [];
             this._pianoLabels = [];
-            this._mouseY = 0;
-            this._mouseDown = false;
-            this._mouseOver = false;
             this._playedPitch = -1;
             this._renderedScale = -1;
             this._renderedDrums = false;
             this._renderedKey = -1;
             this._renderedPitchCount = -1;
             this._renderedLiveInputPitches = [];
-            this._whenMouseOver = (event) => {
-                if (this._mouseOver)
-                    return;
-                this._mouseOver = true;
+            this._onPointerLeave = (event) => {
                 this._updatePreview();
             };
-            this._whenMouseOut = (event) => {
-                if (!this._mouseOver)
-                    return;
-                this._mouseOver = false;
-                this._updatePreview();
-            };
-            this._whenMousePressed = (event) => {
-                event.preventDefault();
+            this._onPointerDown = (event) => {
                 this._doc.synth.maintainLiveInput();
-                this._mouseDown = true;
-                const boundingRect = this.container.getBoundingClientRect();
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
                 this._updateCursorPitch();
                 this._playLiveInput();
                 this._updatePreview();
             };
-            this._whenMouseMoved = (event) => {
-                if (this._mouseDown || this._mouseOver)
-                    this._doc.synth.maintainLiveInput();
-                const boundingRect = this.container.getBoundingClientRect();
-                this._mouseY = ((event.clientY || event.pageY) - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
+            this._onPointerMove = (event) => {
+                this._doc.synth.maintainLiveInput();
                 this._updateCursorPitch();
-                if (this._mouseDown)
+                if (event.pointer.isDown)
                     this._playLiveInput();
                 this._updatePreview();
             };
-            this._whenMouseReleased = (event) => {
-                if (this._mouseDown)
-                    this._releaseLiveInput();
-                this._mouseDown = false;
-                this._updatePreview();
-            };
-            this._whenTouchPressed = (event) => {
-                event.preventDefault();
-                this._doc.synth.maintainLiveInput();
-                this._mouseDown = true;
-                const boundingRect = this.container.getBoundingClientRect();
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._updateCursorPitch();
-                this._playLiveInput();
-            };
-            this._whenTouchMoved = (event) => {
-                event.preventDefault();
-                this._doc.synth.maintainLiveInput();
-                const boundingRect = this.container.getBoundingClientRect();
-                this._mouseY = (event.touches[0].clientY - boundingRect.top) * this._editorHeight / (boundingRect.bottom - boundingRect.top);
-                if (isNaN(this._mouseY))
-                    this._mouseY = 0;
-                this._updateCursorPitch();
-                if (this._mouseDown)
-                    this._playLiveInput();
-            };
-            this._whenTouchReleased = (event) => {
-                event.preventDefault();
-                this._mouseDown = false;
+            this._onPointerUp = (event) => {
                 this._releaseLiveInput();
+                this._updatePreview();
             };
             this._onAnimationFrame = () => {
                 window.requestAnimationFrame(this._onAnimationFrame);
@@ -17824,7 +20392,7 @@ var beepbox = (function (exports) {
                 this._pitchCount = isDrum ? Config.drumCount : this._doc.getVisiblePitchCount();
                 this._pitchHeight = this._editorHeight / this._pitchCount;
                 this._updateCursorPitch();
-                if (this._mouseDown)
+                if (this._pointers.latest.isDown)
                     this._playLiveInput();
                 if (!this._doc.prefs.showLetters)
                     return;
@@ -17872,22 +20440,20 @@ var beepbox = (function (exports) {
                 const scale = (1.0 - (i / Config.drumCount) * 0.35) * 100;
                 this._drumContainer.appendChild(HTML.div({ class: "drum-button", style: `background-size: ${scale}% ${scale}%;` }));
             }
-            this.container.addEventListener("mousedown", this._whenMousePressed);
-            document.addEventListener("mousemove", this._whenMouseMoved);
-            document.addEventListener("mouseup", this._whenMouseReleased);
-            this.container.addEventListener("mouseover", this._whenMouseOver);
-            this.container.addEventListener("mouseout", this._whenMouseOut);
-            this.container.addEventListener("touchstart", this._whenTouchPressed);
-            this.container.addEventListener("touchmove", this._whenTouchMoved);
-            this.container.addEventListener("touchend", this._whenTouchReleased);
-            this.container.addEventListener("touchcancel", this._whenTouchReleased);
+            this.container.addEventListener("pointerenter", this._onPointerMove);
+            this.container.addEventListener("pointerleave", this._onPointerLeave);
+            this.container.addEventListener("pointerdown", this._onPointerDown);
+            this.container.addEventListener("pointermove", this._onPointerMove);
+            this.container.addEventListener("pointerup", this._onPointerUp);
+            this.container.addEventListener("pointercancel", this._onPointerUp);
             this._doc.notifier.watch(this._documentChanged);
             this._documentChanged();
             window.requestAnimationFrame(this._onAnimationFrame);
         }
         _updateCursorPitch() {
             const scale = Config.scales[this._doc.song.scale].flags;
-            const mousePitch = Math.max(0, Math.min(this._pitchCount - 1, this._pitchCount - (this._mouseY / this._pitchHeight)));
+            const mouseY = this._pointers.latest.getPointInNormalized(this.container).y || 0;
+            const mousePitch = Math.max(0, Math.min(this._pitchCount - 1, (1 - mouseY) * this._pitchCount));
             if (scale[Math.floor(mousePitch) % Config.pitchesPerOctave] || this._doc.song.getChannelIsNoise(this._doc.channel)) {
                 this._cursorPitch = Math.floor(mousePitch);
             }
@@ -17925,10 +20491,10 @@ var beepbox = (function (exports) {
             this._playedPitch = -1;
         }
         _updatePreview() {
-            this._preview.style.visibility = (!this._mouseOver || this._mouseDown) ? "hidden" : "visible";
-            if (this._mouseOver && !this._mouseDown) {
-                const boundingRect = this.container.getBoundingClientRect();
-                const pitchHeight = this._pitchHeight / (this._editorHeight / (boundingRect.bottom - boundingRect.top));
+            const previewIsVisible = this._pointers.latest.isHovering;
+            this._preview.style.display = previewIsVisible ? "" : "none";
+            if (previewIsVisible) {
+                const pitchHeight = this._pitchHeight / (this._editorHeight / this.container.clientHeight);
                 this._preview.style.left = "0px";
                 this._preview.style.top = pitchHeight * (this._pitchCount - this._cursorPitch - 1) + "px";
                 this._preview.style.height = pitchHeight + "px";
@@ -19836,134 +22402,6 @@ You should be redirected to the song at:<br /><br />
         }
     }
 
-    const versionPrefix = "songVersion: ";
-    const maximumSongCount = 8;
-    const maximumWorkPerVersion = 3 * 60 * 1000;
-    const minimumWorkPerSpan = 1 * 60 * 1000;
-    function keyIsVersion(key) {
-        return key.indexOf(versionPrefix) == 0;
-    }
-    function keyToVersion(key) {
-        return JSON.parse(key.substring(versionPrefix.length));
-    }
-    function versionToKey(version) {
-        return versionPrefix + JSON.stringify(version);
-    }
-    function generateUid() {
-        return ((Math.random() * (-1 >>> 0)) >>> 0).toString(32);
-    }
-    function errorAlert(error) {
-        console.warn(error);
-        window.alert("Whoops, the song data appears to have been corrupted! Please try to recover the last working version of the song from the \"Recover Recent Song...\" option in BeepBox's \"File\" menu.");
-    }
-    function compareSongs(a, b) {
-        return b.versions[0].time - a.versions[0].time;
-    }
-    function compareVersions(a, b) {
-        return b.time - a.time;
-    }
-    class SongRecovery {
-        constructor() {
-            this._song = new Song();
-        }
-        static getAllRecoveredSongs() {
-            const songs = [];
-            const songsByUid = {};
-            for (let i = 0; i < localStorage.length; i++) {
-                const itemKey = localStorage.key(i);
-                if (keyIsVersion(itemKey)) {
-                    const version = keyToVersion(itemKey);
-                    let song = songsByUid[version.uid];
-                    if (song == undefined) {
-                        song = { versions: [] };
-                        songsByUid[version.uid] = song;
-                        songs.push(song);
-                    }
-                    song.versions.push(version);
-                }
-            }
-            for (const song of songs) {
-                song.versions.sort(compareVersions);
-            }
-            songs.sort(compareSongs);
-            return songs;
-        }
-        saveVersion(uid, songData) {
-            const newTime = Math.round(Date.now());
-            clearTimeout(this._saveVersionTimeoutHandle);
-            this._saveVersionTimeoutHandle = setTimeout(() => {
-                try {
-                    this._song.fromBase64String(songData);
-                }
-                catch (error) {
-                    errorAlert(error);
-                    return;
-                }
-                const songs = SongRecovery.getAllRecoveredSongs();
-                let currentSong = null;
-                for (const song of songs) {
-                    if (song.versions[0].uid == uid) {
-                        currentSong = song;
-                    }
-                }
-                if (currentSong == null) {
-                    currentSong = { versions: [] };
-                    songs.unshift(currentSong);
-                }
-                let versions = currentSong.versions;
-                let newWork = 1000;
-                if (versions.length > 0) {
-                    const mostRecentTime = versions[0].time;
-                    const mostRecentWork = versions[0].work;
-                    newWork = mostRecentWork + Math.min(maximumWorkPerVersion, newTime - mostRecentTime);
-                }
-                const newVersion = { uid: uid, time: newTime, work: newWork };
-                const newKey = versionToKey(newVersion);
-                versions.unshift(newVersion);
-                localStorage.setItem(newKey, songData);
-                let minSpan = minimumWorkPerSpan;
-                const spanMult = Math.pow(2, 1 / 2);
-                for (var i = 1; i < versions.length; i++) {
-                    const currentWork = versions[i].work;
-                    const olderWork = (i == versions.length - 1) ? 0.0 : versions[i + 1].work;
-                    if (currentWork - olderWork < minSpan) {
-                        let indexToDiscard = i;
-                        if (i < versions.length - 1) {
-                            const currentTime = versions[i].time;
-                            const newerTime = versions[i - 1].time;
-                            const olderTime = versions[i + 1].time;
-                            if ((currentTime - olderTime) < 0.5 * (newerTime - currentTime)) {
-                                indexToDiscard = i + 1;
-                            }
-                        }
-                        localStorage.removeItem(versionToKey(versions[indexToDiscard]));
-                        break;
-                    }
-                    minSpan *= spanMult;
-                }
-                while (songs.length > maximumSongCount) {
-                    let leastImportantSong = null;
-                    let leastImportance = Number.POSITIVE_INFINITY;
-                    for (let i = Math.round(maximumSongCount / 2); i < songs.length; i++) {
-                        const song = songs[i];
-                        const timePassed = newTime - song.versions[0].time;
-                        const timeScale = 1.0 / ((timePassed / (12 * 60 * 60 * 1000)) + 1.0);
-                        const adjustedWork = song.versions[0].work + 5 * 60 * 1000;
-                        const weight = adjustedWork * timeScale;
-                        if (leastImportance > weight) {
-                            leastImportance = weight;
-                            leastImportantSong = song;
-                        }
-                    }
-                    for (const version of leastImportantSong.versions) {
-                        localStorage.removeItem(versionToKey(version));
-                    }
-                    songs.splice(songs.indexOf(leastImportantSong), 1);
-                }
-            }, 750);
-        }
-    }
-
     const { button: button$2, div: div$2, h2: h2$1, p: p$1, select: select$2, option: option$2, iframe } = HTML;
     class SongRecoveryPrompt {
         constructor(_doc) {
@@ -20150,19 +22588,57 @@ You should be redirected to the song at:<br /><br />
             this._change = null;
             this._value = 0;
             this._oldValue = 0;
-            this._whenInput = () => {
+            this._onPointerDown = (event) => {
+                this._setFromPointer(event);
+                this.input.dispatchEvent(new InputEvent("input", { bubbles: true, cancelable: false, composed: true }));
+            };
+            this._onPointerMove = (event) => {
+                if (event.pointer.isDown) {
+                    this._setFromPointer(event);
+                    this.input.dispatchEvent(new InputEvent("input", { bubbles: true, cancelable: false, composed: true }));
+                }
+            };
+            this._onPointerUp = (event) => {
+                this._setFromPointer(event);
+                this.input.dispatchEvent(new InputEvent("input", { bubbles: true, cancelable: false, composed: true }));
+                this.input.dispatchEvent(new Event("change", { bubbles: true, cancelable: false, composed: true }));
+            };
+            this._onInput = () => {
                 const continuingProspectiveChange = this._doc.lastChangeWas(this._change);
                 if (!continuingProspectiveChange)
                     this._oldValue = this._value;
                 this._change = this._getChange(this._oldValue, parseInt(this.input.value));
-                this._doc.setProspectiveChange(this._change);
+                if (this._change)
+                    this._doc.setProspectiveChange(this._change);
             };
-            this._whenChange = () => {
-                this._doc.record(this._change);
+            this._onChange = () => {
+                if (this._change)
+                    this._doc.record(this._change);
                 this._change = null;
             };
-            input.addEventListener("input", this._whenInput);
-            input.addEventListener("change", this._whenChange);
+            input.addEventListener("input", this._onInput);
+            input.addEventListener("change", this._onChange);
+            input.style.pointerEvents = "none";
+            this.container = span(input, { style: "touch-action: pan-y; display: flex;" });
+            new EasyPointers(this.container);
+            this.container.addEventListener("pointerdown", this._onPointerDown);
+            this.container.addEventListener("pointermove", this._onPointerMove);
+            this.container.addEventListener("pointerup", this._onPointerUp);
+        }
+        _setFromPointer(event) {
+            const x = event.pointer.getPointIn(this.input, "contentBox").x;
+            const dimensions = getElementDimensions(this.input, "contentBox");
+            const thumbWidth = 6;
+            const ratio = (x - (thumbWidth / 2)) / (dimensions.width - thumbWidth);
+            const step = parseFloat(this.input.step) || 1;
+            let min = parseFloat(this.input.min);
+            let max = parseFloat(this.input.max);
+            if (!isFinite(min))
+                min = 0;
+            if (!isFinite(max))
+                max = 100;
+            const value = Math.max(min, Math.min(max, Math.round(((max - min) * ratio) / step) * step + min));
+            this.input.value = String(value);
         }
         updateValue(value) {
             this._value = value;
@@ -20170,40 +22646,40 @@ You should be redirected to the song at:<br /><br />
         }
     }
     class SongEditor {
-        constructor(_doc) {
-            this._doc = _doc;
+        constructor(beepboxEditorContainer) {
+            this.doc = new SongDocument();
             this.prompt = null;
-            this._keyboardLayout = new KeyboardLayout(this._doc);
-            this._patternEditorPrev = new PatternEditor(this._doc, false, -1);
-            this._patternEditor = new PatternEditor(this._doc, true, 0);
-            this._patternEditorNext = new PatternEditor(this._doc, false, 1);
-            this._muteEditor = new MuteEditor(this._doc);
-            this._trackEditor = new TrackEditor(this._doc);
-            this._loopEditor = new LoopEditor(this._doc);
-            this._octaveScrollBar = new OctaveScrollBar(this._doc);
-            this._piano = new Piano(this._doc);
+            this._keyboardLayout = new KeyboardLayout(this.doc);
+            this._patternEditorPrev = new PatternEditor(this.doc, false, -1);
+            this._patternEditor = new PatternEditor(this.doc, true, 0);
+            this._patternEditorNext = new PatternEditor(this.doc, false, 1);
+            this._muteEditor = new MuteEditor(this.doc);
+            this._trackEditor = new TrackEditor(this.doc);
+            this._loopEditor = new LoopEditor(this.doc);
+            this._octaveScrollBar = new OctaveScrollBar(this.doc);
+            this._piano = new Piano(this.doc);
             this._playButton = button({ class: "playButton", type: "button", title: "Play (Space)" }, span("Play"));
             this._pauseButton = button({ class: "pauseButton", style: "display: none;", type: "button", title: "Pause (Space)" }, "Pause");
             this._recordButton = button({ class: "recordButton", style: "display: none;", type: "button", title: "Record (Ctrl+Space)" }, span("Record"));
             this._stopButton = button({ class: "stopButton", style: "display: none;", type: "button", title: "Stop Recording (Space)" }, "Stop Recording");
             this._prevBarButton = button({ class: "prevBarButton", type: "button", title: "Previous Bar (left bracket)" });
             this._nextBarButton = button({ class: "nextBarButton", type: "button", title: "Next Bar (right bracket)" });
-            this._volumeSlider = input({ title: "main volume", style: "width: 5em; flex-grow: 1; margin: 0;", type: "range", min: "0", max: "75", value: "50", step: "1" });
+            this._volumeSlider = new Slider(input({ title: "main volume", style: "flex-grow: 1; margin: 0;", type: "range", min: "0", max: "75", value: "50", step: "1" }), this.doc, (oldValue, newValue) => { this._setVolumeSlider(); return null; });
             this._fileMenu = select({ style: "width: 100%;" }, option({ selected: true, disabled: true, hidden: false }, "File"), option({ value: "new" }, "+ New Blank Song"), option({ value: "import" }, "↑ Import Song... (" + EditorConfig.ctrlSymbol + "O)"), option({ value: "export" }, "↓ Export Song... (" + EditorConfig.ctrlSymbol + "S)"), option({ value: "copyUrl" }, "⎘ Copy Song URL"), option({ value: "shareUrl" }, "⤳ Share Song URL"), option({ value: "shortenUrl" }, "… Shorten Song URL"), option({ value: "viewPlayer" }, "▶ View in Song Player"), option({ value: "copyEmbed" }, "⎘ Copy HTML Embed Code"), option({ value: "songRecovery" }, "⚠ Recover Recent Song..."));
             this._editMenu = select({ style: "width: 100%;" }, option({ selected: true, disabled: true, hidden: false }, "Edit"), option({ value: "undo" }, "Undo (Z)"), option({ value: "redo" }, "Redo (Y)"), option({ value: "copy" }, "Copy Pattern (C)"), option({ value: "pasteNotes" }, "Paste Pattern Notes (V)"), option({ value: "pasteNumbers" }, "Paste Pattern Numbers (" + EditorConfig.ctrlSymbol + "⇧V)"), option({ value: "insertBars" }, "Insert Bar (⏎)"), option({ value: "deleteBars" }, "Delete Selected Bars (⌫)"), option({ value: "insertChannel" }, "Insert Channel (" + EditorConfig.ctrlSymbol + "⏎)"), option({ value: "deleteChannel" }, "Delete Selected Channels (" + EditorConfig.ctrlSymbol + "⌫)"), option({ value: "selectAll" }, "Select All (A)"), option({ value: "selectChannel" }, "Select Channel (⇧A)"), option({ value: "duplicatePatterns" }, "Duplicate Reused Patterns (D)"), option({ value: "transposeUp" }, "Move Notes Up (+ or ⇧+)"), option({ value: "transposeDown" }, "Move Notes Down (- or ⇧-)"), option({ value: "moveNotesSideways" }, "Move All Notes Sideways..."), option({ value: "beatsPerBar" }, "Change Beats Per Bar..."), option({ value: "barCount" }, "Change Song Length..."), option({ value: "channelSettings" }, "Channel Settings... (Q)"));
             this._optionsMenu = select({ style: "width: 100%;" }, option({ selected: true, disabled: true, hidden: false }, "Preferences"), option({ value: "autoPlay" }, "Auto Play on Load"), option({ value: "autoFollow" }, "Show And Play The Same Bar"), option({ value: "enableNotePreview" }, "Hear Preview of Added Notes"), option({ value: "showLetters" }, "Show Piano Keys"), option({ value: "showFifth" }, 'Highlight "Fifth" of Song Key'), option({ value: "notesOutsideScale" }, "Allow Adding Notes Not in Scale"), option({ value: "setDefaultScale" }, "Use Current Scale as Default"), option({ value: "showChannels" }, "Show Notes From All Channels"), option({ value: "showScrollBar" }, "Show Octave Scroll Bar"), option({ value: "alwaysShowSettings" }, "Customize All Instruments"), option({ value: "instrumentCopyPaste" }, "Instrument Copy/Paste Buttons"), option({ value: "enableChannelMuting" }, "Enable Channel Muting"), option({ value: "displayBrowserUrl" }, "Display Song Data in URL"), option({ value: "layout" }, "Choose Layout..."), option({ value: "colorTheme" }, "Choose Theme..."), option({ value: "recordingSetup" }, "Set Up Note Recording..."));
             this._scaleSelect = buildOptions(select(), Config.scales.map(scale => scale.name));
             this._keySelect = buildOptions(select(), Config.keys.map(key => key.name).reverse());
-            this._tempoSlider = new Slider(input({ style: "margin: 0; width: 4em; flex-grow: 1; vertical-align: middle;", type: "range", min: "0", max: "14", value: "7", step: "1" }), this._doc, (oldValue, newValue) => new ChangeTempo(this._doc, oldValue, Math.round(120.0 * Math.pow(2.0, (-4.0 + newValue) / 9.0))));
+            this._tempoSlider = new Slider(input({ style: "margin: 0; width: 4em; flex-grow: 1; vertical-align: middle;", type: "range", min: "0", max: "14", value: "7", step: "1" }), this.doc, (oldValue, newValue) => new ChangeTempo(this.doc, oldValue, Math.round(120.0 * Math.pow(2.0, (-4.0 + newValue) / 9.0))));
             this._tempoStepper = input({ style: "width: 3em; margin-left: 0.4em; vertical-align: middle;", type: "number", step: "1" });
-            this._chorusSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.chorusRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeChorus(this._doc, oldValue, newValue));
-            this._chorusRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("chorus") }, "Chorus:"), this._chorusSlider.input);
-            this._reverbSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.reverbRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeReverb(this._doc, oldValue, newValue));
-            this._reverbRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("reverb") }, "Reverb:"), this._reverbSlider.input);
-            this._echoSustainSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.echoSustainRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeEchoSustain(this._doc, oldValue, newValue));
-            this._echoSustainRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("echoSustain") }, "Echo:"), this._echoSustainSlider.input);
-            this._echoDelaySlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.echoDelayRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeEchoDelay(this._doc, oldValue, newValue));
-            this._echoDelayRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("echoDelay") }, "Echo Delay:"), this._echoDelaySlider.input);
+            this._chorusSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.chorusRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeChorus(this.doc, oldValue, newValue));
+            this._chorusRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("chorus") }, "Chorus:"), this._chorusSlider.container);
+            this._reverbSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.reverbRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeReverb(this.doc, oldValue, newValue));
+            this._reverbRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("reverb") }, "Reverb:"), this._reverbSlider.container);
+            this._echoSustainSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.echoSustainRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeEchoSustain(this.doc, oldValue, newValue));
+            this._echoSustainRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("echoSustain") }, "Echo:"), this._echoSustainSlider.container);
+            this._echoDelaySlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.echoDelayRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeEchoDelay(this.doc, oldValue, newValue));
+            this._echoDelayRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("echoDelay") }, "Echo Delay:"), this._echoDelaySlider.container);
             this._rhythmSelect = buildOptions(select(), Config.rhythms.map(rhythm => rhythm.name));
             this._pitchedPresetSelect = buildPresetOptions(false);
             this._drumPresetSelect = buildPresetOptions(true);
@@ -20217,47 +22693,47 @@ You should be redirected to the song at:<br /><br />
             this._instrumentCopyButton = button({ type: "button", class: "copy-instrument", title: "Copy Instrument (⇧C)" }, "Copy");
             this._instrumentPasteButton = button({ type: "button", class: "paste-instrument", title: "Paste Instrument (⇧V)" }, "Paste");
             this._instrumentCopyPasteRow = div({ class: "instrumentCopyPasteRow", style: "display: none;" }, this._instrumentCopyButton, this._instrumentPasteButton);
-            this._instrumentVolumeSlider = new Slider(input({ style: "margin: 0;", type: "range", min: -(Config.volumeRange - 1), max: "0", value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeVolume(this._doc, oldValue, -newValue));
-            this._instrumentVolumeSliderRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("instrumentVolume") }, "Volume:"), this._instrumentVolumeSlider.input);
-            this._panSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.panMax, value: Config.panCenter, step: "1" }), this._doc, (oldValue, newValue) => new ChangePan(this._doc, oldValue, newValue));
-            this._panSliderRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("pan") }, "Panning:"), this._panSlider.input);
+            this._instrumentVolumeSlider = new Slider(input({ style: "margin: 0;", type: "range", min: -(Config.volumeRange - 1), max: "0", value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeVolume(this.doc, oldValue, -newValue));
+            this._instrumentVolumeSliderRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("instrumentVolume") }, "Volume:"), this._instrumentVolumeSlider.container);
+            this._panSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.panMax, value: Config.panCenter, step: "1" }), this.doc, (oldValue, newValue) => new ChangePan(this.doc, oldValue, newValue));
+            this._panSliderRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("pan") }, "Panning:"), this._panSlider.container);
             this._chipWaveSelect = buildOptions(select(), Config.chipWaves.map(wave => wave.name));
             this._chipNoiseSelect = buildOptions(select(), Config.chipNoises.map(wave => wave.name));
             this._chipWaveSelectRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("chipWave") }, "Wave:"), div({ class: "selectContainer" }, this._chipWaveSelect));
             this._chipNoiseSelectRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("chipNoise") }, "Noise:"), div({ class: "selectContainer" }, this._chipNoiseSelect));
-            this._fadeInOutEditor = new FadeInOutEditor(this._doc);
+            this._fadeInOutEditor = new FadeInOutEditor(this.doc);
             this._fadeInOutRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("fadeInOut") }, "Fade In/Out:"), this._fadeInOutEditor.container);
             this._transitionSelect = buildOptions(select(), Config.transitions.map(transition => transition.name));
             this._transitionRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("transition") }, "Transition:"), div({ class: "selectContainer" }, this._transitionSelect));
             this._effectsSelect = select(option({ selected: true, disabled: true, hidden: false }));
-            this._eqFilterEditor = new FilterEditor(this._doc);
+            this._eqFilterEditor = new FilterEditor(this.doc);
             this._eqFilterRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("eqFilter") }, "EQ Filter:"), this._eqFilterEditor.container);
-            this._noteFilterEditor = new FilterEditor(this._doc, true);
+            this._noteFilterEditor = new FilterEditor(this.doc, true);
             this._noteFilterRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("noteFilter") }, "Note Filter:"), this._noteFilterEditor.container);
-            this._supersawDynamismSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.supersawDynamismMax, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeSupersawDynamism(this._doc, oldValue, newValue));
-            this._supersawDynamismRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("supersawDynamism") }, "Dynamism:"), this._supersawDynamismSlider.input);
-            this._supersawSpreadSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.supersawSpreadMax, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeSupersawSpread(this._doc, oldValue, newValue));
-            this._supersawSpreadRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("supersawSpread") }, "Spread:"), this._supersawSpreadSlider.input);
-            this._supersawShapeSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.supersawShapeMax, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeSupersawShape(this._doc, oldValue, newValue));
-            this._supersawShapeRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("supersawShape") }, "Saw↔Pulse:"), this._supersawShapeSlider.input);
-            this._pulseWidthSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.pulseWidthRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangePulseWidth(this._doc, oldValue, newValue));
-            this._pulseWidthRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("pulseWidth") }, "Pulse Width:"), this._pulseWidthSlider.input);
-            this._pitchShiftSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.pitchShiftRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangePitchShift(this._doc, oldValue, newValue));
+            this._supersawDynamismSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.supersawDynamismMax, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeSupersawDynamism(this.doc, oldValue, newValue));
+            this._supersawDynamismRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("supersawDynamism") }, "Dynamism:"), this._supersawDynamismSlider.container);
+            this._supersawSpreadSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.supersawSpreadMax, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeSupersawSpread(this.doc, oldValue, newValue));
+            this._supersawSpreadRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("supersawSpread") }, "Spread:"), this._supersawSpreadSlider.container);
+            this._supersawShapeSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.supersawShapeMax, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeSupersawShape(this.doc, oldValue, newValue));
+            this._supersawShapeRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("supersawShape") }, "Saw↔Pulse:"), this._supersawShapeSlider.container);
+            this._pulseWidthSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.pulseWidthRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangePulseWidth(this.doc, oldValue, newValue));
+            this._pulseWidthRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("pulseWidth") }, "Pulse Width:"), this._pulseWidthSlider.container);
+            this._pitchShiftSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.pitchShiftRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangePitchShift(this.doc, oldValue, newValue));
             this._pitchShiftTonicMarkers = [div({ class: "pitchShiftMarker", style: { color: ColorConfig.tonic } }), div({ class: "pitchShiftMarker", style: { color: ColorConfig.tonic, left: "50%" } }), div({ class: "pitchShiftMarker", style: { color: ColorConfig.tonic, left: "100%" } })];
             this._pitchShiftFifthMarkers = [div({ class: "pitchShiftMarker", style: { color: ColorConfig.fifthNote, left: (100 * 7 / 24) + "%" } }), div({ class: "pitchShiftMarker", style: { color: ColorConfig.fifthNote, left: (100 * 19 / 24) + "%" } })];
-            this._pitchShiftMarkerContainer = div({ style: "display: flex; position: relative;" }, this._pitchShiftSlider.input, div({ class: "pitchShiftMarkerContainer" }, this._pitchShiftTonicMarkers, this._pitchShiftFifthMarkers));
+            this._pitchShiftMarkerContainer = div({ style: "display: flex; position: relative;" }, this._pitchShiftSlider.container, div({ class: "pitchShiftMarkerContainer" }, this._pitchShiftTonicMarkers, this._pitchShiftFifthMarkers));
             this._pitchShiftRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("pitchShift") }, "Pitch Shift:"), this._pitchShiftMarkerContainer);
-            this._detuneSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.detuneMax, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeDetune(this._doc, oldValue, newValue));
-            this._detuneRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("detune") }, "Detune:"), this._detuneSlider.input);
-            this._distortionSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.distortionRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeDistortion(this._doc, oldValue, newValue));
-            this._distortionRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("distortion") }, "Distortion:"), this._distortionSlider.input);
-            this._bitcrusherQuantizationSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.bitcrusherQuantizationRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeBitcrusherQuantization(this._doc, oldValue, newValue));
-            this._bitcrusherQuantizationRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("bitcrusherQuantization") }, "Bit Crush:"), this._bitcrusherQuantizationSlider.input);
-            this._bitcrusherFreqSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.bitcrusherFreqRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeBitcrusherFreq(this._doc, oldValue, newValue));
-            this._bitcrusherFreqRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("bitcrusherFreq") }, "Freq Crush:"), this._bitcrusherFreqSlider.input);
-            this._stringSustainSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.stringSustainRange - 1, value: "0", step: "1" }), this._doc, (oldValue, newValue) => new ChangeStringSustain(this._doc, oldValue, newValue));
+            this._detuneSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.detuneMax, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeDetune(this.doc, oldValue, newValue));
+            this._detuneRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("detune") }, "Detune:"), this._detuneSlider.container);
+            this._distortionSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.distortionRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeDistortion(this.doc, oldValue, newValue));
+            this._distortionRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("distortion") }, "Distortion:"), this._distortionSlider.container);
+            this._bitcrusherQuantizationSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.bitcrusherQuantizationRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeBitcrusherQuantization(this.doc, oldValue, newValue));
+            this._bitcrusherQuantizationRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("bitcrusherQuantization") }, "Bit Crush:"), this._bitcrusherQuantizationSlider.container);
+            this._bitcrusherFreqSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.bitcrusherFreqRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeBitcrusherFreq(this.doc, oldValue, newValue));
+            this._bitcrusherFreqRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("bitcrusherFreq") }, "Freq Crush:"), this._bitcrusherFreqSlider.container);
+            this._stringSustainSlider = new Slider(input({ style: "margin: 0;", type: "range", min: "0", max: Config.stringSustainRange - 1, value: "0", step: "1" }), this.doc, (oldValue, newValue) => new ChangeStringSustain(this.doc, oldValue, newValue));
             this._stringSustainLabel = span({ class: "tip", onclick: () => this._openPrompt("stringSustain") }, "Sustain:");
-            this._stringSustainRow = div({ class: "selectRow" }, this._stringSustainLabel, this._stringSustainSlider.input);
+            this._stringSustainRow = div({ class: "selectRow" }, this._stringSustainLabel, this._stringSustainSlider.container);
             this._unisonSelect = buildOptions(select(), Config.unisons.map(unison => unison.name));
             this._unisonSelectRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("unison") }, "Unison:"), div({ class: "selectContainer" }, this._unisonSelect));
             this._chordSelect = buildOptions(select(), Config.chords.map(chord => chord.name));
@@ -20267,14 +22743,14 @@ You should be redirected to the song at:<br /><br />
             this._phaseModGroup = div({ class: "editor-controls" });
             this._feedbackTypeSelect = buildOptions(select(), Config.feedbacks.map(feedback => feedback.name));
             this._feedbackRow1 = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("feedbackType") }, "Feedback:"), div({ class: "selectContainer" }, this._feedbackTypeSelect));
-            this._spectrumEditor = new SpectrumEditor(this._doc, null);
+            this._spectrumEditor = new SpectrumEditor(this.doc, null);
             this._spectrumRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("spectrum") }, "Spectrum:"), this._spectrumEditor.container);
-            this._harmonicsEditor = new HarmonicsEditor(this._doc);
+            this._harmonicsEditor = new HarmonicsEditor(this.doc);
             this._harmonicsRow = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("harmonics") }, "Harmonics:"), this._harmonicsEditor.container);
-            this._envelopeEditor = new EnvelopeEditor(this._doc);
+            this._envelopeEditor = new EnvelopeEditor(this.doc);
             this._drumsetGroup = div({ class: "editor-controls" });
-            this._feedbackAmplitudeSlider = new Slider(input({ type: "range", min: "0", max: Config.operatorAmplitudeMax, value: "0", step: "1", title: "Feedback Amplitude" }), this._doc, (oldValue, newValue) => new ChangeFeedbackAmplitude(this._doc, oldValue, newValue));
-            this._feedbackRow2 = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("feedbackVolume") }, "Fdback Vol:"), this._feedbackAmplitudeSlider.input);
+            this._feedbackAmplitudeSlider = new Slider(input({ type: "range", min: "0", max: Config.operatorAmplitudeMax, value: "0", step: "1", title: "Feedback Amplitude" }), this.doc, (oldValue, newValue) => new ChangeFeedbackAmplitude(this.doc, oldValue, newValue));
+            this._feedbackRow2 = div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("feedbackVolume") }, "Fdback Vol:"), this._feedbackAmplitudeSlider.container);
             this._customizeInstrumentButton = button({ type: "button", class: "customize-instrument" }, "Customize Instrument");
             this._addEnvelopeButton = button({ type: "button", class: "add-envelope" });
             this._customInstrumentSettingsGroup = div({ class: "editor-controls" }, this._eqFilterRow, this._fadeInOutRow, this._chipWaveSelectRow, this._chipNoiseSelectRow, this._algorithmSelectRow, this._phaseModGroup, this._feedbackRow1, this._feedbackRow2, this._spectrumRow, this._harmonicsRow, this._drumsetGroup, this._supersawDynamismRow, this._supersawSpreadRow, this._supersawShapeRow, this._pulseWidthRow, this._stringSustainRow, this._unisonSelectRow, div({ style: `margin: 2px 0; margin-left: 2em; display: flex; align-items: center;` }, span({ style: `flex-grow: 1; text-align: center;` }, span({ class: "tip", onclick: () => this._openPrompt("effects") }, "Effects")), div({ class: "effects-menu" }, this._effectsSelect)), this._transitionRow, this._chordSelectRow, this._pitchShiftRow, this._detuneRow, this._vibratoSelectRow, this._noteFilterRow, this._distortionRow, this._bitcrusherQuantizationRow, this._bitcrusherFreqRow, this._panSliderRow, this._chorusRow, this._echoSustainRow, this._echoDelayRow, this._reverbRow, div({ style: `margin: 2px 0; margin-left: 2em; display: flex; align-items: center;` }, span({ style: `flex-grow: 1; text-align: center;` }, span({ class: "tip", onclick: () => this._openPrompt("envelopes") }, "Envelopes")), this._addEnvelopeButton), this._envelopeEditor.container);
@@ -20284,15 +22760,15 @@ You should be redirected to the song at:<br /><br />
             this._zoomOutButton = button({ class: "zoomOutButton", type: "button", title: "Zoom Out" });
             this._patternEditorRow = div({ style: "flex: 1; height: 100%; display: flex; overflow: hidden; justify-content: center;" }, this._patternEditorPrev.container, this._patternEditor.container, this._patternEditorNext.container);
             this._patternArea = div({ class: "pattern-area" }, this._piano.container, this._patternEditorRow, this._octaveScrollBar.container, this._zoomInButton, this._zoomOutButton);
-            this._trackContainer = div({ class: "trackContainer" }, this._trackEditor.container, this._loopEditor.container);
+            this._trackContainer = div({ class: "trackContainer noSelection" }, this._trackEditor.container, this._loopEditor.container);
             this._trackVisibleArea = div({ style: "position: absolute; width: 100%; height: 100%; pointer-events: none;" });
-            this._trackAndMuteContainer = div({ class: "trackAndMuteContainer" }, this._muteEditor.container, this._trackContainer, this._trackVisibleArea);
-            this._barScrollBar = new BarScrollBar(this._doc);
+            this._trackAndMuteContainer = div({ class: "trackAndMuteContainer prefers-big-scrollbars" }, this._muteEditor.container, this._trackContainer, this._trackVisibleArea);
+            this._barScrollBar = new BarScrollBar(this.doc);
             this._trackArea = div({ class: "track-area" }, this._trackAndMuteContainer, this._barScrollBar.container);
             this._menuArea = div({ class: "menu-area" }, div({ class: "selectContainer menu file" }, this._fileMenu), div({ class: "selectContainer menu edit" }, this._editMenu), div({ class: "selectContainer menu preferences" }, this._optionsMenu));
-            this._songSettingsArea = div({ class: "song-settings-area" }, div({ class: "editor-controls" }, div({ style: `margin: 3px 0; text-align: center; color: ${ColorConfig.secondaryText};` }, "Song Settings"), div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("scale") }, "Scale:"), div({ class: "selectContainer" }, this._scaleSelect)), div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("key") }, "Key:"), div({ class: "selectContainer" }, this._keySelect)), div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("tempo") }, "Tempo:"), span({ style: "display: flex;" }, this._tempoSlider.input, this._tempoStepper)), div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("rhythm") }, "Rhythm:"), div({ class: "selectContainer" }, this._rhythmSelect))));
+            this._songSettingsArea = div({ class: "song-settings-area" }, div({ class: "editor-controls" }, div({ style: `margin: 3px 0; text-align: center; color: ${ColorConfig.secondaryText};` }, "Song Settings"), div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("scale") }, "Scale:"), div({ class: "selectContainer" }, this._scaleSelect)), div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("key") }, "Key:"), div({ class: "selectContainer" }, this._keySelect)), div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("tempo") }, "Tempo:"), span({ style: "display: flex;" }, this._tempoSlider.container, this._tempoStepper)), div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("rhythm") }, "Rhythm:"), div({ class: "selectContainer" }, this._rhythmSelect))));
             this._instrumentSettingsArea = div({ class: "instrument-settings-area" }, this._instrumentSettingsGroup);
-            this._settingsArea = div({ class: "settings-area noSelection" }, div({ class: "version-area" }, div({ style: `text-align: center; margin: 3px 0; color: ${ColorConfig.secondaryText};` }, EditorConfig.versionDisplayName, " ", a({ class: "tip", target: "_blank", href: EditorConfig.releaseNotesURL }, EditorConfig.version))), div({ class: "play-pause-area" }, div({ class: "playback-bar-controls" }, this._playButton, this._pauseButton, this._recordButton, this._stopButton, this._prevBarButton, this._nextBarButton), div({ class: "playback-volume-controls" }, span({ class: "volume-speaker" }), this._volumeSlider)), this._menuArea, this._songSettingsArea, this._instrumentSettingsArea);
+            this._settingsArea = div({ class: "settings-area noSelection" }, div({ class: "version-area" }, div({ style: `text-align: center; margin: 3px 0; color: ${ColorConfig.secondaryText};` }, EditorConfig.versionDisplayName, " ", a({ class: "tip", target: "_blank", href: EditorConfig.releaseNotesURL }, EditorConfig.version))), div({ class: "play-pause-area" }, div({ class: "playback-bar-controls" }, this._playButton, this._pauseButton, this._recordButton, this._stopButton, this._prevBarButton, this._nextBarButton), div({ class: "playback-volume-controls" }, span({ class: "volume-speaker" }), this._volumeSlider.container)), this._menuArea, this._songSettingsArea, this._instrumentSettingsArea);
             this.mainLayer = div({ class: "beepboxEditor", tabIndex: "0" }, this._patternArea, this._trackArea, this._settingsArea, this._promptContainer);
             this._wasPlaying = false;
             this._currentPromptName = null;
@@ -20313,31 +22789,30 @@ You should be redirected to the song at:<br /><br />
                 this.mainLayer.focus({ preventScroll: true });
             };
             this._onFocusIn = (event) => {
-                if (this._doc.synth.recording && event.target != this.mainLayer && event.target != this._stopButton && event.target != this._volumeSlider) {
+                if (this.doc.synth.recording && event.target != this.mainLayer && event.target != this._stopButton && event.target != this._volumeSlider.input) {
                     this._refocusStage();
                 }
             };
             this.whenUpdated = () => {
-                const prefs = this._doc.prefs;
+                const prefs = this.doc.prefs;
                 this._muteEditor.container.style.display = prefs.enableChannelMuting ? "" : "none";
-                const trackBounds = this._trackVisibleArea.getBoundingClientRect();
-                this._doc.trackVisibleBars = Math.floor((trackBounds.right - trackBounds.left - (prefs.enableChannelMuting ? 32 : 0)) / this._doc.getBarWidth());
-                this._doc.trackVisibleChannels = Math.floor((trackBounds.bottom - trackBounds.top - 30) / ChannelRow.patternHeight);
+                this.doc.trackVisibleBars = Math.floor((this._trackVisibleArea.clientWidth - (prefs.enableChannelMuting ? 32 : 0)) / this.doc.getBarWidth());
+                this.doc.trackVisibleChannels = Math.floor((this._trackVisibleArea.clientHeight - 30) / ChannelRow.patternHeight);
                 this._barScrollBar.render();
                 this._muteEditor.render();
                 this._trackEditor.render();
-                this._trackAndMuteContainer.scrollLeft = this._doc.barScrollPos * this._doc.getBarWidth();
-                this._trackAndMuteContainer.scrollTop = this._doc.channelScrollPos * ChannelRow.patternHeight;
+                this._trackAndMuteContainer.scrollLeft = this.doc.barScrollPos * this.doc.getBarWidth();
+                this._trackAndMuteContainer.scrollTop = this.doc.channelScrollPos * ChannelRow.patternHeight;
                 this._piano.container.style.display = prefs.showLetters ? "" : "none";
                 this._octaveScrollBar.container.style.display = prefs.showScrollBar ? "" : "none";
-                this._barScrollBar.container.style.display = this._doc.song.barCount > this._doc.trackVisibleBars ? "" : "none";
-                if (this._doc.getFullScreen()) {
-                    const semitoneHeight = this._patternEditorRow.clientHeight / this._doc.getVisiblePitchCount();
+                this._barScrollBar.container.style.display = this.doc.song.barCount > this.doc.trackVisibleBars ? "" : "none";
+                if (this.doc.getFullScreen()) {
+                    const semitoneHeight = this._patternEditorRow.clientHeight / this.doc.getVisiblePitchCount();
                     const targetBeatWidth = semitoneHeight * 5;
-                    const minBeatWidth = this._patternEditorRow.clientWidth / (this._doc.song.beatsPerBar * 3);
-                    const maxBeatWidth = this._patternEditorRow.clientWidth / (this._doc.song.beatsPerBar + 2);
+                    const minBeatWidth = this._patternEditorRow.clientWidth / (this.doc.song.beatsPerBar * 3);
+                    const maxBeatWidth = this._patternEditorRow.clientWidth / (this.doc.song.beatsPerBar + 2);
                     const beatWidth = Math.max(minBeatWidth, Math.min(maxBeatWidth, targetBeatWidth));
-                    const patternEditorWidth = beatWidth * this._doc.song.beatsPerBar;
+                    const patternEditorWidth = beatWidth * this.doc.song.beatsPerBar;
                     this._patternEditorPrev.container.style.width = patternEditorWidth + "px";
                     this._patternEditor.container.style.width = patternEditorWidth + "px";
                     this._patternEditorNext.container.style.width = patternEditorWidth + "px";
@@ -20369,7 +22844,7 @@ You should be redirected to the song at:<br /><br />
                     (prefs.showLetters ? "✓ " : "　") + "Show Piano Keys",
                     (prefs.showFifth ? "✓ " : "　") + 'Highlight "Fifth" of Song Key',
                     (prefs.notesOutsideScale ? "✓ " : "　") + "Allow Adding Notes Not in Scale",
-                    (prefs.defaultScale == this._doc.song.scale ? "✓ " : "　") + "Use Current Scale as Default",
+                    (prefs.defaultScale == this.doc.song.scale ? "✓ " : "　") + "Use Current Scale as Default",
                     (prefs.showChannels ? "✓ " : "　") + "Show Notes From All Channels",
                     (prefs.showScrollBar ? "✓ " : "　") + "Show Octave Scroll Bar",
                     (prefs.alwaysShowSettings ? "✓ " : "　") + "Customize All Instruments",
@@ -20385,12 +22860,12 @@ You should be redirected to the song at:<br /><br />
                     if (option.textContent != optionCommands[i])
                         option.textContent = optionCommands[i];
                 }
-                const channel = this._doc.song.channels[this._doc.channel];
-                const instrumentIndex = this._doc.getCurrentInstrument();
+                const channel = this.doc.song.channels[this.doc.channel];
+                const instrumentIndex = this.doc.getCurrentInstrument();
                 const instrument = channel.instruments[instrumentIndex];
                 const wasActive = this.mainLayer.contains(document.activeElement);
                 const activeElement = document.activeElement;
-                const colors = ColorConfig.getChannelColor(this._doc.song, this._doc.channel);
+                const colors = ColorConfig.getChannelColor(this.doc.song, this.doc.channel);
                 for (let i = this._effectsSelect.childElementCount - 1; i < Config.effectOrder.length; i++) {
                     this._effectsSelect.appendChild(option({ value: i }));
                 }
@@ -20403,13 +22878,13 @@ You should be redirected to the song at:<br /><br />
                     if (option.textContent != label)
                         option.textContent = label;
                 }
-                setSelectedValue(this._scaleSelect, this._doc.song.scale);
-                this._scaleSelect.title = Config.scales[this._doc.song.scale].realName;
-                setSelectedValue(this._keySelect, Config.keys.length - 1 - this._doc.song.key);
-                this._tempoSlider.updateValue(Math.max(0, Math.min(28, Math.round(4.0 + 9.0 * Math.log2(this._doc.song.tempo / 120.0)))));
-                this._tempoStepper.value = this._doc.song.tempo.toString();
-                setSelectedValue(this._rhythmSelect, this._doc.song.rhythm);
-                if (this._doc.song.getChannelIsNoise(this._doc.channel)) {
+                setSelectedValue(this._scaleSelect, this.doc.song.scale);
+                this._scaleSelect.title = Config.scales[this.doc.song.scale].realName;
+                setSelectedValue(this._keySelect, Config.keys.length - 1 - this.doc.song.key);
+                this._tempoSlider.updateValue(Math.max(0, Math.min(28, Math.round(4.0 + 9.0 * Math.log2(this.doc.song.tempo / 120.0)))));
+                this._tempoStepper.value = this.doc.song.tempo.toString();
+                setSelectedValue(this._rhythmSelect, this.doc.song.rhythm);
+                if (this.doc.song.getChannelIsNoise(this.doc.channel)) {
                     this._pitchedPresetSelect.style.display = "none";
                     this._drumPresetSelect.style.display = "";
                     setSelectedValue(this._drumPresetSelect, instrument.preset);
@@ -20643,13 +23118,13 @@ You should be redirected to the song at:<br /><br />
                         option.removeAttribute("hidden");
                     }
                 }
-                if (this._doc.song.layeredInstruments || this._doc.song.patternInstruments) {
+                if (this.doc.song.layeredInstruments || this.doc.song.patternInstruments) {
                     this._instrumentsButtonRow.style.display = "";
                     this._instrumentsButtonBar.style.setProperty("--text-color-lit", colors.primaryNote);
                     this._instrumentsButtonBar.style.setProperty("--text-color-dim", colors.secondaryNote);
                     this._instrumentsButtonBar.style.setProperty("--background-color-lit", colors.primaryChannel);
                     this._instrumentsButtonBar.style.setProperty("--background-color-dim", colors.secondaryChannel);
-                    const maxInstrumentsPerChannel = this._doc.song.getMaxInstrumentsPerChannel();
+                    const maxInstrumentsPerChannel = this.doc.song.getMaxInstrumentsPerChannel();
                     while (this._instrumentButtons.length < channel.instruments.length) {
                         const instrumentButton = button(String(this._instrumentButtons.length + 1));
                         this._instrumentButtons.push(instrumentButton);
@@ -20689,9 +23164,9 @@ You should be redirected to the song at:<br /><br />
                             oldButton.classList.remove("selected-instrument");
                         this._highlightedInstrumentIndex = -1;
                     }
-                    if (this._doc.song.layeredInstruments && this._doc.song.patternInstruments) {
+                    if (this.doc.song.layeredInstruments && this.doc.song.patternInstruments) {
                         for (let i = 0; i < channel.instruments.length; i++) {
-                            if (this._doc.recentPatternInstruments[this._doc.channel].indexOf(i) != -1) {
+                            if (this.doc.recentPatternInstruments[this.doc.channel].indexOf(i) != -1) {
                                 this._instrumentButtons[i].classList.remove("deactivated");
                             }
                             else {
@@ -20714,33 +23189,33 @@ You should be redirected to the song at:<br /><br />
                 this._eqFilterEditor.render();
                 this._instrumentVolumeSlider.updateValue(-instrument.volume);
                 this._addEnvelopeButton.disabled = (instrument.envelopeCount >= Config.maxEnvelopeCount);
-                this._volumeSlider.value = String(prefs.volume);
+                this._volumeSlider.input.value = String(prefs.volume);
                 if (wasActive && activeElement != null && activeElement.clientWidth == 0) {
                     this._refocusStage();
                 }
-                this._setPrompt(this._doc.prompt);
-                if (prefs.autoFollow && !this._doc.synth.playing) {
-                    this._doc.synth.goToBar(this._doc.bar);
+                this._setPrompt(this.doc.prompt);
+                if (prefs.autoFollow && !this.doc.synth.playing) {
+                    this.doc.synth.goToBar(this.doc.bar);
                 }
-                if (this._doc.addedEffect) {
+                if (this.doc.addedEffect) {
                     const envButtonRect = this._addEnvelopeButton.getBoundingClientRect();
                     const instSettingsRect = this._instrumentSettingsArea.getBoundingClientRect();
                     const settingsRect = this._settingsArea.getBoundingClientRect();
                     this._instrumentSettingsArea.scrollTop += Math.max(0, envButtonRect.top - (instSettingsRect.top + instSettingsRect.height));
                     this._settingsArea.scrollTop += Math.max(0, envButtonRect.top - (settingsRect.top + settingsRect.height));
-                    this._doc.addedEffect = false;
+                    this.doc.addedEffect = false;
                 }
-                if (this._doc.addedEnvelope) {
+                if (this.doc.addedEnvelope) {
                     this._instrumentSettingsArea.scrollTop = this._instrumentSettingsArea.scrollHeight;
                     this._settingsArea.scrollTop = this._settingsArea.scrollHeight;
-                    this._doc.addedEnvelope = false;
+                    this.doc.addedEnvelope = false;
                 }
             };
             this.updatePlayButton = () => {
-                if (this._renderedIsPlaying != this._doc.synth.playing || this._renderedIsRecording != this._doc.synth.recording || this._renderedShowRecordButton != this._doc.prefs.showRecordButton || this._renderedCtrlHeld != this._ctrlHeld) {
-                    this._renderedIsPlaying = this._doc.synth.playing;
-                    this._renderedIsRecording = this._doc.synth.recording;
-                    this._renderedShowRecordButton = this._doc.prefs.showRecordButton;
+                if (this._renderedIsPlaying != this.doc.synth.playing || this._renderedIsRecording != this.doc.synth.recording || this._renderedShowRecordButton != this.doc.prefs.showRecordButton || this._renderedCtrlHeld != this._ctrlHeld) {
+                    this._renderedIsPlaying = this.doc.synth.playing;
+                    this._renderedIsRecording = this.doc.synth.recording;
+                    this._renderedShowRecordButton = this.doc.prefs.showRecordButton;
                     this._renderedCtrlHeld = this._ctrlHeld;
                     if (document.activeElement == this._playButton || document.activeElement == this._pauseButton || document.activeElement == this._recordButton || document.activeElement == this._stopButton) {
                         this._refocusStage();
@@ -20764,7 +23239,7 @@ You should be redirected to the song at:<br /><br />
                     this._menuArea.style.opacity = "";
                     this._songSettingsArea.style.pointerEvents = "";
                     this._songSettingsArea.style.opacity = "";
-                    if (this._doc.synth.recording) {
+                    if (this.doc.synth.recording) {
                         this._stopButton.style.display = "";
                         this._prevBarButton.style.display = "none";
                         this._nextBarButton.style.display = "none";
@@ -20780,10 +23255,10 @@ You should be redirected to the song at:<br /><br />
                         this._songSettingsArea.style.pointerEvents = "none";
                         this._songSettingsArea.style.opacity = "0.5";
                     }
-                    else if (this._doc.synth.playing) {
+                    else if (this.doc.synth.playing) {
                         this._pauseButton.style.display = "";
                     }
-                    else if (this._doc.prefs.showRecordButton) {
+                    else if (this.doc.prefs.showRecordButton) {
                         this._playButton.style.display = "";
                         this._recordButton.style.display = "";
                         this._playButton.classList.add("shrunk");
@@ -20799,7 +23274,7 @@ You should be redirected to the song at:<br /><br />
                 window.requestAnimationFrame(this.updatePlayButton);
             };
             this._onTrackAreaScroll = (event) => {
-                this._doc.barScrollPos = (this._trackAndMuteContainer.scrollLeft / this._doc.getBarWidth());
+                this.doc.barScrollPos = (this._trackAndMuteContainer.scrollLeft / this.doc.getBarWidth());
             };
             this._disableCtrlContextMenu = (event) => {
                 if (event.ctrlKey) {
@@ -20834,11 +23309,11 @@ You should be redirected to the song at:<br /><br />
                 this._ctrlHeld = event.ctrlKey;
                 if (this.prompt) {
                     if (event.keyCode == 27) {
-                        this._doc.undo();
+                        this.doc.undo();
                     }
                     return;
                 }
-                if (this._doc.synth.recording) {
+                if (this.doc.synth.recording) {
                     if (!event.ctrlKey && !event.metaKey) {
                         this._keyboardLayout.handleKeyEvent(event, true);
                     }
@@ -20854,15 +23329,15 @@ You should be redirected to the song at:<br /><br />
                     }
                     return;
                 }
-                const needControlForShortcuts = (this._doc.prefs.pressControlForShortcuts != event.getModifierState("CapsLock"));
+                const needControlForShortcuts = (this.doc.prefs.pressControlForShortcuts != event.getModifierState("CapsLock"));
                 const canPlayNotes = (!event.ctrlKey && !event.metaKey && needControlForShortcuts);
                 if (canPlayNotes)
                     this._keyboardLayout.handleKeyEvent(event, true);
                 switch (event.keyCode) {
                     case 27:
                         if (!event.ctrlKey && !event.metaKey) {
-                            new ChangePatternSelection(this._doc, 0, 0);
-                            this._doc.selection.resetBoxSelection();
+                            new ChangePatternSelection(this.doc, 0, 0);
+                            this.doc.selection.resetBoxSelection();
                         }
                         break;
                     case 32:
@@ -20871,8 +23346,8 @@ You should be redirected to the song at:<br /><br />
                         }
                         else if (event.shiftKey) {
                             if (this._trackEditor.movePlayheadToMouse() || this._patternEditor.movePlayheadToMouse()) {
-                                if (!this._doc.synth.playing)
-                                    this._doc.performance.play();
+                                if (!this.doc.synth.playing)
+                                    this.doc.performance.play();
                             }
                         }
                         else {
@@ -20894,17 +23369,17 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (event.shiftKey) {
-                            this._doc.redo();
+                            this.doc.redo();
                         }
                         else {
-                            this._doc.undo();
+                            this.doc.undo();
                         }
                         event.preventDefault();
                         break;
                     case 89:
                         if (canPlayNotes)
                             break;
-                        this._doc.redo();
+                        this.doc.redo();
                         event.preventDefault();
                         break;
                     case 67:
@@ -20914,25 +23389,25 @@ You should be redirected to the song at:<br /><br />
                             this._copyInstrument();
                         }
                         else {
-                            this._doc.selection.copy();
+                            this.doc.selection.copy();
                         }
                         event.preventDefault();
                         break;
                     case 13:
                         if (event.ctrlKey || event.metaKey) {
-                            this._doc.selection.insertChannel();
+                            this.doc.selection.insertChannel();
                         }
                         else {
-                            this._doc.selection.insertBars();
+                            this.doc.selection.insertBars();
                         }
                         event.preventDefault();
                         break;
                     case 8:
                         if (event.ctrlKey || event.metaKey) {
-                            this._doc.selection.deleteChannel();
+                            this.doc.selection.deleteChannel();
                         }
                         else {
-                            this._doc.selection.deleteBars();
+                            this.doc.selection.deleteBars();
                         }
                         event.preventDefault();
                         break;
@@ -20940,10 +23415,10 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (event.shiftKey) {
-                            this._doc.selection.selectChannel();
+                            this.doc.selection.selectChannel();
                         }
                         else {
-                            this._doc.selection.selectAll();
+                            this.doc.selection.selectAll();
                         }
                         event.preventDefault();
                         break;
@@ -20951,7 +23426,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.duplicatePatterns();
+                            this.doc.selection.duplicatePatterns();
                             event.preventDefault();
                         }
                         break;
@@ -20959,9 +23434,9 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.synth.snapToStart();
-                            if (this._doc.prefs.autoFollow) {
-                                this._doc.selection.setChannelBar(this._doc.channel, Math.floor(this._doc.synth.playhead));
+                            this.doc.synth.snapToStart();
+                            if (this.doc.prefs.autoFollow) {
+                                this.doc.selection.setChannelBar(this.doc.channel, Math.floor(this.doc.synth.playhead));
                             }
                             event.preventDefault();
                         }
@@ -20970,10 +23445,10 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.synth.goToBar(this._doc.bar);
-                            this._doc.synth.snapToBar();
-                            if (this._doc.prefs.autoFollow) {
-                                this._doc.selection.setChannelBar(this._doc.channel, Math.floor(this._doc.synth.playhead));
+                            this.doc.synth.goToBar(this.doc.bar);
+                            this.doc.synth.snapToBar();
+                            if (this.doc.prefs.autoFollow) {
+                                this.doc.selection.setChannelBar(this.doc.channel, Math.floor(this.doc.synth.playhead));
                             }
                             event.preventDefault();
                         }
@@ -20982,8 +23457,8 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            if (this._doc.prefs.enableChannelMuting) {
-                                this._doc.selection.muteChannels(event.shiftKey);
+                            if (this.doc.prefs.enableChannelMuting) {
+                                this.doc.selection.muteChannels(event.shiftKey);
                                 event.preventDefault();
                             }
                         }
@@ -21004,8 +23479,8 @@ You should be redirected to the song at:<br /><br />
                             event.preventDefault();
                         }
                         else {
-                            if (this._doc.prefs.enableChannelMuting) {
-                                this._doc.selection.soloChannels(event.shiftKey);
+                            if (this.doc.prefs.enableChannelMuting) {
+                                this.doc.selection.soloChannels(event.shiftKey);
                                 event.preventDefault();
                             }
                         }
@@ -21022,13 +23497,13 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if ((event.ctrlKey || event.metaKey) && event.shiftKey && !needControlForShortcuts) {
-                            this._doc.selection.pasteNumbers();
+                            this.doc.selection.pasteNumbers();
                         }
                         else if (event.shiftKey) {
                             this._pasteInstrument();
                         }
                         else {
-                            this._doc.selection.pasteNotes();
+                            this.doc.selection.pasteNotes();
                         }
                         event.preventDefault();
                         break;
@@ -21036,7 +23511,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey) && event.shiftKey) {
-                            const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
+                            const instrument = this.doc.song.channels[this.doc.channel].instruments[this.doc.getCurrentInstrument()];
                             const instrumentObject = instrument.toJsonObject();
                             delete instrumentObject["preset"];
                             delete instrumentObject["volume"];
@@ -21072,9 +23547,9 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.synth.goToPrevBar();
-                            if (this._doc.prefs.autoFollow) {
-                                this._doc.selection.setChannelBar(this._doc.channel, Math.floor(this._doc.synth.playhead));
+                            this.doc.synth.goToPrevBar();
+                            if (this.doc.prefs.autoFollow) {
+                                this.doc.selection.setChannelBar(this.doc.channel, Math.floor(this.doc.synth.playhead));
                             }
                             event.preventDefault();
                         }
@@ -21083,9 +23558,9 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.synth.goToNextBar();
-                            if (this._doc.prefs.autoFollow) {
-                                this._doc.selection.setChannelBar(this._doc.channel, Math.floor(this._doc.synth.playhead));
+                            this.doc.synth.goToNextBar();
+                            if (this.doc.prefs.autoFollow) {
+                                this.doc.selection.setChannelBar(this.doc.channel, Math.floor(this.doc.synth.playhead));
                             }
                             event.preventDefault();
                         }
@@ -21095,7 +23570,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.transpose(false, event.shiftKey);
+                            this.doc.selection.transpose(false, event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21105,61 +23580,61 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.transpose(true, event.shiftKey);
+                            this.doc.selection.transpose(true, event.shiftKey);
                             event.preventDefault();
                         }
                         break;
                     case 38:
                         if (event.ctrlKey || event.metaKey) {
-                            this._doc.selection.swapChannels(-1);
+                            this.doc.selection.swapChannels(-1);
                         }
                         else if (event.shiftKey) {
-                            this._doc.selection.boxSelectionY1 = Math.max(0, this._doc.selection.boxSelectionY1 - 1);
-                            this._doc.selection.scrollToEndOfSelection();
-                            this._doc.selection.selectionUpdated();
+                            this.doc.selection.boxSelectionY1 = Math.max(0, this.doc.selection.boxSelectionY1 - 1);
+                            this.doc.selection.scrollToEndOfSelection();
+                            this.doc.selection.selectionUpdated();
                         }
                         else {
-                            this._doc.selection.setChannelBar((this._doc.channel - 1 + this._doc.song.getChannelCount()) % this._doc.song.getChannelCount(), this._doc.bar);
-                            this._doc.selection.resetBoxSelection();
+                            this.doc.selection.setChannelBar((this.doc.channel - 1 + this.doc.song.getChannelCount()) % this.doc.song.getChannelCount(), this.doc.bar);
+                            this.doc.selection.resetBoxSelection();
                         }
                         event.preventDefault();
                         break;
                     case 40:
                         if (event.ctrlKey || event.metaKey) {
-                            this._doc.selection.swapChannels(1);
+                            this.doc.selection.swapChannels(1);
                         }
                         else if (event.shiftKey) {
-                            this._doc.selection.boxSelectionY1 = Math.min(this._doc.song.getChannelCount() - 1, this._doc.selection.boxSelectionY1 + 1);
-                            this._doc.selection.scrollToEndOfSelection();
-                            this._doc.selection.selectionUpdated();
+                            this.doc.selection.boxSelectionY1 = Math.min(this.doc.song.getChannelCount() - 1, this.doc.selection.boxSelectionY1 + 1);
+                            this.doc.selection.scrollToEndOfSelection();
+                            this.doc.selection.selectionUpdated();
                         }
                         else {
-                            this._doc.selection.setChannelBar((this._doc.channel + 1) % this._doc.song.getChannelCount(), this._doc.bar);
-                            this._doc.selection.resetBoxSelection();
+                            this.doc.selection.setChannelBar((this.doc.channel + 1) % this.doc.song.getChannelCount(), this.doc.bar);
+                            this.doc.selection.resetBoxSelection();
                         }
                         event.preventDefault();
                         break;
                     case 37:
                         if (event.shiftKey) {
-                            this._doc.selection.boxSelectionX1 = Math.max(0, this._doc.selection.boxSelectionX1 - 1);
-                            this._doc.selection.scrollToEndOfSelection();
-                            this._doc.selection.selectionUpdated();
+                            this.doc.selection.boxSelectionX1 = Math.max(0, this.doc.selection.boxSelectionX1 - 1);
+                            this.doc.selection.scrollToEndOfSelection();
+                            this.doc.selection.selectionUpdated();
                         }
                         else {
-                            this._doc.selection.setChannelBar(this._doc.channel, (this._doc.bar + this._doc.song.barCount - 1) % this._doc.song.barCount);
-                            this._doc.selection.resetBoxSelection();
+                            this.doc.selection.setChannelBar(this.doc.channel, (this.doc.bar + this.doc.song.barCount - 1) % this.doc.song.barCount);
+                            this.doc.selection.resetBoxSelection();
                         }
                         event.preventDefault();
                         break;
                     case 39:
                         if (event.shiftKey) {
-                            this._doc.selection.boxSelectionX1 = Math.min(this._doc.song.barCount - 1, this._doc.selection.boxSelectionX1 + 1);
-                            this._doc.selection.scrollToEndOfSelection();
-                            this._doc.selection.selectionUpdated();
+                            this.doc.selection.boxSelectionX1 = Math.min(this.doc.song.barCount - 1, this.doc.selection.boxSelectionX1 + 1);
+                            this.doc.selection.scrollToEndOfSelection();
+                            this.doc.selection.selectionUpdated();
                         }
                         else {
-                            this._doc.selection.setChannelBar(this._doc.channel, (this._doc.bar + 1) % this._doc.song.barCount);
-                            this._doc.selection.resetBoxSelection();
+                            this.doc.selection.setChannelBar(this.doc.channel, (this.doc.bar + 1) % this.doc.song.barCount);
+                            this.doc.selection.resetBoxSelection();
                         }
                         event.preventDefault();
                         break;
@@ -21167,7 +23642,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("0", event.shiftKey);
+                            this.doc.selection.nextDigit("0", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21175,7 +23650,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("1", event.shiftKey);
+                            this.doc.selection.nextDigit("1", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21183,7 +23658,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("2", event.shiftKey);
+                            this.doc.selection.nextDigit("2", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21191,7 +23666,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("3", event.shiftKey);
+                            this.doc.selection.nextDigit("3", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21199,7 +23674,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("4", event.shiftKey);
+                            this.doc.selection.nextDigit("4", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21207,7 +23682,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("5", event.shiftKey);
+                            this.doc.selection.nextDigit("5", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21215,7 +23690,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("6", event.shiftKey);
+                            this.doc.selection.nextDigit("6", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21223,7 +23698,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("7", event.shiftKey);
+                            this.doc.selection.nextDigit("7", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21231,7 +23706,7 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("8", event.shiftKey);
+                            this.doc.selection.nextDigit("8", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
@@ -21239,18 +23714,18 @@ You should be redirected to the song at:<br /><br />
                         if (canPlayNotes)
                             break;
                         if (needControlForShortcuts == (event.ctrlKey || event.metaKey)) {
-                            this._doc.selection.nextDigit("9", event.shiftKey);
+                            this.doc.selection.nextDigit("9", event.shiftKey);
                             event.preventDefault();
                         }
                         break;
                     default:
-                        this._doc.selection.digits = "";
-                        this._doc.selection.instrumentDigits = "";
+                        this.doc.selection.digits = "";
+                        this.doc.selection.instrumentDigits = "";
                         break;
                 }
                 if (canPlayNotes) {
-                    this._doc.selection.digits = "";
-                    this._doc.selection.instrumentDigits = "";
+                    this.doc.selection.digits = "";
+                    this.doc.selection.instrumentDigits = "";
                 }
             };
             this._whenKeyReleased = (event) => {
@@ -21258,88 +23733,88 @@ You should be redirected to the song at:<br /><br />
                 this._keyboardLayout.handleKeyEvent(event, false);
             };
             this._whenPrevBarPressed = () => {
-                this._doc.synth.goToPrevBar();
+                this.doc.synth.goToPrevBar();
             };
             this._whenNextBarPressed = () => {
-                this._doc.synth.goToNextBar();
+                this.doc.synth.goToNextBar();
             };
             this._togglePlay = () => {
-                if (this._doc.synth.playing) {
-                    this._doc.performance.pause();
+                if (this.doc.synth.playing) {
+                    this.doc.performance.pause();
                 }
                 else {
-                    this._doc.synth.snapToBar();
-                    this._doc.performance.play();
+                    this.doc.synth.snapToBar();
+                    this.doc.performance.play();
                 }
             };
             this._toggleRecord = () => {
-                if (this._doc.synth.playing) {
-                    this._doc.performance.pause();
+                if (this.doc.synth.playing) {
+                    this.doc.performance.pause();
                 }
                 else {
-                    this._doc.performance.record();
+                    this.doc.performance.record();
                 }
             };
             this._setVolumeSlider = () => {
-                this._doc.setVolume(Number(this._volumeSlider.value));
+                this.doc.setVolume(Number(this._volumeSlider.input.value));
             };
             this._copyInstrument = () => {
-                const channel = this._doc.song.channels[this._doc.channel];
-                const instrument = channel.instruments[this._doc.getCurrentInstrument()];
+                const channel = this.doc.song.channels[this.doc.channel];
+                const instrument = channel.instruments[this.doc.getCurrentInstrument()];
                 const instrumentCopy = instrument.toJsonObject();
-                instrumentCopy["isDrum"] = this._doc.song.getChannelIsNoise(this._doc.channel);
+                instrumentCopy["isDrum"] = this.doc.song.getChannelIsNoise(this.doc.channel);
                 window.localStorage.setItem("instrumentCopy", JSON.stringify(instrumentCopy));
                 this._refocusStage();
             };
             this._pasteInstrument = () => {
-                const channel = this._doc.song.channels[this._doc.channel];
-                const instrument = channel.instruments[this._doc.getCurrentInstrument()];
+                const channel = this.doc.song.channels[this.doc.channel];
+                const instrument = channel.instruments[this.doc.getCurrentInstrument()];
                 const instrumentCopy = JSON.parse(String(window.localStorage.getItem("instrumentCopy")));
-                if (instrumentCopy != null && instrumentCopy["isDrum"] == this._doc.song.getChannelIsNoise(this._doc.channel)) {
-                    this._doc.record(new ChangePasteInstrument(this._doc, instrument, instrumentCopy));
+                if (instrumentCopy != null && instrumentCopy["isDrum"] == this.doc.song.getChannelIsNoise(this.doc.channel)) {
+                    this.doc.record(new ChangePasteInstrument(this.doc, instrument, instrumentCopy));
                 }
                 this._refocusStage();
             };
             this._whenSetTempo = () => {
-                this._doc.record(new ChangeTempo(this._doc, -1, parseInt(this._tempoStepper.value) | 0));
+                this.doc.record(new ChangeTempo(this.doc, -1, parseInt(this._tempoStepper.value) | 0));
             };
             this._whenSetScale = () => {
                 if (isNaN(this._scaleSelect.value)) {
                     switch (this._scaleSelect.value) {
                         case "forceScale":
-                            this._doc.selection.forceScale();
+                            this.doc.selection.forceScale();
                             break;
                     }
-                    this._doc.notifier.changed();
+                    this.doc.notifier.changed();
                 }
                 else {
-                    this._doc.record(new ChangeScale(this._doc, this._scaleSelect.selectedIndex));
+                    this.doc.record(new ChangeScale(this.doc, this._scaleSelect.selectedIndex));
                 }
             };
             this._whenSetKey = () => {
                 if (isNaN(this._keySelect.value)) {
                     switch (this._keySelect.value) {
                         case "detectKey":
-                            this._doc.record(new ChangeDetectKey(this._doc));
+                            this.doc.record(new ChangeDetectKey(this.doc));
                             break;
                     }
-                    this._doc.notifier.changed();
+                    this.doc.notifier.changed();
                 }
                 else {
-                    this._doc.record(new ChangeKey(this._doc, Config.keys.length - 1 - this._keySelect.selectedIndex));
+                    this.doc.record(new ChangeKey(this.doc, Config.keys.length - 1 - this._keySelect.selectedIndex));
                 }
             };
             this._whenSetRhythm = () => {
                 if (isNaN(this._rhythmSelect.value)) {
                     switch (this._rhythmSelect.value) {
                         case "forceRhythm":
-                            this._doc.selection.forceRhythm();
+                            this.doc.selection.forceRhythm();
                             break;
                     }
-                    this._doc.notifier.changed();
+                    this.doc.notifier.changed();
                 }
                 else {
-                    this._doc.record(new ChangeRhythm(this._doc, this._rhythmSelect.selectedIndex));
+                    this.doc.record(new ChangeRhythm(this.doc, this._rhythmSelect.selectedIndex));
                 }
             };
             this._whenSetPitchedPreset = () => {
@@ -21349,81 +23824,81 @@ You should be redirected to the song at:<br /><br />
                 this._setPreset(this._drumPresetSelect.value);
             };
             this._whenSetFeedbackType = () => {
-                this._doc.record(new ChangeFeedbackType(this._doc, this._feedbackTypeSelect.selectedIndex));
+                this.doc.record(new ChangeFeedbackType(this.doc, this._feedbackTypeSelect.selectedIndex));
             };
             this._whenSetAlgorithm = () => {
-                this._doc.record(new ChangeAlgorithm(this._doc, this._algorithmSelect.selectedIndex));
+                this.doc.record(new ChangeAlgorithm(this.doc, this._algorithmSelect.selectedIndex));
             };
             this._whenSelectInstrument = (event) => {
                 if (event.target == this._instrumentAddButton) {
-                    this._doc.record(new ChangeAddChannelInstrument(this._doc));
+                    this.doc.record(new ChangeAddChannelInstrument(this.doc));
                 }
                 else if (event.target == this._instrumentRemoveButton) {
-                    this._doc.record(new ChangeRemoveChannelInstrument(this._doc));
+                    this.doc.record(new ChangeRemoveChannelInstrument(this.doc));
                 }
                 else {
                     const index = this._instrumentButtons.indexOf(event.target);
                     if (index != -1) {
-                        this._doc.selection.selectInstrument(index);
+                        this.doc.selection.selectInstrument(index);
                     }
                 }
                 this._refocusStage();
             };
             this._whenCustomizePressed = () => {
-                this._doc.record(new ChangeCustomizeInstrument(this._doc));
+                this.doc.record(new ChangeCustomizeInstrument(this.doc));
             };
             this._whenSetChipWave = () => {
-                this._doc.record(new ChangeChipWave(this._doc, this._chipWaveSelect.selectedIndex));
+                this.doc.record(new ChangeChipWave(this.doc, this._chipWaveSelect.selectedIndex));
             };
             this._whenSetNoiseWave = () => {
-                this._doc.record(new ChangeNoiseWave(this._doc, this._chipNoiseSelect.selectedIndex));
+                this.doc.record(new ChangeNoiseWave(this.doc, this._chipNoiseSelect.selectedIndex));
             };
             this._whenSetTransition = () => {
-                this._doc.record(new ChangeTransition(this._doc, this._transitionSelect.selectedIndex));
+                this.doc.record(new ChangeTransition(this.doc, this._transitionSelect.selectedIndex));
             };
             this._whenSetEffects = () => {
-                const instrument = this._doc.song.channels[this._doc.channel].instruments[this._doc.getCurrentInstrument()];
+                const instrument = this.doc.song.channels[this.doc.channel].instruments[this.doc.getCurrentInstrument()];
                 const oldValue = instrument.effects;
                 const toggleFlag = Config.effectOrder[this._effectsSelect.selectedIndex - 1];
-                this._doc.record(new ChangeToggleEffects(this._doc, toggleFlag));
+                this.doc.record(new ChangeToggleEffects(this.doc, toggleFlag));
                 this._effectsSelect.selectedIndex = 0;
                 if (instrument.effects > oldValue) {
-                    this._doc.addedEffect = true;
+                    this.doc.addedEffect = true;
                 }
             };
             this._whenSetVibrato = () => {
-                this._doc.record(new ChangeVibrato(this._doc, this._vibratoSelect.selectedIndex));
+                this.doc.record(new ChangeVibrato(this.doc, this._vibratoSelect.selectedIndex));
             };
             this._whenSetUnison = () => {
-                this._doc.record(new ChangeUnison(this._doc, this._unisonSelect.selectedIndex));
+                this.doc.record(new ChangeUnison(this.doc, this._unisonSelect.selectedIndex));
             };
             this._whenSetChord = () => {
-                this._doc.record(new ChangeChord(this._doc, this._chordSelect.selectedIndex));
+                this.doc.record(new ChangeChord(this.doc, this._chordSelect.selectedIndex));
             };
             this._addNewEnvelope = () => {
-                this._doc.record(new ChangeAddEnvelope(this._doc));
+                this.doc.record(new ChangeAddEnvelope(this.doc));
                 this._refocusStage();
-                this._doc.addedEnvelope = true;
+                this.doc.addedEnvelope = true;
             };
             this._zoomIn = () => {
-                this._doc.prefs.visibleOctaves = Math.max(1, this._doc.prefs.visibleOctaves - 1);
-                this._doc.prefs.save();
-                this._doc.notifier.changed();
+                this.doc.prefs.visibleOctaves = Math.max(1, this.doc.prefs.visibleOctaves - 1);
+                this.doc.prefs.save();
+                this.doc.notifier.changed();
                 this._refocusStage();
             };
             this._zoomOut = () => {
-                this._doc.prefs.visibleOctaves = Math.min(Config.pitchOctaves, this._doc.prefs.visibleOctaves + 1);
-                this._doc.prefs.save();
-                this._doc.notifier.changed();
+                this.doc.prefs.visibleOctaves = Math.min(Config.pitchOctaves, this.doc.prefs.visibleOctaves + 1);
+                this.doc.prefs.save();
+                this.doc.notifier.changed();
                 this._refocusStage();
             };
             this._fileMenuHandler = (event) => {
                 switch (this._fileMenu.value) {
                     case "new":
-                        this._doc.goBackToStart();
-                        for (const channel of this._doc.song.channels)
+                        this.doc.goBackToStart();
+                        for (const channel of this.doc.song.channels)
                             channel.muted = false;
-                        this._doc.record(new ChangeSong(this._doc, ""), false, true);
+                        this.doc.record(new ChangeSong(this.doc, ""), false, true);
                         break;
                     case "export":
                         this._openPrompt("export");
@@ -21432,19 +23907,19 @@ You should be redirected to the song at:<br /><br />
                         this._openPrompt("import");
                         break;
                     case "copyUrl":
-                        this._copyTextToClipboard(new URL("#" + this._doc.song.toBase64String(), location.href).href);
+                        this._copyTextToClipboard(new URL("#" + this.doc.song.toBase64String(), location.href).href);
                         break;
                     case "shareUrl":
-                        navigator.share({ url: new URL("#" + this._doc.song.toBase64String(), location.href).href });
+                        navigator.share({ url: new URL("#" + this.doc.song.toBase64String(), location.href).href });
                         break;
                     case "shortenUrl":
-                        window.open("https://tinyurl.com/api-create.php?url=" + encodeURIComponent(new URL("#" + this._doc.song.toBase64String(), location.href).href));
+                        window.open("https://tinyurl.com/api-create.php?url=" + encodeURIComponent(new URL("#" + this.doc.song.toBase64String(), location.href).href));
                         break;
                     case "viewPlayer":
-                        location.href = "player/#song=" + this._doc.song.toBase64String();
+                        location.href = "player/#song=" + this.doc.song.toBase64String();
                         break;
                     case "copyEmbed":
-                        this._copyTextToClipboard(`<iframe width="384" height="60" style="border: none;" src="${new URL("player/#song=" + this._doc.song.toBase64String(), location.href).href}"></iframe>`);
+                        this._copyTextToClipboard(`<iframe width="384" height="60" style="border: none;" src="${new URL("player/#song=" + this.doc.song.toBase64String(), location.href).href}"></iframe>`);
                         break;
                     case "songRecovery":
                         this._openPrompt("songRecovery");
@@ -21455,46 +23930,46 @@ You should be redirected to the song at:<br /><br />
             this._editMenuHandler = (event) => {
                 switch (this._editMenu.value) {
                     case "undo":
-                        this._doc.undo();
+                        this.doc.undo();
                         break;
                     case "redo":
-                        this._doc.redo();
+                        this.doc.redo();
                         break;
                     case "copy":
-                        this._doc.selection.copy();
+                        this.doc.selection.copy();
                         break;
                     case "insertBars":
-                        this._doc.selection.insertBars();
+                        this.doc.selection.insertBars();
                         break;
                     case "deleteBars":
-                        this._doc.selection.deleteBars();
+                        this.doc.selection.deleteBars();
                         break;
                     case "insertChannel":
-                        this._doc.selection.insertChannel();
+                        this.doc.selection.insertChannel();
                         break;
                     case "deleteChannel":
-                        this._doc.selection.deleteChannel();
+                        this.doc.selection.deleteChannel();
                         break;
                     case "pasteNotes":
-                        this._doc.selection.pasteNotes();
+                        this.doc.selection.pasteNotes();
                         break;
                     case "pasteNumbers":
-                        this._doc.selection.pasteNumbers();
+                        this.doc.selection.pasteNumbers();
                         break;
                     case "transposeUp":
-                        this._doc.selection.transpose(true, false);
+                        this.doc.selection.transpose(true, false);
                         break;
                     case "transposeDown":
-                        this._doc.selection.transpose(false, false);
+                        this.doc.selection.transpose(false, false);
                         break;
                     case "selectAll":
-                        this._doc.selection.selectAll();
+                        this.doc.selection.selectAll();
                         break;
                     case "selectChannel":
-                        this._doc.selection.selectChannel();
+                        this.doc.selection.selectChannel();
                         break;
                     case "duplicatePatterns":
-                        this._doc.selection.duplicatePatterns();
+                        this.doc.selection.duplicatePatterns();
                         break;
                     case "barCount":
                         this._openPrompt("barCount");
@@ -21514,45 +23989,45 @@ You should be redirected to the song at:<br /><br />
             this._optionsMenuHandler = (event) => {
                 switch (this._optionsMenu.value) {
                     case "autoPlay":
-                        this._doc.prefs.autoPlay = !this._doc.prefs.autoPlay;
+                        this.doc.prefs.autoPlay = !this.doc.prefs.autoPlay;
                         break;
                     case "autoFollow":
-                        this._doc.prefs.autoFollow = !this._doc.prefs.autoFollow;
+                        this.doc.prefs.autoFollow = !this.doc.prefs.autoFollow;
                         break;
                     case "enableNotePreview":
-                        this._doc.prefs.enableNotePreview = !this._doc.prefs.enableNotePreview;
+                        this.doc.prefs.enableNotePreview = !this.doc.prefs.enableNotePreview;
                         break;
                     case "showLetters":
-                        this._doc.prefs.showLetters = !this._doc.prefs.showLetters;
+                        this.doc.prefs.showLetters = !this.doc.prefs.showLetters;
                         break;
                     case "showFifth":
-                        this._doc.prefs.showFifth = !this._doc.prefs.showFifth;
+                        this.doc.prefs.showFifth = !this.doc.prefs.showFifth;
                         break;
                     case "notesOutsideScale":
-                        this._doc.prefs.notesOutsideScale = !this._doc.prefs.notesOutsideScale;
+                        this.doc.prefs.notesOutsideScale = !this.doc.prefs.notesOutsideScale;
                         break;
                     case "setDefaultScale":
-                        this._doc.prefs.defaultScale = this._doc.song.scale;
+                        this.doc.prefs.defaultScale = this.doc.song.scale;
                         break;
                     case "showChannels":
-                        this._doc.prefs.showChannels = !this._doc.prefs.showChannels;
+                        this.doc.prefs.showChannels = !this.doc.prefs.showChannels;
                         break;
                     case "showScrollBar":
-                        this._doc.prefs.showScrollBar = !this._doc.prefs.showScrollBar;
+                        this.doc.prefs.showScrollBar = !this.doc.prefs.showScrollBar;
                         break;
                     case "alwaysShowSettings":
-                        this._doc.prefs.alwaysShowSettings = !this._doc.prefs.alwaysShowSettings;
+                        this.doc.prefs.alwaysShowSettings = !this.doc.prefs.alwaysShowSettings;
                         break;
                     case "instrumentCopyPaste":
-                        this._doc.prefs.instrumentCopyPaste = !this._doc.prefs.instrumentCopyPaste;
+                        this.doc.prefs.instrumentCopyPaste = !this.doc.prefs.instrumentCopyPaste;
                         break;
                     case "enableChannelMuting":
-                        this._doc.prefs.enableChannelMuting = !this._doc.prefs.enableChannelMuting;
-                        for (const channel of this._doc.song.channels)
+                        this.doc.prefs.enableChannelMuting = !this.doc.prefs.enableChannelMuting;
+                        for (const channel of this.doc.song.channels)
                             channel.muted = false;
                         break;
                     case "displayBrowserUrl":
-                        this._doc.toggleDisplayBrowserUrl();
+                        this.doc.toggleDisplayBrowserUrl();
                         break;
                     case "layout":
                         this._openPrompt("layout");
@@ -21565,11 +24040,11 @@ You should be redirected to the song at:<br /><br />
                         break;
                 }
                 this._optionsMenu.selectedIndex = 0;
-                this._doc.notifier.changed();
-                this._doc.prefs.save();
+                this.doc.notifier.changed();
+                this.doc.prefs.save();
             };
-            this._doc.notifier.watch(this.whenUpdated);
-            new MidiInputHandler(this._doc);
+            this.doc.notifier.watch(this.whenUpdated);
+            new MidiInputHandler(this.doc);
             window.addEventListener("resize", this.whenUpdated);
             window.requestAnimationFrame(this.updatePlayButton);
             if (!("share" in navigator)) {
@@ -21583,26 +24058,26 @@ You should be redirected to the song at:<br /><br />
                 const operatorIndex = i;
                 const operatorNumber = div({ style: `margin-right: .1em; color: ${ColorConfig.secondaryText};` }, i + 1 + ".");
                 const frequencySelect = buildOptions(select({ style: "width: 100%;", title: "Frequency" }), Config.operatorFrequencies.map(freq => freq.name));
-                const amplitudeSlider = new Slider(input({ type: "range", min: "0", max: Config.operatorAmplitudeMax, value: "0", step: "1", title: "Volume" }), this._doc, (oldValue, newValue) => new ChangeOperatorAmplitude(this._doc, operatorIndex, oldValue, newValue));
-                const row = div({ class: "selectRow" }, operatorNumber, div({ class: "selectContainer", style: "width: 3em; margin-right: .3em;" }, frequencySelect), amplitudeSlider.input);
+                const amplitudeSlider = new Slider(input({ type: "range", min: "0", max: Config.operatorAmplitudeMax, value: "0", step: "1", title: "Volume" }), this.doc, (oldValue, newValue) => new ChangeOperatorAmplitude(this.doc, operatorIndex, oldValue, newValue));
+                const row = div({ class: "selectRow" }, operatorNumber, div({ class: "selectContainer", style: "width: 3em; margin-right: .3em;" }, frequencySelect), amplitudeSlider.container);
                 this._phaseModGroup.appendChild(row);
                 this._operatorRows[i] = row;
                 this._operatorAmplitudeSliders[i] = amplitudeSlider;
                 this._operatorFrequencySelects[i] = frequencySelect;
                 frequencySelect.addEventListener("change", () => {
-                    this._doc.record(new ChangeOperatorFrequency(this._doc, operatorIndex, frequencySelect.selectedIndex));
+                    this.doc.record(new ChangeOperatorFrequency(this.doc, operatorIndex, frequencySelect.selectedIndex));
                 });
             }
             this._drumsetGroup.appendChild(div({ class: "selectRow" }, span({ class: "tip", onclick: () => this._openPrompt("drumsetEnvelope") }, "Envelope:"), span({ class: "tip", onclick: () => this._openPrompt("drumsetSpectrum") }, "Spectrum:")));
             for (let i = Config.drumCount - 1; i >= 0; i--) {
                 const drumIndex = i;
-                const spectrumEditor = new SpectrumEditor(this._doc, drumIndex);
-                spectrumEditor.container.addEventListener("mousedown", this._refocusStage);
+                const spectrumEditor = new SpectrumEditor(this.doc, drumIndex);
+                spectrumEditor.container.addEventListener("pointerdown", this._refocusStage);
                 this._drumsetSpectrumEditors[i] = spectrumEditor;
                 const envelopeSelect = buildOptions(select({ style: "width: 100%;", title: "Filter Envelope" }), Config.envelopes.map(envelope => envelope.name));
                 this._drumsetEnvelopeSelects[i] = envelopeSelect;
                 envelopeSelect.addEventListener("change", () => {
-                    this._doc.record(new ChangeDrumsetEnvelope(this._doc, drumIndex, envelopeSelect.selectedIndex));
+                    this.doc.record(new ChangeDrumsetEnvelope(this.doc, drumIndex, envelopeSelect.selectedIndex));
                 });
                 const row = div({ class: "selectRow" }, div({ class: "selectContainer", style: "width: 5em; margin-right: .3em;" }, envelopeSelect), this._drumsetSpectrumEditors[i].container);
                 this._drumsetGroup.appendChild(row);
@@ -21647,16 +24122,16 @@ You should be redirected to the song at:<br /><br />
             });
             this._prevBarButton.addEventListener("click", this._whenPrevBarPressed);
             this._nextBarButton.addEventListener("click", this._whenNextBarPressed);
-            this._volumeSlider.addEventListener("input", this._setVolumeSlider);
+            this._volumeSlider.input.addEventListener("input", this._setVolumeSlider);
             this._zoomInButton.addEventListener("click", this._zoomIn);
             this._zoomOutButton.addEventListener("click", this._zoomOut);
-            this._patternArea.addEventListener("mousedown", this._refocusStage);
-            this._trackArea.addEventListener("mousedown", this._refocusStage);
-            this._fadeInOutEditor.container.addEventListener("mousedown", this._refocusStage);
-            this._spectrumEditor.container.addEventListener("mousedown", this._refocusStage);
-            this._eqFilterEditor.container.addEventListener("mousedown", this._refocusStage);
-            this._noteFilterEditor.container.addEventListener("mousedown", this._refocusStage);
-            this._harmonicsEditor.container.addEventListener("mousedown", this._refocusStage);
+            this._patternArea.addEventListener("pointerdown", this._refocusStage);
+            this._trackArea.addEventListener("pointerdown", this._refocusStage);
+            this._fadeInOutEditor.container.addEventListener("pointerdown", this._refocusStage);
+            this._spectrumEditor.container.addEventListener("pointerdown", this._refocusStage);
+            this._eqFilterEditor.container.addEventListener("pointerdown", this._refocusStage);
+            this._noteFilterEditor.container.addEventListener("pointerdown", this._refocusStage);
+            this._harmonicsEditor.container.addEventListener("pointerdown", this._refocusStage);
             this._tempoStepper.addEventListener("keydown", this._tempoStepperCaptureNumberKeys, false);
             this._addEnvelopeButton.addEventListener("click", this._addNewEnvelope);
             this._patternArea.addEventListener("contextmenu", this._disableCtrlContextMenu);
@@ -21666,7 +24141,7 @@ You should be redirected to the song at:<br /><br />
             this.mainLayer.addEventListener("focusin", this._onFocusIn);
             this._promptContainer.addEventListener("click", (event) => {
                 if (event.target == this._promptContainer) {
-                    this._doc.undo();
+                    this.doc.undo();
                 }
             });
             this._trackAndMuteContainer.addEventListener("scroll", this._onTrackAreaScroll, { capture: false, passive: true });
@@ -21680,9 +24155,33 @@ You should be redirected to the song at:<br /><br />
                 layoutOption.disabled = true;
                 layoutOption.setAttribute("hidden", "");
             }
+            beepboxEditorContainer.appendChild(this.mainLayer);
+            this.whenUpdated();
+            this.mainLayer.focus();
+            if (!isMobile && this.doc.prefs.autoPlay) {
+                if (document.hidden) {
+                    const autoplay = (event) => {
+                        if (!document.hidden) {
+                            this.doc.synth.play();
+                            this.updatePlayButton();
+                            window.removeEventListener("visibilitychange", autoplay);
+                        }
+                    };
+                    window.addEventListener("visibilitychange", autoplay);
+                }
+                else {
+                    this.doc.synth.play();
+                }
+            }
+            this.updatePlayButton();
+            if ("scrollRestoration" in history)
+                history.scrollRestoration = "manual";
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("/service_worker.js", { updateViaCache: "all", scope: "/" }).catch(() => { });
+            }
         }
         _openPrompt(promptName) {
-            this._doc.openPrompt(promptName);
+            this.doc.openPrompt(promptName);
             this._setPrompt(promptName);
         }
         _setPrompt(promptName) {
@@ -21691,7 +24190,7 @@ You should be redirected to the song at:<br /><br />
             this._currentPromptName = promptName;
             if (this.prompt) {
                 if (this._wasPlaying && !(this.prompt instanceof TipPrompt || this.prompt instanceof SustainPrompt)) {
-                    this._doc.performance.play();
+                    this.doc.performance.play();
                 }
                 this._wasPlaying = false;
                 this._promptContainer.style.display = "none";
@@ -21703,46 +24202,46 @@ You should be redirected to the song at:<br /><br />
             if (promptName) {
                 switch (promptName) {
                     case "export":
-                        this.prompt = new ExportPrompt(this._doc);
+                        this.prompt = new ExportPrompt(this.doc);
                         break;
                     case "import":
-                        this.prompt = new ImportPrompt(this._doc);
+                        this.prompt = new ImportPrompt(this.doc);
                         break;
                     case "songRecovery":
-                        this.prompt = new SongRecoveryPrompt(this._doc);
+                        this.prompt = new SongRecoveryPrompt(this.doc);
                         break;
                     case "barCount":
-                        this.prompt = new SongDurationPrompt(this._doc);
+                        this.prompt = new SongDurationPrompt(this.doc);
                         break;
                     case "beatsPerBar":
-                        this.prompt = new BeatsPerBarPrompt(this._doc);
+                        this.prompt = new BeatsPerBarPrompt(this.doc);
                         break;
                     case "moveNotesSideways":
-                        this.prompt = new MoveNotesSidewaysPrompt(this._doc);
+                        this.prompt = new MoveNotesSidewaysPrompt(this.doc);
                         break;
                     case "channelSettings":
-                        this.prompt = new ChannelSettingsPrompt(this._doc);
+                        this.prompt = new ChannelSettingsPrompt(this.doc);
                         break;
                     case "layout":
-                        this.prompt = new LayoutPrompt(this._doc);
+                        this.prompt = new LayoutPrompt(this.doc);
                         break;
                     case "recordingSetup":
-                        this.prompt = new RecordingSetupPrompt(this._doc);
+                        this.prompt = new RecordingSetupPrompt(this.doc);
                         break;
                     case "stringSustain":
-                        this.prompt = new SustainPrompt(this._doc);
+                        this.prompt = new SustainPrompt(this.doc);
                         break;
                     case "colorTheme":
-                        this.prompt = new ThemePrompt(this._doc);
+                        this.prompt = new ThemePrompt(this.doc);
                         break;
                     default:
-                        this.prompt = new TipPrompt(this._doc, promptName);
+                        this.prompt = new TipPrompt(this.doc, promptName);
                         break;
                 }
                 if (this.prompt) {
                     if (!(this.prompt instanceof TipPrompt || this.prompt instanceof SustainPrompt)) {
-                        this._wasPlaying = this._doc.synth.playing;
-                        this._doc.performance.pause();
+                        this._wasPlaying = this.doc.synth.playing;
+                        this.doc.performance.pause();
                     }
                     this._promptContainer.style.display = "";
                     this._promptContainer.appendChild(this.prompt.container);
@@ -21767,11 +24266,11 @@ You should be redirected to the song at:<br /><br />
                 window.prompt("Copy this:", text);
         }
         _randomPreset() {
-            const isNoise = this._doc.song.getChannelIsNoise(this._doc.channel);
-            this._doc.record(new ChangePreset(this._doc, pickRandomPresetValue(isNoise)));
+            const isNoise = this.doc.song.getChannelIsNoise(this.doc.channel);
+            this.doc.record(new ChangePreset(this.doc, pickRandomPresetValue(isNoise)));
         }
         _randomGenerated() {
-            this._doc.record(new ChangeRandomGeneratedInstrument(this._doc));
+            this.doc.record(new ChangeRandomGeneratedInstrument(this.doc));
         }
         _setPreset(preset) {
             if (isNaN(preset)) {
@@ -21789,1443 +24288,23 @@ You should be redirected to the song at:<br /><br />
                         this._randomGenerated();
                         break;
                 }
-                this._doc.notifier.changed();
+                this.doc.notifier.changed();
             }
             else {
-                this._doc.record(new ChangePreset(this._doc, parseInt(preset)));
+                this.doc.record(new ChangePreset(this.doc, parseInt(preset)));
             }
         }
-    }
-
-    class SongPerformance {
-        constructor(_doc) {
-            this._doc = _doc;
-            this._channelIsDrum = false;
-            this._channelOctave = -1;
-            this._songKey = -1;
-            this._pitchesAreTemporary = false;
-            this._recentlyAddedPitches = [];
-            this._songLengthWhenRecordingStarted = -1;
-            this._playheadPart = -1;
-            this._playheadPattern = null;
-            this._pitchesChanged = false;
-            this._lastNote = null;
-            this._recordingChange = null;
-            this._onAnimationFrame = () => {
-                window.requestAnimationFrame(this._onAnimationFrame);
-                if (this._doc.synth.recording) {
-                    const dirty = this._updateRecordedNotes();
-                    if (dirty) {
-                        this._doc.notifier.notifyWatchers();
-                    }
-                }
-            };
-            this._documentChanged = () => {
-                const isDrum = this._doc.song.getChannelIsNoise(this._doc.channel);
-                const octave = this._doc.song.channels[this._doc.channel].octave;
-                if (this._doc.synth.liveInputChannel != this._doc.channel || this._channelIsDrum != isDrum || this._channelOctave != octave || this._songKey != this._doc.song.key) {
-                    this._doc.synth.liveInputChannel = this._doc.channel;
-                    this._channelIsDrum = isDrum;
-                    this._channelOctave = octave;
-                    this._songKey = this._doc.song.key;
-                    this.clearAllPitches();
-                }
-                this._doc.synth.liveInputInstruments = this._doc.recentPatternInstruments[this._doc.channel];
-            };
-            this._doc.notifier.watch(this._documentChanged);
-            this._documentChanged();
-            window.requestAnimationFrame(this._onAnimationFrame);
-        }
-        play() {
-            this._doc.synth.play();
-            this._doc.synth.enableMetronome = false;
-            this._doc.synth.countInMetronome = false;
-            this._doc.synth.maintainLiveInput();
-        }
-        pause() {
-            this.clearAllPitches();
-            if (this._recordingChange != null) {
-                if (this._doc.song.barCount > this._songLengthWhenRecordingStarted && !this._lastBarHasPatterns()) {
-                    new ChangeDeleteBars(this._doc, this._doc.song.barCount - 1, 1);
-                    new ChangeChannelBar(this._doc, this._doc.channel, this._doc.song.barCount - 1);
-                }
-                if (!this._recordingChange.isNoop()) {
-                    this._doc.record(this._recordingChange);
-                    this._recordingChange = null;
-                }
-                this._lastNote = null;
-            }
-            this._doc.synth.pause();
-            this._doc.synth.resetEffects();
-            this._doc.synth.enableMetronome = false;
-            this._doc.synth.countInMetronome = false;
-            if (this._doc.prefs.autoFollow) {
-                this._doc.synth.goToBar(this._doc.bar);
-            }
-            this._doc.synth.snapToBar();
-        }
-        record() {
-            this._doc.synth.snapToBar();
-            const playheadBar = Math.floor(this._doc.synth.playhead);
-            if (playheadBar != this._doc.bar) {
-                new ChangeChannelBar(this._doc, this._doc.channel, playheadBar);
-            }
-            if (this._pitchesAreTemporary) {
-                this.clearAllPitches();
-                this._pitchesAreTemporary = false;
-            }
-            this._doc.synth.enableMetronome = this._doc.prefs.metronomeWhileRecording;
-            this._doc.synth.countInMetronome = this._doc.prefs.metronomeCountIn;
-            this._doc.synth.startRecording();
-            this._doc.synth.maintainLiveInput();
-            this._songLengthWhenRecordingStarted = this._doc.song.barCount;
-            this._playheadPart = this._getCurrentPlayheadPart();
-            this._playheadPattern = null;
-            this._pitchesChanged = false;
-            this._lastNote = null;
-            this._recentlyAddedPitches.length = 0;
-            this._recordingChange = new ChangeGroup();
-            this._doc.setProspectiveChange(this._recordingChange);
-        }
-        abortRecording() {
-            this._recordingChange = null;
-            this.pause();
-        }
-        pitchesAreTemporary() {
-            return this._pitchesAreTemporary;
-        }
-        _getMinDivision() {
-            if (this._doc.prefs.snapRecordedNotesToRhythm) {
-                return Config.partsPerBeat / Config.rhythms[this._doc.song.rhythm].stepsPerBeat;
-            }
-            else {
-                return 1;
-            }
-        }
-        _getCurrentPlayheadPart() {
-            const currentPart = this._doc.synth.playhead * this._doc.song.beatsPerBar * Config.partsPerBeat;
-            if (this._doc.prefs.snapRecordedNotesToRhythm) {
-                const minDivision = this._getMinDivision();
-                return Math.round(currentPart / minDivision) * minDivision;
-            }
-            return Math.round(currentPart);
-        }
-        _lastBarHasPatterns() {
-            for (let channelIndex = 0; channelIndex < this._doc.song.getChannelCount(); channelIndex++) {
-                if (this._doc.song.channels[channelIndex].bars[this._doc.song.barCount - 1] != 0)
-                    return true;
-            }
-            return false;
-        }
-        _updateRecordedNotes() {
-            if (this._recordingChange == null)
-                return false;
-            if (!this._doc.lastChangeWas(this._recordingChange)) {
-                this.abortRecording();
-                return false;
-            }
-            if (this._doc.synth.countInMetronome) {
-                this._recentlyAddedPitches.length = 0;
-                this._pitchesChanged = false;
-                return false;
-            }
-            const partsPerBar = this._doc.song.beatsPerBar * Config.partsPerBeat;
-            const oldPart = this._playheadPart % partsPerBar;
-            const oldBar = Math.floor(this._playheadPart / partsPerBar);
-            const oldPlayheadPart = this._playheadPart;
-            this._playheadPart = this._getCurrentPlayheadPart();
-            const newPart = this._playheadPart % partsPerBar;
-            const newBar = Math.floor(this._playheadPart / partsPerBar);
-            if (oldPart == newPart && oldBar == newBar)
-                return false;
-            if (this._playheadPart < oldPlayheadPart) {
-                this._lastNote = null;
-                this._playheadPattern = null;
-                return false;
-            }
-            let dirty = false;
-            for (let bar = oldBar; bar <= newBar; bar++) {
-                if (bar != oldBar)
-                    this._playheadPattern = null;
-                const startPart = (bar == oldBar) ? oldPart : 0;
-                const endPart = (bar == newBar) ? newPart : partsPerBar;
-                if (startPart == endPart)
-                    break;
-                if (this._lastNote != null && !this._pitchesChanged && startPart > 0 && this._doc.synth.liveInputPitches.length > 0) {
-                    this._recordingChange.append(new ChangePinTime(this._doc, this._lastNote, 1, endPart, this._lastNote.continuesLastPattern));
-                    this._doc.currentPatternIsDirty = true;
-                }
-                else {
-                    if (this._lastNote != null) {
-                        this._lastNote = null;
-                    }
-                    let noteStartPart = startPart;
-                    let noteEndPart = endPart;
-                    while (noteStartPart < endPart) {
-                        let addedAlreadyReleasedPitch = false;
-                        if (this._recentlyAddedPitches.length > 0 || this._doc.synth.liveInputPitches.length > 0) {
-                            if (this._playheadPattern == null) {
-                                this._doc.selection.erasePatternInBar(this._recordingChange, this._doc.synth.liveInputChannel, bar);
-                                this._recordingChange.append(new ChangeEnsurePatternExists(this._doc, this._doc.synth.liveInputChannel, bar));
-                                this._playheadPattern = this._doc.song.getPattern(this._doc.synth.liveInputChannel, bar);
-                            }
-                            if (this._playheadPattern == null)
-                                throw new Error();
-                            this._lastNote = new Note(-1, noteStartPart, noteEndPart, Config.noteSizeMax, this._doc.song.getChannelIsNoise(this._doc.synth.liveInputChannel));
-                            this._lastNote.continuesLastPattern = (noteStartPart == 0 && !this._pitchesChanged);
-                            this._lastNote.pitches.length = 0;
-                            while (this._recentlyAddedPitches.length > 0) {
-                                if (this._lastNote.pitches.length >= Config.maxChordSize)
-                                    break;
-                                const recentPitch = this._recentlyAddedPitches.shift();
-                                if (this._doc.synth.liveInputPitches.indexOf(recentPitch) == -1) {
-                                    this._lastNote.pitches.push(recentPitch);
-                                    addedAlreadyReleasedPitch = true;
-                                }
-                            }
-                            for (let i = 0; i < this._doc.synth.liveInputPitches.length; i++) {
-                                if (this._lastNote.pitches.length >= Config.maxChordSize)
-                                    break;
-                                this._lastNote.pitches.push(this._doc.synth.liveInputPitches[i]);
-                            }
-                            this._recordingChange.append(new ChangeNoteAdded(this._doc, this._playheadPattern, this._lastNote, this._playheadPattern.notes.length));
-                            if (addedAlreadyReleasedPitch) {
-                                noteEndPart = noteStartPart + this._getMinDivision();
-                                new ChangeNoteLength(this._doc, this._lastNote, this._lastNote.start, noteEndPart);
-                                this._lastNote = null;
-                            }
-                            dirty = true;
-                        }
-                        this._pitchesChanged = addedAlreadyReleasedPitch;
-                        noteStartPart = noteEndPart;
-                        noteEndPart = endPart;
-                    }
-                }
-                if (bar == this._doc.song.barCount - 1) {
-                    if (this._lastBarHasPatterns()) {
-                        new ChangeInsertBars(this._doc, this._doc.song.barCount, 1);
-                        this._doc.bar--;
-                        dirty = true;
-                    }
-                }
-            }
-            return dirty;
-        }
-        setTemporaryPitches(pitches, duration) {
-            this._updateRecordedNotes();
-            for (let i = 0; i < pitches.length; i++) {
-                this._doc.synth.liveInputPitches[i] = pitches[i];
-            }
-            this._doc.synth.liveInputPitches.length = Math.min(pitches.length, Config.maxChordSize);
-            this._doc.synth.liveInputDuration = duration;
-            this._doc.synth.liveInputStarted = true;
-            this._pitchesAreTemporary = true;
-            this._pitchesChanged = true;
-        }
-        addPerformedPitch(pitch) {
-            this._doc.synth.maintainLiveInput();
-            this._updateRecordedNotes();
-            if (this._pitchesAreTemporary) {
-                this.clearAllPitches();
-                this._pitchesAreTemporary = false;
-            }
-            if (this._doc.prefs.ignorePerformedNotesNotInScale && !Config.scales[this._doc.song.scale].flags[pitch % Config.pitchesPerOctave]) {
-                return;
-            }
-            if (this._doc.synth.liveInputPitches.indexOf(pitch) == -1) {
-                this._doc.synth.liveInputPitches.push(pitch);
-                this._pitchesChanged = true;
-                while (this._doc.synth.liveInputPitches.length > Config.maxChordSize) {
-                    this._doc.synth.liveInputPitches.shift();
-                }
-                this._doc.synth.liveInputDuration = Number.MAX_SAFE_INTEGER;
-                if (this._recordingChange != null) {
-                    const recentIndex = this._recentlyAddedPitches.indexOf(pitch);
-                    if (recentIndex != -1) {
-                        this._recentlyAddedPitches.splice(recentIndex, 1);
-                    }
-                    this._recentlyAddedPitches.push(pitch);
-                    while (this._recentlyAddedPitches.length > Config.maxChordSize * 4) {
-                        this._recentlyAddedPitches.shift();
-                    }
-                }
-            }
-        }
-        removePerformedPitch(pitch) {
-            this._updateRecordedNotes();
-            for (let i = 0; i < this._doc.synth.liveInputPitches.length; i++) {
-                if (this._doc.synth.liveInputPitches[i] == pitch) {
-                    this._doc.synth.liveInputPitches.splice(i, 1);
-                    this._pitchesChanged = true;
-                    i--;
-                }
-            }
-        }
-        clearAllPitches() {
-            this._updateRecordedNotes();
-            this._doc.synth.liveInputPitches.length = 0;
-            this._pitchesChanged = true;
-        }
-    }
-
-    class Selection {
-        constructor(_doc) {
-            this._doc = _doc;
-            this.boxSelectionX0 = 0;
-            this.boxSelectionY0 = 0;
-            this.boxSelectionX1 = 0;
-            this.boxSelectionY1 = 0;
-            this.digits = "";
-            this.instrumentDigits = "";
-            this.patternSelectionStart = 0;
-            this.patternSelectionEnd = 0;
-            this.patternSelectionActive = false;
-            this._changeTranspose = null;
-            this._changeReorder = null;
-            this._changeTrack = null;
-            this._changeInstrument = null;
-        }
-        toJSON() {
-            return {
-                "x0": this.boxSelectionX0,
-                "x1": this.boxSelectionX1,
-                "y0": this.boxSelectionY0,
-                "y1": this.boxSelectionY1,
-                "start": this.patternSelectionStart,
-                "end": this.patternSelectionEnd,
-            };
-        }
-        fromJSON(json) {
-            if (json == null)
-                return;
-            this.boxSelectionX0 = +json["x0"];
-            this.boxSelectionX1 = +json["x1"];
-            this.boxSelectionY0 = +json["y0"];
-            this.boxSelectionY1 = +json["y1"];
-            this.patternSelectionStart = +json["start"];
-            this.patternSelectionEnd = +json["end"];
-            this.digits = "";
-            this.instrumentDigits = "";
-            this.patternSelectionActive = this.patternSelectionStart < this.patternSelectionEnd;
-        }
-        selectionUpdated() {
-            this._doc.notifier.changed();
-            this.digits = "";
-            this.instrumentDigits = "";
-        }
-        get boxSelectionBar() {
-            return Math.min(this.boxSelectionX0, this.boxSelectionX1);
-        }
-        get boxSelectionChannel() {
-            return Math.min(this.boxSelectionY0, this.boxSelectionY1);
-        }
-        get boxSelectionWidth() {
-            return Math.abs(this.boxSelectionX0 - this.boxSelectionX1) + 1;
-        }
-        get boxSelectionHeight() {
-            return Math.abs(this.boxSelectionY0 - this.boxSelectionY1) + 1;
-        }
-        get boxSelectionActive() {
-            return this.boxSelectionWidth > 1 || this.boxSelectionHeight > 1;
-        }
-        scrollToSelectedPattern() {
-            this._doc.barScrollPos = Math.min(this._doc.bar, Math.max(this._doc.bar - (this._doc.trackVisibleBars - 1), this._doc.barScrollPos));
-            this._doc.channelScrollPos = Math.min(this._doc.channel, Math.max(this._doc.channel - (this._doc.trackVisibleChannels - 1), this._doc.channelScrollPos));
-        }
-        scrollToEndOfSelection() {
-            this._doc.barScrollPos = Math.min(this.boxSelectionX1, Math.max(this.boxSelectionX1 - (this._doc.trackVisibleBars - 1), this._doc.barScrollPos));
-            this._doc.channelScrollPos = Math.min(this.boxSelectionY1, Math.max(this.boxSelectionY1 - (this._doc.trackVisibleChannels - 1), this._doc.channelScrollPos));
-        }
-        setChannelBar(channelIndex, bar) {
-            if (channelIndex == this._doc.channel && bar == this._doc.bar)
-                return;
-            const canReplaceLastChange = this._doc.lastChangeWas(this._changeTrack);
-            this._changeTrack = new ChangeGroup();
-            this._changeTrack.append(new ChangeChannelBar(this._doc, channelIndex, bar));
-            const pattern = this._doc.getCurrentPattern(0);
-            if (pattern != null && this._doc.song.patternInstruments) {
-                if (pattern.instruments.indexOf(this._doc.viewedInstrument[this._doc.channel]) == -1) {
-                    this._doc.viewedInstrument[this._doc.channel] = pattern.instruments[0];
-                }
-            }
-            if (!this._doc.hasRedoHistory()) {
-                this._doc.record(this._changeTrack, canReplaceLastChange);
-            }
-            this.selectionUpdated();
-        }
-        setPattern(pattern) {
-            this._doc.record(new ChangePatternNumbers(this._doc, pattern, this.boxSelectionBar, this.boxSelectionChannel, this.boxSelectionWidth, this.boxSelectionHeight));
-        }
-        nextDigit(digit, forInstrument) {
-            const channel = this._doc.song.channels[this._doc.channel];
-            if (forInstrument) {
-                if (digit == "0")
-                    digit = "10";
-                this.instrumentDigits += digit;
-                var parsed = parseInt(this.instrumentDigits);
-                if (parsed != 0 && parsed <= channel.instruments.length) {
-                    this.selectInstrument(parsed - 1);
-                    return;
-                }
-                this.instrumentDigits = digit;
-                parsed = parseInt(this.instrumentDigits);
-                if (parsed != 0 && parsed <= channel.instruments.length) {
-                    this.selectInstrument(parsed - 1);
-                    return;
-                }
-                this.instrumentDigits = "";
-            }
-            else {
-                if (this.digits.length > 0 && this.digits != String(channel.bars[this.boxSelectionBar])) {
-                    this.digits = "";
-                }
-                this.digits += digit;
-                let parsed = parseInt(this.digits);
-                if (parsed <= this._doc.song.patternsPerChannel) {
-                    this.setPattern(parsed);
-                    return;
-                }
-                this.digits = digit;
-                parsed = parseInt(this.digits);
-                if (parsed <= this._doc.song.patternsPerChannel) {
-                    this.setPattern(parsed);
-                    return;
-                }
-                this.digits = "";
-            }
-        }
-        insertBars() {
-            this._doc.record(new ChangeInsertBars(this._doc, this.boxSelectionBar + this.boxSelectionWidth, this.boxSelectionWidth));
-            const width = this.boxSelectionWidth;
-            this.boxSelectionX0 += width;
-            this.boxSelectionX1 += width;
-        }
-        insertChannel() {
-            const group = new ChangeGroup();
-            const insertIndex = this.boxSelectionChannel + this.boxSelectionHeight;
-            const isNoise = this._doc.song.getChannelIsNoise(insertIndex - 1);
-            group.append(new ChangeAddChannel(this._doc, insertIndex, isNoise));
-            if (!group.isNoop()) {
-                this.boxSelectionY0 = this.boxSelectionY1 = insertIndex;
-                group.append(new ChangeChannelBar(this._doc, insertIndex, this._doc.bar));
-                this._doc.record(group);
-            }
-        }
-        deleteBars() {
-            const group = new ChangeGroup();
-            if (this._doc.selection.patternSelectionActive) {
-                if (this.boxSelectionActive) {
-                    group.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
-                }
-                for (const channelIndex of this._eachSelectedChannel()) {
-                    for (const pattern of this._eachSelectedPattern(channelIndex)) {
-                        group.append(new ChangeNoteTruncate(this._doc, pattern, this._doc.selection.patternSelectionStart, this._doc.selection.patternSelectionEnd));
-                    }
-                }
-                group.append(new ChangePatternSelection(this._doc, 0, 0));
-            }
-            else {
-                group.append(new ChangeDeleteBars(this._doc, this.boxSelectionBar, this.boxSelectionWidth));
-                const width = this.boxSelectionWidth;
-                this.boxSelectionX0 = Math.max(0, this.boxSelectionX0 - width);
-                this.boxSelectionX1 = Math.max(0, this.boxSelectionX1 - width);
-            }
-            this._doc.record(group);
-        }
-        deleteChannel() {
-            this._doc.record(new ChangeRemoveChannel(this._doc, this.boxSelectionChannel, this.boxSelectionChannel + this.boxSelectionHeight - 1));
-            this.boxSelectionY0 = this.boxSelectionY1 = this._doc.channel;
-        }
-        *_eachSelectedChannel() {
-            for (let channelIndex = this.boxSelectionChannel; channelIndex < this.boxSelectionChannel + this.boxSelectionHeight; channelIndex++) {
-                yield channelIndex;
-            }
-        }
-        *_eachSelectedBar() {
-            for (let bar = this.boxSelectionBar; bar < this.boxSelectionBar + this.boxSelectionWidth; bar++) {
-                yield bar;
-            }
-        }
-        *_eachSelectedPattern(channelIndex) {
-            const handledPatterns = {};
-            for (const bar of this._eachSelectedBar()) {
-                const currentPatternIndex = this._doc.song.channels[channelIndex].bars[bar];
-                if (currentPatternIndex == 0)
-                    continue;
-                if (handledPatterns[String(currentPatternIndex)])
-                    continue;
-                handledPatterns[String(currentPatternIndex)] = true;
-                const pattern = this._doc.song.getPattern(channelIndex, bar);
-                if (pattern == null)
-                    throw new Error();
-                yield pattern;
-            }
-        }
-        _parseCopiedInstrumentArray(patternCopy, channelIndex) {
-            const instruments = Array.from(patternCopy["instruments"]).map(i => i >>> 0);
-            discardInvalidPatternInstruments(instruments, this._doc.song, channelIndex);
-            return instruments;
-        }
-        _patternIndexIsUnused(channelIndex, patternIndex) {
-            for (let i = 0; i < this._doc.song.barCount; i++) {
-                if (this._doc.song.channels[channelIndex].bars[i] == patternIndex) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        copy() {
-            const channels = [];
-            for (const channelIndex of this._eachSelectedChannel()) {
-                const patterns = {};
-                const bars = [];
-                for (const bar of this._eachSelectedBar()) {
-                    const patternNumber = this._doc.song.channels[channelIndex].bars[bar];
-                    bars.push(patternNumber);
-                    if (patterns[String(patternNumber)] == undefined) {
-                        const pattern = this._doc.song.getPattern(channelIndex, bar);
-                        let instruments = this._doc.recentPatternInstruments[channelIndex];
-                        let notes = [];
-                        if (pattern != null) {
-                            instruments = pattern.instruments.concat();
-                            if (this.patternSelectionActive) {
-                                for (const note of pattern.cloneNotes()) {
-                                    if (note.end <= this.patternSelectionStart)
-                                        continue;
-                                    if (note.start >= this.patternSelectionEnd)
-                                        continue;
-                                    note.start -= this.patternSelectionStart;
-                                    note.end -= this.patternSelectionStart;
-                                    if (note.start < 0 || note.end > this.patternSelectionEnd - this.patternSelectionStart) {
-                                        new ChangeNoteLength(null, note, Math.max(note.start, 0), Math.min(this.patternSelectionEnd - this.patternSelectionStart, note.end));
-                                    }
-                                    notes.push(note);
-                                }
-                            }
-                            else {
-                                notes = pattern.notes;
-                            }
-                        }
-                        patterns[String(patternNumber)] = { "instruments": instruments, "notes": notes };
-                    }
-                }
-                const channelCopy = {
-                    "isNoise": this._doc.song.getChannelIsNoise(channelIndex),
-                    "patterns": patterns,
-                    "bars": bars,
-                };
-                channels.push(channelCopy);
-            }
-            const selectionCopy = {
-                "partDuration": this.patternSelectionActive ? this.patternSelectionEnd - this.patternSelectionStart : this._doc.song.beatsPerBar * Config.partsPerBeat,
-                "channels": channels,
-            };
-            window.localStorage.setItem("selectionCopy", JSON.stringify(selectionCopy));
-        }
-        pasteNotes() {
-            const selectionCopy = JSON.parse(String(window.localStorage.getItem("selectionCopy")));
-            if (selectionCopy == null)
-                return;
-            const channelCopies = selectionCopy["channels"] || [];
-            const copiedPartDuration = selectionCopy["partDuration"] >>> 0;
-            const group = new ChangeGroup();
-            const fillSelection = this.boxSelectionActive;
-            const pasteHeight = fillSelection ? this.boxSelectionHeight : Math.min(channelCopies.length, this._doc.song.getChannelCount() - this.boxSelectionChannel);
-            for (let pasteChannel = 0; pasteChannel < pasteHeight; pasteChannel++) {
-                const channelCopy = channelCopies[pasteChannel % channelCopies.length];
-                const channelIndex = this.boxSelectionChannel + pasteChannel;
-                const isNoise = !!channelCopy["isNoise"];
-                const patternCopies = channelCopy["patterns"] || {};
-                const copiedBars = channelCopy["bars"] || [];
-                if (copiedBars.length == 0)
-                    continue;
-                if (isNoise != this._doc.song.getChannelIsNoise(channelIndex))
-                    continue;
-                const pasteWidth = fillSelection ? this.boxSelectionWidth : Math.min(copiedBars.length, this._doc.song.barCount - this.boxSelectionBar);
-                if (!fillSelection && copiedBars.length == 1 && channelCopies.length == 1) {
-                    const copiedPatternIndex = copiedBars[0] >>> 0;
-                    const bar = this.boxSelectionBar;
-                    const currentPatternIndex = this._doc.song.channels[channelIndex].bars[bar];
-                    if (copiedPatternIndex == 0 && currentPatternIndex == 0)
-                        continue;
-                    const patternCopy = patternCopies[String(copiedPatternIndex)];
-                    const instrumentsCopy = this._parseCopiedInstrumentArray(patternCopy, channelIndex);
-                    if (currentPatternIndex == 0) {
-                        const existingPattern = this._doc.song.channels[channelIndex].patterns[copiedPatternIndex - 1];
-                        if (existingPattern != undefined &&
-                            !this.patternSelectionActive &&
-                            ((comparePatternNotes(patternCopy["notes"], existingPattern.notes) && patternsContainSameInstruments(instrumentsCopy, existingPattern.instruments)) ||
-                                this._patternIndexIsUnused(channelIndex, copiedPatternIndex))) {
-                            group.append(new ChangePatternNumbers(this._doc, copiedPatternIndex, bar, channelIndex, 1, 1));
-                        }
-                        else {
-                            group.append(new ChangeEnsurePatternExists(this._doc, channelIndex, bar));
-                        }
-                    }
-                    const pattern = this._doc.song.getPattern(channelIndex, bar);
-                    if (pattern == null)
-                        throw new Error();
-                    group.append(new ChangePaste(this._doc, pattern, patternCopy["notes"], this.patternSelectionActive ? this.patternSelectionStart : 0, this.patternSelectionActive ? this.patternSelectionEnd : Config.partsPerBeat * this._doc.song.beatsPerBar, copiedPartDuration));
-                    if (currentPatternIndex == 0)
-                        group.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instrumentsCopy, pattern));
-                }
-                else if (this.patternSelectionActive) {
-                    const reusablePatterns = {};
-                    const usedPatterns = {};
-                    group.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, pasteWidth, this.boxSelectionChannel, pasteHeight));
-                    for (let pasteBar = 0; pasteBar < pasteWidth; pasteBar++) {
-                        const bar = this.boxSelectionBar + pasteBar;
-                        const copiedPatternIndex = copiedBars[pasteBar % copiedBars.length] >>> 0;
-                        const currentPatternIndex = this._doc.song.channels[channelIndex].bars[bar];
-                        const reusedIndex = [copiedPatternIndex, currentPatternIndex].join(",");
-                        if (copiedPatternIndex == 0 && currentPatternIndex == 0)
-                            continue;
-                        if (reusablePatterns[reusedIndex] != undefined) {
-                            group.append(new ChangePatternNumbers(this._doc, reusablePatterns[reusedIndex], bar, channelIndex, 1, 1));
-                            continue;
-                        }
-                        if (currentPatternIndex == 0) {
-                            group.append(new ChangeEnsurePatternExists(this._doc, channelIndex, bar));
-                            const patternCopy = patternCopies[String(copiedPatternIndex)];
-                            const instrumentsCopy = this._parseCopiedInstrumentArray(patternCopy, channelIndex);
-                            const pattern = this._doc.song.getPattern(channelIndex, bar);
-                            group.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instrumentsCopy, pattern));
-                        }
-                        else {
-                            const pattern = this._doc.song.getPattern(channelIndex, bar);
-                            if (pattern == null)
-                                throw new Error();
-                            if (!usedPatterns[String(currentPatternIndex)]) {
-                                usedPatterns[String(currentPatternIndex)] = true;
-                            }
-                            else {
-                                group.append(new ChangePatternNumbers(this._doc, 0, bar, channelIndex, 1, 1));
-                                group.append(new ChangeEnsurePatternExists(this._doc, channelIndex, bar));
-                                const newPattern = this._doc.song.getPattern(channelIndex, bar);
-                                if (newPattern == null)
-                                    throw new Error();
-                                for (const note of pattern.cloneNotes()) {
-                                    group.append(new ChangeNoteAdded(this._doc, newPattern, note, newPattern.notes.length, false));
-                                }
-                            }
-                        }
-                        const pattern = this._doc.song.getPattern(channelIndex, bar);
-                        if (pattern == null)
-                            throw new Error();
-                        if (copiedPatternIndex == 0) {
-                            group.append(new ChangeNoteTruncate(this._doc, pattern, this.patternSelectionStart, this.patternSelectionEnd));
-                        }
-                        else {
-                            const patternCopy = patternCopies[String(copiedPatternIndex)];
-                            group.append(new ChangePaste(this._doc, pattern, patternCopy["notes"], this.patternSelectionStart, this.patternSelectionEnd, copiedPartDuration));
-                        }
-                        reusablePatterns[reusedIndex] = this._doc.song.channels[channelIndex].bars[bar];
-                    }
-                }
-                else {
-                    for (let pasteBar = 0; pasteBar < pasteWidth; pasteBar++) {
-                        this.erasePatternInBar(group, channelIndex, this.boxSelectionBar + pasteBar);
-                    }
-                    const reusablePatterns = {};
-                    for (let pasteBar = 0; pasteBar < pasteWidth; pasteBar++) {
-                        const bar = this.boxSelectionBar + pasteBar;
-                        const copiedPatternIndex = copiedBars[pasteBar % copiedBars.length] >>> 0;
-                        const reusedIndex = String(copiedPatternIndex);
-                        if (copiedPatternIndex == 0)
-                            continue;
-                        if (reusablePatterns[reusedIndex] != undefined) {
-                            group.append(new ChangePatternNumbers(this._doc, reusablePatterns[reusedIndex], bar, channelIndex, 1, 1));
-                            continue;
-                        }
-                        const patternCopy = patternCopies[String(copiedPatternIndex)];
-                        const instrumentsCopy = this._parseCopiedInstrumentArray(patternCopy, channelIndex);
-                        const existingPattern = this._doc.song.channels[channelIndex].patterns[copiedPatternIndex - 1];
-                        if (existingPattern != undefined &&
-                            copiedPartDuration == Config.partsPerBeat * this._doc.song.beatsPerBar &&
-                            comparePatternNotes(patternCopy["notes"], existingPattern.notes) &&
-                            patternsContainSameInstruments(instrumentsCopy, existingPattern.instruments)) {
-                            group.append(new ChangePatternNumbers(this._doc, copiedPatternIndex, bar, channelIndex, 1, 1));
-                        }
-                        else {
-                            if (existingPattern != undefined && this._patternIndexIsUnused(channelIndex, copiedPatternIndex)) {
-                                group.append(new ChangePatternNumbers(this._doc, copiedPatternIndex, bar, channelIndex, 1, 1));
-                            }
-                            else {
-                                group.append(new ChangeEnsurePatternExists(this._doc, channelIndex, bar));
-                            }
-                            const pattern = this._doc.song.getPattern(channelIndex, bar);
-                            if (pattern == null)
-                                throw new Error();
-                            group.append(new ChangePaste(this._doc, pattern, patternCopy["notes"], this.patternSelectionActive ? this.patternSelectionStart : 0, this.patternSelectionActive ? this.patternSelectionEnd : Config.partsPerBeat * this._doc.song.beatsPerBar, copiedPartDuration));
-                            group.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instrumentsCopy, pattern));
-                        }
-                        reusablePatterns[reusedIndex] = this._doc.song.channels[channelIndex].bars[bar];
-                    }
-                }
-            }
-            this._doc.record(group);
-        }
-        erasePatternInBar(group, channelIndex, bar) {
-            const removedPattern = this._doc.song.channels[channelIndex].bars[bar];
-            if (removedPattern != 0) {
-                group.append(new ChangePatternNumbers(this._doc, 0, bar, channelIndex, 1, 1));
-                if (this._patternIndexIsUnused(channelIndex, removedPattern)) {
-                    this._doc.song.channels[channelIndex].patterns[removedPattern - 1].notes.length = 0;
-                }
-            }
-        }
-        pasteNumbers() {
-            const selectionCopy = JSON.parse(String(window.localStorage.getItem("selectionCopy")));
-            if (selectionCopy == null)
-                return;
-            const channelCopies = selectionCopy["channels"] || [];
-            const group = new ChangeGroup();
-            const fillSelection = this.boxSelectionActive;
-            const pasteHeight = fillSelection ? this.boxSelectionHeight : Math.min(channelCopies.length, this._doc.song.getChannelCount() - this.boxSelectionChannel);
-            for (let pasteChannel = 0; pasteChannel < pasteHeight; pasteChannel++) {
-                const channelCopy = channelCopies[pasteChannel % channelCopies.length];
-                const channelIndex = this.boxSelectionChannel + pasteChannel;
-                const copiedBars = channelCopy["bars"] || [];
-                if (copiedBars.length == 0)
-                    continue;
-                const pasteWidth = fillSelection ? this.boxSelectionWidth : Math.min(copiedBars.length, this._doc.song.barCount - this.boxSelectionBar);
-                for (let pasteBar = 0; pasteBar < pasteWidth; pasteBar++) {
-                    const copiedPatternIndex = copiedBars[pasteBar % copiedBars.length] >>> 0;
-                    const bar = this.boxSelectionBar + pasteBar;
-                    if (copiedPatternIndex > this._doc.song.patternsPerChannel) {
-                        group.append(new ChangePatternsPerChannel(this._doc, copiedPatternIndex));
-                    }
-                    group.append(new ChangePatternNumbers(this._doc, copiedPatternIndex, bar, channelIndex, 1, 1));
-                }
-            }
-            this._doc.record(group);
-        }
-        selectAll() {
-            new ChangePatternSelection(this._doc, 0, 0);
-            if (this.boxSelectionBar == 0 &&
-                this.boxSelectionChannel == 0 &&
-                this.boxSelectionWidth == this._doc.song.barCount &&
-                this.boxSelectionHeight == this._doc.song.getChannelCount()) {
-                this.setTrackSelection(this._doc.bar, this._doc.bar, this._doc.channel, this._doc.channel);
-            }
-            else {
-                this.setTrackSelection(0, this._doc.song.barCount - 1, 0, this._doc.song.getChannelCount() - 1);
-            }
-            this.selectionUpdated();
-        }
-        selectChannel() {
-            new ChangePatternSelection(this._doc, 0, 0);
-            if (this.boxSelectionBar == 0 && this.boxSelectionWidth == this._doc.song.barCount) {
-                this.setTrackSelection(this._doc.bar, this._doc.bar, this.boxSelectionY0, this.boxSelectionY1);
-            }
-            else {
-                this.setTrackSelection(0, this._doc.song.barCount - 1, this.boxSelectionY0, this.boxSelectionY1);
-            }
-            this.selectionUpdated();
-        }
-        duplicatePatterns() {
-            this._doc.record(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
-        }
-        muteChannels(allChannels) {
-            if (allChannels) {
-                let anyMuted = false;
-                for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
-                    if (this._doc.song.channels[channelIndex].muted) {
-                        anyMuted = true;
-                        break;
-                    }
-                }
-                for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
-                    this._doc.song.channels[channelIndex].muted = !anyMuted;
-                }
-            }
-            else {
-                let anyUnmuted = false;
-                for (const channelIndex of this._eachSelectedChannel()) {
-                    if (!this._doc.song.channels[channelIndex].muted) {
-                        anyUnmuted = true;
-                        break;
-                    }
-                }
-                for (const channelIndex of this._eachSelectedChannel()) {
-                    this._doc.song.channels[channelIndex].muted = anyUnmuted;
-                }
-            }
-            this._doc.notifier.changed();
-        }
-        soloChannels(invert) {
-            let alreadySoloed = true;
-            for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
-                const shouldBeMuted = (channelIndex < this.boxSelectionChannel || channelIndex >= this.boxSelectionChannel + this.boxSelectionHeight) ? !invert : invert;
-                if (this._doc.song.channels[channelIndex].muted != shouldBeMuted) {
-                    alreadySoloed = false;
-                    break;
-                }
-            }
-            if (alreadySoloed) {
-                for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
-                    this._doc.song.channels[channelIndex].muted = false;
-                }
-            }
-            else {
-                for (let channelIndex = 0; channelIndex < this._doc.song.channels.length; channelIndex++) {
-                    this._doc.song.channels[channelIndex].muted = (channelIndex < this.boxSelectionChannel || channelIndex >= this.boxSelectionChannel + this.boxSelectionHeight) ? !invert : invert;
-                }
-            }
-            this._doc.notifier.changed();
-        }
-        forceRhythm() {
-            const group = new ChangeGroup();
-            if (this.boxSelectionActive) {
-                group.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
-            }
-            for (const channelIndex of this._eachSelectedChannel()) {
-                for (const pattern of this._eachSelectedPattern(channelIndex)) {
-                    group.append(new ChangePatternRhythm(this._doc, pattern));
-                }
-            }
-            this._doc.record(group);
-        }
-        forceScale() {
-            const group = new ChangeGroup();
-            if (this.boxSelectionActive) {
-                group.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
-            }
-            const scaleFlags = [true, false, false, false, false, false, false, false, false, false, false, false];
-            for (const channelIndex of this._eachSelectedChannel()) {
-                if (this._doc.song.getChannelIsNoise(channelIndex))
-                    continue;
-                for (const pattern of this._eachSelectedPattern(channelIndex)) {
-                    unionOfUsedNotes(pattern, scaleFlags);
-                }
-            }
-            const scaleMap = generateScaleMap(scaleFlags, this._doc.song.scale);
-            for (const channelIndex of this._eachSelectedChannel()) {
-                if (this._doc.song.getChannelIsNoise(channelIndex))
-                    continue;
-                for (const pattern of this._eachSelectedPattern(channelIndex)) {
-                    group.append(new ChangePatternScale(this._doc, pattern, scaleMap));
-                }
-            }
-            this._doc.record(group);
-        }
-        setTrackSelection(newX0, newX1, newY0, newY1) {
-            const canReplaceLastChange = this._doc.lastChangeWas(this._changeTrack);
-            this._changeTrack = new ChangeGroup();
-            this._changeTrack.append(new ChangeTrackSelection(this._doc, newX0, newX1, newY0, newY1));
-            if (!this._doc.hasRedoHistory()) {
-                this._doc.record(this._changeTrack, canReplaceLastChange);
-            }
-        }
-        transpose(upward, octave) {
-            const canReplaceLastChange = this._doc.lastChangeWas(this._changeTranspose);
-            this._changeTranspose = new ChangeGroup();
-            if (this.boxSelectionActive) {
-                this._changeTranspose.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
-            }
-            for (const channelIndex of this._eachSelectedChannel()) {
-                for (const pattern of this._eachSelectedPattern(channelIndex)) {
-                    this._changeTranspose.append(new ChangeTranspose(this._doc, channelIndex, pattern, upward, this._doc.prefs.notesOutsideScale, octave));
-                }
-            }
-            this._doc.record(this._changeTranspose, canReplaceLastChange);
-        }
-        swapChannels(offset) {
-            const possibleSectionBoundaries = [
-                this._doc.song.pitchChannelCount,
-                this._doc.song.pitchChannelCount + this._doc.song.noiseChannelCount,
-                this._doc.song.getChannelCount(),
-            ];
-            let channelSectionMin = 0;
-            let channelSectionMax = 0;
-            for (const nextBoundary of possibleSectionBoundaries) {
-                if ((this.boxSelectionChannel < nextBoundary && offset < 0) || (this.boxSelectionChannel + this.boxSelectionHeight <= nextBoundary)) {
-                    channelSectionMax = nextBoundary - 1;
-                    break;
-                }
-                channelSectionMin = nextBoundary;
-            }
-            const newSelectionMin = Math.max(this.boxSelectionChannel, channelSectionMin);
-            const newSelectionMax = Math.min(this.boxSelectionChannel + this.boxSelectionHeight - 1, channelSectionMax);
-            offset = Math.max(offset, channelSectionMin - newSelectionMin);
-            offset = Math.min(offset, channelSectionMax - newSelectionMax);
-            if (offset != 0) {
-                const canReplaceLastChange = this._doc.lastChangeWas(this._changeReorder);
-                this._changeReorder = new ChangeGroup();
-                this.boxSelectionY0 = newSelectionMin + offset;
-                this.boxSelectionY1 = newSelectionMax + offset;
-                this._changeReorder.append(new ChangeChannelOrder(this._doc, newSelectionMin, newSelectionMax, offset));
-                this._changeReorder.append(new ChangeChannelBar(this._doc, Math.max(this.boxSelectionY0, Math.min(this.boxSelectionY1, this._doc.channel + offset)), this._doc.bar));
-                this.selectionUpdated();
-                this._doc.record(this._changeReorder, canReplaceLastChange);
-            }
-        }
-        selectInstrument(instrument) {
-            if (this._doc.viewedInstrument[this._doc.channel] == instrument) {
-                if (this._doc.song.layeredInstruments && this._doc.song.patternInstruments) {
-                    const canReplaceLastChange = this._doc.lastChangeWas(this._changeInstrument);
-                    this._changeInstrument = new ChangeGroup();
-                    const instruments = this._doc.recentPatternInstruments[this._doc.channel];
-                    this._doc.notifier.changed();
-                    if (instruments.indexOf(instrument) == -1) {
-                        instruments.push(instrument);
-                        const maxLayers = this._doc.song.getMaxInstrumentsPerPattern(this._doc.channel);
-                        if (instruments.length > maxLayers) {
-                            instruments.splice(0, instruments.length - maxLayers);
-                        }
-                    }
-                    else {
-                        instruments.splice(instruments.indexOf(instrument), 1);
-                        if (instruments.length == 0)
-                            instruments[0] = 0;
-                    }
-                    if (this.boxSelectionActive) {
-                        this._changeInstrument.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
-                    }
-                    for (const channelIndex of this._eachSelectedChannel()) {
-                        for (const pattern of this._eachSelectedPattern(channelIndex)) {
-                            this._changeInstrument.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instruments, pattern));
-                        }
-                    }
-                    this._doc.record(this._changeInstrument, canReplaceLastChange);
-                }
-            }
-            else {
-                const canReplaceLastChange = this._doc.lastChangeWas(this._changeInstrument);
-                this._changeInstrument = new ChangeGroup();
-                this._changeInstrument.append(new ChangeViewInstrument(this._doc, instrument));
-                if (!this._doc.song.layeredInstruments && this._doc.song.patternInstruments) {
-                    if (this.boxSelectionActive) {
-                        this._changeInstrument.append(new ChangeDuplicateSelectedReusedPatterns(this._doc, this.boxSelectionBar, this.boxSelectionWidth, this.boxSelectionChannel, this.boxSelectionHeight));
-                    }
-                    const instruments = [instrument];
-                    for (const channelIndex of this._eachSelectedChannel()) {
-                        for (const pattern of this._eachSelectedPattern(channelIndex)) {
-                            this._changeInstrument.append(new ChangeSetPatternInstruments(this._doc, channelIndex, instruments, pattern));
-                        }
-                    }
-                    this._doc.record(this._changeInstrument, canReplaceLastChange);
-                }
-                else if (!this._doc.hasRedoHistory()) {
-                    this._doc.record(this._changeInstrument, canReplaceLastChange);
-                }
-            }
-        }
-        resetBoxSelection() {
-            this.boxSelectionX0 = this.boxSelectionX1 = this._doc.bar;
-            this.boxSelectionY0 = this.boxSelectionY1 = this._doc.channel;
-        }
-    }
-
-    class Preferences {
-        constructor() {
-            this.volume = 75;
-            this.visibleOctaves = Preferences.defaultVisibleOctaves;
-            this.reload();
-        }
-        reload() {
-            this.autoPlay = window.localStorage.getItem("autoPlay") == "true";
-            this.autoFollow = window.localStorage.getItem("autoFollow") != "false";
-            this.enableNotePreview = window.localStorage.getItem("enableNotePreview") != "false";
-            this.showFifth = window.localStorage.getItem("showFifth") == "true";
-            this.notesOutsideScale = window.localStorage.getItem("notesOutsideScale") == "true";
-            this.showLetters = window.localStorage.getItem("showLetters") == "true";
-            this.showChannels = window.localStorage.getItem("showChannels") == "true";
-            this.showScrollBar = window.localStorage.getItem("showScrollBar") == "true";
-            this.alwaysShowSettings = window.localStorage.getItem("alwaysShowSettings") == "true";
-            this.instrumentCopyPaste = window.localStorage.getItem("instrumentCopyPaste") == "true";
-            this.enableChannelMuting = window.localStorage.getItem("enableChannelMuting") == "true";
-            this.displayBrowserUrl = window.localStorage.getItem("displayBrowserUrl") != "false";
-            this.pressControlForShortcuts = window.localStorage.getItem("pressControlForShortcuts") == "true";
-            this.enableMidi = window.localStorage.getItem("enableMidi") != "false";
-            this.showRecordButton = window.localStorage.getItem("showRecordButton") == "true";
-            this.snapRecordedNotesToRhythm = window.localStorage.getItem("snapRecordedNotesToRhythm") == "true";
-            this.ignorePerformedNotesNotInScale = window.localStorage.getItem("ignorePerformedNotesNotInScale") == "true";
-            this.metronomeCountIn = window.localStorage.getItem("metronomeCountIn") != "false";
-            this.metronomeWhileRecording = window.localStorage.getItem("metronomeWhileRecording") != "false";
-            this.keyboardLayout = window.localStorage.getItem("keyboardLayout") || "wickiHayden";
-            this.layout = window.localStorage.getItem("TBBlayout") || "small";
-            this.colorTheme = window.localStorage.getItem("TBBcolorTheme") || "dark classic";
-            this.visibleOctaves = (window.localStorage.getItem("visibleOctaves") >>> 0) || Preferences.defaultVisibleOctaves;
-            const defaultScale = Config.scales.dictionary[window.localStorage.getItem("defaultScale")];
-            this.defaultScale = (defaultScale != undefined) ? defaultScale.index : 0;
-            if (window.localStorage.getItem("volume") != null) {
-                this.volume = Math.min(window.localStorage.getItem("volume") >>> 0, 75);
-            }
-            if (window.localStorage.getItem("fullScreen") != null) {
-                if (window.localStorage.getItem("fullScreen") == "true")
-                    this.layout = "long";
-                window.localStorage.removeItem("fullScreen");
-            }
-        }
-        save() {
-            window.localStorage.setItem("autoPlay", this.autoPlay ? "true" : "false");
-            window.localStorage.setItem("autoFollow", this.autoFollow ? "true" : "false");
-            window.localStorage.setItem("enableNotePreview", this.enableNotePreview ? "true" : "false");
-            window.localStorage.setItem("showFifth", this.showFifth ? "true" : "false");
-            window.localStorage.setItem("notesOutsideScale", this.notesOutsideScale ? "true" : "false");
-            window.localStorage.setItem("defaultScale", Config.scales[this.defaultScale].name);
-            window.localStorage.setItem("showLetters", this.showLetters ? "true" : "false");
-            window.localStorage.setItem("showChannels", this.showChannels ? "true" : "false");
-            window.localStorage.setItem("showScrollBar", this.showScrollBar ? "true" : "false");
-            window.localStorage.setItem("alwaysShowSettings", this.alwaysShowSettings ? "true" : "false");
-            window.localStorage.setItem("enableChannelMuting", this.enableChannelMuting ? "true" : "false");
-            window.localStorage.setItem("instrumentCopyPaste", this.instrumentCopyPaste ? "true" : "false");
-            window.localStorage.setItem("displayBrowserUrl", this.displayBrowserUrl ? "true" : "false");
-            window.localStorage.setItem("pressControlForShortcuts", this.pressControlForShortcuts ? "true" : "false");
-            window.localStorage.setItem("enableMidi", this.enableMidi ? "true" : "false");
-            window.localStorage.setItem("showRecordButton", this.showRecordButton ? "true" : "false");
-            window.localStorage.setItem("snapRecordedNotesToRhythm", this.snapRecordedNotesToRhythm ? "true" : "false");
-            window.localStorage.setItem("ignorePerformedNotesNotInScale", this.ignorePerformedNotesNotInScale ? "true" : "false");
-            window.localStorage.setItem("metronomeCountIn", this.metronomeCountIn ? "true" : "false");
-            window.localStorage.setItem("metronomeWhileRecording", this.metronomeWhileRecording ? "true" : "false");
-            window.localStorage.setItem("keyboardLayout", this.keyboardLayout);
-            window.localStorage.setItem("TBBlayout", this.layout);
-            window.localStorage.setItem("TBBcolorTheme", this.colorTheme);
-            window.localStorage.setItem("volume", String(this.volume));
-            window.localStorage.setItem("visibleOctaves", String(this.visibleOctaves));
-        }
-    }
-    Preferences.defaultVisibleOctaves = 3;
-
-    class ChangeNotifier {
-        constructor() {
-            this._watchers = [];
-            this._dirty = false;
-        }
-        watch(watcher) {
-            if (this._watchers.indexOf(watcher) == -1) {
-                this._watchers.push(watcher);
-            }
-        }
-        unwatch(watcher) {
-            const index = this._watchers.indexOf(watcher);
-            if (index != -1) {
-                this._watchers.splice(index, 1);
-            }
-        }
-        changed() {
-            this._dirty = true;
-        }
-        notifyWatchers() {
-            if (!this._dirty)
-                return;
-            this._dirty = false;
-            for (const watcher of this._watchers.concat()) {
-                watcher();
-            }
-        }
-    }
-
-    class SongDocument {
-        constructor() {
-            this.notifier = new ChangeNotifier();
-            this.selection = new Selection(this);
-            this.prefs = new Preferences();
-            this.channel = 0;
-            this.bar = 0;
-            this.recentPatternInstruments = [];
-            this.viewedInstrument = [];
-            this.trackVisibleBars = 16;
-            this.trackVisibleChannels = 4;
-            this.barScrollPos = 0;
-            this.channelScrollPos = 0;
-            this.prompt = null;
-            this.addedEffect = false;
-            this.addedEnvelope = false;
-            this.currentPatternIsDirty = false;
-            this._recovery = new SongRecovery();
-            this._recentChange = null;
-            this._sequenceNumber = 0;
-            this._lastSequenceNumber = 0;
-            this._stateShouldBePushed = false;
-            this._recordedNewSong = false;
-            this._waitingToUpdateState = false;
-            this._whenHistoryStateChanged = () => {
-                if (this.synth.recording) {
-                    this.performance.abortRecording();
-                }
-                if (window.history.state == null && window.location.hash != "") {
-                    this._sequenceNumber++;
-                    this._resetSongRecoveryUid();
-                    const state = { canUndo: true, sequenceNumber: this._sequenceNumber, bar: this.bar, channel: this.channel, instrument: this.viewedInstrument[this.channel], recoveryUid: this._recoveryUid, prompt: null, selection: this.selection.toJSON() };
-                    try {
-                        new ChangeSong(this, window.location.hash);
-                    }
-                    catch (error) {
-                        errorAlert(error);
-                    }
-                    this.prompt = state.prompt;
-                    if (this.prefs.displayBrowserUrl) {
-                        this._replaceState(state, this.song.toBase64String());
-                    }
-                    else {
-                        this._pushState(state, this.song.toBase64String());
-                    }
-                    this.forgetLastChange();
-                    this.notifier.notifyWatchers();
-                    return;
-                }
-                const state = this._getHistoryState();
-                if (state == null)
-                    throw new Error("History state is null.");
-                if (state.sequenceNumber == this._sequenceNumber)
-                    return;
-                this.bar = state.bar;
-                this.channel = state.channel;
-                this.viewedInstrument[this.channel] = state.instrument;
-                this._sequenceNumber = state.sequenceNumber;
-                this.prompt = state.prompt;
-                try {
-                    new ChangeSong(this, this._getHash());
-                }
-                catch (error) {
-                    errorAlert(error);
-                }
-                this._recoveryUid = state.recoveryUid;
-                this.selection.fromJSON(state.selection);
-                this.forgetLastChange();
-                this.notifier.notifyWatchers();
-            };
-            this._cleanDocument = () => {
-                this.notifier.notifyWatchers();
-            };
-            this._validateDocState = () => {
-                const channelCount = this.song.getChannelCount();
-                for (let i = this.recentPatternInstruments.length; i < channelCount; i++) {
-                    this.recentPatternInstruments[i] = [0];
-                }
-                this.recentPatternInstruments.length = channelCount;
-                for (let i = 0; i < channelCount; i++) {
-                    if (i == this.channel) {
-                        if (this.song.patternInstruments) {
-                            const pattern = this.song.getPattern(this.channel, this.bar);
-                            if (pattern != null) {
-                                this.recentPatternInstruments[i] = pattern.instruments.concat();
-                            }
-                        }
-                        else {
-                            const channel = this.song.channels[this.channel];
-                            for (let j = 0; j < channel.instruments.length; j++) {
-                                this.recentPatternInstruments[i][j] = j;
-                            }
-                            this.recentPatternInstruments[i].length = channel.instruments.length;
-                        }
-                    }
-                    discardInvalidPatternInstruments(this.recentPatternInstruments[i], this.song, i);
-                }
-                for (let i = this.viewedInstrument.length; i < channelCount; i++) {
-                    this.viewedInstrument[i] = 0;
-                }
-                this.viewedInstrument.length = channelCount;
-                for (let i = 0; i < channelCount; i++) {
-                    if (this.song.patternInstruments && !this.song.layeredInstruments && i == this.channel) {
-                        const pattern = this.song.getPattern(this.channel, this.bar);
-                        if (pattern != null) {
-                            this.viewedInstrument[i] = pattern.instruments[0];
-                        }
-                    }
-                    this.viewedInstrument[i] = Math.min(this.viewedInstrument[i] | 0, this.song.channels[i].instruments.length - 1);
-                }
-                const highlightedPattern = this.getCurrentPattern();
-                if (highlightedPattern != null && this.song.patternInstruments) {
-                    this.recentPatternInstruments[this.channel] = highlightedPattern.instruments.concat();
-                }
-                if ((!this.synth.playing && (this.bar < this.selection.boxSelectionBar || this.selection.boxSelectionBar + this.selection.boxSelectionWidth <= this.bar)) ||
-                    this.channel < this.selection.boxSelectionChannel ||
-                    this.selection.boxSelectionChannel + this.selection.boxSelectionHeight <= this.channel ||
-                    this.song.barCount < this.selection.boxSelectionBar + this.selection.boxSelectionWidth ||
-                    channelCount < this.selection.boxSelectionChannel + this.selection.boxSelectionHeight ||
-                    (this.selection.boxSelectionWidth == 1 && this.selection.boxSelectionHeight == 1)) {
-                    this.selection.resetBoxSelection();
-                }
-                this.barScrollPos = Math.max(0, Math.min(this.song.barCount - this.trackVisibleBars, this.barScrollPos));
-                this.channelScrollPos = Math.max(0, Math.min(this.song.getChannelCount() - this.trackVisibleChannels, this.channelScrollPos));
-            };
-            this._updateHistoryState = () => {
-                this._waitingToUpdateState = false;
-                let hash;
-                try {
-                    hash = this.song.toBase64String();
-                }
-                catch (error) {
-                    errorAlert(error);
-                    return;
-                }
-                if (this._stateShouldBePushed)
-                    this._sequenceNumber++;
-                if (this._recordedNewSong) {
-                    this._resetSongRecoveryUid();
-                }
-                else {
-                    this._recovery.saveVersion(this._recoveryUid, hash);
-                }
-                let state = { canUndo: true, sequenceNumber: this._sequenceNumber, bar: this.bar, channel: this.channel, instrument: this.viewedInstrument[this.channel], recoveryUid: this._recoveryUid, prompt: this.prompt, selection: this.selection.toJSON() };
-                if (this._stateShouldBePushed) {
-                    this._pushState(state, hash);
-                }
-                else {
-                    this._replaceState(state, hash);
-                }
-                this._stateShouldBePushed = false;
-                this._recordedNewSong = false;
-            };
-            this.notifier.watch(this._validateDocState);
-            ColorConfig.setTheme(this.prefs.colorTheme);
-            Layout.setLayout(this.prefs.layout);
-            if (window.sessionStorage.getItem("currentUndoIndex") == null) {
-                window.sessionStorage.setItem("currentUndoIndex", "0");
-                window.sessionStorage.setItem("oldestUndoIndex", "0");
-                window.sessionStorage.setItem("newestUndoIndex", "0");
-            }
-            let songString = window.location.hash;
-            if (songString == "") {
-                songString = this._getHash();
-            }
-            try {
-                this.song = new Song(songString);
-                if (songString == "" || songString == undefined) {
-                    setDefaultInstruments(this.song);
-                    this.song.scale = this.prefs.defaultScale;
-                }
-            }
-            catch (error) {
-                errorAlert(error);
-            }
-            songString = this.song.toBase64String();
-            this.synth = new Synth(this.song);
-            this.synth.volume = this._calcVolume();
-            this.synth.anticipatePoorPerformance = isMobile;
-            let state = this._getHistoryState();
-            if (state == null) {
-                state = { canUndo: false, sequenceNumber: 0, bar: 0, channel: 0, instrument: 0, recoveryUid: generateUid(), prompt: null, selection: this.selection.toJSON() };
-            }
-            if (state.recoveryUid == undefined)
-                state.recoveryUid = generateUid();
-            this._replaceState(state, songString);
-            window.addEventListener("hashchange", this._whenHistoryStateChanged);
-            window.addEventListener("popstate", this._whenHistoryStateChanged);
-            this.bar = state.bar | 0;
-            this.channel = state.channel | 0;
-            for (let i = 0; i <= this.channel; i++)
-                this.viewedInstrument[i] = 0;
-            this.viewedInstrument[this.channel] = state.instrument | 0;
-            this._recoveryUid = state.recoveryUid;
-            this.prompt = state.prompt;
-            this.selection.fromJSON(state.selection);
-            this.selection.scrollToSelectedPattern();
-            for (const eventName of ["input", "change", "click", "keyup", "keydown", "mousedown", "mousemove", "mouseup", "touchstart", "touchmove", "touchend", "touchcancel"]) {
-                window.addEventListener(eventName, this._cleanDocument);
-            }
-            this._validateDocState();
-            this.performance = new SongPerformance(this);
-        }
-        toggleDisplayBrowserUrl() {
-            const state = this._getHistoryState();
-            if (state == null)
-                throw new Error("History state is null.");
-            this.prefs.displayBrowserUrl = !this.prefs.displayBrowserUrl;
-            this._replaceState(state, this.song.toBase64String());
-        }
-        _getHistoryState() {
-            if (this.prefs.displayBrowserUrl) {
-                return window.history.state;
-            }
-            else {
-                const json = JSON.parse(window.sessionStorage.getItem(window.sessionStorage.getItem("currentUndoIndex")));
-                return json == null ? null : json.state;
-            }
-        }
-        _getHash() {
-            if (this.prefs.displayBrowserUrl) {
-                return window.location.hash;
-            }
-            else {
-                const json = JSON.parse(window.sessionStorage.getItem(window.sessionStorage.getItem("currentUndoIndex")));
-                return json == null ? "" : json.hash;
-            }
-        }
-        _replaceState(state, hash) {
-            if (this.prefs.displayBrowserUrl) {
-                window.history.replaceState(state, "", "#" + hash);
-            }
-            else {
-                window.sessionStorage.setItem(window.sessionStorage.getItem("currentUndoIndex") || "0", JSON.stringify({ state, hash }));
-                window.history.replaceState(null, "", location.pathname);
-            }
-        }
-        _pushState(state, hash) {
-            if (this.prefs.displayBrowserUrl) {
-                window.history.pushState(state, "", "#" + hash);
-            }
-            else {
-                let currentIndex = Number(window.sessionStorage.getItem("currentUndoIndex"));
-                let oldestIndex = Number(window.sessionStorage.getItem("oldestUndoIndex"));
-                currentIndex = (currentIndex + 1) % SongDocument._maximumUndoHistory;
-                window.sessionStorage.setItem("currentUndoIndex", String(currentIndex));
-                window.sessionStorage.setItem("newestUndoIndex", String(currentIndex));
-                if (currentIndex == oldestIndex) {
-                    oldestIndex = (oldestIndex + 1) % SongDocument._maximumUndoHistory;
-                    window.sessionStorage.setItem("oldestUndoIndex", String(oldestIndex));
-                }
-                window.sessionStorage.setItem(String(currentIndex), JSON.stringify({ state, hash }));
-                window.history.replaceState(null, "", location.pathname);
-            }
-            this._lastSequenceNumber = state.sequenceNumber;
-        }
-        hasRedoHistory() {
-            return this._lastSequenceNumber > this._sequenceNumber;
-        }
-        _forward() {
-            if (this.prefs.displayBrowserUrl) {
-                window.history.forward();
-            }
-            else {
-                let currentIndex = Number(window.sessionStorage.getItem("currentUndoIndex"));
-                let newestIndex = Number(window.sessionStorage.getItem("newestUndoIndex"));
-                if (currentIndex != newestIndex) {
-                    currentIndex = (currentIndex + 1) % SongDocument._maximumUndoHistory;
-                    window.sessionStorage.setItem("currentUndoIndex", String(currentIndex));
-                    setTimeout(this._whenHistoryStateChanged);
-                }
-            }
-        }
-        _back() {
-            if (this.prefs.displayBrowserUrl) {
-                window.history.back();
-            }
-            else {
-                let currentIndex = Number(window.sessionStorage.getItem("currentUndoIndex"));
-                let oldestIndex = Number(window.sessionStorage.getItem("oldestUndoIndex"));
-                if (currentIndex != oldestIndex) {
-                    currentIndex = (currentIndex + SongDocument._maximumUndoHistory - 1) % SongDocument._maximumUndoHistory;
-                    window.sessionStorage.setItem("currentUndoIndex", String(currentIndex));
-                    setTimeout(this._whenHistoryStateChanged);
-                }
-            }
-        }
-        record(change, replace = false, newSong = false) {
-            if (change.isNoop()) {
-                this._recentChange = null;
-                if (replace)
-                    this._back();
-            }
-            else {
-                change.commit();
-                this._recentChange = change;
-                this._stateShouldBePushed = this._stateShouldBePushed || !replace;
-                this._recordedNewSong = this._recordedNewSong || newSong;
-                if (!this._waitingToUpdateState) {
-                    window.requestAnimationFrame(this._updateHistoryState);
-                    this._waitingToUpdateState = true;
-                }
-            }
-        }
-        _resetSongRecoveryUid() {
-            this._recoveryUid = generateUid();
-        }
-        openPrompt(prompt) {
-            this.prompt = prompt;
-            const hash = this.song.toBase64String();
-            this._sequenceNumber++;
-            const state = { canUndo: true, sequenceNumber: this._sequenceNumber, bar: this.bar, channel: this.channel, instrument: this.viewedInstrument[this.channel], recoveryUid: this._recoveryUid, prompt: this.prompt, selection: this.selection.toJSON() };
-            this._pushState(state, hash);
-        }
-        undo() {
-            const state = this._getHistoryState();
-            if (state == null || state.canUndo)
-                this._back();
-        }
-        redo() {
-            this._forward();
-        }
-        setProspectiveChange(change) {
-            this._recentChange = change;
-        }
-        forgetLastChange() {
-            this._recentChange = null;
-        }
-        lastChangeWas(change) {
-            return change != null && change == this._recentChange;
-        }
-        goBackToStart() {
-            this.bar = 0;
-            this.channel = 0;
-            this.barScrollPos = 0;
-            this.channelScrollPos = 0;
-            this.synth.snapToStart();
-            this.notifier.changed();
-        }
-        setVolume(val) {
-            this.prefs.volume = val;
-            this.prefs.save();
-            this.synth.volume = this._calcVolume();
-        }
-        _calcVolume() {
-            return Math.min(1.0, Math.pow(this.prefs.volume / 50.0, 0.5)) * Math.pow(2.0, (this.prefs.volume - 75.0) / 25.0);
-        }
-        getCurrentPattern(barOffset = 0) {
-            return this.song.getPattern(this.channel, this.bar + barOffset);
-        }
-        getCurrentInstrument(barOffset = 0) {
-            return this.viewedInstrument[this.channel];
-        }
-        getMobileLayout() {
-            return window.innerWidth <= 710;
-        }
-        getBarWidth() {
-            return (!this.getMobileLayout() && this.prefs.enableChannelMuting && !this.getFullScreen()) ? 30 : 32;
-        }
-        getFullScreen() {
-            return !this.getMobileLayout() && (this.prefs.layout != "small");
-        }
-        getVisibleOctaveCount() {
-            return this.getFullScreen() ? this.prefs.visibleOctaves : Preferences.defaultVisibleOctaves;
-        }
-        getVisiblePitchCount() {
-            return this.getVisibleOctaveCount() * Config.pitchesPerOctave + 1;
-        }
-        getBaseVisibleOctave(channel) {
-            const visibleOctaveCount = this.getVisibleOctaveCount();
-            return Math.max(0, Math.min(Config.pitchOctaves - visibleOctaveCount, Math.ceil(this.song.channels[channel].octave - visibleOctaveCount * 0.5)));
-        }
-    }
-    SongDocument._maximumUndoHistory = 100;
-
-    const doc = new SongDocument();
-    const editor = new SongEditor(doc);
-    const beepboxEditorContainer = document.getElementById("beepboxEditorContainer");
-    beepboxEditorContainer.appendChild(editor.mainLayer);
-    editor.whenUpdated();
-    editor.mainLayer.focus();
-    if (!isMobile && doc.prefs.autoPlay) {
-        function autoplay() {
-            if (!document.hidden) {
-                doc.synth.play();
-                editor.updatePlayButton();
-                window.removeEventListener("visibilitychange", autoplay);
-            }
-        }
-        if (document.hidden) {
-            window.addEventListener("visibilitychange", autoplay);
-        }
-        else {
-            autoplay();
-        }
-    }
-    if ("scrollRestoration" in history)
-        history.scrollRestoration = "manual";
-    editor.updatePlayButton();
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/service_worker.js", { updateViaCache: "all", scope: "/" }).catch(() => { });
     }
 
     exports.ChangePreset = ChangePreset;
     exports.Channel = Channel;
     exports.ColorConfig = ColorConfig;
     exports.Config = Config;
+    exports.DynamicBiquadFilter = DynamicBiquadFilter;
     exports.EditorConfig = EditorConfig;
     exports.ExportPrompt = ExportPrompt;
+    exports.FilterCoefficients = FilterCoefficients;
+    exports.FrequencyResponse = FrequencyResponse;
     exports.Instrument = Instrument;
     exports.Note = Note;
     exports.Pattern = Pattern;
@@ -23233,6 +24312,9 @@ You should be redirected to the song at:<br /><br />
     exports.SongDocument = SongDocument;
     exports.SongEditor = SongEditor;
     exports.Synth = Synth;
+    exports.fastFourierTransform = fastFourierTransform;
+    exports.forwardRealFourierTransform = forwardRealFourierTransform;
+    exports.inverseRealFourierTransform = inverseRealFourierTransform;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
